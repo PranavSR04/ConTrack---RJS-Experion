@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { EditOutlined, SearchOutlined } from "@ant-design/icons";
 import { Button, Empty, Input, Tag } from "antd";
-import {
-  FilterConfirmProps,
-  TablePaginationConfig,
-} from "antd/lib/table/interface";
+import { FilterConfirmProps, TablePaginationConfig} from "antd/lib/table/interface";
 import { fetchDataFromApi } from "./api/AllContracts";
 import { fetchMyContractsApi } from "./api/MyContracts";
 import { ContractData, TableColumn, locale } from "./types";
-import AllContracts from "./AllContracts";
+import ContractList from "./ContractList";
 import { useNavigate } from "react-router";
 import tableStyles from "./contractsList.module.css";
 import { useLocation } from "react-router";
+
 const ContractListHandler = () => {
   const [data, setData] = useState<ContractData[]>([]);
   const [searchConditions, setSearchConditions] = useState<Record<string, string>>({});
@@ -295,7 +293,7 @@ const ContractListHandler = () => {
 
   return (
     <>
-      <AllContracts
+      <ContractList
         columns={columns}
         data={data}
         pagination={pagination}

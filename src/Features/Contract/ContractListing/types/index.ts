@@ -48,7 +48,7 @@ export type TableColumn = {
   render?: (text: any, record: ContractData) => React.ReactNode;
 };
 
-export interface AllContractsPropType {
+export interface ContractListPropType {
   columns: TableColumn[];
   data: ContractData[];
   pagination: paginations;

@@ -1,10 +1,10 @@
 import { Button, ConfigProvider, Segmented, Switch, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import styles from "./contractsList.module.css";
-import { AllContractsPropType, ContractData } from "./types";
+import { ContractListPropType, ContractData } from "./types";
 import { useNavigate } from "react-router";
 import { LoadingOutlined } from "@ant-design/icons";
-import Toast from "../../Components/Toast/Toast";
+//import Toast from "../../Components/Toast/Toast";
 
 const ContractList = ({
   columns,
@@ -21,7 +21,7 @@ const ContractList = ({
   contractEditToast,
   isMyContracts,
   handleSegmentChange
-}: AllContractsPropType) => {
+}: ContractListPropType) => {
   const navigate = useNavigate();
   const ROLE_ID = parseInt(localStorage.getItem("role_id") || "0", 10); //get loged in users role
 
@@ -114,12 +114,12 @@ const ContractList = ({
             spinning: loading,
           }}
         ></Table> 
-        {contractAddToast && (    //show toasts if corresponding values received
+        {/* {contractAddToast && (    //show toasts if corresponding values received
           <Toast messageType="success" message="Contract Added"></Toast> 
         )}
         {contractEditToast && (
           <Toast messageType="success" message="Contract Edited"></Toast>
-        )}
+        )} */}
       </div>
     </>
   );
