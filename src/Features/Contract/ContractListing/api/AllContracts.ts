@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import axiosInstance from "../../../Config/AxiosConfig";
+import axiosInstance from "../../../../Config/AxiosConfig";
 import { Condition } from "../types";
 
 export const fetchDataFromApi = async (

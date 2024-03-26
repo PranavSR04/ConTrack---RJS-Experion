@@ -7,7 +7,7 @@ import { fetchMyContractsApi } from "./api/MyContracts";
 import { ContractData, TableColumn, locale } from "./types";
 import ContractList from "./ContractList";
 import { useNavigate } from "react-router";
-import tableStyles from "./contractsList.module.css";
+import tableStyles from "./ContractList.module.css";
 import { useLocation } from "react-router";
 
 const ContractListHandler = () => {
@@ -23,19 +23,18 @@ const ContractListHandler = () => {
   const [slideroption, setSlideroption] = useState<string>('');
   const navigate = useNavigate();
   const location = useLocation();
-  const role_id = parseInt(localStorage.getItem("role_id") || "0", 10);
-  const [pageTitle, setPageTitle] = useState("CONTRACTS OVERVIEW");
-
+  const ROLE_ID = parseInt(localStorage.getItem("role_id") || "0");  //get loged in users role
+  const [pageTitle, setPageTitle] = useState("CONTRACTS OVERVIEW"); 
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 10, // Default page size
     total: 0,
   });
+
   let locale: locale = {
     //empty message for table
     emptyText: loading ? " " : <Empty />,
   };
-
   const showExpired = (checked: boolean) => {
     //show expired contracts?
     setCheckedExpiring(checked);
@@ -55,11 +54,50 @@ const ContractListHandler = () => {
       setSlideroption('added_by_me');
       clearSearch();
     }
-  }
+  };
+  const handleTableChange = (pagination: TablePaginationConfig) => { //pagination handle
+    if ("current" in pagination && "pageSize" in pagination) {
+      setPagination({
+        current: pagination.current || 1,
+        pageSize: pagination.pageSize || 10,
+        total: pagination.total || 0,
+      });
+    }
+  };
+  const onSearch = (selectedKeys: string, selectedField: string) => {
+    setIsEmptySearch(false);
+    setSearchConditions((prevConditions) => ({
+      ...prevConditions,
+      [selectedField]: selectedKeys,
+    }));
+  };
+
+  const clearSearch = () => {
+    setSearchConditions({});
+    setIsEmptySearch(true);
+  };
+
+  const rowClassName = (record: ContractData, index: number): string => {
+    // Add a custom class to alternate rows
+    return index % 2 === 0 ? tableStyles["oddRow"] : tableStyles["evenRow"];
+  };
+//click function for each data row
+  const rowClickHandler = (record: ContractData) => {
+    if (!actionClicked) {
+      navigate(`${record.contract_ref_id}`, {
+        state: { id: record.id as string },
+      });
+    }
+  };
 
   useEffect(() => {
     setSearchConditions({}); //clear search and search entry
     setIsEmptySearch(true);
+    setPagination({ //set pagination to default
+        current:  1,
+        pageSize: 10,
+        total: 0,
+      });
   }, [window.location.href]);
 
   useEffect(() => {
@@ -85,6 +123,7 @@ const ContractListHandler = () => {
       }, 0);
     }
   }, [location.state]);
+
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -127,40 +166,6 @@ const ContractListHandler = () => {
       }
     } finally {
       setLoading(false);
-    }
-  };
-  const handleTableChange = (pagination: TablePaginationConfig) => { //pagination handle
-    if ("current" in pagination && "pageSize" in pagination) {
-      setPagination({
-        current: pagination.current || 1,
-        pageSize: pagination.pageSize || 10,
-        total: pagination.total || 0,
-      });
-    }
-  };
-  const onSearch = (selectedKeys: string, selectedField: string) => {
-    setIsEmptySearch(false);
-    setSearchConditions((prevConditions) => ({
-      ...prevConditions,
-      [selectedField]: selectedKeys,
-    }));
-  };
-
-  const clearSearch = () => {
-    setSearchConditions({});
-    setIsEmptySearch(true);
-  };
-
-  const rowClassName = (record: ContractData, index: number): string => {
-    // Add a custom class to alternate rows
-    return index % 2 === 0 ? tableStyles["oddRow"] : tableStyles["evenRow"];
-  };
-//click function for each data row
-  const rowClickHandler = (record: ContractData) => {
-    if (!actionClicked) {
-      navigate(`${record.contract_ref_id}`, {
-        state: { id: record.id as string },
-      });
     }
   };
   //search button components for each title
@@ -274,7 +279,7 @@ const ContractListHandler = () => {
     },
   });
   {
-    role_id !== 3 &&
+    ROLE_ID !== 3 &&
       columns.push({
         title: "Action",
         key: "action",
@@ -308,6 +313,7 @@ const ContractListHandler = () => {
         contractEditToast={contractEditToast}
         isMyContracts={isMyContracts}
         handleSegmentChange={handleSegmentChange}
+        ROLE_ID={ROLE_ID}
       />
     </>
   );

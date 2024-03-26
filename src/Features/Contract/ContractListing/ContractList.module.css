@@ -1,69 +1,66 @@
 .contracts-tableHead {
-    color: #3471c5;
-    margin-left: 1rem;
-  }
-  .contracts-table {
-    margin-top: 1%;
-    margin-bottom: 2%;
-    padding-left: 1%;
-    padding-right: 1%;
-    border-width: 10cm;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
-    margin-left: 16rem;
-    margin-right: 1.5rem;
-    font-family: "Montserrat", sans-serif;
-    width: 65rem;
-    background-color: #ffffff;
-    border-radius: 0.5rem;
-  }
-  
-  .contracts-button-switch {
-    font-size: small;
-  }
-  
-  .contracts-buttons {
+  color: #3471c5;
+  margin-left: 2%;
+}
+.contracts-table {
+  margin-top: 1%;
+  margin-bottom: 2%;
+  padding-left: 1%;
+  padding-right: 1%; 
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+  margin-left: 18.5%;
+  margin-right: 2.5%;
+  font-family: "Montserrat", sans-serif;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+}
+
+.contracts-buttons {
     margin-top: 1%;
     padding-top: 1rem;
     margin-bottom: 1%;
     font-family: "Montserrat", sans-serif;
     display: flex;
   }
-  .contracts-addContract {
-    background-color: #dc143c;
-    color: white;
-    font-family: "Montserrat", sans-serif;
-    flex: 1;
-  }
-  
-  .contracts-buttons-expired {
-    padding-top: 0.5rem;
-    flex: 9;
-    padding-left: 0.3rem;
-  }
-  .contracts-buttons-addedBy {
-    padding-right: 0.5rem;
-  }
-  .contracts-h1 {
-    font-weight: 700;
-    font-size: 1.2rem;
-    padding-top: 2%;
-    margin-bottom: 0%;
-    margin-left: 16rem;
-    margin-right: 1.5rem;
-    width: 60rem;
-    font-family: "Montserrat", sans-serif;
-  }
-  
-  .ant-pagination .ant-pagination-item-active {
-    border-color: #dc143c;
-  }
-  
-  .oddRow {
-    background-color: #f6fbfe; /* Set the background color for even rows */
-  }
-  
-  /* Optionally, you can add styles for odd rows as well */
-  .evenRow {
-    background-color: #ffffff; /* Set the background color for odd rows */
-  }
-  
+
+.contracts-button-switch {
+  font-size: small;
+}
+
+.contracts-addContract {
+  background-color: #dc143c;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  flex: 1;
+}
+
+.contracts-buttons-expired {
+  padding-top: 0.5rem;
+  flex: 9;
+  padding-left: 0.3rem;
+}
+.contracts-buttons-addedBy {
+  padding-right: 0.5rem;
+}
+.contracts-h1 {
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding-top: 2%;
+  margin-bottom: 0%;
+  margin-left: 18.5%;
+  margin-right: 2.5%;
+  font-family: "Montserrat", sans-serif;
+}
+
+.ant-pagination .ant-pagination-item-active {
+  border-color: #dc143c;
+}
+
+.oddRow {
+  background-color: #f6fbfe; /* Set the background color for even rows */
+}
+
+/* Optionally, you can add styles for odd rows as well */
+.evenRow {
+  background-color: #ffffff; /* Set the background color for odd rows */
+}

@@ -1,6 +1,6 @@
 import { Button, ConfigProvider, Segmented, Switch, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import styles from "./contractsList.module.css";
+import styles from "./ContractList.module.css";
 import { ContractListPropType, ContractData } from "./types";
 import { useNavigate } from "react-router";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -20,11 +20,10 @@ const ContractList = ({
   contractAddToast,
   contractEditToast,
   isMyContracts,
-  handleSegmentChange
+  handleSegmentChange,
+  ROLE_ID
 }: ContractListPropType) => {
   const navigate = useNavigate();
-  const ROLE_ID = parseInt(localStorage.getItem("role_id") || "0", 10); //get loged in users role
-
   return (
     <>
       <h3 className={styles["contracts-h1"]}>{pageTitle}</h3>

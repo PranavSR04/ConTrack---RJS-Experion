@@ -63,5 +63,6 @@ export interface ContractListPropType {
   contractEditToast: boolean;
   isMyContracts:boolean;
   handleSegmentChange:(value: string) => void;
+  ROLE_ID:number;
 
 }

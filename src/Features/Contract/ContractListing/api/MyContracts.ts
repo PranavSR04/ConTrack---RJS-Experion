@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { Condition } from "../types";
-import axiosInstance from "../../../Config/AxiosConfig";
+import axiosInstance from "../../../../Config/AxiosConfig";
 
 export const fetchMyContractsApi = async (
   searchConditions: Condition,
@@ -21,7 +21,7 @@ export const fetchMyContractsApi = async (
 
     console.log("search query", queryStrings);
     const response: AxiosResponse = await axiosInstance.get(
-      `http://127.0.0.1:8000/api/contracts/myContracts/${userId}?${queryStrings}&page=${currentPage}&per_page=${pageSize}${checkedExpiring && '&status=Expired'}${slideroption && `&${slideroption}=true`}`
+      `/api/contracts/myContracts/${userId}?${queryStrings}&page=${currentPage}&per_page=${pageSize}${checkedExpiring && '&status=Expired'}${slideroption && `&${slideroption}=true`}`
     );
 
     if (response.status !== 200) {
