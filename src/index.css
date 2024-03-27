@@ -1,3 +1,4 @@
+@import "./styles/antd.css";
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -11,20 +12,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-@media only screen and (min-width: 368px) and (max-width: 907.8px){
-  :where(.css-dev-only-do-not-override-42nv3w).ant-table-wrapper .ant-table-thead >tr>th, :where(.css-dev-only-do-not-override-42nv3w).ant-table-wrapper .ant-table-thead >tr>td {
-      position: relative;
-      color: rgba(0, 0, 0, 0.88);
-      font-weight: 600;
-      text-align: start;
-      background: #fafafa;
-      border-bottom: 1px solid #f0f0f0;
-      transition: background 0.2s ease;
-      font-size: x-small;
-  }
-  :where(.css-dev-only-do-not-override-42nv3w).ant-table-wrapper .ant-table-tbody >tr >td {
-    transition: background 0.2s, border-color 0.2s;
-    border-bottom: 1px solid #f0f0f0;
-    font-size:x-small;
-}
-  }

@@ -1,6 +1,6 @@
 .contracts-tableHead {
-  color: #3471c5;
-  margin-left: 2%;
+  overflow-x: scroll;
+  white-space: nowrap; 
 }
 .contracts-table {
   margin-top: 1%;
@@ -13,16 +13,16 @@
   font-family: "Montserrat", sans-serif;
   background-color: #ffffff;
   border-radius: 0.5rem;
-  width: 75%;
+  max-width: 75%;
 }
 
-@media only screen and (min-width: 368px) and (max-width: 892.8px){
+/* @media only screen and (min-width: 368px) and (max-width: 892.8px){
 .contracts-table {
     overflow-x: scroll;
 }
-}
+} */
 
-.contracts-buttons {
+.contracts-table__buttons {
     margin-top: 1%;
     padding-top: 1rem;
     margin-bottom: 1%;
@@ -30,26 +30,26 @@
     display: flex;
   }
 
-.contracts-button-switch {
+.contracts-table__buttons-switch {
   font-size: small;
 }
 
-.contracts-addContract {
+.contracts-table__buttons__addContract {
   background-color: #dc143c;
   color: white;
   font-family: "Montserrat", sans-serif;
   flex: 1;
 }
 
-.contracts-buttons-expired {
+.contracts-table__buttons-expired {
   padding-top: 0.5rem;
   flex: 9;
   padding-left: 0.3rem;
 }
-.contracts-buttons-addedBy {
+.contracts-table__buttons-addedBy {
   padding-right: 0.5rem;
 }
-.contracts-h1 {
+.contracts-heading {
   font-weight: 700;
   font-size: 1.2rem;
   padding-top: 2%;

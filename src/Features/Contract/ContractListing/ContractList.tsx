@@ -26,18 +26,18 @@ const ContractList = ({
   const navigate = useNavigate();
   return (
     <>
-      <h3 className={styles["contracts-h1"]}>{pageTitle}</h3>
+      <h3 className={styles["contracts-heading"]}>{pageTitle}</h3>
       <div className={styles["contracts-table"]}>
-        <div className={styles["contracts-buttons"]}>
-          <div className={styles["contracts-buttons-expired"]}>
-            <label className={styles["contracts-button-switch"]}>
+        <div className={styles["contracts-table__buttons"]}>
+          <div className={styles["contracts-table__buttons-expired"]}>
+            <label className={styles["contracts-table__buttons-switch"]}>
               {" "}
               Show Expired &nbsp;{" "}
             </label>
             <Switch size="small" onChange={showExpired} />
           </div>
           {ROLE_ID !== 3 && isMyContracts && (
-            <div className={styles["contracts-buttons-addedBy"]}>
+            <div className={styles["contracts-table__buttons-addedBy"]}>
               <ConfigProvider //show selection slider
                 theme={{
                   token: {
@@ -66,7 +66,7 @@ const ContractList = ({
           )}
           {ROLE_ID !== 3 && ( //show button only isnt reader
             <Button
-              className={styles["contracts-addContract"]}
+              className={styles["contracts-table__buttons__addContract"]}
               onClick={() => navigate("Add Contract")}
             >
               + Add Contract
@@ -75,8 +75,8 @@ const ContractList = ({
         </div>
         <div >
         <Table
-          className={styles["contracts-tableHead"]}
           columns={columns as ColumnsType<ContractData>}
+          rootClassName= {styles["contracts-tableHead"]}
           dataSource={data.map((item) => ({ ...item, key: item.id }))}
           locale={locale} //empty message
           pagination={{
