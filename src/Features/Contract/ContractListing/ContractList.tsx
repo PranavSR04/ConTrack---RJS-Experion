@@ -73,6 +73,7 @@ const ContractList = ({
             </Button>
           )}
         </div>
+        <div >
         <Table
           className={styles["contracts-tableHead"]}
           columns={columns as ColumnsType<ContractData>}
@@ -113,6 +114,7 @@ const ContractList = ({
             spinning: loading,
           }}
         ></Table> 
+        </div>
         {/* {contractAddToast && (    //show toasts if corresponding values received
           <Toast messageType="success" message="Contract Added"></Toast> 
         )}
