@@ -26,7 +26,7 @@ const ContractList = ({
 }: ContractListPropType) => {
   return (
     <>
-      <h3 className={styles["contracts-heading"]}>{pageTitle}</h3>
+      <p className={styles["contracts-heading"]}>{pageTitle}</p>
       <div className={styles["contracts-table"]}>
         <div className={styles["contracts-table__buttons"]}>
           <div className={styles["contracts-table__buttons-expired"]}>

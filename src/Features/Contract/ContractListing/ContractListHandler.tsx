@@ -99,6 +99,7 @@ const ContractListHandler = () => {
         pageSize: 10,
         total: 0,
       });
+    setCheckedExpiring(false); //set check expiring off by default
   }, [window.location.href]);
 
   useEffect(() => {
