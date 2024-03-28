@@ -24,6 +24,7 @@ const ContractListHandler = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const ROLE_ID = parseInt(localStorage.getItem("role_id") || "0");  //get loged in users role
+  const SCROLL =  {x: 'auto' } //table scroll for x axis
   const [pageTitle, setPageTitle] = useState("CONTRACTS OVERVIEW"); 
   const [pagination, setPagination] = useState({
     current: 1,
@@ -313,7 +314,9 @@ const ContractListHandler = () => {
         contractEditToast={contractEditToast}
         isMyContracts={isMyContracts}
         handleSegmentChange={handleSegmentChange}
+        navigate={navigate}
         ROLE_ID={ROLE_ID}
+        SCROLL={SCROLL}
       />
     </>
   );

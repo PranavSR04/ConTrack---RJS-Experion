@@ -2,7 +2,6 @@ import { Button, ConfigProvider, Segmented, Switch, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import styles from "./ContractList.module.css";
 import { ContractListPropType, ContractData } from "./types";
-import { useNavigate } from "react-router";
 import { LoadingOutlined } from "@ant-design/icons";
 //import Toast from "../../Components/Toast/Toast";
 
@@ -21,9 +20,10 @@ const ContractList = ({
   contractEditToast,
   isMyContracts,
   handleSegmentChange,
-  ROLE_ID
+  navigate,
+  ROLE_ID,
+  SCROLL
 }: ContractListPropType) => {
-  const navigate = useNavigate();
   return (
     <>
       <h3 className={styles["contracts-heading"]}>{pageTitle}</h3>
@@ -105,6 +105,7 @@ const ContractList = ({
           onChange={handleTableChange}
           rowClassName={rowClassName}
           size="small"
+          scroll =  {SCROLL}
           loading={{
             indicator: (
               <div>
@@ -113,6 +114,7 @@ const ContractList = ({
             ),
             spinning: loading,
           }}
+          
         ></Table> 
         </div>
         {/* {contractAddToast && (    //show toasts if corresponding values received

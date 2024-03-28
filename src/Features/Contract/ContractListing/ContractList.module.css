@@ -1,5 +1,5 @@
 .contracts-tableHead {
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
   white-space: nowrap; 
 }
 .contracts-table {

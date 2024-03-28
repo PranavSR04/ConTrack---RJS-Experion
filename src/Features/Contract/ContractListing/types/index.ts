@@ -4,6 +4,7 @@ import {
   TablePaginationConfig,
 } from "antd/lib/table/interface";
 import { ReactNode } from "react";
+import { NavigateFunction } from "react-router";
 
 export interface Condition {
   [field: string]: string;
@@ -47,7 +48,9 @@ export type TableColumn = {
   onFilter?: (value: string, record: ContractData) => boolean;
   render?: (text: any, record: ContractData) => React.ReactNode;
 };
-
+export interface SCROLL {
+  x: string;
+}
 export interface ContractListPropType {
   columns: TableColumn[];
   data: ContractData[];
@@ -64,5 +67,6 @@ export interface ContractListPropType {
   isMyContracts:boolean;
   handleSegmentChange:(value: string) => void;
   ROLE_ID:number;
-
+  SCROLL?:SCROLL;
+  navigate:  NavigateFunction
 }
