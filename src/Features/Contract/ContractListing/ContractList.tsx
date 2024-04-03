@@ -3,7 +3,7 @@ import { ColumnsType } from "antd/es/table";
 import styles from "./ContractList.module.css";
 import { ContractListPropType, ContractData } from "./types";
 import { LoadingOutlined } from "@ant-design/icons";
-//import Toast from "../../Components/Toast/Toast";
+import Toast from "../../../Components/Toast/Toast";
 
 const ContractList = ({
   columns,
@@ -26,18 +26,18 @@ const ContractList = ({
 }: ContractListPropType) => {
   return (
     <>
-      <p className={styles["contracts-heading"]}>{pageTitle}</p>
-      <div className={styles["contracts-table"]}>
-        <div className={styles["contracts-table__buttons"]}>
-          <div className={styles["contracts-table__buttons-expired"]}>
-            <label className={styles["contracts-table__buttons-switch"]}>
+      <p className={styles["contractsHeading"]}>{pageTitle}</p>
+      <div className={styles["contractsTableWrap"]}>
+        <div className={styles["contractsTableWrap__buttons"]}>
+          <div className={styles["contractsTableWrap__buttonExpired"]}>
+            <label className={styles["contractsTableWrap__buttonSwitch"]}>
               {" "}
               Show Expired &nbsp;{" "}
             </label>
             <Switch size="small" onChange={showExpired} />
           </div>
           {ROLE_ID !== 3 && isMyContracts && (
-            <div className={styles["contracts-table__buttons-addedBy"]}>
+            <div className={styles["contractsTableWrap__buttonAddedBy"]}>
               <ConfigProvider //show selection slider
                 theme={{
                   token: {
@@ -66,7 +66,7 @@ const ContractList = ({
           )}
           {ROLE_ID !== 3 && ( //show button only isnt reader
             <Button
-              className={styles["contracts-table__buttons__addContract"]}
+              className={styles["contractsTableWrap__buttons__addContract"]}
               onClick={() => navigate("Add Contract")}
             >
               + Add Contract
@@ -76,7 +76,7 @@ const ContractList = ({
         <div >
         <Table
           columns={columns as ColumnsType<ContractData>}
-          rootClassName= {styles["contracts-tableHead"]}
+          rootClassName= {styles["contractsTable"]}
           dataSource={data.map((item) => ({ ...item, key: item.id }))}
           locale={locale} //empty message
           pagination={{
@@ -117,12 +117,12 @@ const ContractList = ({
           
         ></Table> 
         </div>
-        {/* {contractAddToast && (    //show toasts if corresponding values received
+        {contractAddToast && (    //show toasts if corresponding values received
           <Toast messageType="success" message="Contract Added"></Toast> 
         )}
         {contractEditToast && (
           <Toast messageType="success" message="Contract Edited"></Toast>
-        )} */}
+        )}
       </div>
     </>
   );

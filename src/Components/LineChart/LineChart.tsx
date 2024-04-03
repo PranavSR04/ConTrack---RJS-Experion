@@ -2,7 +2,7 @@ import React from "react";
 import { Line } from "react-chartjs-2";
 import zoomPlugin from "chartjs-plugin-zoom";
 import { LineChartPropType } from "./types";
-import styles from "./RevenueProjection.module.css";
+import styles from "./LineChart.module.css";
 import { LoadingOutlined } from "@ant-design/icons";
 import {
 	Chart as ChartJS,
@@ -80,8 +80,6 @@ const LineChart= ({ revenueData, loading, error }: LineChartPropType) => {
 					callback: function (value: any) {
 						if (value >= 0) {
 							return (value / 1000000).toFixed(2) + 'M';
-						// } else if (value >= 1000) {
-						// 	return (value / 1000).toFixed(2) + 'K';
 						} else {
 							return value.toFixed(2);
 						}
@@ -94,14 +92,14 @@ const LineChart= ({ revenueData, loading, error }: LineChartPropType) => {
 	};
 
 	return (
-		<div className={styles.body} >
-			<div className={styles.large_column}>
-				<div className={styles.container} >
+		<div>
+			<div className={styles.linechart}>
+				<div className={styles.linechart__container} >
 					{loading ? (
 						// <div data-testid="line-chart-spinner">
 						<Spin 
 							data-testid="line-chart-spinner"
-							className={styles.spinner}
+							className={styles.linechart__container__spinner}
 							indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
 						/>
 						// </div>
