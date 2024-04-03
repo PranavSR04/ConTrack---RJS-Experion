@@ -45,3 +45,11 @@
 .MSAList__Table__Table{
     padding-top: 2%;
 }
+.oddRow {
+    background-color: #f5f8fc; /* Set the background color for even rows */
+  }
+  
+  /* Optionally, you can add styles for odd rows as well */
+  .evenRow {
+    background-color: #ffffff; /* Set the background color for odd rows */
+  }
