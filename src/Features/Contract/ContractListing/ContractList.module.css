@@ -52,11 +52,11 @@
   font-weight: 700;
   font-size: 140%;
   /* padding-top: 2%; */
-  margin-bottom: 0%;
+  /* margin-bottom: 0%;
   margin-left: 18.5%;
   margin-right: 2.5%;
   font-family: "Montserrat", sans-serif;
-}
+} */
 
 .ant-pagination .ant-pagination-item-active {
   border-color: #dc143c;
