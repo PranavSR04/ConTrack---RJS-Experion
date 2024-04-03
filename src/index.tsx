@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import AppRoutes from "./AppRoutes/AppRoutes";
 import { MsalProvider } from "@azure/msal-react";
 import { msalConfig } from "./Config/authConfig";
 import { PublicClientApplication } from "@azure/msal-browser";
+import AppRoutes from './AppRoutes/AppRoutes';
 
 const msalInstance = new PublicClientApplication(msalConfig);
 

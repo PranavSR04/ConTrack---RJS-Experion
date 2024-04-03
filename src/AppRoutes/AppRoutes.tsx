@@ -7,6 +7,7 @@ import ContractListHandler from '../Features/Contract/ContractListing/ContractLi
 import RevenueProjectionHandler from "../Features/RevenueProjection/RevenueProjectionHandler";
 import IndividualContractHandler from "../Features/Contract/IndividualContract/IndividualContractHandler";
 import SideBar from "../Components/SideBar/SideBar";
+import ManageUsersHandler from '../Features/ManageUsers/ManageUsersHandler'
 
 const AppRoutes = () => {
 	return (
@@ -21,6 +22,8 @@ const AppRoutes = () => {
 					<Route path="/AllContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
               		<Route path="/MyContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
               		<Route path="/Revenue/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
+					<Route path="/ManageUser" element={<><NavBarHandler /><SideBar><ManageUsersHandler/></SideBar></>}></Route>
+
 				</Routes>
 			</AuthContext>
 		</BrowserRouter>

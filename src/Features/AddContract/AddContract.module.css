@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+.contractdetails_bg {
+  background-color: #dedede;
+  font-weight: normal;
+  font-family: "Montserrat", sans-serif;
+}
+
+.contract_details {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+  padding: 0px;
+  margin-left: 8rem;
+  margin-top: 1rem;
+  width: 66rem;
+}
+
+.contract_details_heading {
+  padding-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+}
+
+.customDatePicker {
+  width: 11.7rem;
+}
+
+.redAsterisk {
+  color: red;
+  margin-left: 4px;
+}
+
+.submitButton {
+  background-color: #dc143c;
+  color: white;
+  border: none;
+  padding: 20px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: -1rem;
+  margin-top: 0.5rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submitButton:disabled {
+  background-color: #828282;
+  cursor: not-allowed;
+  color: white;
+  padding: 20px 20px;
+}
