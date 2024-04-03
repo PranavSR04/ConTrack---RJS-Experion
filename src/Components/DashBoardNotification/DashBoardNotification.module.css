@@ -1,0 +1,17 @@
+.DashBoard_Notification_Container{
+    background-color: #ffffff;
+    padding-left: 2%;
+    width: 300px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    height: 352px;
+    overflow-y: auto;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    text-align: center;
+    font-size: 15px;
+    cursor: pointer;
+}
+.DashBoard_Notification_Container_Spin{
+    font-size: 20%;
+}
