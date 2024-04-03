@@ -1,0 +1,73 @@
+.contracts-tableHead {
+  /* overflow-x: scroll; */
+  white-space: nowrap; 
+}
+.contracts-table {
+  margin-top: 1%;
+  margin-bottom: 2%;
+  padding-left: 1%;
+  padding-right: 1%; 
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+  margin-left: 18.5%;
+  margin-right: 2.5%;
+  font-family: "Montserrat", sans-serif;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  max-width: 75%;
+}
+
+@media only screen and (min-width: 368px) and (max-width: 892.8px){
+.contracts-table {
+    overflow-x: scroll;
+}
+}
+
+.contracts-table__buttons {
+    margin-top: 1%;
+    padding-top: 1rem;
+    margin-bottom: 1%;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+  }
+
+.contracts-table__buttons-switch {
+  font-size: small;
+}
+
+.contracts-table__buttons__addContract {
+  background-color: #dc143c;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  flex: 1;
+}
+
+.contracts-table__buttons-expired {
+  padding-top: 0.5rem;
+  flex: 9;
+  padding-left: 0.3rem;
+}
+.contracts-table__buttons-addedBy {
+  padding-right: 0.5rem;
+}
+.contracts-heading {
+  font-weight: 700;
+  font-size: 140%;
+  padding-top: 2%;
+  margin-bottom: 0%;
+  margin-left: 18.5%;
+  margin-right: 2.5%;
+  font-family: "Montserrat", sans-serif;
+}
+
+.ant-pagination .ant-pagination-item-active {
+  border-color: #dc143c;
+}
+
+.oddRow {
+  background-color: #f6fbfe; /* Set the background color for even rows */
+}
+
+/* Optionally, you can add styles for odd rows as well */
+.evenRow {
+  background-color: #ffffff; /* Set the background color for odd rows */
+}

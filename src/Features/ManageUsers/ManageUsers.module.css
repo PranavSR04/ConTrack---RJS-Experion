@@ -1,15 +1,15 @@
-.body {
+  .body {
     font-family: "Montserrat", sans-serif;
   }
   
   .pageTitle {
     font-weight: 700;
     font-size: 1.2rem;
-    margin-left: 16rem;
+    margin-left: 20.5%;
     margin-top: 1.3rem;
     font-family: "Montserrat", sans-serif;
   }
-  
+
   .oddRow {
     background-color: #f6fbfe; /* Set the background color for even rows */
   }
@@ -26,47 +26,75 @@
   .wholeTable {
     /* Add your styling for the table wrapper here */
     width: 83%;
-    margin-left: 16rem;
+    margin-left: 18.5%;
     margin-top: 1rem;
     border-radius: 0.5rem;
-    /* border-radius: 5px; */
-    /* box-shadow: 0px 3px 8px rgba(37, 37, 37, 0.589); */
-    /* margin-bottom: 2rem; */
-    /* padding-bottom: 1rem;  */
-    /* background-color: #f8f8f8; */
   }
+
+  @media only screen and (min-width: 368px) and (max-width: 892.8px){
+    .wholeTable {
+        overflow-x: scroll;
+    }
+    .viewAccessBox{
+      width:15rem;
+      height: 2rem;
+      margin-right: 3%;
+      /* margin-left: 1.7%; */
+      /* margin-top: 3rem; */
+      margin-bottom: 1.5rem;
+      border: 0.0625rem solid #a4a2a2d1; 
+      border-radius: 0.375rem;
+     }
+
+     .addUserButton {
+      width: 6rem;
+      height: 2rem;
+      /* margin-left: 1.5%; */
+      margin-bottom: 2%;
+      margin-right: 2%;
+      /* margin-top: 3rem; */
+      /* margin-bottom: 3rem; */
+      color: white;
+      background-color: #dc143c;
+    }
+
+    .searchEmployeeBox{
+      width:15rem;
+      height: 2rem;
+      /* margin-left: 8rem; */
+      margin-left: 2%;
+      margin-top: 1rem ;
+      margin-bottom: 1.5rem;
+      border: 0.0625rem solid #a4a2a2d1;
+      border-radius: 0.375rem;
+    }
+    
+
+    }
   
     .searchEmployeeCluster{
-      margin-left:3rem ;
+      /* margin-left:3rem ; */
+       margin-left:4.5% ;
+
     }
   
     .mainListContainer{
       box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
-      /* border: 1px solid rgba(37, 37, 37, 0.589); */
       border-radius: 8px;
       border-width:2px ;
       width: 95%;
       padding: 1rem;
       padding-bottom: 0rem;
-      /* margin-left: 2rem; */
-      /* margin-right: 2rem; */
-      /* margin-bottom: 3rem; */
+
   }
   
   .userListTable {
     width: 100%;
-    /* margin-left: 2rem;
-      margin-right: 2rem; */
-    /* box-shadow: 0px 3px 8px rgba(37, 37, 37, 0.589); */
   }
   
   .ant-modal .ant-modal-content {
     height: 10rem;
   }
-  
-  /* .ant-card-body{
-    padding:50px
-  } */
   
   .customPagination {
     text-align: center;
@@ -126,12 +154,11 @@
     .viewAccessBox{
       width:15rem;
       height: 2rem;
-      margin-left: 1rem;
+      margin-left: 1.7%;
       /* margin-top: 3rem; */
       margin-bottom: 1.5rem;
       border: 0.0625rem solid #a4a2a2d1; 
       border-radius: 0.375rem;
-  
      }
   
   .viewUpdateUserAccessBox {
@@ -145,7 +172,8 @@
   .addUserButton {
     width: 6rem;
     height: 2rem;
-    margin-left: 1.5rem;
+    margin-left: 1.5%;
+    margin-right: 2%;
     /* margin-top: 3rem; */
     /* margin-bottom: 3rem; */
     color: white;
@@ -153,8 +181,8 @@
   }
   
   .searchUserBox {
-    width: 25rem;
-    margin-left: 13rem;
+    width: 40%;
+    margin-left: 20.5%;
     /* margin-top: 1rem; */
     margin-bottom: 1rem;
     /* border: '5px solid #808080' */

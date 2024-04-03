@@ -1,0 +1,24 @@
+.milestones {
+    padding: 1rem 2rem;
+    position: relative;
+  }
+  
+  .milestones__heading {
+    position: sticky;
+    padding-top: 1rem;
+    width: 100%;
+    top: 0; /* Stick to the top */
+    background-color: white;
+    z-index: 1;
+  }
+  
+  .milestones__heading h2 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  
+  .milestones__content {
+    padding-bottom: 2rem;
+  }
+  
