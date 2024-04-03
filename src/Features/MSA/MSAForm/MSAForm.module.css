@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.MSAForm{
+    margin-top: 1%;
+    margin-left: 30%;
+    margin-right: 1%;
+    font-family: 'Montserrat', sans-serif;
+}
+.MSAForm__heading{
+    font-weight: 700; /* Bold weight */
+    font-size: 1.7rem; /* Font size 40 */
+}
+.MSAForm__Form{
+    background-color: white;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    border-radius: 5px;
+    padding: 1rem;
+}
+.MSAForm__Form__Heading{
+    font-weight: 700; /* Bold weight */
+    font-size: 1.2rem;
+}
+.MSAForm__Form__row1,
+.MSAForm__Form__row2,
+.MSAForm__Form__row3{
+    display: flex;
+}
+.MSAForm__Form__row1{
+    margin-top: 1.5rem;
+}
+.MSAForm__Form__row1__col1,
+.MSAForm__Form__row1__col2,
+.MSAForm__Form__row1__col3,
+.MSAForm__Form__row2__col1,
+.MSAForm__Form__row2__col2,
+.MSAForm__Form__row3__col1,
+.MSAForm__Form__row3__col2{
+    flex: 1;
+}
+.MSAForm__Form__row1__col2,
+.MSAForm__Form__row1__col3{
+    margin-left: 4rem;
+}
+.MSAForm__Form__input__msa_ref_id{
+    background-color: rgb(239, 237, 237);
+}
+.MSAForm__Form__inputs,
+.MSAForm__Form__input__msa_ref_id{
+    width:15rem;
+}
+.MSAForm__Form__Button{
+    color: white;
+    background-color:#dc143c;
+    width: 9rem;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 0.8rem;
+    height: 2.7rem;
+    margin-left: 25rem;
+}
+.MSAForm__Form__row3__col1__fileicon{
+    font-size: 24px;
+    color: #dc143c;
+    font-size: 4.5rem;
+}
+.MSAForm__Form__ModalOk{
+    background-color:#dc143c ;
+    color: white;
+    justify-content: center;
+}

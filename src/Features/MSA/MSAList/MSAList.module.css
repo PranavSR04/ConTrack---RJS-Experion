@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.MSAList{
+    margin-top: 1%;
+    margin-left: 30%;
+    margin-right: 1%;
+    font-family: 'Montserrat', sans-serif;
+}
+.MSAList_heading{
+    font-weight: 700; 
+    font-size: 1.7rem;
+    width: 90%;
+  padding: 2%;
+  margin-left: -1rem;
+}
+.MSAList_Table_row1{
+    display: flex;
+    margin-top: -2%;
+}
+.MSAList_Table_row1_col1_Toggle{
+    flex:1;
+}
+.MSAList_Table_row1_col2_Addbutton{
+    flex:1;
+}
+.MSAList_Table_Addbutton{
+    margin-left: 65%;
+    margin-top: 1%;
+    border-color: transparent;
+    width:30%;
+    margin-bottom: 1%;
+    border-radius: 0.5rem;
+     background-color:#DC143C;
+     color: white;
+     height: 90%;
+}
+.MSAList_Table_Table{
+    padding-top: 2%;
+}
