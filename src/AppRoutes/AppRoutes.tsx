@@ -28,8 +28,8 @@ const AppRoutes = () => {
                     <Route path="/MyContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
                     <Route path="/Revenue/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
                     <Route path="/ManageUser" element={<><NavBarHandler /><SideBar><ManageUsersHandler/></SideBar></>}></Route>
-                    <Route path="/MSAOverview" element={<MSAListHandler/>} />
-                    <Route path="/MSAForm" element={<MSAFormHandler />} />
+                    <Route path="/MSAOverview" element={<><NavBarHandler /><SideBar><MSAListHandler/></SideBar></>} />
+                    <Route path="/MSAForm" element={<><NavBarHandler /><SideBar><MSAFormHandler /></SideBar></>} />
                 </Routes>
             </AuthContext>
         </BrowserRouter>
