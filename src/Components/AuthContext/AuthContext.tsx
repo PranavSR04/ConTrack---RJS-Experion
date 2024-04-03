@@ -64,6 +64,7 @@ const AuthContext = ({ children }: { children: React.ReactNode }) => {
 
 		if (!(contrack_response instanceof AxiosError)) {
 			console.log("Logged User Details", contrack_response.contrackUser);
+			console.log(contrack_response.contrackUser);
 			setCurrentUser(contrack_response.contrackUser);
 			localStorage.setItem("access_token", contrack_response.access_token);
 			contrack_response.contrackUser.id? localStorage.setItem("user_id",contrack_response.contrackUser.id.toString())
@@ -71,7 +72,7 @@ const AuthContext = ({ children }: { children: React.ReactNode }) => {
 			localStorage.setItem("role_id",contrack_response.contrackUser.role_id.toString());
 			localStorage.setItem("user", JSON.stringify(contrack_response.user));
 			localStorage.setItem("username",JSON.stringify(contrack_response.contrackUser.user_name));
-			navigate("/Dashboard");
+			navigate("/navbar");
 
 		} else {
 			showModal();
