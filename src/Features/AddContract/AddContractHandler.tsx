@@ -8,6 +8,7 @@ import { UploadRequestOption } from "rc-upload/lib/interface";
 import { useNavigate } from "react-router-dom";
 import AddContract from "./AddContract";
 import { getUser } from "./api/getUser";
+import { Moment } from "moment";
 
 const AddContractHandler = () => {
   const [contractDetails, setContractDetails] = useState<ContractDetails>({
@@ -96,6 +97,82 @@ const AddContractHandler = () => {
     } catch (error) {
       console.error("Error fetching user names:", error);
     }
+  };
+
+  // Function to handle changes in the start date of the contract
+  const handleStartDateChange = (value: Moment | null) => {
+    const startDateString = value ? value.format("YYYY-MM-DD") : "";
+    setContractDetails({
+      ...contractDetails,
+      start_date: startDateString,
+    });
+  };
+
+  // Function to handle changes in the end date of the contracts
+  const handleEndDateChange = (value: Moment | null) => {
+    const endDateString = value ? value.format("YYYY-MM-DD") : "";
+    setContractDetails({
+      ...contractDetails,
+      end_date: endDateString,
+    });
+  };
+
+  // Function to handle changes in the date of signature of the contract
+  const handleDateOfSignatureChange = (value: Moment | null) => {
+    const dateOfSignatureString = value ? value.format("YYYY-MM-DD") : "";
+    setContractDetails({
+      ...contractDetails,
+      date_of_signature: dateOfSignatureString,
+    });
+  };
+
+  // Validation function for end date
+  const validateEndDate = (rule: any, value: Moment | null) => {
+    if (
+      value &&
+      contractDetails.start_date &&
+      value.isBefore(contractDetails.start_date)
+    ) {
+      return Promise.reject("End Date must be after Start Date");
+    }
+    return Promise.resolve();
+  };
+
+  // Validation function for date of signature
+  const validateDateOfSignature = (rule: any, value: Moment | null) => {
+    if (
+      value &&
+      contractDetails.start_date &&
+      contractDetails.end_date &&
+      (value.isAfter(contractDetails.start_date) ||
+        value.isAfter(contractDetails.end_date))
+    ) {
+      return Promise.reject("Must be before Start Date & End Date");
+    }
+    return Promise.resolve();
+  };
+
+  // Validation function for checking if percentage is greater than 100
+  const checkPercentage = (_: any, value: number) => {
+    if (value > 100) {
+      return Promise.reject(new Error("% > 100"));
+    }
+    return Promise.resolve();
+  };
+
+  // Validation function for checking sum of percentages for milestones
+  const checkSumOfPercentage = (index: number, value: any) => {
+    let total = value;
+    milestones.forEach((milestone, i) => {
+      if (i !== index) {
+        total += milestone.percentage || 0;
+      }
+    });
+
+    if (total !== 100) {
+      return Promise.reject(new Error("% error"));
+    }
+    return Promise.resolve();
   };
 
   // Function to handle contract type change
@@ -358,6 +435,13 @@ const AddContractHandler = () => {
       contractDetails={contractDetails}
       setContractDetails={setContractDetails}
       milestones={milestones}
+      handleStartDateChange={handleStartDateChange}
+      handleEndDateChange={handleEndDateChange}
+      handleDateOfSignatureChange={handleDateOfSignatureChange}
+      validateEndDate={validateEndDate}
+      validateDateOfSignature={validateDateOfSignature}
+      checkPercentage={checkPercentage}
+      checkSumOfPercentage={checkSumOfPercentage}
       spinning={spinning}
     />
   );

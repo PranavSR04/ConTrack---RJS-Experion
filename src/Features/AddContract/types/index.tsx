@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { UploadRequestOption } from "rc-upload/lib/interface";
 import { EditContractDetails } from "./editcontract";
+import { Moment } from "moment";
 
 export interface RcFile extends File {
   uid: string;
@@ -67,6 +68,13 @@ export interface AddContractPropType {
     value: string;
   }[];
   getUserName: (searchValue: string) => Promise<void>;
+  handleStartDateChange: (value: Moment | null) => void;
+  handleEndDateChange: (value: Moment | null) => void;
+  handleDateOfSignatureChange: (value: Moment | null) => void;
+  validateEndDate: (rule: any, value: Moment | null) => Promise<void>;
+  validateDateOfSignature: (rule: any, value: Moment | null) => Promise<void>;
+  checkPercentage: (_: any, value: number) => Promise<void>;
+  checkSumOfPercentage: (index: number, value: any) => Promise<void>;
   contractDetails: ContractDetails;
   setContractDetails: React.Dispatch<React.SetStateAction<ContractDetails>>;
   milestones: Milestone[];

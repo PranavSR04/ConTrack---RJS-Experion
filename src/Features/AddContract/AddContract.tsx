@@ -36,6 +36,13 @@ const AddContract = ({
   handleContractTypeChange,
   getClientName,
   getUserName,
+  handleStartDateChange,
+  handleEndDateChange,
+  handleDateOfSignatureChange,
+  validateEndDate,
+  validateDateOfSignature,
+  checkPercentage,
+  checkSumOfPercentage,
   clientNameOptions,
   userNameOptions,
   contractDetails,
@@ -48,82 +55,6 @@ const AddContract = ({
   useEffect(() => {
     setUPMiles(milestones);
   }, [milestones]);
-
-  // Function to handle changes in the start date of the contract
-  const handleStartDateChange = (value: Moment | null) => {
-    const startDateString = value ? value.format("YYYY-MM-DD") : "";
-    setContractDetails({
-      ...contractDetails,
-      start_date: startDateString,
-    });
-  };
-
-  // Function to handle changes in the end date of the contract
-  const handleEndDateChange = (value: Moment | null) => {
-    const endDateString = value ? value.format("YYYY-MM-DD") : "";
-    setContractDetails({
-      ...contractDetails,
-      end_date: endDateString,
-    });
-  };
-
-  // Function to handle changes in the date of signature of the contract
-  const handleDateOfSignatureChange = (value: Moment | null) => {
-    const dateOfSignatureString = value ? value.format("YYYY-MM-DD") : "";
-    setContractDetails({
-      ...contractDetails,
-      date_of_signature: dateOfSignatureString,
-    });
-  };
-
-  // Validation function for end date
-  const validateEndDate = (rule: any, value: Moment | null) => {
-    if (
-      value &&
-      contractDetails.start_date &&
-      value.isBefore(contractDetails.start_date)
-    ) {
-      return Promise.reject("End Date must be after Start Date");
-    }
-    return Promise.resolve();
-  };
-
-  // Validation function for date of signature
-  const validateDateOfSignature = (rule: any, value: Moment | null) => {
-    if (
-      value &&
-      contractDetails.start_date &&
-      contractDetails.end_date &&
-      (value.isAfter(contractDetails.start_date) ||
-        value.isAfter(contractDetails.end_date))
-    ) {
-      return Promise.reject("Must be before Start Date & End Date");
-    }
-    return Promise.resolve();
-  };
-
-  // Validation function for checking if percentage is greater than 100
-  const checkPercentage = (_: any, value: number) => {
-    if (value > 100) {
-      return Promise.reject(new Error("% > 100"));
-    }
-    return Promise.resolve();
-  };
-
-  // Validation function for checking sum of percentages for milestones
-  const checkSumOfPercentage = (index: number, value: any) => {
-    let total = value;
-    milestones.forEach((milestone, i) => {
-      if (i !== index) {
-        total += milestone.percentage || 0;
-      }
-    });
-
-    if (total !== 100) {
-      return Promise.reject(new Error("% error"));
-    }
-    return Promise.resolve();
-  };
 
   return (
     <>
