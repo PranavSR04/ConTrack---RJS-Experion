@@ -1,0 +1,17 @@
+
+.linechart__container {
+	width: 74vw;
+	height: 65vh;
+}
+
+.linechart__container__spinner {
+	justify-content: center; /* Center the spinner horizontally */
+	align-items: center;
+}
+
+@media only screen and (max-width: 1150px) {
+	.linechart__container {
+        width: 55vw;
+
+	}
+}
