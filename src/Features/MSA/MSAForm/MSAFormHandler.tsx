@@ -151,6 +151,7 @@ const handleFileUpload = (info: any) => {
     // Update the form data with the uploaded file
     setFileUpload( info.file );
     setFileName(info.file.name);
+    setShowFile(true);
   } catch (e) {
     console.log("file upload error is", e);
   }
@@ -189,6 +190,10 @@ const handleMSAForm = () => {
     setIsModalVisible(false);
   };
 
+    //Function to cancel file 
+    const fileCancel = () => {
+      setShowFile(false)
+    };
   //Function to handle form submission
 const handleSubmitForm=async(value:any)=>{
   console.log(msaData)
@@ -235,6 +240,8 @@ const validateStartDate = async (value:any) => {
       handleStartDateChange={handleStartDateChange}
       handleEndDateChange={handleEndDateChange}
       validateStartDate={validateStartDate}
+      showFile={showFile}
+      fileCancel={fileCancel}
       />
     </div>
   )

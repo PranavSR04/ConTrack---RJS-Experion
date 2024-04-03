@@ -32,4 +32,6 @@ export interface MsaDataType {
     handleStartDateChange: (dateString: string) => void;
     handleEndDateChange: (dateString: string) => void;
     validateStartDate: (value: any) => Promise<void>;
+    showFile: boolean;
+    fileCancel: () => void
   }

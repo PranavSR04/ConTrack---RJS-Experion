@@ -3,7 +3,7 @@ import styles from './MSAForm.module.css'
 import { Button, DatePicker, Form, Input, Modal, Spin, Upload } from 'antd'
 import { useNavigate } from 'react-router'
 import { MSAFormProps } from './types'
-import { FilePdfOutlined, PlusOutlined } from '@ant-design/icons'
+import { CloseOutlined, FilePdfOutlined, PlusOutlined } from '@ant-design/icons'
 import TextArea from 'antd/es/input/TextArea'
 import moment from 'moment'
 const MSAForm = ({
@@ -20,7 +20,9 @@ const MSAForm = ({
    handleInputChange,
    handleStartDateChange,
    handleEndDateChange,
-   validateStartDate
+   validateStartDate,
+   showFile,
+   fileCancel
 }
   :MSAFormProps) => {
     console.log(msaData.start_date)
@@ -95,8 +97,7 @@ const MSAForm = ({
                 wrapperCol={{ span: 24 }}
                 valuePropName={msaData.region}
                 rules={[
-                  { required: true, message: "Please enter the Region" },
-
+                  { required: true, message: "Please enter the Region" }
                 ]}
               >
                 <Input
@@ -152,7 +153,6 @@ const MSAForm = ({
                 <DatePicker
                   className={styles.MSAForm__Form__inputs}
                   onChange={handleEndDateChange}
-
                   required
                 />
               </Form.Item>
@@ -171,7 +171,57 @@ const MSAForm = ({
                 wrapperCol={{ span: 24 }}
                 rules={[{ required: true, message: "Please upload File" }]}
               >
-                {fileName ? (
+                {showFile ? (
+                  <div className={styles.container_file}>
+                    <CloseOutlined
+                      className={styles.file__closeicon}
+                      onClick={fileCancel}
+                    />
+
+                      <FilePdfOutlined
+                        className={styles.MSAForm__Form__row3__col1__fileicon}
+                      />
+
+                      <br />
+                      <div>
+                      <p className={styles.MSAForm__Form__row3__col1__filename}>
+                      {fileName}
+                    </p>
+                      </div>
+                  </div>
+                ) : fileName ? (
+                  <>
+                    <div>
+                      <FilePdfOutlined
+                        className={styles.MSAForm__Form__row3__col1__fileicon}
+                      />
+                      <br />
+                    <p className={styles.MSAForm__Form__row3__col1__filename}>
+                      {fileName}
+                    </p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <Upload
+                      action=""
+                      listType="picture-card"
+                      fileList={[]}
+                      accept=".pdf,.docx"
+                      customRequest={handleFileUpload}
+                      beforeUpload={beforeUpload}
+                    >
+                      <button
+                        style={{ border: 0, background: "none" }}
+                        type="button"
+                      >
+                        <PlusOutlined />
+                        <div style={{ marginTop: 8 }}>Upload</div>
+                      </button>
+                    </Upload>
+                  </>
+                )}
+                {/* {fileName ? (
                   <div>
                     <FilePdfOutlined
                       className={styles.MSAForm__Form__row3__col1__fileicon}
@@ -198,7 +248,7 @@ const MSAForm = ({
                       <div style={{ marginTop: 8 }}>Upload</div>
                     </button>
                   </Upload>
-                )}
+                )} */}
               </Form.Item>
               <Form.Item
                 name="comments"

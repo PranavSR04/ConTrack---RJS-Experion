@@ -68,3 +68,11 @@
     color: white;
     justify-content: center;
 }
+.file__closeicon{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 13rem;
+    font-size: 15px;
+    color: black;
+}
