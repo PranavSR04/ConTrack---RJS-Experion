@@ -1,0 +1,89 @@
+
+.revueneProjection {
+  margin-top: 20px;
+  margin-left: 16rem;
+  margin-right: 1.5rem;
+  font-family: "Montserrat", sans-serif;
+  
+  width: 60rem;
+}
+.revueneProjection__heading {
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding-top:3px;
+  margin-left: 1rem;
+}
+
+.card {
+  margin-top: 1rem;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+  margin-bottom: 2rem;
+  width: 700px;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: "Montserrat", sans-serif;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  background-color: #a58787;
+}
+
+.chart_container {
+  width: 900px;
+  display: flex;
+  /* height: 20px; */
+}
+
+.small_column {
+  width: 40px;
+}
+
+.large_column {
+  
+  width: 1000px;
+  /* transform: scale(1.2); */
+  overflow-x: scroll;
+}
+.large_column::-webkit-scrollbar {
+  height: 10px;
+}
+
+.large_column::-webkit-scrollbar-track {
+  background: transparent; /* Color of the scrollbar track */
+  border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+}
+
+.large_column::-webkit-scrollbar-thumb {
+  background: #adadad; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+}
+
+.large_column::-webkit-scrollbar-thumb:hover {
+  background: #5e5e5e; /* Color of the scrollbar thumb on hover */
+}
+.container {
+  padding-top: 30px;
+  width: 1000px;
+  height: 400px;
+  /* margin-left: 20px; */
+}
+.spinner {
+  justify-content: center; /* Center the spinner horizontally */
+  align-items: center;
+}
+.filtericon {
+  margin-left: 5rem;
+  align-self: flex-end;
+  cursor: pointer;
+}
+.filterModal {
+  max-width: 20rem;
+  max-height: 20px;
+  margin-left: 68%;
+}
+.rangepicker{
+  margin-left: 20rem;
+
+}
