@@ -1,0 +1,190 @@
+.Notificationstyle{
+  display: flex;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow:0 0 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 2px 0 20px 4px;
+  height:80px;
+  width:320px;
+  transition: transform 0.3s ease;
+  
+}
+.Notificationstyle:hover{
+  display: flex;
+  background-color: #f0eded;
+  border-radius: 10px;
+  padding: 16px;
+  margin: 2px 0 20px 4px;
+  height:80px;
+  width:320px;
+  transform: translateY(-5px);
+}
+.Notificationstyle_added p {
+  margin-top: 10%;
+  background-color: #e9d2f4;
+  color: #320249;
+  font-weight:700;
+  font-size: 10px;
+  padding: 9%;
+  width: 60px;
+  border-radius: 20px; 
+}
+.Notificationstyle_edited p{
+  margin-top: 10px;
+  background-color: #eba68d;
+  color: #451b0c;
+  font-weight:700;
+  font-size: 10px;
+  padding: 9%;
+  width: 60px;
+  border-radius: 20px; 
+}
+.Notificationstyle_renewed p{
+  margin-top: 10px;
+  background-color: #ACF3A0;
+  color: #1F9423;
+  font-weight:700;
+  font-size: 10px;
+  padding: 9%;
+  width: 60px;
+  border-radius: 20px; 
+}
+.Notificationstyle_expired p{
+  margin-top: 10px;
+  background-color: #DC143C;
+  color: #5F2828;
+  font-weight:700;
+  font-size: 10px;
+  padding: 9%;
+  width: 60px;
+  border-radius: 20px; 
+}
+.Notificationstyle_expiring p{
+  margin-top: 10px;
+  background-color: #F2E291;
+  color: #9F7D24;
+  font-weight:700;
+  font-size: 10px;
+  padding: 9%;
+  width: 60px;
+  border-radius: 20px; 
+}
+.Notificationstyle_cardStyle_right{
+  flex: 7;
+  padding-left: 6px;
+  text-align: left;
+  font-size: 12px;
+  margin-top: 10px;
+}
+.DashBoard_Notification_Style{
+display: flex;
+background-color: #ffffff;
+border-radius: 10px;
+box-shadow:0 0 4px rgba(0, 0, 0, 0.1);
+margin: 2px 0 20px 4px;
+height:45px;
+width:271px;
+font-size: small;
+transition: transform 0.3s ease;
+
+}
+.DashBoard_Notification_Style:hover{
+display: flex;
+background-color: #f0eded;
+border-radius: 10px;
+margin: 2px 0 20px 4px;
+height:45px;
+width:271px;
+transform: translateY(-5px);
+}
+
+.DashBoard_Notification_Style_added p {
+  margin-top: 10%;
+  background-color: #e9d2f4;
+  color: #320249;
+  font-weight:700;
+  font-size: 8px;
+  padding: 9%;
+  width: 60px;
+  border-radius: 20px; 
+}
+.DashBoard_Notification_Style_edited p{
+  margin-top: 10px;
+  background-color: #eba68d;
+  color: #451b0c;
+  font-weight:700;
+  font-size: 8px;
+  padding: 9%;
+  width: 60px;
+  border-radius: 20px; 
+}
+.DashBoard_Notification_Style_renewed p{
+  margin-top: 10px;
+  background-color: #ACF3A0;
+  color: #1F9423;
+  font-weight:700;
+  font-size: 8px;
+  padding: 9%;
+  width: 60px;
+  border-radius: 20px; 
+}
+.DashBoard_Notification_Style_expired p{
+  margin-top: 10px;
+  background-color: #DC143C;
+  color: #5F2828;
+  font-weight:700;
+  font-size: 8px;
+  padding: 9%;
+  width: 60px;
+  border-radius: 20px; 
+}
+.DashBoard_Notification_Style_expiring p{
+  margin-top: 10px;
+  background-color: #F2E291;
+  color: #9F7D24;
+  font-weight:700;
+  font-size: 8px;
+  padding: 9%;
+  width: 60px;
+  border-radius: 20px; 
+}
+
+.DashBoard_Notification_Style_cardStyle_right{
+  flex: 7;
+  padding-left: 6px;
+  text-align: left;
+  font-size: 8px;
+  margin-top: 10px;
+}
+
+.listStyle{
+max-height: calc(99vh - 50px - 50px); 
+overflow-y: auto;
+scrollbar-width: none; 
+-ms-overflow-style: none;
+text-align: center;
+font-size: 15px;
+cursor: pointer;
+}
+
+.drawer{
+margin-top: 55px;
+box-shadow: none;
+}
+.viewMore {
+margin-bottom: 30px;
+text-align: center;
+color: #1890ff;
+cursor: pointer;
+}
+
+.viewMore:hover {
+text-decoration: underline;
+}
+.difference{
+font-size: 11px;
+font-weight: 100;
+padding-left: 5px;
+padding-top: 10px;
+}
