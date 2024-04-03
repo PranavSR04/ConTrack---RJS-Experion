@@ -1,0 +1,55 @@
+
+.revueneprojection {
+  /* height: var(--app-margin-top); */
+  
+  padding-top:calc(var(--app-margin-top) + 5vh);
+  margin-left: 16rem;
+  margin-right: 1.5rem;
+  /* width: 60rem;   */
+}
+
+.revueneprojection__title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-left: 1rem;
+}
+
+.revueneprojection__card{
+  width: 77vw;
+}
+
+.revueneprojection__card__filtersection{
+  margin-bottom: 1%;
+  margin-top: 1%;
+}
+
+.revueneprojection__card__filtersection__datepicker{
+  margin-left: 25vw;
+
+
+
+}
+
+.revueneprojection__card__filtersection__filtericon{
+  margin-left: 2%;
+  align-self: flex-end;
+  cursor: pointer;
+
+}
+
+.revueneprojection__card__filtersection__filtermodal{
+  max-width: 20rem;
+  max-height: 20px;
+  margin-left: 68%;
+}
+
+@media only screen and (max-width: 1150px) {
+  .revueneprojection__card{
+    width: 60vw;
+  }
+  .revueneprojection__card__filtersection__datepicker{
+    margin-left: 5vw;
+    transition: margin-left 0.5s ease;
+  }
+
+}

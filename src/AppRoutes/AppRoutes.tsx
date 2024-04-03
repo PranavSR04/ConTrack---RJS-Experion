@@ -4,6 +4,7 @@ import NavBarHandler from "../Components/NavBar/NavBarHandler";
 import LoginHandler from "../Features/Login/LoginHandler";
 import AuthContext from "../Components/AuthContext/AuthContext";
 import ContractListHandler from '../Features/Contract/ContractListing/ContractListHandler'
+import RevenueProjectionHandler from "../Features/RevenueProjection/RevenueProjectionHandler";
 
 const AppRoutes = () => {
 	return (
@@ -14,6 +15,7 @@ const AppRoutes = () => {
 					<Route path="/navbar" element={<NavBarHandler />}></Route>
 					<Route path='/AllContracts' element={<ContractListHandler/>}></Route>
             		<Route path='/MyContracts' element={<ContractListHandler/>}></Route>
+					<Route path="/RevenueProjection" element={<><NavBarHandler /><RevenueProjectionHandler /></>}></Route>
 				</Routes>
 			</AuthContext>
 		</BrowserRouter>
