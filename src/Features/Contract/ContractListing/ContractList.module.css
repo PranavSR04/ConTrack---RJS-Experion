@@ -16,11 +16,11 @@
   max-width: 75%;
 }
 
-/* @media only screen and (min-width: 368px) and (max-width: 892.8px){
+@media only screen and (min-width: 368px) and (max-width: 892.8px){
 .contracts-table {
     overflow-x: scroll;
 }
-} */
+}
 
 .contracts-table__buttons {
     margin-top: 1%;

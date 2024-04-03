@@ -5,6 +5,7 @@ import LoginHandler from "../Features/Login/LoginHandler";
 import AuthContext from "../Components/AuthContext/AuthContext";
 import ContractListHandler from '../Features/Contract/ContractListing/ContractListHandler'
 import IndividualContractHandler from "../Features/Contract/IndividualContract/IndividualContractHandler";
+import ManageUsersHandler from '../Features/ManageUsers/ManageUsersHandler'
 
 const AppRoutes = () => {
 	return (
@@ -18,6 +19,8 @@ const AppRoutes = () => {
 					<Route path="/AllContracts/:contract_ref_id" element={<IndividualContractHandler/>}></Route>
               		<Route path="/MyContracts/:contract_ref_id" element={<IndividualContractHandler />}></Route>
               		<Route path="/Revenue/:contract_ref_id" element={<IndividualContractHandler />}></Route>
+					<Route path="/ManageUser" element={<><ManageUsersHandler/></>}></Route>
+
 				</Routes>
 			</AuthContext>
 		</BrowserRouter>
