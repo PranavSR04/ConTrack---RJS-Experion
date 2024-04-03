@@ -11,6 +11,8 @@ import MSAListHandler from "../Features/MSA/MSAList/MSAListHandler";
 import MSAFormHandler from "../Features/MSA/MSAForm/MSAFormHandler";
 import AddContractHandler from "../Features/AddContract/AddContractHandler";
  
+
+
 const AppRoutes = () => {
     return (
         <BrowserRouter>
