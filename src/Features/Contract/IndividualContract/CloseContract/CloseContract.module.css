@@ -1,0 +1,5 @@
+.maincontainer__documents__buttons{
+    display: flex;
+    margin-top: 1rem;
+    justify-content: flex-end;
+}

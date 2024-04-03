@@ -1,0 +1,126 @@
+.login {
+	display: flex;
+	height: 100vh;
+	background-color: white;
+	align-items: center;
+  	justify-content: center;
+}
+.login__left {
+	flex: 1;
+}
+.login__left__brand {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	width: 50%;
+	margin: auto;
+}
+.login__left__brand__logo {
+	padding: 1rem;
+	margin-right: 3%;
+	height: auto; 
+}
+.login__left__brand__title {
+	font-size: 4.5rem;
+}
+
+.login__left__tagline {
+	font-size: small;
+	margin-left: 40%;
+}
+.login__left__mobileButton{
+	display: none;
+}
+.login__left__mobileButton__microsoftButton{
+	background-color: #0078d4; /* Microsoft Blue */
+	color: #ffffff; /* White text */
+	border: none;
+	border-radius: 0px;
+	font-size: 13px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.login__right {
+	flex: 1;
+}
+
+.login__right__card {
+	box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+	border-radius: 0px;
+	display: flex;
+	align-items: center;
+	min-width: 17rem;
+	width: 40%;
+	margin: auto;
+}
+
+.login__right__card__microsoftLogo {
+	width: 35px;
+	height: auto;
+	margin-bottom: 6px;
+	margin-right: 2px;
+	flex: 1;
+}
+
+.login__right__card__microsoftButton {
+	background-color: #0078d4; /* Microsoft Blue */
+	color: #ffffff; /* White text */
+	border: none;
+	border-radius: 0px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	flex: 1;
+}
+
+.login__right__card__microsoftButton:hover {
+	background-color: #005a9e;
+	border-width: 5px;
+	border-color: black; /* Darker shade of Microsoft Blue on hover */
+}
+
+
+@media only screen and (max-width: 910px) {
+	.login {
+		display: flex;
+		flex-direction: column;
+		height: 100vh;
+		background-color: rgb(255, 255, 255);
+		justify-content: center;
+		align-items: center;		
+	}
+	.login__left{
+		margin-top: 50vh;
+		
+	}
+	.login__left__brand {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.login__left__brand__logo {
+		padding: 0;
+		width: 25px;
+		justify-content: center;
+		align-items: center;
+		margin-right: 5%;
+	}
+	.login__left__brand__title {
+		font-size: 2.3rem;
+	}
+	.login__left__tagline {
+		display: none;
+	
+	}
+	.login__left__mobileButton{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	.login__right{
+		display: none;
+	}
+	
+}

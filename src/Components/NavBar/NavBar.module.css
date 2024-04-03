@@ -1,0 +1,28 @@
+.navbar {
+	height: var(--app-margin-top);
+	width: 100vw;
+	padding-left: 1rem;
+	padding-right: 2rem;
+	display: flex;
+	background-color: black;
+	color: white;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 100;
+	position: fixed;
+}
+.navbar__navbrand {
+	display: flex;
+	align-items: center;
+}
+.navbar__navbrand__logo {
+	width: 1.3rem;
+	margin-right: 0.4rem;
+}
+.navbar__notification {
+	margin-right: 2rem;
+	cursor: pointer;
+}
+.navbar__notification:hover {
+	background-color: rgb(68, 68, 68);
+}

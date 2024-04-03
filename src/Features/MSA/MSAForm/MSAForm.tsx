@@ -16,7 +16,9 @@ const MSAForm = ({
   handleCancel,
   spinning,
   headingText,
-
+   handleInputChange,
+   handleStartDateChange,
+   handleEndDateChange
 }
   :MSAFormProps) => {
     console.log(msaData.msa_ref_id)
@@ -34,7 +36,6 @@ const MSAForm = ({
             style={{ maxWidth: 600 }}
             onFinish={handleSubmitForm}
             requiredMark={false}
-            //initialValues={{ client_name: msaData.client_name }} 
           >
             <div className={styles.MSAForm__Form__row1}>
               <Form.Item
@@ -55,7 +56,7 @@ const MSAForm = ({
               <Form.Item
                 className={styles.MSAForm__Form__row1__col2}
                 name="client_name"
-                //initialValue={msaData.client_name}
+                valuePropName={msaData.client_name}
                 label={
                   <div>
                     Client Name
@@ -74,8 +75,9 @@ const MSAForm = ({
               >
                 <Input
                   name="client_name"
-                  //value={msaData.client_name}
+                  value={msaData.client_name}
                   className={styles.MSAForm__Form__inputs}
+                  onChange={handleInputChange}
                 />
               </Form.Item>
               <Form.Item
@@ -89,19 +91,17 @@ const MSAForm = ({
                 }
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
-                //valuePropName={msaData.region}
+                valuePropName={msaData.region}
                 rules={[
                   { required: true, message: "Please enter the Region" },
-                  {
-                    pattern: /^[a-zA-Z]+$/,
-                    message: "Region must be letters",
-                  },
+
                 ]}
               >
                 <Input
                   name="region"
-                  //value={msaData.region}
+                  value={msaData.region}
                   className={styles.MSAForm__Form__inputs}
+                  onChange={handleInputChange}
                 />
               </Form.Item>
             </div>
@@ -123,6 +123,7 @@ const MSAForm = ({
               >
                 <DatePicker
                   className={styles.MSAForm__Form__inputs}
+                  onChange={handleStartDateChange}
                   required
                 />
               </Form.Item>
@@ -143,6 +144,7 @@ const MSAForm = ({
               >
                 <DatePicker
                   className={styles.MSAForm__Form__inputs}
+                  onChange={handleEndDateChange}
                   required
                 />
               </Form.Item>
@@ -205,6 +207,7 @@ const MSAForm = ({
                 <TextArea
                   rows={4}
                   name="comments"
+                  onChange={handleInputChange}
                 />
               </Form.Item>
             </div>

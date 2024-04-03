@@ -28,4 +28,7 @@ export interface MsaDataType {
     handleCancel: () => void;
     spinning: boolean;
     headingText: string;
+    handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    handleStartDateChange: (dateString: string) => void;
+    handleEndDateChange: (dateString: string) => void
   }

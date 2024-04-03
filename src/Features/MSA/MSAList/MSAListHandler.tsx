@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MsaData, TableColumn } from "./types";
 import { getmsalist } from "./api/getmsalist";
 import { Button, Input, Pagination, TablePaginationConfig } from "antd";
@@ -11,6 +11,7 @@ import { useLocation, useNavigate } from "react-router";
 const MSAListHandler = () => {
     const location = useLocation();
     const ROLE_ID = parseInt(localStorage.getItem("role_id") || "0", 10);
+    //const{setAdded,added,setEdited,edited,setRenew,renew}=useContext(NavContexts);
     const [data, setData] = useState<MsaData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const navigate = useNavigate();
