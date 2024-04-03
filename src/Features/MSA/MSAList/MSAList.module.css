@@ -6,24 +6,24 @@
     margin-right: 1%;
     font-family: 'Montserrat', sans-serif;
 }
-.MSAList_heading{
+.MSAList__heading{
     font-weight: 700; 
     font-size: 1.7rem;
     width: 90%;
   padding: 2%;
   margin-left: -1rem;
 }
-.MSAList_Table_row1{
+.MSAList__Table__row1{
     display: flex;
     margin-top: -2%;
 }
-.MSAList_Table_row1_col1_Toggle{
+.MSAList__Table__row1__col1__Toggle{
     flex:1;
 }
-.MSAList_Table_row1_col2_Addbutton{
+.MSAList__Table__row1__col2__Addbutton{
     flex:1;
 }
-.MSAList_Table_Addbutton{
+.MSAList__Table__Addbutton{
     margin-left: 65%;
     margin-top: 1%;
     border-color: transparent;
@@ -34,6 +34,6 @@
      color: white;
      height: 90%;
 }
-.MSAList_Table_Table{
+.MSAList__Table__Table{
     padding-top: 2%;
 }

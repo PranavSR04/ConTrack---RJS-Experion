@@ -41,5 +41,6 @@ export interface MsaListDataType{
     rowClassName: (record: MsaData, index: number) => string;
     handleSegmentChange: ((value: string) => void);
     handleAddMSA: () => void;
-    added: boolean;
+   
+  
   }

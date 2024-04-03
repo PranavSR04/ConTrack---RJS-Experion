@@ -3,6 +3,8 @@ import styles from './MSAList.module.css'
 import { MsaListDataType } from "./types";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router";
+import { useContext, useEffect, useState } from "react";
+import { NavContexts } from "../../../Components/NavContext/NavContext";
 const MSAList = (
     {
         columns,
@@ -21,14 +23,37 @@ const MSAList = (
 ) => {
     const scroll={x:'auto'};
     const ROLE_ID = parseInt(localStorage.getItem("role_id") || "0", 10);
-
+    const [showAddedToast, setShowAddedToast] = useState(false);
+    const [showEditedToast, setShowEditedToast] = useState(false);
+    const [showRenewToast, setShowRenewToast] = useState(false);
+    const{setAdded,setEdited,setRenew}=useContext(NavContexts);
+    useEffect(() => {
+      if (msaAdded && !showAddedToast) {
+        setShowAddedToast(true);
+        setAdded(false);
+      }
+    }, [msaAdded, showAddedToast, setAdded]);
+   
+    useEffect(() => {
+      if (edited && !showEditedToast) {
+        setShowEditedToast(true);
+        setEdited(false);
+      }
+    }, [edited, showEditedToast, setEdited]);
+   
+    useEffect(() => {
+      if (renew && !showRenewToast) {
+        setShowRenewToast(true);
+        setRenew(false);
+      }
+    }, [renew, showRenewToast, setRenew]);
   return (
     <>
     <div className={styles.MSAList}>
-      <h3 className={styles.MSAList_heading}>MASTER SERVICE AGREEMENT</h3>
-      <div className={styles.MSAList_Table}>
-        <div className={styles.MSAList_Table_row1}>
-        <div className={styles.MSAList_Table_row1_col1_Toggle}>
+      <h3 className={styles.MSAList__heading}>MASTER SERVICE AGREEMENT</h3>
+      <div className={styles.MSAList__Table}>
+        <div className={styles.MSAList__Table__row1}>
+        <div className={styles.MSAList__Table__row1__col1__Toggle}>
         <ConfigProvider
                   theme={{
                     token: {
@@ -53,10 +78,10 @@ const MSAList = (
                   />
                 </ConfigProvider>
         </div>
-        <div className={styles.MSAList_Table_row1_col2_Addbutton}>
+        <div className={styles.MSAList__Table__row1__col2__Addbutton}>
         {ROLE_ID !== 3 && (
         <button
-                    className={styles.MSAList_Table_Addbutton}
+                    className={styles.MSAList__Table__Addbutton}
                    onClick={handleAddMSA}
                   >
                     + Add MSA
@@ -64,14 +89,14 @@ const MSAList = (
         )}
         </div>
       </div>
-      <div className={styles.MSAList_Table_Table}>
+      <div className={styles.MSAList__Table__Table}>
       <Table
       locale={{ emptyText: " " }}
       size="small"
       columns={columns}
       dataSource={data}
       scroll={scroll}
-      className={styles.ListMsa_Details_Table_table}
+      className={styles.ListMsa__Details__Table__table}
       pagination={{
         ...pagination,
         position: ["bottomCenter"],
@@ -123,6 +148,7 @@ const MSAList = (
       >
 
       </Table>
+      
       {/* {msaAdded ? (
             <Toast
               messageType="success"

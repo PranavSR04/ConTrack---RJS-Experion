@@ -30,5 +30,6 @@ export interface MsaDataType {
     headingText: string;
     handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     handleStartDateChange: (dateString: string) => void;
-    handleEndDateChange: (dateString: string) => void
+    handleEndDateChange: (dateString: string) => void;
+    validateStartDate: (value: any) => Promise<void>;
   }

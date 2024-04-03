@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router'
 import { MSAFormProps } from './types'
 import { FilePdfOutlined, PlusOutlined } from '@ant-design/icons'
 import TextArea from 'antd/es/input/TextArea'
+import moment from 'moment'
 const MSAForm = ({
   msaData,
   fileName,
@@ -18,10 +19,11 @@ const MSAForm = ({
   headingText,
    handleInputChange,
    handleStartDateChange,
-   handleEndDateChange
+   handleEndDateChange,
+   validateStartDate
 }
   :MSAFormProps) => {
-    console.log(msaData.msa_ref_id)
+    console.log(msaData.start_date)
   return (
     <div className={styles.MSAForm}>
       <h3 className={styles.MSAForm__heading}>
@@ -118,12 +120,16 @@ const MSAForm = ({
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
                 rules={[
-                  { required: true, message: "Please enter the Start Date" },
+                    {
+                      validator: validateStartDate,
+                    }
                 ]}
+                valuePropName={msaData.start_date}
               >
                 <DatePicker
                   className={styles.MSAForm__Form__inputs}
                   onChange={handleStartDateChange}
+
                   required
                 />
               </Form.Item>
@@ -141,10 +147,12 @@ const MSAForm = ({
                 rules={[
                   { required: true, message: "Please enter the End Date" },
                 ]}
+                valuePropName={msaData.end_date}
               >
                 <DatePicker
                   className={styles.MSAForm__Form__inputs}
                   onChange={handleEndDateChange}
+
                   required
                 />
               </Form.Item>

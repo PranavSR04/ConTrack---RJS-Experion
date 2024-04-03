@@ -7,8 +7,8 @@ import { postmsaform } from './api/postmsaform';
 import { LocationStateProps } from './types';
 import { getmsaapi } from './api/getmsaapi';
 import { useLocation, useNavigate } from 'react-router';
-import { Moment } from 'moment';
 import dayjs from 'dayjs';
+import moment from 'moment';
 const MSAFormHandler = () => {
   const location=useLocation();
   const navigate=useNavigate();
@@ -63,7 +63,7 @@ const MSAFormHandler = () => {
      }
     }
 
-}, [msaEdited,msaRenewed]);
+}, [msaEdited,msaRenewed,msaAdded]);
 
 //Function to autofill msa data for edit and renew msa
 const handleAutoFillData=()=>{
@@ -113,8 +113,8 @@ const autoFillMsa = async (msa_ref_id: string) => {
         ...prevState,
         client_name: client_name,
         region: region,
-        start_date: start_date,
-        end_date: end_date,
+        start_date:start_date,
+        end_date:end_date,
         msa_doclink: msa_doclink, 
       }))
     }
@@ -211,6 +211,12 @@ msaFormData.append('file',fileUpload||'')
   navigate("/MSAList", { state: { added: true } });
 }
 
+//Function to validate start date
+const validateStartDate = async (value:any) => {
+  if (value && msaData.end_date && moment(value).isAfter(msaData.end_date)) {
+    throw new Error('End date must be after start date');
+  }
+};
 
   return (
     <div>
@@ -228,6 +234,7 @@ msaFormData.append('file',fileUpload||'')
       handleInputChange={handleInputChange}
       handleStartDateChange={handleStartDateChange}
       handleEndDateChange={handleEndDateChange}
+      validateStartDate={validateStartDate}
       />
     </div>
   )
