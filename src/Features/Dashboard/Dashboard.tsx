@@ -1,4 +1,3 @@
-import React from "react";
 import { Card } from "antd";
 import styles from "./dashboard.module.css";
 import DashBoardNotificationListHandler from "../../Components/DashBoardNotificationList/DashBoardNotificationListHandler";
