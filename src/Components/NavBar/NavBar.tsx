@@ -4,8 +4,12 @@ import logo from "../../assets/img/logo.png";
 import { Nav, NavItem, NavbarBrand, NavbarText } from "react-bootstrap";
 import { IoMdNotifications } from "react-icons/io";
 import { Avatar, Badge, Space } from "antd";
+import { NavBarPropType } from "./types";
 
-const NavBar = () => {
+const NavBar = ({username,activeNotificationCount}:NavBarPropType) => {
+
+	console.log(username,activeNotificationCount);
+	const currentUser = JSON.parse(localStorage.getItem("username")||"" );
 	return (
 		<Nav className={styles.navbar}>
 			<NavbarBrand className={styles.navbar__navbrand}> 
@@ -14,13 +18,13 @@ const NavBar = () => {
 			</NavbarBrand>
 			<NavItem>
 				<Space className={styles.navbar__notification}>
-					<Badge count={9} overflowCount={30} showZero={false} offset={[4, 10]} data-testid="bell-icon">
+					<Badge count={activeNotificationCount} overflowCount={30} showZero={false} offset={[4, 10]} data-testid="bell-icon">
 						<Avatar shape="square" size={30}>
 							<IoMdNotifications size={30} />
 						</Avatar>
 					</Badge>
 				</Space>
-				<NavbarText>Gokul Surendran</NavbarText>
+				<NavbarText>{currentUser}</NavbarText>
 			</NavItem>
 		</Nav>
 	);

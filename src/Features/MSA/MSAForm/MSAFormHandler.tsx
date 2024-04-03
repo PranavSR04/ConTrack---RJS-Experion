@@ -213,7 +213,7 @@ msaFormData.append('file',fileUpload||'')
 //Api to post the data for add msa
   await postmsaform(msaFormData,user_id,msaState);
   setSpinning(false);
-  navigate("/MSAList", { state: { added: true } });
+  navigate("/MSAOverview", { state: { added: true } });
 }
 
 //Function to validate start date

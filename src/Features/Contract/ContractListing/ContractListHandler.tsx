@@ -39,6 +39,11 @@ const ContractListHandler = () => {
   const showExpired = (checked: boolean) => {
     //show expired contracts?
     setCheckedExpiring(checked);
+    setPagination({ //set pagination to default
+      current:  1,
+      pageSize: 10,
+      total: 0,
+    });
     setSearchConditions({}); //clear search from Api
     setIsEmptySearch(true);
   };
