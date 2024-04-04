@@ -1,10 +1,10 @@
 .dashboard-div1{
     margin-top: 1%;
     border-width: 10cm;
-    margin-left: 14.5rem;
+    margin-left: 17.5%;
     padding-left: 1.1%;
   font-family: "Montserrat", sans-serif;
-  width: 62rem;
+  width: 62vh;
   height: 38rem;
   position:fixed;
   border-radius: .5rem;
@@ -33,7 +33,7 @@ display:flex;
 .dash-row1-charts{
 display: flex;
 margin-top: -12.8rem;
-width: 46.3rem;
+width: 46.3vw;
 height: 13rem;
 border-radius: 10px;
 background-color:'white';
@@ -51,14 +51,14 @@ background-color:'white';
 
 }
 .dash-row2-ducharts{
-  width: 30.59rem;
+  width: 30.59vw;
   height:14.2rem ;
 
 }
 .dash-row2-charts{
   display: flex;
   /* margin-top: -13rem; */
-  width: 46.3rem;
+  width: 46.3rvw;
   height: 17.3rem;
   border-radius: 10px;
   margin-top: .8rem;

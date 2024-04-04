@@ -8,6 +8,7 @@ import RevenueProjectionHandler from "../Features/RevenueProjection/RevenueProje
 import IndividualContractHandler from "../Features/Contract/IndividualContract/IndividualContractHandler";
 import SideBar from "../Components/SideBar/SideBar";
 import ManageUsersHandler from '../Features/ManageUsers/ManageUsersHandler'
+import Dashboard from "../Features/Dashboard/Dashboard";
 
 const AppRoutes = () => {
 	return (
@@ -23,7 +24,7 @@ const AppRoutes = () => {
               		<Route path="/MyContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
               		<Route path="/Revenue/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
 					<Route path="/ManageUser" element={<><NavBarHandler /><SideBar><ManageUsersHandler/></SideBar></>}></Route>
-
+					<Route path="/Dashboard" element={<><NavBarHandler /><SideBar><Dashboard/></SideBar></>}></Route>
 				</Routes>
 			</AuthContext>
 		</BrowserRouter>

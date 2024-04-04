@@ -104,7 +104,7 @@ const ContractListHandler = () => {
         pageSize: 10,
         total: 0,
       });
-    setCheckedExpiring(false); //set check expiring off by default
+   // setCheckedExpiring(false); //set check expiring off by default
   }, [window.location.href]);
 
   useEffect(() => {
@@ -113,7 +113,6 @@ const ContractListHandler = () => {
     searchConditions,
     pagination.current,
     pagination.pageSize,
-    window.location.href,
   ]); // Refetch data when searchText or searchField changes
 
   useEffect(() => {
