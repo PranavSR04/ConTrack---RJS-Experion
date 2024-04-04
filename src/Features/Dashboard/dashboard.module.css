@@ -1,11 +1,16 @@
+.dashboardContainer{
+max-width: 80vw;
+height: 50vh;
+}
+
 .dashboard-div1{
     margin-top: 1%;
     border-width: 10cm;
-    margin-left: 14.5rem;
+    margin-left: 17.5%;
     padding-left: 1.1%;
   font-family: "Montserrat", sans-serif;
-  width: 62rem;
-  height: 38rem;
+  width: 80vw;
+  height: 100vh;
   position:fixed;
   border-radius: .5rem;
   background-color: white;
@@ -21,10 +26,10 @@
 
 .dash-revenue-div{ 
 display:flex;
+max-height:20vh;
 }
 .dash-revenue-div-month{
   padding-right: 1rem;
-
 }
 .dash-revenue-div-notifi{
   padding-left: 0%;
@@ -32,36 +37,35 @@ display:flex;
 
 .dash-row1-charts{
 display: flex;
-margin-top: -12.8rem;
-width: 46.3rem;
-height: 13rem;
+margin-top: 2vh;
+width: 46.3vw;
+height: 35.8vh;
 border-radius: 10px;
 background-color:'white';
 }
 
 .dash-row1-doughnut{
-  margin-top:-1.1rem ;
+  margin-top:.2vh ;
   /* margin-left:.5rem ;  */
   padding-left: 1rem;
   background-color:'white';
 }
 .dash-row1-barchart{
-  margin-top:-1rem ;
+  margin-top:1rvh ;
   padding-left: .1rem;
 
 }
 .dash-row2-ducharts{
-  width: 30.59rem;
-  height:14.2rem ;
-
+  width: 33.59vw;
+  height:35vh ;
 }
 .dash-row2-charts{
   display: flex;
   /* margin-top: -13rem; */
-  width: 46.3rem;
-  height: 17.3rem;
+  width: 46.3rvw;
+  height: 31.3vh;
   border-radius: 10px;
-  margin-top: .8rem;
+  margin-top: 1.9%;
   padding-left: .1%;
   background-color:white;
   }
