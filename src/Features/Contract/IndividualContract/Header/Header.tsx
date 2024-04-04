@@ -15,8 +15,8 @@ const Header = ({
   id,
 }: HeaderPropType) => {
   return (
-    <div className={`col-12 ${styles.maincontainer__header}`}>
-      <div className={`col-10 col-lg-12 ${styles.maincontainer__header__title}`}>
+    <div className={`${styles.maincontainer__header}`}>
+      <div className={`${styles.maincontainer__header__title}`}>
         <div className={`${styles.maincontainer__header__title__contract}`}>
           <h2>
             {clientName} <span>#{contractRefId}</span>
@@ -33,7 +33,7 @@ const Header = ({
             <p>{contractType}</p>
           </div>
         </div>
-        <div className={`col-1 col-lg-1 ${styles.maincontainer__header__title__edit}`}>
+        <div className={`${styles.maincontainer__header__title__edit}`}>
           {ROLE_ID !== 3 && (
             <button
               className={`${styles.maincontainer__header__title__edit__button}`}
@@ -43,7 +43,7 @@ const Header = ({
             </button>
           )}
         </div>
-        <div className={`col-1 col-lg-1 ${styles.maincontainer__header__title__export}`}>
+        <div className={`${styles.maincontainer__header__title__export}`}>
           {contractExcelData && (
             <button
               className={styles.maincontainer__header__title__export__button}

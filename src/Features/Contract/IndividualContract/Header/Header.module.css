@@ -1,6 +1,7 @@
 .maincontainer__header {
   margin: 0px 0rem;
   font-family: "Montserrat", sans-serif;
+  background-color: white;
 }
 
 .maincontainer__header__title {
@@ -28,6 +29,7 @@
   color: white;
   border: none;
   padding: 5px 15px;
+  margin-right: 1rem;
   font-size: small;
   border-radius: 10px;
 }
@@ -65,4 +67,24 @@
   font-size: xx-small;
   font-weight: 600;
   text-transform: uppercase;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .maincontainer__header__title{
+    flex-direction: column;
+  }
+  .maincontainer__header {
+    flex-direction: row; /* Change to column layout */
+    align-items: flex-start; /* Align items to the start */
+  }
+
+  .maincontainer__header__subheading {
+    display: flex; /* Change to flex layout */
+    flex-wrap: wrap; /* Allow items to wrap */
+  }
+
+  .maincontainer__header__title__edit{
+    margin: 1rem 0rem;
+  }
 }
