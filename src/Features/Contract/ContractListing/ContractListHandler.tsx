@@ -318,6 +318,8 @@ const ContractListHandler = () => {
         locale={locale}
         showExpired={showExpired}
         contractAddToast={contractAddToast}
+        setContractAddToast={setContractAddToast}
+        setContractEditToast={setContractEditToast}
         contractEditToast={contractEditToast}
         isMyContracts={isMyContracts}
         handleSegmentChange={handleSegmentChange}
