@@ -151,12 +151,12 @@ const MSAList = (
       >
 
       </Table>
-      {msaAdded ? (
+      {showAddedToast ? (
             <Toast
               messageType="success"
               message="MSA Added Successfully"
             ></Toast>
-          ) : edited ? (
+          ) : showEditedToast ? (
             <Toast
               messageType="success"
               message="MSA Edited Successfully"
@@ -164,7 +164,7 @@ const MSAList = (
           ) : (
             <></>
           )}
-          {renew ? (
+          {showRenewToast ? (
             <Toast
               messageType="success"
               message="MSA Renewed Successfully"
