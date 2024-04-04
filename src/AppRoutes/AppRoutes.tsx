@@ -14,6 +14,7 @@ import AddContractHandler from "../Features/AddContract/AddContractHandler";
 import AddMsaHandler from "../Features/MSAOld/AddMsa/AddMsaHandler";
 import EditMsaHandler from "../Features/MSAOld/EditMsa/EditMsaHandler";
 import RenewMsaHandler from "../Features/MSAOld/RenewMsa/RenewMsaHandler";
+import NavContext from "../Components/NavContext/NavContext";
  
 
 
@@ -21,6 +22,8 @@ const AppRoutes = () => {
     return (
         <BrowserRouter>
             <AuthContext>
+             <NavContext>
+
                 <Routes>
                     <Route path="/" element={<LoginHandler />}></Route>
                     <Route path="/navbar" element={<><NavBarHandler /><SideBar/></>}></Route>
@@ -41,6 +44,8 @@ const AppRoutes = () => {
 
 
                 </Routes>
+             </NavContext>
+
             </AuthContext>
         </BrowserRouter>
     );
