@@ -121,8 +121,8 @@ ManageUsersPropType) => {
           />
         ) : (
           <></>
-        )}
-        {userDeleted ? (
+        )} 
+         {userDeleted ? (
           <Toast
             message={"User Deleted Successfully"}
             messageType={"warning"}
@@ -138,7 +138,7 @@ ManageUsersPropType) => {
         )}
         {employeeNotFoundToast && (
           <Toast message="No Employee Found" messageType="error" />
-        )}
+        )} 
 
         <div className={`${userTableStyles.mainListContainer}`}>
           <Input

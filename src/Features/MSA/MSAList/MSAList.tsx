@@ -19,6 +19,8 @@ const MSAList = (
         renew,
         handleSegmentChange,
         handleAddMSA,
+
+      
         
     }:MsaListDataType
 ) => {
@@ -149,13 +151,12 @@ const MSAList = (
       >
 
       </Table>
-
- {showAddedToast ? (
+      {msaAdded ? (
             <Toast
               messageType="success"
               message="MSA Added Successfully"
             ></Toast>
-          ) : showEditedToast ? (
+          ) : edited ? (
             <Toast
               messageType="success"
               message="MSA Edited Successfully"
@@ -163,7 +164,7 @@ const MSAList = (
           ) : (
             <></>
           )}
-          {showRenewToast ? (
+          {renew ? (
             <Toast
               messageType="success"
               message="MSA Renewed Successfully"
@@ -171,11 +172,6 @@ const MSAList = (
           ) : (
             <></>
           )}
-      {/* {msaAdded ? (
-            <Toast
-              messageType="success"
-              message="MSA Added Successfully"
-            ></Toast>):<></>} */}
       </div>
       </div>
     </div>
