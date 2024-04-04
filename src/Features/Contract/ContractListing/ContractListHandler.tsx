@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { EditOutlined, SearchOutlined } from "@ant-design/icons";
 import { Button, Empty, Input, Tag } from "antd";
 import { FilterConfirmProps, TablePaginationConfig} from "antd/lib/table/interface";
@@ -9,6 +9,7 @@ import ContractList from "./ContractList";
 import { useNavigate } from "react-router";
 import tableStyles from "./ContractList.module.css";
 import { useLocation } from "react-router";
+import { NavContexts } from "../../../Components/NavContext/NavContext";
 
 const ContractListHandler = () => {
   const [data, setData] = useState<ContractData[]>([]);
@@ -17,8 +18,9 @@ const ContractListHandler = () => {
   const [isEmptySearch, setIsEmptySearch] = useState<boolean>(false);
   const [actionClicked, setActionClicked] = useState<boolean>(false);
   const [checkedExpiring, setCheckedExpiring] = useState(false);
-  const [contractAddToast, setContractAddToast] = useState<boolean>(false);
-  const [contractEditToast, setContractEditToast] = useState<boolean>(false);
+  // const [contractAddToast, setContractAddToast] = useState<boolean>(false);
+  // const [contractEditToast, setContractEditToast] = useState<boolean>(false);
+  const{setContractAddToast,contractAddToast,setContractEditToast,contractEditToast}=useContext(NavContexts);
   const [isMyContracts, setIsMyContracts] = useState<boolean>(false);
   const [slideroption, setSlideroption] = useState<string>('');
   const navigate = useNavigate();
