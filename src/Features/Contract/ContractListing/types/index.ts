@@ -69,4 +69,6 @@ export interface ContractListPropType {
   ROLE_ID:number;
   SCROLL?:SCROLL;
   navigate:  NavigateFunction
+  setContractAddToast: React.Dispatch<React.SetStateAction<boolean>>
+  setContractEditToast: React.Dispatch<React.SetStateAction<boolean>>
 }
