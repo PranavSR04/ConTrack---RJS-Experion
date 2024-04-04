@@ -35,6 +35,7 @@ const MSAListHandler = () => {
       // const[edited,setEdited]=useState(false);
       // const[renew,setRenew]=useState(false);    
       const [selectedActiveKeys, setSelectedActiveKeys] = useState("");
+
       useEffect(() => {
         if (location.state) {
           // Check if MSA was added
@@ -152,11 +153,11 @@ const MSAListHandler = () => {
         setIsEmptySearch(true);    
       };
       const oneditPage = (msa_ref_id: string) => {
-        navigate("/MSAForm", { state: {msa_ref_id: msa_ref_id as string , msaEdited: true } });
+        navigate("/msa/edit", { state: {msa_ref_id: msa_ref_id as string , msaEdited: true } });
        
       };
       const onRenewPage=(msa_ref_id:string)=>{
-        navigate("/MSAForm", { state: {msa_ref_id: msa_ref_id as string , msaRenewed: true } });
+        navigate("/msa/renew", { state: {msa_ref_id: msa_ref_id as string , msaRenewed: true } });
        
       }
       const columns: TableColumn[] = desiredColumnKeys.map((key) => ({

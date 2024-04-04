@@ -22,7 +22,7 @@ const MSAForm = ({
    handleEndDateChange,
    validateStartDate,
    showFile,
-   fileCancel
+   fileCancel,msaAdded
 }
   :MSAFormProps) => {
     console.log(msaData.start_date)
@@ -69,13 +69,21 @@ const MSAForm = ({
                 }
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
-                rules={[
+                rules={msaAdded ? [
                   { required: true, message: "Please enter the Client Name" },
                   {
                     pattern: /^.{5,}$/,
                     message: "Client name must contain at least 5 characters",
                   },
-                ]}
+                ] : []}
+                // {[
+
+                //   // { required: true, message: "Please enter the Client Name" },
+                //   // {
+                //   //   pattern: /^.{5,}$/,
+                //   //   message: "Client name must contain at least 5 characters",
+                //   // },
+                // ]}
               >
                 <Input
                   name="client_name"
@@ -96,9 +104,12 @@ const MSAForm = ({
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
                 valuePropName={msaData.region}
-                rules={[
+                rules={msaAdded ? [
                   { required: true, message: "Please enter the Region" }
-                ]}
+                ] : []}
+                // {[
+                //   { required: true, message: "Please enter the Region" }
+                // ]}
               >
                 <Input
                   name="region"

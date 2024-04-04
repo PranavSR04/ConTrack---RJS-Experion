@@ -9,6 +9,7 @@ import AppRoutes from './AppRoutes/AppRoutes';
 
 const msalInstance = new PublicClientApplication(msalConfig);
 
+
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
 );

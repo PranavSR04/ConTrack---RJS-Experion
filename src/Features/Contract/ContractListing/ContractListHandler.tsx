@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { EditOutlined, SearchOutlined } from "@ant-design/icons";
 import { Button, Empty, Input, Tag } from "antd";
 import { FilterConfirmProps, TablePaginationConfig} from "antd/lib/table/interface";
@@ -9,6 +9,7 @@ import ContractList from "./ContractList";
 import { useNavigate } from "react-router";
 import tableStyles from "./ContractList.module.css";
 import { useLocation } from "react-router";
+import { NavContexts } from "../../../Components/NavContext/NavContext";
 
 const ContractListHandler = () => {
   const [data, setData] = useState<ContractData[]>([]);
@@ -17,15 +18,16 @@ const ContractListHandler = () => {
   const [isEmptySearch, setIsEmptySearch] = useState<boolean>(false);
   const [actionClicked, setActionClicked] = useState<boolean>(false);
   const [checkedExpiring, setCheckedExpiring] = useState(false);
-  const [contractAddToast, setContractAddToast] = useState<boolean>(false);
-  const [contractEditToast, setContractEditToast] = useState<boolean>(false);
+  // const [contractAddToast, setContractAddToast] = useState<boolean>(false);
+  // const [contractEditToast, setContractEditToast] = useState<boolean>(false);
+  const{setContractAddToast,contractAddToast,setContractEditToast,contractEditToast}=useContext(NavContexts);
   const [isMyContracts, setIsMyContracts] = useState<boolean>(false);
   const [slideroption, setSlideroption] = useState<string>('');
   const navigate = useNavigate();
   const location = useLocation();
   const ROLE_ID = parseInt(localStorage.getItem("role_id") || "0");  //get loged in users role
   const SCROLL =  {x: 'auto' } //table scroll for x axis
-  const [pageTitle, setPageTitle] = useState("CONTRACTS OVERVIEW"); 
+  const [pageTitle, setPageTitle] = useState(""); 
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 10, // Default page size
@@ -104,7 +106,7 @@ const ContractListHandler = () => {
         pageSize: 10,
         total: 0,
       });
-    setCheckedExpiring(false); //set check expiring off by default
+   // setCheckedExpiring(false); //set check expiring off by default
   }, [window.location.href]);
 
   useEffect(() => {
@@ -113,7 +115,6 @@ const ContractListHandler = () => {
     searchConditions,
     pagination.current,
     pagination.pageSize,
-    window.location.href,
   ]); // Refetch data when searchText or searchField changes
 
   useEffect(() => {

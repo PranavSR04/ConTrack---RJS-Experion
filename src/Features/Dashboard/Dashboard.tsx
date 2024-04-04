@@ -1,4 +1,3 @@
-import React from "react";
 import { Card } from "antd";
 import styles from "./dashboard.module.css";
 import DashBoardNotificationListHandler from "../../Components/DashBoardNotificationList/DashBoardNotificationListHandler";
@@ -16,9 +15,11 @@ import RegionHorizontalBar from "../../Components/RegionHorizontalBar/RegionHori
 const Dashboard = () => {
   return (
     < >
+    <div className={styles["dashboardContainer"]}>
       <div className={styles["dashboard-div1"]}>
         <div className={styles["dash-row1-div"]}>
-          <div className={styles["dash-revenue-div"]}>
+          <div >
+            <div className={styles["dash-revenue-div"]}>
             <div className={styles["dash-revenue-div-month"]}>
               <DashBoardMonthlyRevenueHandler />
             </div>
@@ -35,19 +36,23 @@ const Dashboard = () => {
             <div className={styles["dash-revenue-div-month"]}>
               <DashBoardMsaCountHandler />
             </div>
-          </div>
-          <div className={styles["dash-revenue-div-notifi"]}>
-            <DashBoardNotificationListHandler />
-          </div>
-        </div>
-    <div className={styles['dash-row1-charts']}>
+            </div>
+          
+           <div>
+          <div className={styles['dash-row1-charts']}>
     <div className={styles['dash-row1-barchart']}>
       <Card className={styles['dash-row2-ducharts']}><BarChartHandler/> </Card>  
       </div> 
       <div className={styles['dash-row1-doughnut']}>     
       <DoughnutChartHandler />
       </div> 
+      </div>
     </div>
+    </div>
+          <div className={styles["dash-revenue-div-notifi"]}>
+            <DashBoardNotificationListHandler />
+          </div>
+        </div>
 <div  className={styles['dash-row2-charts']}>
   <Card style={{backgroundColor:'white',marginRight:'.8rem'}}>      
     <ScatterPlotHandler/>
@@ -59,6 +64,7 @@ const Dashboard = () => {
  <TopRevenueHandler/>
  </Card>
 </div>
+      </div>
       </div>
     </>
   );

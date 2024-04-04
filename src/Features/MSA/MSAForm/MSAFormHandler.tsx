@@ -242,6 +242,7 @@ const validateStartDate = async (value:any) => {
       validateStartDate={validateStartDate}
       showFile={showFile}
       fileCancel={fileCancel}
+      msaAdded={msaAdded}
       />
     </div>
   )
