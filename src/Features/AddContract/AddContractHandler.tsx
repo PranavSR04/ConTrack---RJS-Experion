@@ -304,14 +304,16 @@ const AddContractHandler = () => {
     try {
       setSpinning(true);
       await addContract(contractDetails);
-
+      
+    } catch (error) {
+      console.log("Form not submitted",error);
+    }finally{
+      setSpinning(false);
       setContractAdded(true);
       console.log("Navigating from");
       navigate("/AllContracts", {
         state: { added: contractAdded as boolean },
       });
-    } catch (error) {
-      console.log("Form not submitted");
     }
   };
 

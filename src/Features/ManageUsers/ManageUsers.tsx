@@ -16,7 +16,7 @@ import {
   Card,
 } from "antd";
 import { ManageUserHandlerPropType, ManageUsersPropType } from "./types";
-// import Toast from "../../Components/Toast/Toast";
+import Toast from "../../Components/Toast/Toast";
 import { LabeledValue } from "antd/es/select";
 // import BreadCrumbs from "../../Components/BreadCrumbs/Breadcrumbs";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -108,7 +108,7 @@ ManageUsersPropType) => {
             ADD USER
           </Button>
         </div>
-{/* 
+
         {userAdded ? (
           <Toast message={"User Added Successfully"} messageType={"success"} />
         ) : (
@@ -121,8 +121,8 @@ ManageUsersPropType) => {
           />
         ) : (
           <></>
-        )} */}
-        {/* {userDeleted ? (
+        )} 
+         {userDeleted ? (
           <Toast
             message={"User Deleted Successfully"}
             messageType={"warning"}
@@ -138,7 +138,7 @@ ManageUsersPropType) => {
         )}
         {employeeNotFoundToast && (
           <Toast message="No Employee Found" messageType="error" />
-        )} */}
+        )} 
 
         <div className={`${userTableStyles.mainListContainer}`}>
           <Input

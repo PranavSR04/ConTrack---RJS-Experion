@@ -7,12 +7,11 @@ import { CloudDownloadOutlined, EditOutlined, SearchOutlined, SyncOutlined } fro
 import { FilterConfirmProps } from "antd/es/table/interface";
 import MSAList from "./MSAList";
 import { useLocation, useNavigate } from "react-router";
-import { NavContexts } from "../../../Components/NavContext/NavContext";
 
 const MSAListHandler = () => {
     const location = useLocation();
     const ROLE_ID = parseInt(localStorage.getItem("role_id") || "0", 10);
-    const{setAdded,added,setEdited,edited,setRenew,renew}=useContext(NavContexts);
+    //const{setAdded,added,setEdited,edited,setRenew,renew}=useContext(NavContexts);
     const [data, setData] = useState<MsaData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const navigate = useNavigate();
@@ -31,10 +30,11 @@ const MSAListHandler = () => {
       });
       const [actionClicked, setActionClicked]= useState<boolean>(false);
       const [isEmptySearch, setIsEmptySearch] = useState(false);
-      // const [added, setAdded] = useState(false);
-      // const[edited,setEdited]=useState(false);
-      // const[renew,setRenew]=useState(false);    
+      const [added, setAdded] = useState(false);
+      const[edited,setEdited]=useState(false);
+      const[renew,setRenew]=useState(false);    
       const [selectedActiveKeys, setSelectedActiveKeys] = useState("");
+
       useEffect(() => {
         if (location.state) {
           // Check if MSA was added
@@ -152,11 +152,11 @@ const MSAListHandler = () => {
         setIsEmptySearch(true);    
       };
       const oneditPage = (msa_ref_id: string) => {
-        navigate("/MSAForm", { state: {msa_ref_id: msa_ref_id as string , msaEdited: true } });
+        navigate("/msa/edit", { state: {msa_ref_id: msa_ref_id as string , msaEdited: true } });
        
       };
       const onRenewPage=(msa_ref_id:string)=>{
-        navigate("/MSAForm", { state: {msa_ref_id: msa_ref_id as string , msaRenewed: true } });
+        navigate("/msa/renew", { state: {msa_ref_id: msa_ref_id as string , msaRenewed: true } });
        
       }
       const columns: TableColumn[] = desiredColumnKeys.map((key) => ({

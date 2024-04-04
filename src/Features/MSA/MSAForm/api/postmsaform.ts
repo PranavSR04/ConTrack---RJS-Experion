@@ -5,5 +5,13 @@ export const postmsaform = async (formDatatoSend: FormData, user_id: number,msaS
     headers: {
       "Content-Type": "multipart/form-data",
     },
+  }).then(response => {
+    // Handle successful response
+    console.log("Response:", response.data);
+  })
+  .catch(error => {
+    // Handle error
+    console.error("Error:", error);
   });
+  ;
 };

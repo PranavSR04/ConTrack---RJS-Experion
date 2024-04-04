@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBarHandler from "../Components/NavBar/NavBarHandler";
 import LoginHandler from "../Features/Login/LoginHandler";
@@ -10,6 +11,9 @@ import ManageUsersHandler from '../Features/ManageUsers/ManageUsersHandler'
 import MSAListHandler from "../Features/MSA/MSAList/MSAListHandler";
 import MSAFormHandler from "../Features/MSA/MSAForm/MSAFormHandler";
 import AddContractHandler from "../Features/AddContract/AddContractHandler";
+import AddMsaHandler from "../Features/MSAOld/AddMsa/AddMsaHandler";
+import EditMsaHandler from "../Features/MSAOld/EditMsa/EditMsaHandler";
+import RenewMsaHandler from "../Features/MSAOld/RenewMsa/RenewMsaHandler";
  
 
 
@@ -29,7 +33,13 @@ const AppRoutes = () => {
                     <Route path="/Revenue/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
                     <Route path="/ManageUser" element={<><NavBarHandler /><SideBar><ManageUsersHandler/></SideBar></>}></Route>
                     <Route path="/MSAOverview" element={<><NavBarHandler /><SideBar><MSAListHandler/></SideBar></>} />
-                    <Route path="/MSAForm" element={<><NavBarHandler /><SideBar><MSAFormHandler /></SideBar></>} />
+                    {/* <Route path="/MSAForm" element={<><NavBarHandler /><SideBar><MSAFormHandler /></SideBar></>} /> */}
+                    <Route path="/MSAForm" element={<><NavBarHandler /><SideBar><AddMsaHandler /></SideBar></>} />
+                    <Route path="/msa/edit" element={<><NavBarHandler /><SideBar><EditMsaHandler /></SideBar></>} />
+                    <Route path="/msa/renew" element={<><NavBarHandler /><SideBar><RenewMsaHandler /></SideBar></>} />
+
+
+
                 </Routes>
             </AuthContext>
         </BrowserRouter>
