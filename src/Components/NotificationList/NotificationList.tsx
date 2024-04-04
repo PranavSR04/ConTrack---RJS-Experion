@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { NotificationListPropType } from './types';
 import NotificationHandler from '../Notification/NotificationHandler';
 import styles from '../Notification/Notification.module.css';
-import { Drawer, Spin } from 'antd';
+import { Drawer } from 'antd';
 import { NavContexts } from '../NavContext/NavContext';
 
 const NotificationList = ({notifications, isLoading, isError, error, viewMoreClick, hasViewMore}:NotificationListPropType) => {
