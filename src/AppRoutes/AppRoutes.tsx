@@ -8,6 +8,7 @@ import RevenueProjectionHandler from "../Features/RevenueProjection/RevenueProje
 import IndividualContractHandler from "../Features/Contract/IndividualContract/IndividualContractHandler";
 import SideBar from "../Components/SideBar/SideBar";
 import ManageUsersHandler from '../Features/ManageUsers/ManageUsersHandler'
+import Dashboard from "../Features/Dashboard/Dashboard";
 import MSAListHandler from "../Features/MSA/MSAList/MSAListHandler";
 import MSAFormHandler from "../Features/MSA/MSAForm/MSAFormHandler";
 import AddContractHandler from "../Features/AddContract/AddContractHandler";
@@ -43,6 +44,8 @@ const AppRoutes = () => {
 
 
 
+					<Route path="/Dashboard" element={<><NavBarHandler /><SideBar><Dashboard/></SideBar></>}></Route>
+			
                 </Routes>
              </NavContext>
 
