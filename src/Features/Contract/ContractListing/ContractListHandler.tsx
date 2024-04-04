@@ -25,7 +25,7 @@ const ContractListHandler = () => {
   const location = useLocation();
   const ROLE_ID = parseInt(localStorage.getItem("role_id") || "0");  //get loged in users role
   const SCROLL =  {x: 'auto' } //table scroll for x axis
-  const [pageTitle, setPageTitle] = useState("CONTRACTS OVERVIEW"); 
+  const [pageTitle, setPageTitle] = useState(""); 
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 10, // Default page size
@@ -104,7 +104,7 @@ const ContractListHandler = () => {
         pageSize: 10,
         total: 0,
       });
-    setCheckedExpiring(false); //set check expiring off by default
+   // setCheckedExpiring(false); //set check expiring off by default
   }, [window.location.href]);
 
   useEffect(() => {
@@ -113,7 +113,6 @@ const ContractListHandler = () => {
     searchConditions,
     pagination.current,
     pagination.pageSize,
-    window.location.href,
   ]); // Refetch data when searchText or searchField changes
 
   useEffect(() => {

@@ -16,7 +16,7 @@ import {
   Card,
 } from "antd";
 import { ManageUserHandlerPropType, ManageUsersPropType } from "./types";
-// import Toast from "../../Components/Toast/Toast";
+import Toast from "../../Components/Toast/Toast";
 import { LabeledValue } from "antd/es/select";
 // import BreadCrumbs from "../../Components/BreadCrumbs/Breadcrumbs";
 import { LoadingOutlined } from "@ant-design/icons";
