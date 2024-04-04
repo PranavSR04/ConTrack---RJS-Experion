@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+.AddMsa {
+  width: 65rem;
+  margin-top: 30px;
+  margin-left: 16rem;
+  margin-right: 1.5rem;
+  font-family: "Montserrat", sans-serif;
+}
+.AddMsa_Heading {
+  font-weight: 700; /* Bold weight */
+  font-size: 1.7rem; /* Font size 40 */
+  margin-top: -18px;
+}
+.AddMsaDetails_Heading {
+  font-weight: 700; /* Bold weight */
+  font-size: 1.2rem;
+}
+.AddMsaDetails {
+  background-color: white;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+  border-radius: 5px;
+  padding: 1rem;
+}
+.AddMsaDetails_star {
+  color: #dc143c;
+}
+.AddMsaDetails_row1,
+.AddMsaDetails_row2,
+.AddMsaDetails_row3 {
+  display: flex;
+}
+.AddMsaDetails_row1{
+  margin-top: 1.5rem;
+}
+.AddMsaDetails_row1_col1,
+.AddMsaDetails_row1_col2,
+.AddMsaDetails_row1_col3,
+.AddMsaDetails_row2_col1,
+.AddMsaDetails_row2_col2,
+.AddMsaDetails_row3_col1,
+.AddMsaDetails_row3_col2 {
+  flex: 1;
+}
+.AddMsaDetails_row1_col2 {
+  margin-left: 4rem;
+}
+.AddMsaDetails_row1_col3 {
+  margin-left: 4rem;
+}
+.AddMsaDetails_inputs {
+  width: 15rem;
+}
+.AddMsaDetails_Button {
+  color: white;
+  background-color:#dc143c;
+  width: 9rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+  height: 2.7rem;
+  margin-left: 25rem;
+}
+.AddMsaDetails_row3_col1_filename {
+  font-size: 0.9rem;
+}
+.document_link {
+  text-decoration: none;
+  color: black;
+}
+.container_file {
+  position: relative;
+}
+.EditMsaDetails_row3_col1_closeicon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 13rem;
+  font-size: 15px;
+  color: black;
+}
+.AddMsaDetails_row3_col1_fileicon {
+  font-size: 24px;
+  color: #dc143c;
+  font-size: 4.5rem;
+}
+.AddMsaDetails_inputs_startdate{
+  width: 15rem;
+}
+.AddMsaDetails_inputs_msarefid{
+  width: 15rem;
+  background-color: rgb(239, 237, 237);
+}
+.modal_okbutton{
+  background-color:#dc143c ;
+  color: white;
+  /* flex:1; */
+  justify-content: center;
+
+}
+.modal_cancelbutton{
+  flex: 1;
+
+
+}
+

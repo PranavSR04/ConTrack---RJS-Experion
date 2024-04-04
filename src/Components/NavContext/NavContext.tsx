@@ -42,13 +42,28 @@ export const NavContexts=createContext<NavPropType>({
         setActiveNotificationCount(0);
       };
   return (
-    <NavContexts.Provider value={{showDrawer,open,onClose,activeNotificationCount,
-    setActiveNotificationCount,setAdded,added,setEdited,edited,setRenew,renew,
-    setContractAddToast,contractAddToast,setContractEditToast,contractEditToast}}>
-            {children}
+    <NavContexts.Provider
+      value={{
+        showDrawer,
+        open,
+        onClose,
+        activeNotificationCount,
+        setActiveNotificationCount,
+        setAdded,
+        added,
+        setEdited,
+        edited,
+        setRenew,
+        renew,
+        setContractAddToast,
+        contractAddToast,
+        setContractEditToast,
+        contractEditToast,
+      }}
+    >
+      {children}
     </NavContexts.Provider>
-  )
-}
+  );
+};
 
-export default NavContext
-
+export default NavContext;

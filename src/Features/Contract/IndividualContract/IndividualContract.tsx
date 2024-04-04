@@ -7,6 +7,7 @@ import OverviewHandler from "./Overview/OverviewHandler";
 import MilestonesHandler from "./Milestones/MilestonesHandler";
 import DocumentsUsersCommentsHandler from "./DocumentsUsersComments/DocumentsUsersCommentsHandler";
 import CloseContractHandler from "./CloseContract/CloseContractHandler";
+import RevenueProjectionHandler from "../../RevenueProjection/RevenueProjectionHandler";
 
 const IndividualContract = ({
   responses,
@@ -29,7 +30,7 @@ const IndividualContract = ({
         }}
       >
         <div className={styles.maincontainer__chart}>
-          {/* <RevenueProjectionHandler id={revenueid} /> */}
+          <RevenueProjectionHandler id={revenueid} />
         </div>
       </div>
       <div className={`${styles.maincontainer__milestones}`}>

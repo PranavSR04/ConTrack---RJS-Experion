@@ -1,65 +1,83 @@
-import React from 'react'
-import styles from './MSAForm.module.css'
-import { Button, DatePicker, Form, Input, Modal, Spin, Upload } from 'antd'
-import { useNavigate } from 'react-router'
-import { MSAFormProps } from './types'
-import { CloseOutlined, FilePdfOutlined, PlusOutlined } from '@ant-design/icons'
-import TextArea from 'antd/es/input/TextArea'
-import moment from 'moment'
-const MSAForm = ({
+import styles from "../Msa.module.css";
+import { Button, DatePicker, Form, Input, Modal, Spin, Upload } from "antd";
+import {
+  CloseOutlined,
+  FilePdfOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
+import TextArea from "antd/es/input/TextArea";
+import { EditMsaHandlertype } from "./types";
+import moment from "moment";
+import Toast from "../../../Components/Toast/Toast";
+import { useNavigate } from "react-router";
+// import BreadCrumbs from "../../../Components/BreadCrumbs/Breadcrumbs";
+const EditMsa = ({
   msaData,
-  fileName,
-  handleFileUpload,
-  beforeUpload,
-  handleMSAForm,
+  msa_ref_id,
+  msaEdited,
+  handleEditMsa,
   isModalVisible,
-  handleSubmitForm,
   handleCancel,
+  handleInputChange,
+  handleDateChange,
+  handleEndDateChange,
+  SubmitEditMsa,
+  fileCancel,
+  showFile,
+  handleFileUpload,
+  fileName,
+  validateStartDate,
+  validateClientName,
+  validateRegion,
   spinning,
-  headingText,
-   handleInputChange,
-   handleStartDateChange,
-   handleEndDateChange,
-   validateStartDate,
-   showFile,
-   fileCancel,msaAdded
-}
-  :MSAFormProps) => {
-    console.log(msaData.start_date)
+  beforeUpload,
+}: EditMsaHandlertype) => {
   return (
-    <div className={styles.MSAForm}>
-      <h3 className={styles.MSAForm__heading}>
-        {headingText} MASTER SERVICE AGREEMENT</h3>
-      <div className={styles.MSAForm__Form}>
-      <h4 className={styles.MSAForm__Form__Heading}>
+    <>
+      {/* <BreadCrumbs
+        style={{
+          marginTop: "0.5rem",
+          marginLeft: "16rem",
+          fontSize: 17,
+          fontStyle: "italic",
+        }}
+      /> */}
+      <div className={styles.AddMsa}>
+        <div>
+          <h3 className={styles.AddMsa_Heading}>
+            EDIT MASTER SERVICE AGREEMENT
+          </h3>
+        </div>
+        <div className={styles.AddMsaDetails}>
+          <h4 className={styles.AddMsaDetails_Heading}>
             Master Service Agreement Details
           </h4>
-      <Form
+          <Form
             name="complex-form"
             encType="multipart/form-data"
             style={{ maxWidth: 600 }}
-            onFinish={handleSubmitForm}
             requiredMark={false}
           >
-            <div className={styles.MSAForm__Form__row1}>
+            <div className={styles.AddMsaDetails_row1}>
               <Form.Item
-                className={styles.MSAForm__Form__row1__col1}
+                className={styles.AddMsaDetails_row1_col1}
                 name="msa_ref_id"
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
                 label="MSA Reference ID"
-                valuePropName={msaData.msa_ref_id}
+                valuePropName={msa_ref_id}
               >
                 <Input
                   name="msa_ref_id"
-                  value={msaData.msa_ref_id}
+                  value={msa_ref_id}
                   readOnly
-                  className={styles.MSAForm__Form__input__msa_ref_id}
+                  className={styles.AddMsaDetails_inputs_msarefid}
                 />
               </Form.Item>
               <Form.Item
-                className={styles.MSAForm__Form__row1__col2}
+                className={styles.AddMsaDetails_row1_col2}
                 name="client_name"
+                required
                 valuePropName={msaData.client_name}
                 label={
                   <div>
@@ -69,32 +87,27 @@ const MSAForm = ({
                 }
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
-                rules={msaAdded ? [
-                  { required: true, message: "Please enter the Client Name" },
+                rules={[
+                  {
+                    validator: validateClientName,
+                  },
                   {
                     pattern: /^.{5,}$/,
                     message: "Client name must contain at least 5 characters",
                   },
-                ] : []}
-                // {[
-
-                //   // { required: true, message: "Please enter the Client Name" },
-                //   // {
-                //   //   pattern: /^.{5,}$/,
-                //   //   message: "Client name must contain at least 5 characters",
-                //   // },
-                // ]}
+                ]}
               >
                 <Input
                   name="client_name"
                   value={msaData.client_name}
-                  className={styles.MSAForm__Form__inputs}
+                  className={styles.AddMsaDetails_inputs}
                   onChange={handleInputChange}
                 />
               </Form.Item>
               <Form.Item
-                className={styles.MSAForm__Form__row1__col3}
+                className={styles.AddMsaDetails_row1_col3}
                 name="region"
+                valuePropName={msaData.region}
                 label={
                   <div>
                     Region
@@ -103,25 +116,23 @@ const MSAForm = ({
                 }
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
-                valuePropName={msaData.region}
-                rules={msaAdded ? [
-                  { required: true, message: "Please enter the Region" }
-                ] : []}
-                // {[
-                //   { required: true, message: "Please enter the Region" }
-                // ]}
+                rules={[
+                  {
+                    validator: validateRegion,
+                  },
+                ]}
               >
                 <Input
                   name="region"
                   value={msaData.region}
-                  className={styles.MSAForm__Form__inputs}
                   onChange={handleInputChange}
+                  className={styles.AddMsaDetails_inputs}
                 />
               </Form.Item>
             </div>
-            <div className={styles.MSAForm__Form__row2}>
+            <div className={styles.AddMsaDetails_row2}>
               <Form.Item
-                className={styles.MSAForm__Form__row2__col1}
+                className={styles.AddMsaDetails_row2_col1}
                 name="start_date"
                 label={
                   <div>
@@ -131,22 +142,21 @@ const MSAForm = ({
                 }
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
-                rules={[
-                    {
-                      validator: validateStartDate,
-                    }
-                ]}
                 valuePropName={msaData.start_date}
+                required
               >
                 <DatePicker
-                  className={styles.MSAForm__Form__inputs}
-                  onChange={handleStartDateChange}
-
-                  required
+                  className={styles.AddMsaDetails_inputs}
+                  onChange={handleDateChange}
+                  value={
+                    msaData.start_date
+                      ? moment(msaData.start_date, "YYYY-MM-DD")
+                      : undefined
+                  }
                 />
               </Form.Item>
               <Form.Item
-                className={styles.MSAForm__Form__row2__col2}
+                className={styles.AddMsaDetails_row2_col2}
                 name="end_date"
                 label={
                   <div>
@@ -157,21 +167,28 @@ const MSAForm = ({
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
                 rules={[
-                  { required: true, message: "Please enter the End Date" },
+                  {
+                    validator: validateStartDate,
+                  },
                 ]}
                 valuePropName={msaData.end_date}
+                required
               >
                 <DatePicker
-                  className={styles.MSAForm__Form__inputs}
+                  className={styles.AddMsaDetails_inputs}
                   onChange={handleEndDateChange}
-                  required
+                  value={
+                    msaData.end_date
+                      ? moment(msaData.end_date, "YYYY-MM-DD")
+                      : undefined
+                  }
                 />
               </Form.Item>
             </div>
-            <div className={styles.MSAForm__Form__row3}>
+            <div className={styles.AddMsaDetails_row3}>
               <Form.Item
                 name="file"
-                className={styles.MSAForm__Form__row3__col1}
+                className={styles.AddMsaDetails_row3_col1}
                 label={
                   <div>
                     Upload Master Service Agreement
@@ -180,36 +197,39 @@ const MSAForm = ({
                 }
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
-                rules={[{ required: true, message: "Please upload File" }]}
               >
                 {showFile ? (
                   <div className={styles.container_file}>
                     <CloseOutlined
-                      className={styles.file__closeicon}
+                      className={styles.EditMsaDetails_row3_col1_closeicon}
                       onClick={fileCancel}
                     />
-
+                    <a
+                      className={styles.document_link}
+                      href={msaData.msa_doclink}
+                    >
                       <FilePdfOutlined
-                        className={styles.MSAForm__Form__row3__col1__fileicon}
+                        className={styles.AddMsaDetails_row3_col1_fileicon}
                       />
 
                       <br />
-                      <div>
-                      <p className={styles.MSAForm__Form__row3__col1__filename}>
-                      {fileName}
-                    </p>
+                      <div className={styles.msa_doclink_filename}>
+                        <p className={styles.AddMsaDetails_row3_col1_filename}>
+                          {msa_ref_id}.pdf
+                        </p>
                       </div>
+                    </a>
                   </div>
                 ) : fileName ? (
                   <>
                     <div>
                       <FilePdfOutlined
-                        className={styles.MSAForm__Form__row3__col1__fileicon}
+                        className={styles.AddMsaDetails_row3_col1_fileicon}
                       />
                       <br />
-                    <p className={styles.MSAForm__Form__row3__col1__filename}>
-                      {fileName}
-                    </p>
+                      <p className={styles.AddMsaDetails_row3_col1_filename}>
+                        {fileName}
+                      </p>
                     </div>
                   </>
                 ) : (
@@ -232,38 +252,10 @@ const MSAForm = ({
                     </Upload>
                   </>
                 )}
-                {/* {fileName ? (
-                  <div>
-                    <FilePdfOutlined
-                      className={styles.MSAForm__Form__row3__col1__fileicon}
-                    />
-                    <br />
-                    <p className={styles.MSAForm__Form__row3__col1__filename}>
-                      {fileName}
-                    </p>
-                  </div>
-                ) : (
-                  <Upload
-                    action=""
-                    listType="picture-card"
-                    fileList={[]}
-                    accept=".pdf,.docx"
-                    customRequest={handleFileUpload}
-                    beforeUpload={beforeUpload}
-                  >
-                    <button
-                      style={{ border: 0, background: "none" }}
-                      type="button"
-                    >
-                      <PlusOutlined/>
-                      <div style={{ marginTop: 8 }}>Upload</div>
-                    </button>
-                  </Upload>
-                )} */}
               </Form.Item>
               <Form.Item
                 name="comments"
-                className={styles.MSAForm__Form__row3__col2}
+                className={styles.AddMsaDetails_row3_col2}
                 label={
                   <div>
                     Comments/Remarks
@@ -281,42 +273,41 @@ const MSAForm = ({
               </Form.Item>
             </div>
             <Button
-              className={styles.MSAForm__Form__Button}
+              className={styles.AddMsaDetails_Button}
               type="primary"
-              htmlType='submit'
-              onClick={handleSubmitForm}
+              htmlType="submit"
+              onClick={handleEditMsa}
             >
-              {headingText} MSA
+              Edit MSA
             </Button>
-
-            {/* <Modal
-              title="Are you sure you want to submit this Form?"
+            <Modal
+              title="Are you sure you want to edit this MSA?"
               visible={isModalVisible}
               onCancel={handleCancel}
               footer={[
                 <Button
-                  className={styles.MSAForm__Form__ModalOk}
-                  type='primary'
+                  className={styles.modal_okbutton}
                   key="ok"
-                  onClick={handleSubmitForm}
+                  onClick={SubmitEditMsa}
                 >
                   Yes
                 </Button>,
-                <Button
-                  key="cancel"
-                  className={styles.modal_cancelbutton}
-                  onClick={handleCancel}
-                >
+                <Button key="cancel" onClick={handleCancel}>
                   No
                 </Button>,
               ]}
-            >
-              <Spin spinning={spinning} fullscreen />
-            </Modal> */}
+            ></Modal>
+            <Spin spinning={spinning} fullscreen />
           </Form>
+          {msaEdited ? (
+            <Toast messageType="success" message="MSA Updated"></Toast>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
-    </div>
-  )
-}
+    </>
+  );
+};
 
-export default MSAForm
+export default EditMsa;
