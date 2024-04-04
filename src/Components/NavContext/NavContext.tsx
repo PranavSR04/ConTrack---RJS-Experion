@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react'
 import { NavPropType } from './types'
-// import { postNotificationStatus } from '../NotificationList/Api/putNotificationCountStatus';
-// import { userType } from '../NotificationList/types';
+import { postNotificationStatus } from '../NotificationList/Api/putNotificationCountStatus';
+import { userType } from '../NotificationList/types';
 
 export const NavContexts=createContext<NavPropType>({
     showDrawer:()=>{},
@@ -32,9 +32,9 @@ export const NavContexts=createContext<NavPropType>({
     const SENDTO_ID = parseInt(localStorage.getItem("user_id") || '0', 10);
     const showDrawer = async() => {
       setOpen(true);
-      // const user: userType = { user_id: SENDTO_ID };
-      // const response = await postNotificationStatus(user);
-      // console.log("response data",response)
+      const user: userType = { user_id: SENDTO_ID };
+      const response = await postNotificationStatus(user);
+      console.log("response data",response)
     };
    
     const onClose = () => {

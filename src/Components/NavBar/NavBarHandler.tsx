@@ -20,7 +20,7 @@ const NavBarHandler = () => {
   return(
     <NavBar
     username={username}
-    activeNotificationCount={activeNotificationCount}
+    activeNotificationCounte={activeNotificationCount}
     
     />
   )
