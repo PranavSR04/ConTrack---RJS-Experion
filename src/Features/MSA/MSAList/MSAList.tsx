@@ -5,6 +5,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import { NavContexts } from "../../../Components/NavContext/NavContext";
+import Toast from "../../../Components/Toast/Toast";
 const MSAList = (
     {
         columns,
@@ -148,7 +149,28 @@ const MSAList = (
       >
 
       </Table>
-      
+
+ {showAddedToast ? (
+            <Toast
+              messageType="success"
+              message="MSA Added Successfully"
+            ></Toast>
+          ) : showEditedToast ? (
+            <Toast
+              messageType="success"
+              message="MSA Edited Successfully"
+            ></Toast>
+          ) : (
+            <></>
+          )}
+          {showRenewToast ? (
+            <Toast
+              messageType="success"
+              message="MSA Renewed Successfully"
+            ></Toast>
+          ) : (
+            <></>
+          )}
       {/* {msaAdded ? (
             <Toast
               messageType="success"

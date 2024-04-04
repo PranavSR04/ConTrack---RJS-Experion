@@ -3,3 +3,9 @@
     margin-top: 1rem;
     justify-content: flex-end;
 }
+
+@media only screen and (max-width: 768px) {
+    .maincontainer__documents__buttons {
+      margin-right: 3rem;
+    }
+  }
