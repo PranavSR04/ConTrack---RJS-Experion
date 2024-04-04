@@ -2,9 +2,9 @@
     background-color: #ffffff;
     padding-left: 2%;
     width: 300px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     border-radius: 10px;
-    height: 352px;
+    height: 55vh;
     overflow-y: auto;
     scrollbar-width: none; 
     -ms-overflow-style: none;
