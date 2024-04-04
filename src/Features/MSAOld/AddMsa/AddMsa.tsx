@@ -33,7 +33,7 @@ const AddMsa = ({
 }: AddMsaPropsType) => {
   return (
     <>
-      <div className={styles.AddMsa}>
+      <div className={styles.AddMsa_Msa}>
         <div>
           {/* <BreadCrumbs
             style={{
