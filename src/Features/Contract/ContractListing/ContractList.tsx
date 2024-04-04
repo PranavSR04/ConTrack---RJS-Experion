@@ -15,6 +15,8 @@ const ContractList = ({
   pageTitle,
   rowClassName,
   locale,
+  setContractEditToast,
+  setContractAddToast,
   showExpired,
   contractAddToast,
   contractEditToast,
@@ -118,10 +120,11 @@ const ContractList = ({
         ></Table> 
         </div>
         {contractAddToast && (    //show toasts if corresponding values received
-          <Toast messageType="success" message="Contract Added"></Toast> 
+          <><Toast messageType="success" message="Contract Added"></Toast> {setContractAddToast(false)}</>
         )}
+        
         {contractEditToast && (
-          <Toast messageType="success" message="Contract Edited"></Toast>
+          <><Toast messageType="success" message="Contract Edited"></Toast>{setContractEditToast(false)}</>
         )}
       </div>
     </>
