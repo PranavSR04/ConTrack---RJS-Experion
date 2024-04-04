@@ -1,6 +1,6 @@
 .dashboardContainer{
 max-width: 80vw;
-max-height: 100vh;
+height: 50vh;
 }
 
 .dashboard-div1{
@@ -56,17 +56,16 @@ background-color:'white';
 
 }
 .dash-row2-ducharts{
-  width: 30.59vw;
-  height:32.2vh ;
-
+  width: 33.59vw;
+  height:35vh ;
 }
 .dash-row2-charts{
   display: flex;
   /* margin-top: -13rem; */
   width: 46.3rvw;
-  height: 17.3vh;
+  height: 31.3vh;
   border-radius: 10px;
-  margin-top: .8rem;
+  margin-top: 1.9%;
   padding-left: .1%;
   background-color:white;
   }
