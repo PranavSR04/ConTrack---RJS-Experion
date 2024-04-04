@@ -370,7 +370,7 @@ const ManageUsersHandler = () => {
       setDeleteConfirmationVisible(true);
     }
   };
-
+    
   const hideDeleteConfirmation = (): void => {
     setDeleteConfirmationVisible(false);
   };

@@ -33,9 +33,8 @@ const AddContractHandler = () => {
     file: null as RcFile | null,
     comments: "",
     estimated_amount: 0,
-    contract_added_by: 3,
+    contract_added_by: parseInt(localStorage.getItem("user_id") || "0"),
   });
-
   const [uploadedFile, setUploadedFile] = useState(null);
   const [contractAdded, setContractAdded] = useState<boolean>(false);
   const [milestones, setMilestones] = useState<Milestone[]>(

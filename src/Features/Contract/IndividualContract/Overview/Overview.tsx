@@ -18,7 +18,7 @@ const Overview = ({
 }: OverviewPropType) => {
   return (
     <>
-      <div className={`col-12 ${styles.maincontainer__overviewpayment}`}>
+      <div className={`${styles.maincontainer__overviewpayment}`}>
         <Card
           className={`${styles.maincontainer__overviewpayment__overview}`}
           loading={loading}

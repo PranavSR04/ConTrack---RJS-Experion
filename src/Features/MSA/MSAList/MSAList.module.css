@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.MSAList{
+    margin-top: 1%;
+    margin-left: 20%;
+    margin-right: 5%;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.MSAList__heading{
+    font-weight: 700; 
+    font-size: 1.5rem;
+
+  margin-top: 1.3rem;
+
+}
+.MSAList__Table{
+    background-color: white;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+   padding: 1.8rem;
+   border-radius: 0.5rem;
+   min-width: 62rem;
+}
+.MSAList__Table__row1{
+    display: flex;
+    margin-top: -2%;
+}
+.MSAList__Table__row1__col1__Toggle{
+    flex:1;
+}
+.MSAList__Table__row1__col2__Addbutton{
+    flex:1;
+}
+.MSAList__Table__Addbutton{
+    margin-left: 65%;
+    margin-top: 1%;
+    border-color: transparent;
+    width:30%;
+    margin-bottom: 1%;
+    border-radius: 0.5rem;
+     background-color:#DC143C;
+     color: white;
+     height: 90%;
+}
+.MSAList__Table__Table{
+    padding-top: 2%;
+}
+.oddRow {
+    background-color: #f5f8fc; /* Set the background color for even rows */
+  }
+  
+  /* Optionally, you can add styles for odd rows as well */
+  .evenRow {
+    background-color: #ffffff; /* Set the background color for odd rows */
+  }
