@@ -249,7 +249,7 @@ const ContractListHandler = () => {
 
   const oneditPage = (contract_id: string) => { //edit button click
     setActionClicked(true);
-    navigate(`Edit Contract`, {
+    navigate(`/contract/edit`, {
       state: { id: contract_id as string },
     });
   };
