@@ -139,7 +139,7 @@ const RenewMsaHandler = () => {
         formDatatoSend.append("file", filePdf || "");
 
         // Sending the changed values to the API
-        await postRenewMsa(user_id, formDatatoSend)
+        await postRenewMsa(user_id, formDatatoSend,msa_ref_id)
           .then(() => {
             // Only set msaRenewed to true if the API call succeeds
             setMsaRenewed(true);

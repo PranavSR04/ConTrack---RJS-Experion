@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import styles from "./NavBar.module.css";
 import logo from "../../assets/img/logo.png";
 import { Nav, NavItem, NavbarBrand, NavbarText } from "react-bootstrap";
