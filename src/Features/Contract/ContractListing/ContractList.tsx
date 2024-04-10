@@ -24,7 +24,8 @@ const ContractList = ({
   handleSegmentChange,
   navigate,
   ROLE_ID,
-  SCROLL
+  SCROLL,
+  contractCloseToast
 }: ContractListPropType) => {
   return (
     <>
@@ -125,6 +126,9 @@ const ContractList = ({
         
         {contractEditToast && (
           <><Toast messageType="success" message="Contract Edited"></Toast>{setContractEditToast(false)}</>
+        )}
+        {contractCloseToast && (
+          <Toast messageType="error" message="Contract Closed"></Toast>
         )}
       </div>
     </>
