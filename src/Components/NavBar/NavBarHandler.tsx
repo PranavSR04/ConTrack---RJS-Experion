@@ -15,6 +15,7 @@ const NavBarHandler = () => {
     setUsername(currentUser?.user_name);
     setNotificationCount(notificationCount);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
   return(

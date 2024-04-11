@@ -2,19 +2,24 @@
 
 .AddMsa {
   width: 65rem;
-  margin-top: 30px;
+  margin-top: 1rem;
+  margin-left: 16rem;
+  margin-right: 1.5rem;
+  font-family: "Montserrat", sans-serif;
+}
+.AddMsa_Msa{
+  width: 65rem;
   margin-left: 16rem;
   margin-right: 1.5rem;
   font-family: "Montserrat", sans-serif;
 }
 .AddMsa_Heading {
   font-weight: 700; /* Bold weight */
-  font-size: 1.7rem; /* Font size 40 */
-  margin-top: -18px;
+  font-size: 1.2rem; /* Font size 40 */
 }
 .AddMsaDetails_Heading {
-  font-weight: 700; /* Bold weight */
-  font-size: 1.2rem;
+  font-weight: 600; /* Bold weight */
+  font-size: 1.1rem;
 }
 .AddMsaDetails {
   background-color: white;
