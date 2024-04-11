@@ -11,7 +11,7 @@ const MSAForm = ({
   fileName,
   handleFileUpload,
   beforeUpload,
-  handleMSAForm,
+  handleSubmit,
   isModalVisible,
   handleSubmitForm,
   handleCancel,
@@ -22,7 +22,10 @@ const MSAForm = ({
    handleEndDateChange,
    validateStartDate,
    showFile,
-   fileCancel,msaAdded
+   fileCancel,
+   msaAdded,
+   hideMsarefid,
+   msaRenewed
 }
   :MSAFormProps) => {
     console.log(msaData.start_date)
@@ -38,7 +41,7 @@ const MSAForm = ({
             name="complex-form"
             encType="multipart/form-data"
             style={{ maxWidth: 600 }}
-            onFinish={handleSubmitForm}
+            //onFinish={handleSubmitForm}
             requiredMark={false}
           >
             <div className={styles.MSAForm__Form__row1}>
@@ -49,10 +52,11 @@ const MSAForm = ({
                 wrapperCol={{ span: 24 }}
                 label="MSA Reference ID"
                 valuePropName={msaData.msa_ref_id}
+                
               >
                 <Input
                   name="msa_ref_id"
-                  value={msaData.msa_ref_id}
+                  value={hideMsarefid ? '' : msaData.msa_ref_id}
                   readOnly
                   className={styles.MSAForm__Form__input__msa_ref_id}
                 />
@@ -76,20 +80,13 @@ const MSAForm = ({
                     message: "Client name must contain at least 5 characters",
                   },
                 ] : []}
-                // {[
-
-                //   // { required: true, message: "Please enter the Client Name" },
-                //   // {
-                //   //   pattern: /^.{5,}$/,
-                //   //   message: "Client name must contain at least 5 characters",
-                //   // },
-                // ]}
               >
                 <Input
                   name="client_name"
                   value={msaData.client_name}
                   className={styles.MSAForm__Form__inputs}
                   onChange={handleInputChange}
+                  disabled={msaRenewed}
                 />
               </Form.Item>
               <Form.Item
@@ -107,15 +104,13 @@ const MSAForm = ({
                 rules={msaAdded ? [
                   { required: true, message: "Please enter the Region" }
                 ] : []}
-                // {[
-                //   { required: true, message: "Please enter the Region" }
-                // ]}
               >
                 <Input
                   name="region"
                   value={msaData.region}
                   className={styles.MSAForm__Form__inputs}
                   onChange={handleInputChange}
+                  disabled={msaRenewed}
                 />
               </Form.Item>
             </div>
@@ -232,34 +227,6 @@ const MSAForm = ({
                     </Upload>
                   </>
                 )}
-                {/* {fileName ? (
-                  <div>
-                    <FilePdfOutlined
-                      className={styles.MSAForm__Form__row3__col1__fileicon}
-                    />
-                    <br />
-                    <p className={styles.MSAForm__Form__row3__col1__filename}>
-                      {fileName}
-                    </p>
-                  </div>
-                ) : (
-                  <Upload
-                    action=""
-                    listType="picture-card"
-                    fileList={[]}
-                    accept=".pdf,.docx"
-                    customRequest={handleFileUpload}
-                    beforeUpload={beforeUpload}
-                  >
-                    <button
-                      style={{ border: 0, background: "none" }}
-                      type="button"
-                    >
-                      <PlusOutlined/>
-                      <div style={{ marginTop: 8 }}>Upload</div>
-                    </button>
-                  </Upload>
-                )} */}
               </Form.Item>
               <Form.Item
                 name="comments"
@@ -284,12 +251,12 @@ const MSAForm = ({
               className={styles.MSAForm__Form__Button}
               type="primary"
               htmlType='submit'
-              onClick={handleSubmitForm}
+              onClick={handleSubmit}
             >
               {headingText} MSA
             </Button>
 
-            {/* <Modal
+            <Modal
               title="Are you sure you want to submit this Form?"
               visible={isModalVisible}
               onCancel={handleCancel}
@@ -312,7 +279,7 @@ const MSAForm = ({
               ]}
             >
               <Spin spinning={spinning} fullscreen />
-            </Modal> */}
+            </Modal>
           </Form>
       </div>
     </div>

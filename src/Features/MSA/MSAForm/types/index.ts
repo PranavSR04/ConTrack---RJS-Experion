@@ -14,7 +14,7 @@ export interface MsaDataType {
     msaAdded: boolean;
     msaEdited: boolean;
     msaRenewed: boolean;
-    msa_ref_id: string;
+    id: string;
   }
   
   export interface MSAFormProps {
@@ -22,7 +22,7 @@ export interface MsaDataType {
     fileName: string | undefined;
     handleFileUpload: (info: any) => void;
     beforeUpload: (file: RcFile) => boolean;
-    handleMSAForm: () => void;
+    handleSubmit: () => void;
     isModalVisible: boolean;
     handleSubmitForm: (value: any) => Promise<void>;
     handleCancel: () => void;
@@ -34,5 +34,7 @@ export interface MsaDataType {
     validateStartDate: (value: any) => Promise<void>;
     showFile: boolean;
     fileCancel: () => void;
-    msaAdded?: boolean | undefined
+    msaAdded?: boolean | undefined;
+    hideMsarefid?: boolean;
+    msaRenewed?: boolean 
   }

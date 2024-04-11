@@ -152,12 +152,12 @@ const MSAListHandler = () => {
         setSearchConditions({});
         setIsEmptySearch(true);    
       };
-      const oneditPage = (msa_ref_id: string) => {
-        navigate("/msa/edit", { state: {msa_ref_id: msa_ref_id as string , msaEdited: true } });
+      const oneditPage = (id: string) => {
+        navigate('/MSAForm', { state: {id:id as string , msaEdited: true } });
        
       };
-      const onRenewPage=(msa_ref_id:string)=>{
-        navigate("/msa/renew", { state: {msa_ref_id: msa_ref_id as string , msaRenewed: true } });
+      const onRenewPage=(id:string)=>{
+        navigate("/MSAForm", { state: {id:id as string , msaRenewed: true } });
        
       }
       const columns: TableColumn[] = desiredColumnKeys.map((key) => ({
@@ -182,7 +182,7 @@ const MSAListHandler = () => {
             className='listmsa-action-renew'
             style={{ fontSize: '16px', color: '#DC143C' ,paddingRight:"10px" }}
             onClick={()=>{
-              onRenewPage(record.msa_ref_id)
+              onRenewPage(record.id)
             }}
            />
           </span>
@@ -194,7 +194,7 @@ const MSAListHandler = () => {
              className='listmsa-action-edit-icon'
                style={{ fontSize: '18px', color: '#DC143C' ,paddingRight:"10px" }}
                onClick={() => {
-                oneditPage(record.msa_ref_id);
+                oneditPage(record.id);
               }}
              />}
            </span>
