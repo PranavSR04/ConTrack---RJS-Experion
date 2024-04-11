@@ -53,10 +53,12 @@ const ContractListHandler = () => {
   const handleSegmentChange = (value: string) => { //function to handle segment slider
     if(value==='All'){
       setSlideroption('');
+      setSortField('');
       clearSearch();
     }
     else if(value==='Associated'){
       setSlideroption('associated_by_me');
+      setSortField('');
       clearSearch();
     }
     else{
