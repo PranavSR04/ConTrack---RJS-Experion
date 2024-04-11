@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { EditOutlined, SearchOutlined } from "@ant-design/icons";
+import { ArrowDownOutlined, ArrowUpOutlined, DownOutlined, EditOutlined, SearchOutlined, SortAscendingOutlined, SortDescendingOutlined, UpOutlined } from "@ant-design/icons";
 import { Button, Empty, Input, Tag } from "antd";
 import { FilterConfirmProps, TablePaginationConfig} from "antd/lib/table/interface";
 import { fetchDataFromApi } from "./api/AllContracts";
@@ -21,6 +21,8 @@ const ContractListHandler = () => {
   const [contractEditToast, setContractEditToast] = useState<boolean>(false);
   const [isMyContracts, setIsMyContracts] = useState<boolean>(false);
   const [slideroption, setSlideroption] = useState<string>('');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | 'none'>('none');
+  const [sortField, setSortField] = useState<string>();
   const navigate = useNavigate();
   const location = useLocation();
   const ROLE_ID = parseInt(localStorage.getItem("role_id") || "0");  //get loged in users role
@@ -96,6 +98,19 @@ const ContractListHandler = () => {
     }
   };
 
+  const handleSort = (key:string) => {
+    if (sortOrder === 'asc') {
+      console.log(key,"sort column");
+      setSortOrder('desc');
+      setSortField(key);
+      clearSearch();
+    } else {
+      setSortField(key);
+      setSortOrder('asc');
+      clearSearch();
+    }
+  }
+
   useEffect(() => {
     setSearchConditions({}); //clear search and search entry
     setIsEmptySearch(true);
@@ -162,6 +177,8 @@ const ContractListHandler = () => {
           pagination.current,
           pagination.pageSize,
           checkedExpiring,
+          sortField,
+          sortOrder
         );
         setData(result.data);
         setPageTitle("CONTRACTS OVERVIEW");
@@ -233,14 +250,20 @@ const ContractListHandler = () => {
     "contract_type",
     "du",
   ];
+ 
 //map the data selected corresponding title
   const columns: TableColumn[] = desiredColumnKeys.map((key) => ({
-    title: customHeadings[key],
+    title: (
+      <div onClick={() => handleSort(key)}>
+        {customHeadings[key]}
+        <ArrowUpOutlined style={{ marginLeft: '5px' ,width:'12px', height:'12px'}} title="Ascending sort" />
+        <ArrowDownOutlined style={{ marginLeft: '1px' ,width:'12px', height:'12px' }} title="Descending sort" />
+      </div>
+    ),
     dataIndex: key,
     key,
-    sorter: (a: ContractData, b: ContractData) =>
-      a[key as keyof ContractData].localeCompare(b[key as keyof ContractData]),
-    sortDirections: ["ascend", "descend"],
+     // Enable sorter for the column
+    
     ...getColumnSearchProps(key),
     render: (text: any, record: ContractData) => (
       <span onClick={() => rowClickHandler(record)}>{text}</span>
@@ -255,12 +278,16 @@ const ContractListHandler = () => {
   };
 
   columns.push({ //add status row to columns
-    title: "Status",
+    title: (
+      <div onClick={() => handleSort('contract_status')}>
+        {'Status'}
+        <ArrowUpOutlined style={{ marginLeft: '5px' ,width:'12px', height:'12px'}} title="Ascending sort"/>
+        <ArrowDownOutlined style={{ marginLeft: '1px' ,width:'12px', height:'12px'}} title="Descending sort"/>
+      </div>
+    ),
     dataIndex: "contract_status",
     key: "contract_status",
-    sorter: (a: ContractData, b: ContractData) =>
-      a.contract_status.localeCompare(b.contract_status),
-    sortDirections: ["ascend", "descend"],
+   
     ...getColumnSearchProps("contract_status"),
     render: (status: string, record: ContractData) => {
       let className = "status-active"; //default style
@@ -287,7 +314,11 @@ const ContractListHandler = () => {
   {
     ROLE_ID !== 3 &&
       columns.push({
-        title: "Action",
+        title: (
+          <div>
+            {"Action"}
+          </div>
+        ),
         key: "action",
         render: (text: any, record: ContractData) => (
           <span>
