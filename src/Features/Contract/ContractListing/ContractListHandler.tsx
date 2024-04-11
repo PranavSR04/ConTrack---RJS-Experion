@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { ArrowDownOutlined, ArrowUpOutlined, DownOutlined, EditOutlined, SearchOutlined, SortAscendingOutlined, SortDescendingOutlined, UpOutlined } from "@ant-design/icons";
-import { Button, Empty, Input, Tag } from "antd";
+import { ArrowDownOutlined, ArrowUpOutlined, EditOutlined, SearchOutlined } from "@ant-design/icons";
+import { Button, Empty, Input, Tag, Tooltip } from "antd";
 import { FilterConfirmProps, TablePaginationConfig} from "antd/lib/table/interface";
 import { fetchDataFromApi } from "./api/AllContracts";
 import { fetchMyContractsApi } from "./api/MyContracts";
@@ -48,6 +48,7 @@ const ContractListHandler = () => {
     });
     setSearchConditions({}); //clear search from Api
     setIsEmptySearch(true);
+    setSortField('');
   };
   const handleSegmentChange = (value: string) => { //function to handle segment slider
     if(value==='All'){
@@ -99,16 +100,16 @@ const ContractListHandler = () => {
   };
 
   const handleSort = (key:string) => {
-    if (sortOrder === 'asc') {
-      console.log(key,"sort column");
-      setSortOrder('desc');
+    if (sortField === key){
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
       setSortField(key);
-      clearSearch();
-    } else {
+      
+    }
+    else{
       setSortField(key);
       setSortOrder('asc');
-      clearSearch();
     }
+    clearSearch();
   }
 
   useEffect(() => {
@@ -119,6 +120,7 @@ const ContractListHandler = () => {
         pageSize: 10,
         total: 0,
       });
+      setSortField('');
    // setCheckedExpiring(false); //set check expiring off by default
   }, [window.location.href]);
 
@@ -161,7 +163,9 @@ const ContractListHandler = () => {
           pagination.pageSize,
           USER_ID,
           checkedExpiring,
-          slideroption
+          slideroption,
+          sortField,
+          sortOrder
         );
         setData(result.data);
         setPageTitle("MY CONTRACTS"); //dynamic page title
@@ -255,9 +259,11 @@ const ContractListHandler = () => {
   const columns: TableColumn[] = desiredColumnKeys.map((key) => ({
     title: (
       <div onClick={() => handleSort(key)}>
-        {customHeadings[key]}
-        <ArrowUpOutlined style={{ marginLeft: '5px' ,width:'12px', height:'12px'}} title="Ascending sort" />
-        <ArrowDownOutlined style={{ marginLeft: '1px' ,width:'12px', height:'12px' }} title="Descending sort" />
+        <Tooltip title="Click to sort">
+        {customHeadings[key]} 
+        <ArrowUpOutlined style={{ marginLeft: '5px' ,width:'12px', height:'12px'}} title="Ascending sort" className={sortOrder === 'asc' && sortField === key ? tableStyles['activeSort'] : ''}/>  
+        <ArrowDownOutlined style={{ marginLeft: '1px' ,width:'12px', height:'12px' }} title="Descending sort" className={sortOrder === 'desc' && sortField === key ? tableStyles['activeSort'] : ''}/>
+        </Tooltip>
       </div>
     ),
     dataIndex: key,
@@ -281,8 +287,8 @@ const ContractListHandler = () => {
     title: (
       <div onClick={() => handleSort('contract_status')}>
         {'Status'}
-        <ArrowUpOutlined style={{ marginLeft: '5px' ,width:'12px', height:'12px'}} title="Ascending sort"/>
-        <ArrowDownOutlined style={{ marginLeft: '1px' ,width:'12px', height:'12px'}} title="Descending sort"/>
+        <ArrowUpOutlined style={{ marginLeft: '5px' ,width:'12px', height:'12px'}} title="Ascending sort" className={sortOrder === 'asc' && sortField === 'contract_status' ? tableStyles['activeSort'] : ''}/>
+        <ArrowDownOutlined style={{ marginLeft: '1px' ,width:'12px', height:'12px'}} title="Descending sort" className={sortOrder === 'desc' && sortField === 'contract_status' ? tableStyles['activeSort'] : ''}/>
       </div>
     ),
     dataIndex: "contract_status",
