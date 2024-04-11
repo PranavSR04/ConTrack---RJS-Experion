@@ -105,7 +105,10 @@ const ContractListHandler = () => {
         current:  1,
         pageSize: 10,
         total: 0,
+        
       });
+    setContractAddToast(false)
+    setContractEditToast(false)
    // setCheckedExpiring(false); //set check expiring off by default
   }, [window.location.href]);
 
@@ -121,6 +124,7 @@ const ContractListHandler = () => {
     //get values from navigation to show props
     if (location.state && location.state.hasOwnProperty("added")) {
       setContractAddToast(true);
+      console.log("ContractListHandler toast",contractAddToast);
       setTimeout(() => {
         window.history.replaceState(null, "");
       }, 0);

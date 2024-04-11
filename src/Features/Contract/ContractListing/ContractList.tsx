@@ -26,6 +26,8 @@ const ContractList = ({
   ROLE_ID,
   SCROLL
 }: ContractListPropType) => {
+  console.log("contract added toast",contractAddToast)
+  console.log("contract edited toast",contractEditToast)
   return (
     <>
       <p className={styles["contractsHeading"]}>{pageTitle}</p>
@@ -120,11 +122,11 @@ const ContractList = ({
         ></Table> 
         </div>
         {contractAddToast && (    //show toasts if corresponding values received
-          <><Toast messageType="success" message="Contract Added"></Toast> {setContractAddToast(false)}</>
+          <><Toast messageType="success" message="Contract Added"></Toast></>
         )}
         
         {contractEditToast && (
-          <><Toast messageType="success" message="Contract Edited"></Toast>{setContractEditToast(false)}</>
+          <><Toast messageType="success" message="Contract Edited"></Toast></>
         )}
       </div>
     </>

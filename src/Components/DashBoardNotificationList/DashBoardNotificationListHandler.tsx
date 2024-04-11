@@ -30,7 +30,7 @@ const DashBoardNotificationListHandler = () => {
                         throw new Error('Notifications data is not an array');
                     }
                     setNotifications(data.NotificationListdisplay as NotificationType[]);
-                    } catch (error) 
+                } catch (error) 
                     {
                         if (axios.isAxiosError(error)) {
                             console.error('Axios error fetching notifications:', error.message);

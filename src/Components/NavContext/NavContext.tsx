@@ -22,11 +22,11 @@ export const NavContexts=createContext<NavPropType>({
 
 })
     const NavContext = ({ children }: { children: React.ReactNode }) =>  {
-    const [added, setAdded] = useState(false);
+    const[added, setAdded] = useState(false);
     const[edited,setEdited]=useState(false);
     const[renew,setRenew]=useState(false);
-    const [contractAddToast, setContractAddToast] = useState<boolean>(false);
-    const [contractEditToast, setContractEditToast] = useState<boolean>(false);    
+    const [contractAddToast, setContractAddToast] = useState(true);
+    const [contractEditToast, setContractEditToast] = useState(false);    
     const [open, setOpen] = useState(false);
     const [activeNotificationCount, setActiveNotificationCount] = useState<number>(0);
     const SENDTO_ID = parseInt(localStorage.getItem("user_id") || '0', 10);
