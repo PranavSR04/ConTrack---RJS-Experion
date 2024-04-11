@@ -20,6 +20,7 @@ const ContractListHandler = () => {
   const [checkedExpiring, setCheckedExpiring] = useState(false);
   // const [contractAddToast, setContractAddToast] = useState<boolean>(false);
   // const [contractEditToast, setContractEditToast] = useState<boolean>(false);
+  const [contractCloseToast, setContractCloseToast] = useState<boolean>(false);
   const{setContractAddToast,contractAddToast,setContractEditToast,contractEditToast}=useContext(NavContexts);
   const [isMyContracts, setIsMyContracts] = useState<boolean>(false);
   const [slideroption, setSlideroption] = useState<string>('');
@@ -126,6 +127,11 @@ const ContractListHandler = () => {
       }, 0);
     } else if (location.state && location.state.hasOwnProperty("edited")) {
       setContractEditToast(true);
+      setTimeout(() => {
+        window.history.replaceState(null, "");
+      }, 0);
+    } else if (location.state && location.state.hasOwnProperty("closed")) {
+      setContractCloseToast(true);
       setTimeout(() => {
         window.history.replaceState(null, "");
       }, 0);
@@ -326,6 +332,7 @@ const ContractListHandler = () => {
         navigate={navigate}
         ROLE_ID={ROLE_ID}
         SCROLL={SCROLL}
+        contractCloseToast={contractCloseToast}
       />
     </>
   );

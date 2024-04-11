@@ -71,4 +71,5 @@ export interface ContractListPropType {
   navigate:  NavigateFunction
   setContractAddToast: React.Dispatch<React.SetStateAction<boolean>>
   setContractEditToast: React.Dispatch<React.SetStateAction<boolean>>
+  contractCloseToast: boolean;
 }
