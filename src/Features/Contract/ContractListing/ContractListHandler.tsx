@@ -20,8 +20,9 @@ const ContractListHandler = () => {
   const [checkedExpiring, setCheckedExpiring] = useState(false);
   // const [contractAddToast, setContractAddToast] = useState<boolean>(false);
   // const [contractEditToast, setContractEditToast] = useState<boolean>(false);
-  const [contractCloseToast, setContractCloseToast] = useState<boolean>(false);
-  const{setContractAddToast,contractAddToast,setContractEditToast,contractEditToast}=useContext(NavContexts);
+  // const [contractCloseToast, setContractCloseToast] = useState<boolean>(false);
+  const{setContractAddToast,contractAddToast,setContractEditToast,contractEditToast
+    ,setContractCloseToast,contractCloseToast}=useContext(NavContexts);
   const [isMyContracts, setIsMyContracts] = useState<boolean>(false);
   const [slideroption, setSlideroption] = useState<string>('');
   const navigate = useNavigate();
@@ -110,6 +111,7 @@ const ContractListHandler = () => {
       });
     setContractAddToast(false)
     setContractEditToast(false)
+    setContractCloseToast(false)
    // setCheckedExpiring(false); //set check expiring off by default
   }, [window.location.href]);
 
@@ -328,8 +330,6 @@ const ContractListHandler = () => {
         locale={locale}
         showExpired={showExpired}
         contractAddToast={contractAddToast}
-        setContractAddToast={setContractAddToast}
-        setContractEditToast={setContractEditToast}
         contractEditToast={contractEditToast}
         isMyContracts={isMyContracts}
         handleSegmentChange={handleSegmentChange}

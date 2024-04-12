@@ -18,14 +18,17 @@ export const NavContexts=createContext<NavPropType>({
     setContractAddToast:()=>{},
     contractAddToast:false,
     setContractEditToast:()=>{},
-    contractEditToast:false
+    contractEditToast:false,
+    setContractCloseToast:()=>{},
+    contractCloseToast:false,
 
 })
     const NavContext = ({ children }: { children: React.ReactNode }) =>  {
     const[added, setAdded] = useState(false);
     const[edited,setEdited]=useState(false);
     const[renew,setRenew]=useState(false);
-    const [contractAddToast, setContractAddToast] = useState(true);
+    const [contractCloseToast, setContractCloseToast] = useState(false);
+    const [contractAddToast, setContractAddToast] = useState(false);
     const [contractEditToast, setContractEditToast] = useState(false);    
     const [open, setOpen] = useState(false);
     const [activeNotificationCount, setActiveNotificationCount] = useState<number>(0);
@@ -59,6 +62,8 @@ export const NavContexts=createContext<NavPropType>({
         contractAddToast,
         setContractEditToast,
         contractEditToast,
+        setContractCloseToast,
+        contractCloseToast,
       }}
     >
       {children}

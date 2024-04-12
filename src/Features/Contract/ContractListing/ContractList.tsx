@@ -15,8 +15,6 @@ const ContractList = ({
   pageTitle,
   rowClassName,
   locale,
-  setContractEditToast,
-  setContractAddToast,
   showExpired,
   contractAddToast,
   contractEditToast,
