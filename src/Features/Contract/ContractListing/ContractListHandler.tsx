@@ -295,11 +295,13 @@ const ContractListHandler = () => {
 
   columns.push({ //add status row to columns
     title: (
+      <Tooltip title="Click to sort">
       <div onClick={() => handleSort('contract_status')}>
         {'Status'}
         <ArrowUpOutlined style={{ marginLeft: '5px' ,width:'12px', height:'12px'}} title="Ascending sort" className={sortOrder === 'asc' && sortField === 'contract_status' ? tableStyles['activeSort'] : ''}/>
         <ArrowDownOutlined style={{ marginLeft: '1px' ,width:'12px', height:'12px'}} title="Descending sort" className={sortOrder === 'desc' && sortField === 'contract_status' ? tableStyles['activeSort'] : ''}/>
       </div>
+      </Tooltip>
     ),
     dataIndex: "contract_status",
     key: "contract_status",
@@ -338,12 +340,13 @@ const ContractListHandler = () => {
         key: "action",
         render: (text: any, record: ContractData) => (
           <span>
+            <Tooltip title="Edit contract">
             <EditOutlined
               style={{ fontSize: "16px", color: "#DC143C" }}
               onClick={() => {
                 oneditPage(record.id);
               }}
-            />
+            /></Tooltip>
           </span>
         ),
       });
