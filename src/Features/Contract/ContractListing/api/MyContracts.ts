@@ -8,7 +8,9 @@ export const fetchMyContractsApi = async (
   pageSize: number,
   userId: string,
   checkedExpiring:boolean,
-  slideroption:string
+  slideroption:string,
+  sortField?:string,
+  sortOrder?:string
 ) => {
   try {
     let queryString: string[] = [];
@@ -21,7 +23,7 @@ export const fetchMyContractsApi = async (
 
     console.log("search query", queryStrings);
     const response: AxiosResponse = await axiosInstance.get(
-      `/api/contracts/myContracts/${userId}?${queryStrings}&page=${currentPage}&per_page=${pageSize}${checkedExpiring && '&status=Expired'}${slideroption && `&${slideroption}=true`}`
+      `/api/contracts/myContracts/${userId}?${queryStrings}&page=${currentPage}&per_page=${pageSize} ${checkedExpiring ? '&status=Expired':''} ${sortField ? `&sort_by=${sortField}&sort_value=${sortOrder}` : ''}${slideroption && `&${slideroption}=true`}`
     );
 
     if (response.status !== 200) {
