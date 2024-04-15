@@ -17,8 +17,6 @@ import EditMsaHandler from "../Features/MSAOld/EditMsa/EditMsaHandler";
 import RenewMsaHandler from "../Features/MSAOld/RenewMsa/RenewMsaHandler";
 import NavContext from "../Components/NavContext/NavContext";
  
-
-
 const AppRoutes = () => {
     return (
         <BrowserRouter>
