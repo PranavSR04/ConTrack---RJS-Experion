@@ -30,7 +30,8 @@
 .maincontainer__milestones {
   width: 30%;
   /* height: 58%; */
-  height: 60%;
+  min-height: 38.4rem;
+  max-height: 38.4rem;
   position: absolute;
   right: 1%;
   /* top: 8.5%; */

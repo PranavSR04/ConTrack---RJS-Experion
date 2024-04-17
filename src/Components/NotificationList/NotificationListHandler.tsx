@@ -8,6 +8,7 @@ import { NavContexts } from '../NavContext/NavContext';
 
 const NotificationListHandler = () => {
     const{added,edited,renew,contractAddToast,contractEditToast}=useContext(NavContexts);
+    console.log("usestate status",added,edited,renew,contractAddToast,contractEditToast);
     const [notifications, setNotifications] = useState<NotificationType[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);

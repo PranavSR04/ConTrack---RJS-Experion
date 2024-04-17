@@ -131,13 +131,13 @@ const RenewMsaHandler = () => {
         console.log("After setting", formData);
         console.log("file testing:", filePdf);
         const formDatatoSend = new FormData();
+        //formDatatoSend.append("msa_ref_id", msa_ref_id);
         formDatatoSend.append("client_name", formData.client_name);
         formDatatoSend.append("region", formData.region);
         formDatatoSend.append("start_date", formData.start_date);
         formDatatoSend.append("end_date", formData.end_date);
         formDatatoSend.append("comments", formData.comments);
         formDatatoSend.append("file", filePdf || "");
-
         // Sending the changed values to the API
         await postRenewMsa(user_id, formDatatoSend,msa_ref_id)
           .then(() => {
