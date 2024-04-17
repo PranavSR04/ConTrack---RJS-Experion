@@ -15,7 +15,7 @@ const DeleteConfirmationModal = ({
   onConfirm,
   userName,
 }: DeleteConfirmationModalProps) => {
-  const title = "Do You Really Wish To Remove";
+  const title = "Do you really wish to remove";
 
   return (
     <Modal
