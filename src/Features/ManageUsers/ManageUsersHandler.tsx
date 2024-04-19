@@ -13,6 +13,7 @@ import { addUser } from "./api/postAddUser";
 import { deleteUser } from "./api/putDeleteUser";
 import { updateUser } from "./api/putUpdateUser";
 import { Select } from "antd/lib";
+import { addGroup } from "./api/postAddGroup";
 
 const ManageUsersHandler = () => {
 
@@ -23,6 +24,7 @@ const ManageUsersHandler = () => {
   const { Option } = Select;
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [editModalVisible, setEditModalVisible] = useState(false);
+  const [addGroupModalVisible, setaddGroupModalVisible] = useState(false);
   const [editedUser, setEditedUser] = useState<User | null>(null);
   const [roleOptions, setRoleOptions] = useState<RoleOption[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -50,6 +52,8 @@ const ManageUsersHandler = () => {
     total: 0,
   });
   const [userToBeUpdated,setUserToBeUpdated]=useState<string>("")
+  const [groupAdded, setGroupAdded]=useState<boolean>(false)
+  const [group_name, setGroupName] = useState('');
 
 
   //To list the users in the table
@@ -300,7 +304,7 @@ const ManageUsersHandler = () => {
   const addUserToSystem = async (employee_id: number, role_id: number) => {
     try {
       setLoading(true);
-      await addUser(employee_id, role_id);
+      await addUser(employee_id,role_id);
       //toaster call
       setUserAdded(true);
       setTimeout(() => {
@@ -331,6 +335,32 @@ const ManageUsersHandler = () => {
       );
     }
   };
+
+  const addGroupToSystem = async (group_name: string) => {
+    try {
+      setLoading(true);
+      await addGroup(group_name);
+      setGroupAdded(true);
+      setTimeout(() => {
+      setGroupAdded(false);
+      }, 5000);
+    } catch (error:any) {
+      console.error("Error adding group to the system:", error)
+    if (error.response && error.response.status === 422) {
+      // Display a toast 
+      setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+      }, 5000); 
+    }
+    } finally {
+      setLoading(false);
+      setaddGroupModalVisible(false)
+    }
+  };
+  const handleAddGroup=()=>{
+    setaddGroupModalVisible(true);
+  }
 
   //to show role choices to be updated
   const showUpdateChoice = (record: User) => {
@@ -421,6 +451,10 @@ const ManageUsersHandler = () => {
     setEditedUser(null);
   };
 
+  const handleAddGroupModalCancel = () => {
+    setaddGroupModalVisible(false);
+  };
+
   useEffect(() => {
     // Fetch roles when the component mounts
     fetchRoles();
@@ -434,6 +468,9 @@ const ManageUsersHandler = () => {
   return (
     <ManageUsers
      handleAddUser={handleAddUser}
+     handleAddGroup={handleAddGroup}
+     groupAdded={groupAdded}
+     addGroupToSystem={addGroupToSystem}
      showDeleteConfirmation={showDeleteConfirmation}
      setDeleteConfirmationVisible={setDeleteConfirmationVisible}
      hideDeleteConfirmation={hideDeleteConfirmation}
@@ -459,6 +496,8 @@ const ManageUsersHandler = () => {
      dataSource={dataSource}
      pagination={pagination}
      editModalVisible={editModalVisible}
+     addGroupModalVisible={addGroupModalVisible}
+     handleAddGroupModalCancel={handleAddGroupModalCancel}
      selectedRoleId={selectedRoleId}
      deleteConfirmationVisible={deleteConfirmationVisible}
      selectedUser={selectedUser}

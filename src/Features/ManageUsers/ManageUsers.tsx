@@ -1,6 +1,7 @@
 import React from "react";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import UpdateModal from "./UpdateModal";
+import AddGroupModal from "./AddGroupModal";
 import userTableStyles from "./ManageUsers.module.css";
 import {
   Table,
@@ -21,13 +22,16 @@ import { LabeledValue } from "antd/es/select";
 // import BreadCrumbs from "../../Components/BreadCrumbs/Breadcrumbs";
 import { LoadingOutlined } from "@ant-design/icons";
 
+
 const ManageUsers = ({
   handleAddUser,
+  handleAddGroup,
   hideDeleteConfirmation,
   handleDelete,
   handleSearch,
   handlePageChange,
   handleEditModalCancel,
+  handleAddGroupModalCancel,
   handleUpdateUser,
   rowClassName,
   debouncedFetchData,
@@ -40,6 +44,7 @@ const ManageUsers = ({
   roleOptions,
   dataSource,
   pagination,
+  addGroupModalVisible,
   editModalVisible,
   selectedRoleId,
   deleteConfirmationVisible,
@@ -53,6 +58,7 @@ const ManageUsers = ({
   employeeNotFoundToast,
   selectedEmployeeId,
   dropDownLoading,
+  addGroupToSystem
 }: // handleClear
 
 ManageUsersPropType) => {
@@ -106,6 +112,13 @@ ManageUsersPropType) => {
             }}
           >
             ADD USER
+          </Button>
+
+          <Button
+            className={`${userTableStyles.addGroupButton}`}
+            onClick={() => handleAddGroup()}
+          >
+            + NEW GROUP
           </Button>
         </div>
 
@@ -196,6 +209,11 @@ ManageUsersPropType) => {
         </div>
       </div>
 
+      <AddGroupModal
+       visible={addGroupModalVisible}
+       onCancel={handleAddGroupModalCancel}
+       addGroupToSystem={addGroupToSystem}
+      />
       <UpdateModal
         visible={editModalVisible}
         onCancel={handleEditModalCancel}

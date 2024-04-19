@@ -2,6 +2,7 @@ import { DebouncedFunc } from "lodash";
 
 export interface ManageUsersPropType {
   handleAddUser: () => void;
+  handleAddGroup: () => void
   showDeleteConfirmation: (record: User) => void;
   setDeleteConfirmationVisible: React.Dispatch<React.SetStateAction<boolean>>;
   hideDeleteConfirmation: () => void;
@@ -12,6 +13,7 @@ export interface ManageUsersPropType {
   showUpdateChoice: (record: User) => void;
   handlePageChange: (pagination: any) => void;
   handleEditModalCancel: () => void;
+  handleAddGroupModalCancel:()=>void;
   setSelectedEmployeeId: React.Dispatch<React.SetStateAction<number | undefined>>;
   selectedEmployeeId?:number|null;
   // setSelectedEmployeeId:number | undefined;
@@ -41,7 +43,9 @@ export interface ManageUsersPropType {
       pageSize: number;
       total: number;
   }
+  addGroupToSystem: (groupName: string) => void
   editModalVisible: boolean
+  addGroupModalVisible:boolean
   selectedRoleId: number | undefined
   deleteConfirmationVisible: boolean
   selectedUser: User | null
@@ -53,7 +57,7 @@ export interface ManageUsersPropType {
   emptyUserToast:boolean
   employeeNotFoundToast:boolean
   dropDownLoading:boolean
- 
+ groupAdded:boolean
 }
 
 export interface ManageUserHandlerPropType {}
@@ -106,4 +110,9 @@ export interface UpdateModalProps {
   visible: boolean;
   onCancel: () => void;
   updateUser: () => void;
+}
+
+export interface AddGroupModalProps{
+  visible: boolean;
+  onCancel: () => void;
 }
