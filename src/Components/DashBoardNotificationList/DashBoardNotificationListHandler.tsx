@@ -19,29 +19,17 @@ const DashBoardNotificationListHandler = () => {
                     setError('');
         
                     const response = await fetchNotification(1,5,1); // Notification count is limited to 5 
-                    if (!('data' in response)) 
-                    {
-                        throw new Error('Invalid response structure');
+                    if (response && response.data && Array.isArray(response.data.NotificationListdisplay)) {
+                        setNotifications(response.data.NotificationListdisplay as NotificationType[]);
+                    } else {
+                        console.log("Invalid response structure or no notifications found:", response);
+                        setError('Invalid response structure or no notifications found.');
+                        setIsError(true);
                     }
-
-                    const { data } = response;
-                    if (!Array.isArray(data.NotificationListdisplay)) //check whether it is array or not
-                    {
-                        throw new Error('Notifications data is not an array');
-                    }
-                    setNotifications(data.NotificationListdisplay as NotificationType[]);
                     } catch (error) 
                     {
-                        if (axios.isAxiosError(error)) {
-                            console.error('Axios error fetching notifications:', error.message);
-                            setError(error.message || 'An error occurred with the request.');
-                        } else if (error instanceof Error) {
-                            console.error('Error fetching notifications:', error.message);
-                            setError(error.message);
-                        } else {
-                            console.error('Unknown error:', error);
-                            setError('An unknown error occurred.');
-                        }
+                        console.error('Error fetching notifications:', error);
+                        setError('An error occurred while fetching notifications.');
                         setIsError(true);
                     } 
                     finally 
