@@ -80,6 +80,10 @@ const NotificationHandler = ({ notification }:NotificationHandlerProps) => {
           {
             setActionStyle(`${stylename}_renewed`);
           }
+          else if (notification.action === "Closed") 
+            {
+              setActionStyle(`${stylename}_closed`);
+            } 
           setCardStyle(`${stylename}_cardStyle_right`)
           
       }, [notification.action, stylename]);

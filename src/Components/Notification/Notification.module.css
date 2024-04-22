@@ -70,6 +70,16 @@
   width: 60px;
   border-radius: 20px; 
 }
+.Notificationstyle_closed p{
+  margin-top: 10px;
+  background-color: #d43e33;
+  color: #6f2a1e;
+  font-weight:700;
+  font-size: 10px;
+  padding: 9%;
+  width: 60px;
+  border-radius: 20px; 
+}
 .Notificationstyle_cardStyle_right{
   flex: 7;
   padding-left: 6px;
@@ -149,7 +159,16 @@ transform: translateY(-5px);
   width: 60px;
   border-radius: 20px; 
 }
-
+.DashBoard_Notification_Style_closed p{
+   margin-top: 10px;
+   background-color: #d43e33;
+   color: #6f2a1e;
+  font-weight:700;
+  font-size: 8px;
+  padding: 9%;
+  width: 60px;
+  border-radius: 20px; 
+}
 .DashBoard_Notification_Style_cardStyle_right{
   flex: 7;
   padding-left: 6px;
