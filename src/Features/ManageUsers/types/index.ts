@@ -3,12 +3,30 @@ import { DebouncedFunc } from "lodash";
 export interface ManageUsersPropType {
   handleAddUser: () => void;
   showDeleteConfirmation: (record: User) => void;
+  displayGroupsModal:()=>void;
+  hideGroupsModal: () => void;
+  isGroupModalVisible: boolean
   setDeleteConfirmationVisible: React.Dispatch<React.SetStateAction<boolean>>;
   hideDeleteConfirmation: () => void;
+  groupOptions:GroupOptions[]
+  completeUserList: User[]
+  getFullUsersList: () => Promise<void>
   handleDelete: (selectedUser: User) => Promise<void>;
   setDataSource: React.Dispatch<React.SetStateAction<User[]>>;
   handleSearch: (value: string) => void;
+  handleSelectedGroups: (selectedUserGroups:number[]) => void;
+  addUsersToGroup:(selectedUsers:number[]) => void;
+  showDeleteFromGroupModal:boolean
+  // selectedIndividualGroup:number;
+  handleDeleteFromGroup: () => Promise<void>;
+  cancelDeleteFromGroupModal: () => void;
+
+  handleIndividualGroup:(selectedIndividualGroup:number|undefined) => void;
+  handleAddUsersToGroup:() => void;
+  groupUsersData: User[]
+  // selectedUsers:number[]
   setUserUpdated: React.Dispatch<React.SetStateAction<boolean>>;
+  showDeleteFromGroup: (record: User) => void
   showUpdateChoice: (record: User) => void;
   handlePageChange: (pagination: any) => void;
   handleEditModalCancel: () => void;
@@ -30,6 +48,7 @@ export interface ManageUsersPropType {
   >;
   setSelectedRoleId: React.Dispatch<React.SetStateAction<number | undefined>>;
   columns: TableColumn[];
+  individualGroupColumns:TableColumn[];
   dropdownOptions: {
    label: string;
    value: number;
@@ -56,6 +75,7 @@ export interface ManageUsersPropType {
  
 }
 
+
 export interface ManageUserHandlerPropType {}
 
 export interface User {
@@ -63,6 +83,12 @@ export interface User {
   user_name: string;
   role_access: string;
   contracts_count: number;
+  group_names:string
+}
+
+export interface GroupOptions {
+  id: number;
+  group_name: string;
 }
 
 export interface Employee {

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios, { AxiosResponse, AxiosPromise, AxiosError } from "axios";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { debounce } from "lodash";
-import { TableColumn, User, RoleOption, ActionColumn, Employee,EmployeeOption } from "./types";
+import { TableColumn, User, RoleOption, ActionColumn, Employee,EmployeeOption, GroupOptions } from "./types";
 import ManageUsers from "./ManageUsers";
 import userTableStyles from "./ManageUsers.module.css";
 import { getUserList } from "./api/getUserList";
@@ -13,6 +13,13 @@ import { addUser } from "./api/postAddUser";
 import { deleteUser } from "./api/putDeleteUser";
 import { updateUser } from "./api/putUpdateUser";
 import { Select } from "antd/lib";
+import { getUserGroups } from "./api/getUserGroups";
+import {assignGroupsWhileAdding} from "./api/postAssignGroupsWhileAdding"
+import { getGroupUsers } from "./api/getGroupUsers";
+import { getUsersList } from "./api/getUsersList";
+import { addUsersToIndividualGroup } from "./api/postAddUsersToIndividualGroup";
+import { deleteUserFromGroup } from "./api/postDeleteUserFromGroup";
+
 
 const ManageUsersHandler = () => {
 
@@ -28,10 +35,27 @@ const ManageUsersHandler = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchEmployee, setSearchEmployee] = useState("")
   const [dropdownOptions, setDropdownOptions] = useState<EmployeeOption[]>([]);
+  const [groupOptions, setGroupOptions] = useState<GroupOptions[]>([]);
+  const [selectedUserGroups, setSelectedUserGroups] = useState<number[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
+  const [groupUsersData, setGroupUsersData] = useState<User[]>([]);
+
+
+  const [selectedIndividualGroup,setSelectedIndividualGroup] =  useState<number|undefined >();
+
+  const [individualGroupColumns, setIndividualGroupColumns] = useState<TableColumn[]>([]);
+  const [showDeleteFromGroupModal, setShowDeleteFromGroupModal] = useState<boolean>(false);
+  const [userToBeDeletedFromGroup,setUserToBeDeletedFromGroup] = useState<number|undefined>()
+
+
   const [selectedRole, setSelectedRole] = useState<string>('');
   const [selectedRoleId, setSelectedRoleId] = useState<number | undefined>(undefined);
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<number >();
   const [userAdded, setUserAdded]=useState<boolean>(false)
+  const [userAddedToGroup, setUserAddedToGroup]=useState<boolean>(false)
+  const [userRemovedFromGroup, setUserRemovedFromGroup]=useState<boolean>(false)
+
+
   const [userUpdated, setUserUpdated]=useState<boolean>(false)
   const [userDeleted, setUserDeleted]=useState<boolean>(false)
   const [showToast, setShowToast] = useState(false);
@@ -90,6 +114,8 @@ const ManageUsersHandler = () => {
       const list: User[] = result.data.data || [];
       //Storing the first user to get the columns title
       const firstObject: User = list[0] || {};
+      console.log("FIRSSTTT OBJ :",firstObject)
+      // console.log("GROUPP",firstObject)
       const cols: TableColumn[] = [];
 
       //to get the column title we extract the first record
@@ -97,6 +123,7 @@ const ManageUsersHandler = () => {
       for (const key in firstObject) {
         // Customize column titles based on the 'key'
         let customTitle: string;
+        // console.log("Groups",firstObject)
         //Not to display ID in the table
         if (key !== "id") {
           switch (key) {
@@ -108,6 +135,9 @@ const ManageUsersHandler = () => {
               break;
             case "contracts_count":
               customTitle = "Associated Contracts";
+              break;
+            case "group_names":
+              customTitle = "Groups In";
               break;
             default:
               customTitle = key; // Use the key as the title by default
@@ -176,6 +206,7 @@ const ManageUsersHandler = () => {
           user_name: data.user_name,
           role_access: data.role_access,
           contracts_count: data.contracts_count,
+          group_names:data.group_names
         }))
       );
       //loading boolean value for spinner 
@@ -246,6 +277,7 @@ const ManageUsersHandler = () => {
         const extractedId = data.value;
         console.log("Employee ID :", extractedId);
         setSelectedEmployeeId(extractedId);
+        console.log("Seleced EMployeeee IDD",selectedEmployeeId)
     }
 };
 
@@ -300,6 +332,7 @@ const ManageUsersHandler = () => {
   const addUserToSystem = async (employee_id: number, role_id: number) => {
     try {
       setLoading(true);
+      // console.log("ADDED USER EMP ID",employee_id)
       await addUser(employee_id, role_id);
       //toaster call
       setUserAdded(true);
@@ -320,11 +353,19 @@ const ManageUsersHandler = () => {
     }
   };
 
+   const assignGroupToUser = async(selectedEmployeeId:number,selectedUserGroups:number[])=>{
+
+    await(assignGroupsWhileAdding(selectedEmployeeId,selectedUserGroups))
+
+
+   }
+
   const handleAddUser = () => {
     console.log("Employee ID in handleADDUSER",selectedEmployeeId,"Role ID :",selectedRoleId)
     if (selectedEmployeeId && selectedRoleId) {
       console.log("Add:", selectedEmployeeId, selectedRoleId);
       addUserToSystem(selectedEmployeeId, selectedRoleId);
+      assignGroupToUser(selectedEmployeeId,selectedUserGroups)
     } else {
       console.warn(
         "Please select an employee and a role before adding a user."
@@ -405,8 +446,20 @@ const ManageUsersHandler = () => {
     if (userAdded || userUpdated || userDeleted) {
       render.current = false;
       fetchUserData(pagination.current, pagination.pageSize, searchQuery);
+      handleIndividualGroupChange(selectedIndividualGroup);
     }
   }, [userAdded, userUpdated, userDeleted]);
+
+
+  useEffect(() => {
+    // Fetch data when a users are added to a group
+    if (userAddedToGroup||userRemovedFromGroup) {
+      render.current = false;
+      handleIndividualGroupChange(selectedIndividualGroup);
+      fetchUserData(pagination.current, pagination.pageSize, searchQuery);
+
+    }
+  }, [userAddedToGroup,userRemovedFromGroup]);
 
   const handlePageChange = (pagination: any) => {
     setPagination({
@@ -424,52 +477,334 @@ const ManageUsersHandler = () => {
   useEffect(() => {
     // Fetch roles when the component mounts
     fetchRoles();
+    getGroupsList();
+    getFullUsersList();
   }, []);
+
+
+  useEffect(() => {
+    console.log("NEW OPTIONSSS", groupOptions); // This will log when groupOptions changes
+    console.log("Seleced EMployeeee IDD",selectedEmployeeId)
+    console.log("Selected Groups ID:",selectedUserGroups)
+    console.log("Selected Users to be added",selectedUsers)
+    console.log("Modal VISIBLE VALUE",showDeleteFromGroupModal)
+    
+
+}, [groupOptions,selectedEmployeeId,selectedUserGroups,selectedUsers,selectedIndividualGroup,selectedUsers,showDeleteFromGroupModal]);
+
+
+const [completeUserList, setCompleteUserList] = useState<User[]>([]);
+
+
+const getFullUsersList = async() => {
+  try {
+    const response = await getUsersList(); // Call the async function to fetch groups
+    // console.log("RESPONSE.Data",response.data)
+    // console.log("Group Option",response.data[0].group_name,"Group ID",response.data[0].id)
+    console.log("Full Users List",response.data)
+
+    const fullUsersList = response.data
+      .map((res: { user_name: string; id: number }) => ({
+        user_name: res.user_name,
+        id: res.id,
+      }));
+
+    const userList = fullUsersList.map(
+      (data: { user_name: string; id: number }) => ({
+        value: data.id,
+        label: data.user_name,
+      })
+    );
+    setCompleteUserList(userList);
+
+    // console.log("NEW OPTIONSSS",groupOptions)
+    // console.log("Seleced EMployeeee IDD",selectedEmployeeId)
+    
+} catch (error) {
+    console.error("Failed to fetch groups:", error); // Log any errors that occur
+}
+}
+
+
+  const getGroupsList = async() => {
+    try {
+      const response = await getUserGroups(); // Call the async function to fetch groups
+      console.log("RESPONSE.Data",response.data)
+      console.log("Group Option",response.data[0].group_name,"Group ID",response.data[0].id)
+
+      const groupBoxOptions = response.data
+        .map((res: { group_name: string; id: number }) => ({
+          group: res.group_name,
+          id: res.id,
+        }));
+
+      const groupOption = groupBoxOptions.map(
+        (data: { group: string; id: number }) => ({
+          value: data.id,
+          label: data.group,
+        })
+      );
+      setGroupOptions(groupOption);
+
+      console.log("NEW OPTIONSSS",groupOptions)
+      // console.log("Seleced EMployeeee IDD",selectedEmployeeId)
+
+  } catch (error) {
+      console.error("Failed to fetch groups:", error); // Log any errors that occur
+  }
+  }
+
+  const handleSelectedGroups = (selectedGroups:number[]) => {
+    setSelectedUserGroups(selectedGroups);
+    // console.log('Currently selected values:', selectedUserGroups);
+  };
+
+  const addUsersToGroup = (selectedUsers:number[]) => {
+    setSelectedUsers(selectedUsers)
+  }
+
+ 
 
   const rowClassName = (record: User, index: number): string => {
     // Add a custom class to alternate rows for styling
     return index % 2 === 0 ? userTableStyles.evenRow : userTableStyles.oddRow;
   };
 
+  const [isGroupModalVisible, setIsGroupModalVisible] = useState(false);
+
+  const displayGroupsModal = () => {
+    setIsGroupModalVisible(true);
+  };
+
+  const hideGroupsModal = () => {
+    setIsGroupModalVisible(false);
+  };
+
+  const handleIndividualGroup = (selectedIndividualGroup:number|undefined) =>{
+    setSelectedIndividualGroup(selectedIndividualGroup)
+    handleIndividualGroupChange(selectedIndividualGroup)
+
+  }
+
+
+  const handleIndividualGroupChange = async(selectedIndividualGroup:number|undefined) => {
+    
+    const response = await(getGroupUsers(pagination.current,
+      pagination.pageSize,
+      selectedIndividualGroup,
+      searchQuery,
+      ))
+      // setSelectedIndividualGroup(selectedIndividualGroup)
+      const result = response.data;
+      console.log(result);
+      console.log('parameter', searchQuery)
+      console.log('Entire response', response); // Log the entire response to check its structure
+      console.log("page total", response.data.data.total); 
+      // if (result.data.data.length=== 0) {
+      //   // If the data array is empty, display a toast
+      //   setEmptyUserToast(true);
+      //   setTimeout(() => {
+      //     setEmptyUserToast(false);
+      //   }, 5000);
+      // } else {
+      //   setEmptyUserToast(false);
+      // }
+      setPagination({
+        ...pagination,
+        total: response.data.data.total,
+      });
+
+      const list: User[] = result.data.data || [];
+      //Storing the first user to get the columns title
+      const firstObject: User = list[0] || {};
+      console.log("FIRSSTTT OBJ :",firstObject)
+      // console.log("GROUPP",firstObject)
+      const cols: TableColumn[] = [];
+
+      //to get the column title we extract the first record
+
+      for (const key in firstObject) {
+        // Customize column titles based on the 'key'
+        let customTitle: string;
+        // console.log("Groups",firstObject)
+        //Not to display ID in the table
+        if (key !== "id") {
+          switch (key) {
+            case "user_name":
+              customTitle = "Name";
+              break;
+            case "role_access":
+              customTitle = "Access Permission";
+              break;
+            case "contracts_count":
+              customTitle = "Associated Contracts";
+              break;
+            default:
+              customTitle = key; // Use the key as the title by default
+          }
+
+          const col: TableColumn = {
+            title: <span style={{ fontWeight: "bold" }}>{customTitle}</span>,
+            dataIndex: key,
+            sorter:
+              //Applying sorting logic to only required fields
+              key === "role_access" || key === "id"  //don't apply the sorting to role_access and id
+                ? false
+                : (a, b) => {
+                    if (key === "user_name") {
+                      return (a[key] as string).localeCompare(b[key] as string);
+                    } else if (key === "contracts_count") {
+                      return (a[key] as number) - (b[key] as number);
+                    }
+                    // If no sorting required, return 0
+                    return 0;
+                  },
+            //To prevent ID from being displayed in the table
+            width: key === "id" ? 0 : undefined,
+          };
+          cols.push(col);
+        }
+      }
+
+      // Add "Action" column with "Edit" and "Delete" icons
+      const actionColumn: ActionColumn = {
+        title: <span style={{ fontWeight: "bold" }}>Action</span>,
+        dataIndex: "action",
+        render: (_, record: User) => (
+          <>
+            <DeleteOutlined
+              className={`${userTableStyles.actionIcon}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                showDeleteFromGroup(record);
+                console.log("Delete FROM GROUP ICON CLICKED")
+              }}
+            />
+          </>
+        ),
+      };
+    {     
+      //if the data fetched is not empty
+      result.data.data.length!== 0 &&
+      cols.push(actionColumn);
+    }      
+
+    setIndividualGroupColumns(cols);
+
+      // Initialize datasource once with the mapped list
+      setGroupUsersData(
+        list.map((data: User) => ({
+          id: data.id,
+          user_name: data.user_name,
+          role_access: data.role_access,
+          contracts_count: data.contracts_count,
+          group_names:data.group_names
+        }))
+      );
+
+      //loading boolean value for spinner 
+      setLoading(false);
+      
+  }
+
+    const showDeleteFromGroup = (record:User) =>{
+      
+      setUserToBeDeletedFromGroup(record.id)
+      setShowDeleteFromGroupModal(true)
+      // handleDeleteFromGroup()
+
+    }
+
+    const cancelDeleteFromGroupModal =() => {
+      setShowDeleteFromGroupModal(false)
+    }
+
+    const handleDeleteFromGroup = async() =>{
+      await deleteUserFromGroup(userToBeDeletedFromGroup,selectedIndividualGroup)
+      setShowDeleteFromGroupModal(false)
+      setUserRemovedFromGroup(true);
+      setGroupUsersData(groupUsersData)
+      setTimeout(() => {
+        setUserRemovedFromGroup(false);
+      }, 5000);
+    }
+
+  
+  const addMultipleUsersToGroups = async(selectedIndividualGroup:number|undefined,selectedUsers:number[]) =>{
+    await addUsersToIndividualGroup(selectedIndividualGroup,selectedUsers)
+
+  }
+
+  const handleAddUsersToGroup = () =>{
+    console.log("Selected $$$$$$$$$$$$", selectedIndividualGroup)
+    addMultipleUsersToGroups(selectedIndividualGroup,selectedUsers)
+    setUserAddedToGroup(true);
+      setTimeout(() => {
+        setUserAddedToGroup(false);
+      }, 5000);
+  }
+
+
+  const fetchGroupUsers = async() => {
+    // await
+  }
+
+
   return (
     <ManageUsers
-     handleAddUser={handleAddUser}
-     showDeleteConfirmation={showDeleteConfirmation}
-     setDeleteConfirmationVisible={setDeleteConfirmationVisible}
-     hideDeleteConfirmation={hideDeleteConfirmation}
-     handleDelete={handleDelete}
-     setDataSource={setDataSource}
-     handleSearch={handleSearch}
-     setUserUpdated={setUserUpdated}
-     showUpdateChoice={showUpdateChoice}
-     handlePageChange={handlePageChange}
-     handleEditModalCancel={handleEditModalCancel}
-     handleUpdateUser={handleUpdateUser}
-     rowClassName={rowClassName}
-     debouncedFetchData={debouncedFetchData}
-     onSelectEmployee={onSelectEmployee}
-     getEmployee={getEmployee}
-     setDropdownOptions={setDropdownOptions}
-     setSelectedRoleId={setSelectedRoleId}
-     columns={columns}
-     dropdownOptions={dropdownOptions}
-     roleOptions={roleOptions}
-     setSelectedEmployeeId={setSelectedEmployeeId}
-     selectedEmployeeId={selectedEmployeeId}
-     dataSource={dataSource}
-     pagination={pagination}
-     editModalVisible={editModalVisible}
-     selectedRoleId={selectedRoleId}
-     deleteConfirmationVisible={deleteConfirmationVisible}
-     selectedUser={selectedUser}
-     userAdded={userAdded}
-     loading={loading}
-     userUpdated={userUpdated}
-     userDeleted={userDeleted}
-     showToast={showToast}
-     emptyUserToast={emptyUserToast}
-     employeeNotFoundToast={employeeNotFoundToast}
-     dropDownLoading={dropDownLoading}
+      handleAddUser={handleAddUser}
+      groupOptions={groupOptions}
+      completeUserList={completeUserList}
+      getFullUsersList={getFullUsersList}
+      isGroupModalVisible={isGroupModalVisible}
+      showDeleteConfirmation={showDeleteConfirmation}
+      setDeleteConfirmationVisible={setDeleteConfirmationVisible}
+      hideDeleteConfirmation={hideDeleteConfirmation}
+      handleDelete={handleDelete}
+      setDataSource={setDataSource}
+      handleSearch={handleSearch}
+      handleSelectedGroups={handleSelectedGroups}
+      setUserUpdated={setUserUpdated}
+      showUpdateChoice={showUpdateChoice}
+      handlePageChange={handlePageChange}
+      handleEditModalCancel={handleEditModalCancel}
+      handleUpdateUser={handleUpdateUser}
+      rowClassName={rowClassName}
+      debouncedFetchData={debouncedFetchData}
+      onSelectEmployee={onSelectEmployee}
+      getEmployee={getEmployee}
+      setDropdownOptions={setDropdownOptions}
+      setSelectedRoleId={setSelectedRoleId}
+      columns={columns}
+      individualGroupColumns={individualGroupColumns}
+      dropdownOptions={dropdownOptions}
+      roleOptions={roleOptions}
+      setSelectedEmployeeId={setSelectedEmployeeId}
+      selectedEmployeeId={selectedEmployeeId}
+      dataSource={dataSource}
+      pagination={pagination}
+      editModalVisible={editModalVisible}
+      selectedRoleId={selectedRoleId}
+      deleteConfirmationVisible={deleteConfirmationVisible}
+      selectedUser={selectedUser}
+      userAdded={userAdded}
+      loading={loading}
+      userUpdated={userUpdated}
+      userDeleted={userDeleted}
+      showToast={showToast}
+      emptyUserToast={emptyUserToast}
+      employeeNotFoundToast={employeeNotFoundToast}
+      dropDownLoading={dropDownLoading}
+      displayGroupsModal={displayGroupsModal}
+      hideGroupsModal={hideGroupsModal}
+      handleIndividualGroup={handleIndividualGroup}
+      groupUsersData={groupUsersData}
+      addUsersToGroup={addUsersToGroup}
+      handleAddUsersToGroup={handleAddUsersToGroup}
+      handleDeleteFromGroup={handleDeleteFromGroup}
+      showDeleteFromGroupModal={showDeleteFromGroupModal} 
+      showDeleteFromGroup={showDeleteFromGroup }
+      cancelDeleteFromGroupModal={cancelDeleteFromGroupModal}
      />
   )
 }
