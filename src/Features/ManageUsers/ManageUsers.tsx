@@ -32,9 +32,13 @@ const ManageUsers = ({
   rowClassName,
   debouncedFetchData,
   onSelectEmployee,
+  groupOptions,
+  completeUserList,
   getEmployee,
   setSelectedEmployeeId,
   setSelectedRoleId,
+  handleSelectedGroups,
+  isGroupModalVisible,
   columns,
   dropdownOptions,
   roleOptions,
@@ -53,6 +57,21 @@ const ManageUsers = ({
   employeeNotFoundToast,
   selectedEmployeeId,
   dropDownLoading,
+  displayGroupsModal,
+  hideGroupsModal,
+  handleIndividualGroup,
+  individualGroupColumns,
+  groupUsersData,
+  getFullUsersList,
+  addUsersToGroup,
+  handleAddUsersToGroup,
+  handleDeleteFromGroup,
+  showDeleteFromGroupModal,
+  cancelDeleteFromGroupModal
+  // selectedIndividualGroup,
+  // selectedUsers
+  // selectedIndividualGroup
+
 }: // handleClear
 
 ManageUsersPropType) => {
@@ -73,8 +92,10 @@ ManageUsersPropType) => {
             className={`${userTableStyles.searchEmployeeBox}`}
             // style={{ width: 200 }}
             options={dropdownOptions}
+            // autoFocus={true}
             placeholder="Search Employee"
-            onChange={(value, option) => setSelectedEmployeeId(value?.value)}
+            // onChange={(value, option) => setSelectedEmployeeId(value?.value)}
+            onChange={onSelectEmployee}
             filterOption={false}
             labelInValue={true}
             showSearch
@@ -98,6 +119,19 @@ ManageUsersPropType) => {
             onSelect={(value) => setSelectedRoleId(value as number)}
             placeholder="Select a role"
           />
+
+          <Select
+            className={`${userTableStyles.viewGroupsBox}`}
+            style={{ width: 200 }}
+            mode="multiple"
+                allowClear
+                // style={{ width: '100%' }}
+                options={groupOptions}
+                placeholder="Please select"
+                // defaultValue={['a10', 'c12']}
+                onChange={handleSelectedGroups}
+                // options={groupOptions}
+              />
 
           <Button
             className={`${userTableStyles.addUserButton}`}
@@ -149,6 +183,13 @@ ManageUsersPropType) => {
             }
           />
 
+          <Button
+            className={`${userTableStyles.viewGroupsButton}`}
+            onClick={displayGroupsModal}
+          >
+            View Groups
+          </Button>
+
           <Table
             className={`${userTableStyles.userListTable}`}
             columns={columns}
@@ -195,6 +236,112 @@ ManageUsersPropType) => {
           />
         </div>
       </div>
+
+      <Modal
+      // title="View Groups"
+      open={isGroupModalVisible}
+      // onOk={handleOk}
+      onCancel={hideGroupsModal}
+      width={700}  // Optional: adjust width based on content needs
+      // height={800}
+      footer={null}  // Hides the default footer buttons
+
+    >
+
+      <Select
+            className={`${userTableStyles.viewGroupsBox}`}
+            style={{ width: 200 }}
+            // mode="multiple"
+                allowClear
+                // style={{ width: '100%' }}
+                options={groupOptions}
+                // defaultActiveFirstOption={true}
+                // defaultValue={{id:groupOptions[0].id}}
+                placeholder="Please select"
+                // defaultValue={['a10', 'c12']}
+                onChange={handleIndividualGroup}
+                // options={groupOptions}
+              />
+
+      <Select
+            className={`${userTableStyles.viewGroupsBox}`}
+            style={{ width: 200 }}
+            mode="multiple"
+                allowClear
+                // style={{ width: '100%' }}
+                showSearch
+                
+                onSearch={()=>getFullUsersList()}
+                options={completeUserList}
+                placeholder="Please select"
+                // defaultValue={['a10', 'c12']}
+                onChange={addUsersToGroup}
+                // options={groupOptions}
+              />
+          
+          <Button
+            className={`${userTableStyles.viewGroupsButton}`}
+            // onClick={()=>handleAddUsersToGroup(selectedIndividualGroup,selectedUsers)}
+            onClick={handleAddUsersToGroup}
+          >
+            Add Users
+          </Button>
+
+         <Table
+            className={`${userTableStyles.userListTable}`}
+            columns={individualGroupColumns}
+            size="small"
+            dataSource={groupUsersData}
+            rowClassName={rowClassName}
+            locale={{ emptyText: "Please select a group" }}
+            pagination={{
+              position: ["bottomCenter"],
+              ...pagination,
+              itemRender: (current, type, originalElement) => {
+                if (type === "page") {
+                  return (
+                    <a
+                      style={{
+                        background:
+                          current === pagination.current ? "#DC143C" : "",
+                        color: current === pagination.current ? "white" : "",
+                        borderBlockColor: "#DC143C",
+                        border: "none",
+                      }}
+                    >
+                      {current}
+                    </a>
+                  );
+                }
+                return originalElement;
+              },
+            }}
+            onChange={handlePageChange}
+            loading={{
+              indicator: (
+                <div>
+                  <Spin
+                    indicator={
+                      <LoadingOutlined style={{ fontSize: 30 }} spin />
+                    }
+                  />
+                </div>
+              ),
+              spinning: loading,
+            }}
+            // }
+          />
+
+    </Modal>
+
+    <Modal
+        open={showDeleteFromGroupModal}
+        onCancel={cancelDeleteFromGroupModal}
+        title="Do you really wish to remove the user from this group"
+        onOk={handleDeleteFromGroup}
+        style={{marginTop:30}}
+      />
+
 
       <UpdateModal
         visible={editModalVisible}

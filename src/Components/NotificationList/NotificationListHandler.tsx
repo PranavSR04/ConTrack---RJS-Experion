@@ -7,25 +7,31 @@ import NavBar from '../NavBar/NavBar';
 import { NavContexts } from '../NavContext/NavContext';
 
 const NotificationListHandler = () => {
-    const{added,edited,renew,contractAddToast,contractEditToast}=useContext(NavContexts);
+    const{added,edited,renew,contractAddToast,contractEditToast,contractCloseToast}=useContext(NavContexts);
     console.log("usestate status",added,edited,renew,contractAddToast,contractEditToast);
     const [notifications, setNotifications] = useState<NotificationType[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
     const [page, setPage] = useState<number>(1);
-    const [hasViewMore, setHasViewMore] = useState<boolean>(true);
+    const [hasViewMore, setHasViewMore] = useState<boolean>(false);
     const{setActiveNotificationCount,activeNotificationCount}=useContext(NavContexts);
     const SENDTO_ID = parseInt(localStorage.getItem("user_id") || '0', 10);
-    useEffect(()=>{
+    useEffect(() => {
         const fetchCount = async () => {
-        const response = await fetchNotification(page, 1,SENDTO_ID);
-        const { data } = response;
-        const activenotifications=data.active_notifications_count;
-        setActiveNotificationCount(activenotifications)
-        }
+            try {
+                const response = await fetchNotification(page, 1, SENDTO_ID);
+                const { data } = response;
+                const activenotifications = data.active_notifications_count;
+                setActiveNotificationCount(activenotifications);
+            } catch (error) {
+                console.error('Error fetching notification count:', error);
+            }
+        };
+    
         fetchCount();
-    },[added,edited,renew,contractAddToast,contractEditToast])
+    }, [added, edited, renew, contractAddToast, contractEditToast,contractCloseToast]);
+    
     useEffect(() => {
         //For fetching notifications 
         const fetchData = async () => {
@@ -76,7 +82,7 @@ const NotificationListHandler = () => {
         };
 
         fetchData();
-    },[page,added,edited,renew,contractAddToast,contractEditToast]);
+    },[page,added,edited,renew,contractAddToast,contractEditToast,contractCloseToast]);
 
     const viewMoreClick = () => {
         setPage(prevPage => prevPage + 1);
