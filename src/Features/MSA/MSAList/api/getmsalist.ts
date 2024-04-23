@@ -5,14 +5,14 @@ import { Condition } from "../types";
 export const getmsalist = async (
   currentPage: number,
   pageSize: number,
-  searchConditions: Condition
+  searchConditions: Condition,
+  sortField?:string,
+  sortOrder?:string
 ) => {
   try {
     let queryString: string[] = [];
-     // Check if 'is_active' is '0'
      const isActiveZero = searchConditions['is_active'] === '0';
 
-     // If 'is_active' is '0' and currentPage is not 1, set currentPage to 1
      if (isActiveZero && currentPage !== 1) {
        currentPage = 1;
      }
@@ -26,7 +26,7 @@ export const getmsalist = async (
     console.log("search query", queryStrings);
    
     const response: AxiosResponse = await axiosInstance.get(
-      `/api/msa/list?${queryStrings}&page=${currentPage}&per_page=${pageSize}`
+      `/api/msa/list?${queryStrings}&page=${currentPage}&per_page=${pageSize}  ${sortField ? `&sort_by=${sortField}&sort_order=${sortOrder}` : ''}`
     );
 
     if (response.status !== 200) {

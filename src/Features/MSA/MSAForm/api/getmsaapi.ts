@@ -1,9 +1,9 @@
 import axiosInstance from "../../../../Config/AxiosConfig";
 
-export const getmsaapi = async (msa_ref_id: string) => {
+export const getmsaapi = async (id: string) => {
   try {
     const data = await axiosInstance.get(
-      `api/msa/list?msa_ref_id=${msa_ref_id}`
+      `api/msa/list?id=${id}`
     );
     return data;
   } catch (error) {

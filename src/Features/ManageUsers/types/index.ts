@@ -10,26 +10,34 @@ export interface ManageUsersPropType {
   hideDeleteConfirmation: () => void;
   groupOptions:GroupOptions[]
   completeUserList: User[]
-  getFullUsersList: () => Promise<void>
+  getFullUsersList: (search:string) => Promise<void>
   handleDelete: (selectedUser: User) => Promise<void>;
   setDataSource: React.Dispatch<React.SetStateAction<User[]>>;
   handleSearch: (value: string) => void;
   handleSelectedGroups: (selectedUserGroups:number[]) => void;
   addUsersToGroup:(selectedUsers:number[]) => void;
+  handleAddGroupModalCancel:()=>void;
+
   showDeleteFromGroupModal:boolean
   // selectedIndividualGroup:number;
   handleDeleteFromGroup: () => Promise<void>;
   cancelDeleteFromGroupModal: () => void;
-
+  handleUserSearch:(search:string)=>void;
   handleIndividualGroup:(selectedIndividualGroup:number|undefined) => void;
   handleAddUsersToGroup:() => void;
   groupUsersData: User[]
+  selectedEmployee:EmployeeOption|undefined;
+  selectedUserGroups:number[]
+  selectedUsers:number[]
   // selectedUsers:number[]
   setUserUpdated: React.Dispatch<React.SetStateAction<boolean>>;
   showDeleteFromGroup: (record: User) => void
   showUpdateChoice: (record: User) => void;
   handlePageChange: (pagination: any) => void;
   handleEditModalCancel: () => void;
+  handleDeleteGroup: (selectedIndividualGroup:number|undefined) =>  Promise<void>;
+  handleDeleteGroupModal: () => void;
+  cancelDeleteGroupModal: () => void;
   setSelectedEmployeeId: React.Dispatch<React.SetStateAction<number | undefined>>;
   selectedEmployeeId?:number|null;
   // setSelectedEmployeeId:number | undefined;
@@ -69,9 +77,22 @@ export interface ManageUsersPropType {
   userUpdated:boolean
   userDeleted:boolean
   showToast:boolean
+  selectedIndividualGroup:number | undefined
+
+  showDeleteGroupModal:boolean
+  
   emptyUserToast:boolean
   employeeNotFoundToast:boolean
   dropDownLoading:boolean
+  userDropDownLoading:boolean
+  failedToAddUsersToGroup:boolean
+  groupAdded:boolean
+  failedToAddGroup: boolean
+  addGroupModalVisible:boolean
+  addGroupToSystem: (groupName: string) => void
+  handleAddGroup: () => void
+
+
  
 }
 
@@ -103,6 +124,7 @@ export interface TableColumn {
   dataIndex: string;
   sorter?: false | ((a: any, b: any) => number);
   width?: number | undefined;
+  ellipsis?:boolean | undefined
 }
 
 export interface ActionColumn {
@@ -132,4 +154,9 @@ export interface UpdateModalProps {
   visible: boolean;
   onCancel: () => void;
   updateUser: () => void;
+}
+
+export interface AddGroupModalProps{
+  visible: boolean;
+  onCancel: () => void;
 }
