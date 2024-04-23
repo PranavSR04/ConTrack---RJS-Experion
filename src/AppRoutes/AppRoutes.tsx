@@ -17,7 +17,6 @@ import EditMsaHandler from "../Features/MSAOld/EditMsa/EditMsaHandler";
 import RenewMsaHandler from "../Features/MSAOld/RenewMsa/RenewMsaHandler";
 import NavContext from "../Components/NavContext/NavContext";
 import IndividualMsaHandler from "../Features/MSA/IndividualMSA/IndividualMSAHandler";
-import Msa_contract_listHandler from "../Features/MSA/MSA_Page/Msa_contract_listHandler";
  
 const AppRoutes = () => {
     return (
@@ -49,7 +48,6 @@ const AppRoutes = () => {
                     <Route path="/msa/edit" element={<><NavBarHandler /><SideBar><EditMsaHandler /></SideBar></>} />
                     <Route path="/msa/renew" element={<><NavBarHandler /><SideBar><RenewMsaHandler /></SideBar></>} /> */}
 					<Route path="/Dashboard" element={<><NavBarHandler /><SideBar><Dashboard/></SideBar></>}></Route>
-			        <Route path='/MSAOverview/:msa_ref_id' element={<><NavBarHandler/><SideBar><Msa_contract_listHandler></Msa_contract_listHandler></SideBar></>}></Route>
                 </Routes>
              </NavContext> 
 
