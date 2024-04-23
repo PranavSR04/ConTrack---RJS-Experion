@@ -16,6 +16,8 @@ export interface ManageUsersPropType {
   handleSearch: (value: string) => void;
   handleSelectedGroups: (selectedUserGroups:number[]) => void;
   addUsersToGroup:(selectedUsers:number[]) => void;
+  handleAddGroupModalCancel:()=>void;
+
   showDeleteFromGroupModal:boolean
   // selectedIndividualGroup:number;
   handleDeleteFromGroup: () => Promise<void>;
@@ -84,6 +86,13 @@ export interface ManageUsersPropType {
   dropDownLoading:boolean
   userDropDownLoading:boolean
   failedToAddUsersToGroup:boolean
+  groupAdded:boolean
+  failedToAddGroup: boolean
+  addGroupModalVisible:boolean
+  addGroupToSystem: (groupName: string) => void
+  handleAddGroup: () => void
+
+
  
 }
 
@@ -115,6 +124,7 @@ export interface TableColumn {
   dataIndex: string;
   sorter?: false | ((a: any, b: any) => number);
   width?: number | undefined;
+  ellipsis?:boolean | undefined
 }
 
 export interface ActionColumn {
@@ -144,4 +154,9 @@ export interface UpdateModalProps {
   visible: boolean;
   onCancel: () => void;
   updateUser: () => void;
+}
+
+export interface AddGroupModalProps{
+  visible: boolean;
+  onCancel: () => void;
 }
