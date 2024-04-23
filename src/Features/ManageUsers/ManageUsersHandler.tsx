@@ -184,7 +184,7 @@ const ManageUsersHandler = () => {
                   },
             //To prevent ID from being displayed in the table
             // width: key === "id" ? 0 : undefined,
-            width: key === "group_names" ? 300 : (key === "id" ? 0 : undefined), // Set the width for the "Name" column
+            width: key === "group_names" ? '30%' : (key === "id" ? 0 : undefined), // Set the width for the "Name" column
 
 
           };

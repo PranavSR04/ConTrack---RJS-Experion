@@ -378,7 +378,10 @@ ManageUsersPropType) => {
             dataSource={groupUsersData}
             rowClassName={rowClassName}
 
-            locale={{ emptyText: "Please select a group" }}
+            // locale={{ emptyText: "Please select a group" }}
+            locale={{
+             emptyText:  "No users available" 
+             }}
             pagination={{
               position: ["bottomCenter"],
               ...pagination,
