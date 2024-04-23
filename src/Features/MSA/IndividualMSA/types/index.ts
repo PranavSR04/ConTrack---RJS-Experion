@@ -36,7 +36,7 @@ export interface Msa {
     id: string;
   }
   export interface IndividualMsaPropType{
-    id: string;
+    msa_id: string;
     responses: MsaApiType|AxiosError<unknown, any>|undefined;
     loading: boolean;
   }

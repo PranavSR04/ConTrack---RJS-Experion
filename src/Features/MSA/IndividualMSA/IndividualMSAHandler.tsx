@@ -8,12 +8,14 @@ import IndividualMSA from "./IndividualMSA";
 const IndividualMsaHandler = () => {
   const location = useLocation();
   const { state } = location;
+  const msa_id = state?.msa_id;
   const [id, setId] = useState<string>("1");
   const [responses, setResponses] = useState<
   MsaApiType | AxiosError<unknown, any>
   >();
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
+    setId(msa_id);
     const fetchData = async (id: string) => {
       try {
         const response = await getMSAData(id);
@@ -32,7 +34,7 @@ const IndividualMsaHandler = () => {
 console.log(id);
   return (
     <>
-      <IndividualMSA id={id} responses={responses} loading={loading} />
+      <IndividualMSA msa_id={id} responses={responses} loading={loading} />
     </>
   );
 };

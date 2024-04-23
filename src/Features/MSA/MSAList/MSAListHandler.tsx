@@ -10,8 +10,6 @@ import { useLocation, useNavigate } from "react-router";
 import { NavContexts } from "../../../Components/NavContext/NavContext";
 
 const MSAListHandler = () => {
-  
-
     const location = useLocation();
     const ROLE_ID = parseInt(localStorage.getItem("role_id") || "0", 10);
     const{setAdded,added,setEdited,edited,setRenew,renew}=useContext(NavContexts);
@@ -43,6 +41,12 @@ const MSAListHandler = () => {
       let locale: locale = {
         //empty message for table
         emptyText: loading ? " " : <Empty />,
+      };
+      //click function for each data row
+      const rowClickHandler = (record: MsaData) => {
+          navigate(`/msa/msaDetails`, {
+            state: { msa_id: record.id as string },
+          });
       };
 
       useEffect(() => {
@@ -163,13 +167,13 @@ const MSAListHandler = () => {
     };
 
     //click function for each data row
-  const rowClickHandler = (record: MsaData) => {
-    if (!actionClicked) {
-      navigate(`${record.msa_ref_id}`, {
-        state: { id: record.id as string },
-      });
-    }
-  };
+  // const rowClickHandler = (record: MsaData) => {
+  //   if (!actionClicked) {
+  //     navigate(`${record.msa_ref_id}`, {
+  //       state: { id: record.id as string },
+  //     });
+  //   }
+  // };
 
     const handleActiveMSA=()=>{
         if(selectedActiveKeys=='Inactive'){
