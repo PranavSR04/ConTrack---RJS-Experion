@@ -8,7 +8,8 @@ export interface LineChartPropType {
 export interface LineChartHandlerPtopType {
 	filter: string;
 	selectedFilters: SelectedFiltersType;
-	id:number |undefined
+	id:number |undefined;
+	msa_id:number |undefined;
 	filterEndDate:string|undefined;
 	filterStartDate:string|undefined;
 	

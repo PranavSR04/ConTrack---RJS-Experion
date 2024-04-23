@@ -1,11 +1,11 @@
-import MsaRevenue from './MsaRevenue'
 import { CheckboxOptionType, CheckboxValueType } from "antd/es/checkbox/Group";
 import { Checkbox } from "antd";
 import { RevenueProjectionHandlerPropType, SelectedFiltersType } from "./types";
 import { useState } from 'react';
+import RevenueProjection from '../../../RevenueProjection/RevenueProjection';
 
 
-const MsaRevenueHandler = () => {
+const MsaRevenueHandler = ({ msa_id }: RevenueProjectionHandlerPropType) => {
   const [filter, setFilter] = useState<string>("Monthly");
 	const access_token = localStorage.getItem("access_token");
 	const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -74,8 +74,7 @@ const MsaRevenueHandler = () => {
 	};
   return (
     <>
-      <MsaRevenue
-      
+      <RevenueProjection
 				getFilteredValue={getFilteredValue}
 				filter={filter}
 				showFilterModal={showFilterModal}
@@ -88,13 +87,12 @@ const MsaRevenueHandler = () => {
 				regionOptions={regionOptions}
 				duOptions={duOptions}
 				selectedFilters={selectedFilters}
-				id={1}
+				msa_id={msa_id}
         onhandledatechange={onhandledatechange}
         filterEndDate={filterEndDate}
         filterStartDate={filterStartDate}
 			
       />
-      
     </>
   )
 }

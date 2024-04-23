@@ -19,7 +19,8 @@ export type RevenueProjectionPropType = {
 	regionOptions: string[];
 	duOptions: string[];
 	selectedFilters: {};
-	id:number |undefined;
+	id?:number |undefined;
+	msa_id?:number |undefined;
 	onhandledatechange:(dates: any, dateStrings: any) => void;
 	filterEndDate:string|undefined;
 	filterStartDate:string|undefined;	

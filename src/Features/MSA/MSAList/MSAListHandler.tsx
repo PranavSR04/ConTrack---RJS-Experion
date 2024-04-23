@@ -35,6 +35,12 @@ const MSAListHandler = () => {
       // const[edited,setEdited]=useState(false);
       // const[renew,setRenew]=useState(false);    
       const [selectedActiveKeys, setSelectedActiveKeys] = useState("");
+      //click function for each data row
+      const rowClickHandler = (record: MsaData) => {
+          navigate(`/msa/msaDetails`, {
+            state: { msa_id: record.id as string },
+          });
+      };
 
       useEffect(() => {
         if (location.state) {
@@ -167,6 +173,9 @@ const MSAListHandler = () => {
         sorter: (a: MsaData, b: MsaData) => (a[key as keyof MsaData]).localeCompare(b[key as keyof MsaData]),
         sortDirections: ['ascend', 'descend'],
         ...getColumnSearchProps(key),
+        render: (text: any, record: MsaData) => (
+          <span onClick={() => rowClickHandler(record)}>{text}</span>
+        ),
       }));
       // Add action column conditionally based on ROLE_ID
       {   ROLE_ID !==3 &&

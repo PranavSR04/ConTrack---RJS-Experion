@@ -25,7 +25,7 @@ export type RevenueProjectionPropType = {
 	filterStartDate:string|undefined;	
 };
 export type RevenueProjectionHandlerPropType = {
-	id?:number;
+	msa_id?:number;
 };
 
 export interface RevenueProjectionData {

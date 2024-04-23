@@ -42,6 +42,7 @@ const LineChartHandler = ({
 	filter,
 	selectedFilters,
 	id,
+	msa_id,
 	filterEndDate,
 	filterStartDate
 }: LineChartHandlerPtopType) => {
@@ -72,6 +73,7 @@ const LineChartHandler = ({
 			console.log("inside fun");
 			const data = await fetchRevenueProjection(
 				id ? id : undefined,  //if id is in the request the fetch the individaul revenue or fetch all revenue
+				msa_id ? msa_id : undefined,  //if msa_id is in the request the fetch the individaul revenue or fetch all revenue
 				requestBody
 			);
 			if (data instanceof AxiosError) {     // if Error occures set the error message

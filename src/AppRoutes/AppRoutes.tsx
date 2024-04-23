@@ -19,46 +19,44 @@ import NavContext from "../Components/NavContext/NavContext";
 import IndividualMSA from "../Features/MSA/IndividualMSA/IndividualMSA";
 import MsaRevenueHandler from "../Features/MSA/IndividualMSA/MsaRevenue/MsaRevenueHandler";
  
-const AppRoutes = () => {
-    return (
-        <BrowserRouter>
-            <AuthContext>
-             <NavContext>
+const AppRoutes = () => (
+    <BrowserRouter>
+        <AuthContext>
+            <NavContext>
 
                 <Routes>
                     <Route path="/" element={<LoginHandler />}></Route>
-                    <Route path="/navbar" element={<><NavBarHandler /><SideBar/></>}></Route>
-                    <Route path='/AllContracts' element={<><NavBarHandler /><SideBar><ContractListHandler/></SideBar></>}></Route>
-                    <Route path='/MyContracts' element={<><NavBarHandler /><SideBar><ContractListHandler/></SideBar></>}></Route>
+                    <Route path="/navbar" element={<><NavBarHandler /><SideBar /></>}></Route>
+                    <Route path='/AllContracts' element={<><NavBarHandler /><SideBar><ContractListHandler /></SideBar></>}></Route>
+                    <Route path='/MyContracts' element={<><NavBarHandler /><SideBar><ContractListHandler /></SideBar></>}></Route>
                     <Route path="/Revenue" element={<><NavBarHandler /><SideBar><RevenueProjectionHandler /></SideBar></>}></Route>
-                    <Route path="/AllContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
-                    <Route path="/AllContracts/Add Contract" element={<><NavBarHandler /><SideBar><AddContractHandler /></SideBar></>}/>
-                    <Route path="/MyContracts/Add Contract" element={<><NavBarHandler /><SideBar><AddContractHandler /></SideBar></>}/>
-                    <Route path="/MyContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
-                    <Route path="/Revenue/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
-                    <Route path="/Dashboard/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
-                    <Route path="/MSAOverview/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
-                    <Route path="/MyContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
-                    <Route path="/AllContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
-                    <Route path="/Revenue/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
-                    <Route path="/ManageUser/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
-                    <Route path="/ManageUser" element={<><NavBarHandler /><SideBar><ManageUsersHandler/></SideBar></>}></Route>
-                    <Route path="/MSAOverview" element={<><NavBarHandler /><SideBar><MSAListHandler/></SideBar></>} />
+                    <Route path="/AllContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler /></SideBar></>}></Route>
+                    <Route path="/AllContracts/Add Contract" element={<><NavBarHandler /><SideBar><AddContractHandler /></SideBar></>} />
+                    <Route path="/MyContracts/Add Contract" element={<><NavBarHandler /><SideBar><AddContractHandler /></SideBar></>} />
+                    <Route path="/MyContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler /></SideBar></>}></Route>
+                    <Route path="/Revenue/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler /></SideBar></>}></Route>
+                    <Route path="/Dashboard/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler /></SideBar></>}></Route>
+                    <Route path="/MSAOverview/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler /></SideBar></>}></Route>
+                    <Route path="/MyContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler /></SideBar></>}></Route>
+                    <Route path="/AllContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler /></SideBar></>}></Route>
+                    <Route path="/Revenue/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler /></SideBar></>}></Route>
+                    <Route path="/ManageUser/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler /></SideBar></>}></Route>
+                    <Route path="/ManageUser" element={<><NavBarHandler /><SideBar><ManageUsersHandler /></SideBar></>}></Route>
+                    <Route path="/MSAOverview" element={<><NavBarHandler /><SideBar><MSAListHandler /></SideBar></>} />
                     <Route path="/MSAForm" element={<><NavBarHandler /><SideBar><AddMsaHandler /></SideBar></>} />
                     <Route path="/msa/edit" element={<><NavBarHandler /><SideBar><EditMsaHandler /></SideBar></>} />
                     <Route path="/msa/renew" element={<><NavBarHandler /><SideBar><RenewMsaHandler /></SideBar></>} />
-                    <Route path="/msa/msaDetails" element={<><NavBarHandler /><SideBar><MsaRevenueHandler/></SideBar></>} />
+                    <Route path="/msa/msaDetails" element={<><NavBarHandler /><SideBar><IndividualMSA /></SideBar></>} />
 
 
 
-					<Route path="/Dashboard" element={<><NavBarHandler /><SideBar><Dashboard/></SideBar></>}></Route>
-			
+                    <Route path="/Dashboard" element={<><NavBarHandler /><SideBar><Dashboard /></SideBar></>}></Route>
+
                 </Routes>
-             </NavContext>
+            </NavContext>
 
-            </AuthContext>
-        </BrowserRouter>
-    );
-};
+        </AuthContext>
+    </BrowserRouter>
+);
  
 export default AppRoutes;
