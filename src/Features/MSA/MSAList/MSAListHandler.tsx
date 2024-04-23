@@ -10,8 +10,6 @@ import { useLocation, useNavigate } from "react-router";
 import { NavContexts } from "../../../Components/NavContext/NavContext";
 
 const MSAListHandler = () => {
-  
-
     const location = useLocation();
     const ROLE_ID = parseInt(localStorage.getItem("role_id") || "0", 10);
     const{setAdded,added,setEdited,edited,setRenew,renew}=useContext(NavContexts);
@@ -252,6 +250,7 @@ const MSAListHandler = () => {
           </span>
           
            <span className='listmsa-action-edit'>
+           <Tooltip title="Edit MSA"/>
             {actionClicked?<></>:
              <EditOutlined
              title='Edit MSA'

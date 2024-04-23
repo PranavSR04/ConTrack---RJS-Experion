@@ -70,7 +70,6 @@ const LineChartHandler = ({
 		};
 		setLoading(true);
 		try {
-			console.log("inside fun");
 			const data = await fetchRevenueProjection(
 				id ? id : undefined,  //if id is in the request the fetch the individaul revenue or fetch all revenue
 				msa_id ? msa_id : undefined,  //if msa_id is in the request the fetch the individaul revenue or fetch all revenue

@@ -3,6 +3,7 @@ import { Checkbox } from "antd";
 import { RevenueProjectionHandlerPropType, SelectedFiltersType } from "./types";
 import { useState } from 'react';
 import RevenueProjection from '../../../RevenueProjection/RevenueProjection';
+import styles from './RevenueProjection.module.css';
 
 
 const MsaRevenueHandler = ({ msa_id }: RevenueProjectionHandlerPropType) => {
@@ -73,7 +74,7 @@ const MsaRevenueHandler = ({ msa_id }: RevenueProjectionHandlerPropType) => {
 		console.log("Selected filters:", selectedFilters);
 	};
   return (
-    <>
+    <div className={styles['maincontainer__chart']}>
       <RevenueProjection
 				getFilteredValue={getFilteredValue}
 				filter={filter}
@@ -93,7 +94,7 @@ const MsaRevenueHandler = ({ msa_id }: RevenueProjectionHandlerPropType) => {
         filterStartDate={filterStartDate}
 			
       />
-    </>
+    </div>
   )
 }
 

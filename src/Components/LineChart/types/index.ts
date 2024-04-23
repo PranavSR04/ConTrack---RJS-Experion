@@ -9,7 +9,7 @@ export interface LineChartHandlerPtopType {
 	filter: string;
 	selectedFilters: SelectedFiltersType;
 	id:number |undefined;
-	msa_id:number |undefined;
+	msa_id:string |undefined;
 	filterEndDate:string|undefined;
 	filterStartDate:string|undefined;
 	
