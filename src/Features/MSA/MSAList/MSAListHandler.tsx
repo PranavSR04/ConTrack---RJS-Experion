@@ -1,15 +1,17 @@
 import { useContext, useEffect, useState } from "react";
-import { MsaData, TableColumn } from "./types";
+import { MsaData, TableColumn, locale } from "./types";
 import { getmsalist } from "./api/getmsalist";
-import { Button, Input, Pagination, TablePaginationConfig, Tooltip } from "antd";
+import { Button, Empty, Input, Pagination, TablePaginationConfig, Tooltip } from "antd";
 import tableStyles from './MSAList.module.css'
-import { CloudDownloadOutlined, EditOutlined, SearchOutlined, SyncOutlined } from '@ant-design/icons';
+import { ArrowDownOutlined, ArrowUpOutlined, CloudDownloadOutlined, EditOutlined, SearchOutlined, SyncOutlined } from '@ant-design/icons';
 import { FilterConfirmProps } from "antd/es/table/interface";
 import MSAList from "./MSAList";
 import { useLocation, useNavigate } from "react-router";
 import { NavContexts } from "../../../Components/NavContext/NavContext";
 
 const MSAListHandler = () => {
+  
+
     const location = useLocation();
     const ROLE_ID = parseInt(localStorage.getItem("role_id") || "0", 10);
     const{setAdded,added,setEdited,edited,setRenew,renew}=useContext(NavContexts);
@@ -35,8 +37,16 @@ const MSAListHandler = () => {
       // const[edited,setEdited]=useState(false);
       // const[renew,setRenew]=useState(false);    
       const [selectedActiveKeys, setSelectedActiveKeys] = useState("");
+      const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | 'none'>('none');
+      const [sortField, setSortField] = useState<string>();
+
+      let locale: locale = {
+        //empty message for table
+        emptyText: loading ? " " : <Empty />,
+      };
 
       useEffect(() => {
+        
         if (location.state) {
           // Check if MSA was added
           if (location.state.added) {
@@ -59,27 +69,39 @@ const MSAListHandler = () => {
   useEffect(() => {
     fetchData();
   },[searchConditions,pagination.current, pagination.pageSize]);
+
+
     // Function to fetch data based on search conditions, pagination, and page size
     const fetchData = async () => {
         try {
           setActionClicked(false);
           // Fetch data from API
-          const response = await getmsalist(pagination.current, pagination.pageSize,searchConditions);
+          const response = await getmsalist(
+            pagination.current,
+             pagination.pageSize,
+             searchConditions,
+             sortField,
+             sortOrder);
           setLoading(false);
            // Set fetched data and update pagination
           setData(response.data);
           setPagination({
             ...pagination,
             total: response.total,
+           
           });
     
         } catch (error) {
           console.error("Error fetching data:", error);
         }
       };
+
+
       const handleAddMSA=()=>{
         navigate("/MSAForm", { state: { msaAdded: true } })
       }
+
+
       // Function to handle pagination and page size change in the table
   const handleTableChange = (pagination: TablePaginationConfig) => {
     if ('current' in pagination && 'pageSize' in pagination) {
@@ -91,6 +113,19 @@ const MSAListHandler = () => {
     }
   
   };
+
+  const handleSort = (key:string) => {
+    if (sortField === key){
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+      setSortField(key);
+      
+    }
+    else{
+      setSortField(key);
+      setSortOrder('asc');
+    }
+    clearSearch();
+  }
   // Function to apply custom row class names for alternate rows
   const rowClassName = (record:MsaData, index: number): string => {
     return index % 2 === 0 ? tableStyles['oddRow'] : tableStyles['evenRow'];
@@ -100,7 +135,8 @@ const MSAListHandler = () => {
     // Function to get search properties for a specific column
     const getColumnSearchProps = (dataIndex: string) => {
       return{
-      filterDropdown: ({ selectedKeys,confirm, setSelectedKeys}: { selectedKeys: React.Key[]; confirm: (param?: FilterConfirmProps) => void;setSelectedKeys: (selectedKeys: React.Key[]) => void;}) => { 
+      filterDropdown: ({ selectedKeys,confirm, setSelectedKeys}: 
+        { selectedKeys: React.Key[]; confirm: (param?: FilterConfirmProps) => void;setSelectedKeys: (selectedKeys: React.Key[]) => void;}) => { 
         // Custom filter dropdown content based on the column
   
         return (<div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}>
@@ -125,6 +161,16 @@ const MSAListHandler = () => {
       },
       };
     };
+
+    //click function for each data row
+  const rowClickHandler = (record: MsaData) => {
+    if (!actionClicked) {
+      navigate(`${record.msa_ref_id}`, {
+        state: { id: record.id as string },
+      });
+    }
+  };
+
     const handleActiveMSA=()=>{
         if(selectedActiveKeys=='Inactive'){
             setSearchConditions((prevConditions) => ({...prevConditions, ['is_active']: '1'}));
@@ -152,23 +198,35 @@ const MSAListHandler = () => {
         setSearchConditions({});
         setIsEmptySearch(true);    
       };
-      const oneditPage = (msa_ref_id: string) => {
-        navigate("/msa/edit", { state: {msa_ref_id: msa_ref_id as string , msaEdited: true } });
+      const oneditPage = (id: string) => {
+        navigate('/MSAForm', { state: {id:id as string , msaEdited: true } });
        
       };
-      const onRenewPage=(msa_ref_id:string)=>{
-        navigate("/msa/renew", { state: {msa_ref_id: msa_ref_id as string , msaRenewed: true } });
+      const onRenewPage=(id:string)=>{
+        navigate("/MSAForm", { state: {id:id as string , msaRenewed: true } });
        
       }
       const columns: TableColumn[] = desiredColumnKeys.map((key) => ({
-        title: customHeadings[key],
+        title: (
+          <div onClick={() => handleSort(key)}>
+        <Tooltip title="Click to sort">
+        {customHeadings[key]} 
+        <ArrowUpOutlined style={{ marginLeft: '5px' ,width:'12px', height:'12px'}} title="Ascending sort" className={sortOrder === 'asc' && sortField === key ? tableStyles['activeSort'] : ''}/>  
+        <ArrowDownOutlined style={{ marginLeft: '1px' ,width:'12px', height:'12px' }} title="Descending sort" className={sortOrder === 'desc' && sortField === key ? tableStyles['activeSort'] : ''}/>
+        </Tooltip>
+      </div>
+        ),
         dataIndex: key,
         key,
-        sorter: (a: MsaData, b: MsaData) => (a[key as keyof MsaData]).localeCompare(b[key as keyof MsaData]),
-        sortDirections: ['ascend', 'descend'],
-        ...getColumnSearchProps(key),
+        // Enable sorter for the column
+    
+    ...getColumnSearchProps(key),
+    render: (text: any, record: MsaData) => (
+      <span onClick={() => rowClickHandler(record)}>{text}</span>
+    ),
       }));
       // Add action column conditionally based on ROLE_ID
+      
       {   ROLE_ID !==3 &&
         columns.push({
          title: 'Action',
@@ -182,7 +240,7 @@ const MSAListHandler = () => {
             className='listmsa-action-renew'
             style={{ fontSize: '16px', color: '#DC143C' ,paddingRight:"10px" }}
             onClick={()=>{
-              onRenewPage(record.msa_ref_id)
+              onRenewPage(record.id)
             }}
            />
           </span>
@@ -195,7 +253,7 @@ const MSAListHandler = () => {
              className='listmsa-action-edit-icon'
                style={{ fontSize: '18px', color: '#DC143C' ,paddingRight:"10px" }}
                onClick={() => {
-                oneditPage(record.msa_ref_id);
+                oneditPage(record.id);
               }}
              />}
            </span>
@@ -225,6 +283,7 @@ const MSAListHandler = () => {
    pagination={pagination}
    getRowClassName={getRowClassName}
    data={data}
+   locale={locale}
     fetchData={fetchData}
     rowClassName={rowClassName}
     loading={loading}

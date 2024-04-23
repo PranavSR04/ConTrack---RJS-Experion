@@ -31,6 +31,21 @@
     border-radius: 0.5rem;
   }
 
+  .addGroupButton {
+    width: 7rem;
+    height: 2rem;
+    /* margin-left: 1.5%; */
+    margin-bottom: 2%;
+    margin-right: 2%;
+    
+    /* margin-top: 3rem; */
+    /* margin-bottom: 3rem; */
+    color: white;
+    background-color: #dc143c;
+  }
+
+  
+
   @media only screen and (min-width: 368px) and (max-width: 892.8px){
     .wholeTable {
         overflow-x: scroll;
@@ -171,6 +186,19 @@
       margin-bottom: 2%;
       margin-right: 2%;
       margin-left: 2%;
+      /* margin-top: 3rem; */
+      /* margin-bottom: 3rem; */
+      color: white;
+      background-color: #dc143c;
+    }
+
+    .deleteGroupIcon {
+      width: 3rem;
+      height: 2rem;
+      /* margin-left: 1.5%; */
+      margin-bottom: 2%;
+      margin-right: 2%;
+      /* margin-left: 2%; */
       /* margin-top: 3rem; */
       /* margin-bottom: 3rem; */
       color: white;
