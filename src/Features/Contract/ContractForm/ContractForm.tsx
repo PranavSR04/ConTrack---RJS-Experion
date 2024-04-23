@@ -34,7 +34,7 @@ const ContractForm = ({
 			>
 				<Card className={styles.contractForm__topcard}>
 					<Space>
-						<Form.Item name={"msa_id"} label="Client Name">
+						<Form.Item name={"msa_id"} label="Client Name" rules={[{ required: true, message: 'Please select a Client Name' }]}>
 							<Select 
 								showSearch	
 								style={{ width: 200 }}
@@ -51,7 +51,7 @@ const ContractForm = ({
 							</Select>
 						</Form.Item>
 
-						<Form.Item name={"contract_ref_id"} label="Contract ID">
+						<Form.Item name={"contract_ref_id"} label="Contract ID" rules={[{ required: true, message: 'Please input a Contract ID' }]}>
 							<Input placeholder="Contract ID" />
 						</Form.Item>
 
@@ -59,7 +59,7 @@ const ContractForm = ({
 							<Input placeholder="Region" disabled/>
 						</Form.Item>
 
-						<Form.Item name={"du"} label="DU">
+						<Form.Item name={"du"} label="DU" rules={[{ required: true, message: 'Please select a DU' }]}>
 							<Select placeholder="DU">
 								<Select.Option value="DU1">DU1</Select.Option>
 								<Select.Option value="DU2">DU2</Select.Option>
@@ -69,20 +69,20 @@ const ContractForm = ({
 						</Form.Item>
 					</Space>
 					<Space>
-						<Form.Item name={"date_of_signature"} label="Date of Signature">
+						<Form.Item name={"date_of_signature"} label="Date of Signature" rules={[{ required: true, message: 'Please select the Date of Signature' }]}>
 							<DatePicker placeholder="Date of Signature" />
 						</Form.Item>
 
-						<Form.Item name={"start_date"} label="Start Date">
+						<Form.Item name={"start_date"} label="Start Date" rules={[{ required: true, message: 'Please select the Start Date' }]}>
 							<DatePicker placeholder="Start Date" />
 						</Form.Item>
 
-						<Form.Item name={"end_date"} label="End Date">
+						<Form.Item name={"end_date"} label="End Date" rules={[{ required: true, message: 'Please select the End Date' }]}>
 							<DatePicker placeholder="End Date" />
 						</Form.Item>
 					</Space>
 					<Space style={{width:"90vw"}}>
-						<Form.Item name={"contract_type"} label="Contract Type">
+						<Form.Item name={"contract_type"} label="Contract Type" required>
 							<Select
 								placeholder="Contract Type"
 								style={{ width: "235px" }}
@@ -99,7 +99,7 @@ const ContractForm = ({
 						<Card className={styles.contractForm__ffcard}>
 							<Space style={{width:"90vw"}}>
 								<h6>Milestone Details</h6>
-								<Form.Item label="Total Contract Value" name={"estimated_amount"}>
+								<Form.Item label="Total Contract Value" name={"estimated_amount"} rules={[{ required: true, message: 'Please input the Total Contract Value' }]}>
 									<Input addonBefore="USD" />
 								</Form.Item>
 							</Space>
@@ -113,14 +113,14 @@ const ContractForm = ({
 									return(
 										<Space key={field.key}> 
 											<Form.Item name={[field.name,"milestone_desc"]} key={`${field.key}-ff_milestone_desc`}>
-												<Input placeholder="milestone_desc"/>
+												<Input placeholder="Milestone Description"/>
 											</Form.Item>
 											<Form.Item name={[field.name,"milestone_enddate"]} key={`${field.key}-ff_milestone_enddate`}>
-												<DatePicker placeholder="milestone_enddate" />
+												<DatePicker placeholder="Milestone End Date" />
 											</Form.Item>
 											<Form.Item name={[field.name,"percentage"]} key={`${field.key}-ff_percentage`}>
 												<InputNumber<number>
-													placeholder="%"
+													placeholder="Percentage"
 													min={0}
 													max={100}
 													// formatter={(value) => `${value}%`}
@@ -128,7 +128,7 @@ const ContractForm = ({
 												/>
 											</Form.Item>
 											<Form.Item name={[field.name,"amount"]} key={`${field.key}-ff_amount`}>
-												<InputNumber<number> placeholder="amount" min={0}/>
+												<InputNumber<number> placeholder="Amount" min={0}/>
 											</Form.Item>
 											{fields.length > 1 ? (
 											<AiOutlineMinusCircle style={{marginTop:-25,color:"red"}} size={20} onClick={()=>{remove(field.name)}}/>
@@ -207,8 +207,8 @@ const ContractForm = ({
 					</Card>
 				<Space style={{width:"100%"}}>
 					<Card className={styles.contractForm__uploadcard}>
-						<h6>Upload Work Schedule</h6>
-						<Form.Item name={"file"}>
+						<h6><span style={{color:"red"}}>*</span> Upload Work Schedule</h6>
+						<Form.Item name={"file"} rules={[{ required: true, message: 'Please upload a file' }]}>
 							<Upload accept=".pdf" maxCount={1} >
 								<div style={{ marginTop: "1rem" }} className={styles.contractForm__uploadcard__upload}>
 									<p>Drag & drop or click to upload</p>
