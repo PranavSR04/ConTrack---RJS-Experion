@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { EditOutlined, SearchOutlined } from "@ant-design/icons";
-import { Button, Empty, Input, Tag } from "antd";
+import { ArrowDownOutlined, ArrowUpOutlined, EditOutlined, SearchOutlined } from "@ant-design/icons";
+import { Button, Empty, Input, Tag, Tooltip } from "antd";
 import { FilterConfirmProps, TablePaginationConfig} from "antd/lib/table/interface";
 import { fetchDataFromApi } from "./api/AllContracts";
 import { fetchMyContractsApi } from "./api/MyContracts";
@@ -20,9 +20,13 @@ const ContractListHandler = () => {
   const [checkedExpiring, setCheckedExpiring] = useState(false);
   // const [contractAddToast, setContractAddToast] = useState<boolean>(false);
   // const [contractEditToast, setContractEditToast] = useState<boolean>(false);
-  const{setContractAddToast,contractAddToast,setContractEditToast,contractEditToast}=useContext(NavContexts);
+  // const [contractCloseToast, setContractCloseToast] = useState<boolean>(false);
+  const{setContractAddToast,contractAddToast,setContractEditToast,contractEditToast
+    ,setContractCloseToast,contractCloseToast}=useContext(NavContexts);
   const [isMyContracts, setIsMyContracts] = useState<boolean>(false);
   const [slideroption, setSlideroption] = useState<string>('');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | 'none'>('none');
+  const [sortField, setSortField] = useState<string>();
   const navigate = useNavigate();
   const location = useLocation();
   const ROLE_ID = parseInt(localStorage.getItem("role_id") || "0");  //get loged in users role
@@ -48,14 +52,17 @@ const ContractListHandler = () => {
     });
     setSearchConditions({}); //clear search from Api
     setIsEmptySearch(true);
+    setSortField('');
   };
   const handleSegmentChange = (value: string) => { //function to handle segment slider
     if(value==='All'){
       setSlideroption('');
+      setSortField('');
       clearSearch();
     }
     else if(value==='Associated'){
       setSlideroption('associated_by_me');
+      setSortField('');
       clearSearch();
     }
     else{
@@ -98,6 +105,19 @@ const ContractListHandler = () => {
     }
   };
 
+  const handleSort = (key:string) => {
+    if (sortField === key){
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+      setSortField(key);
+      
+    }
+    else{
+      setSortField(key);
+      setSortOrder('asc');
+    }
+    clearSearch();
+  }
+
   useEffect(() => {
     setSearchConditions({}); //clear search and search entry
     setIsEmptySearch(true);
@@ -105,7 +125,12 @@ const ContractListHandler = () => {
         current:  1,
         pageSize: 10,
         total: 0,
+        
       });
+      setSortField('');
+    setContractAddToast(false)
+    setContractEditToast(false)
+    setContractCloseToast(false)
    // setCheckedExpiring(false); //set check expiring off by default
   }, [window.location.href]);
 
@@ -121,11 +146,17 @@ const ContractListHandler = () => {
     //get values from navigation to show props
     if (location.state && location.state.hasOwnProperty("added")) {
       setContractAddToast(true);
+      console.log("ContractListHandler toast",contractAddToast);
       setTimeout(() => {
         window.history.replaceState(null, "");
       }, 0);
     } else if (location.state && location.state.hasOwnProperty("edited")) {
       setContractEditToast(true);
+      setTimeout(() => {
+        window.history.replaceState(null, "");
+      }, 0);
+    } else if (location.state && location.state.hasOwnProperty("closed")) {
+      setContractCloseToast(true);
       setTimeout(() => {
         window.history.replaceState(null, "");
       }, 0);
@@ -139,7 +170,7 @@ const ContractListHandler = () => {
       let locationPaths = location.split("/");
       let pagePath = locationPaths[locationPaths.length - 1]; //get the corresponding page path.
       //get Api for MyContracts
-      if (pagePath === "MyContracts") {
+      if (pagePath === "MyContracts ") {
         const USER_ID = localStorage.getItem("user_id") as string; //get user id
         setIsMyContracts(true);
         const result = await fetchMyContractsApi(
@@ -148,7 +179,9 @@ const ContractListHandler = () => {
           pagination.pageSize,
           USER_ID,
           checkedExpiring,
-          slideroption
+          slideroption,
+          sortField,
+          sortOrder
         );
         setData(result.data);
         setPageTitle("MY CONTRACTS"); //dynamic page title
@@ -164,6 +197,8 @@ const ContractListHandler = () => {
           pagination.current,
           pagination.pageSize,
           checkedExpiring,
+          sortField,
+          sortOrder
         );
         setData(result.data);
         setPageTitle("CONTRACTS OVERVIEW");
@@ -235,14 +270,22 @@ const ContractListHandler = () => {
     "contract_type",
     "du",
   ];
+ 
 //map the data selected corresponding title
   const columns: TableColumn[] = desiredColumnKeys.map((key) => ({
-    title: customHeadings[key],
+    title: (
+      <div onClick={() => handleSort(key)}>
+        <Tooltip title="Click to sort">
+        {customHeadings[key]} 
+        <ArrowUpOutlined style={{ marginLeft: '5px' ,width:'12px', height:'12px'}} title="Ascending sort" className={sortOrder === 'asc' && sortField === key ? tableStyles['activeSort'] : ''}/>  
+        <ArrowDownOutlined style={{ marginLeft: '1px' ,width:'12px', height:'12px' }} title="Descending sort" className={sortOrder === 'desc' && sortField === key ? tableStyles['activeSort'] : ''}/>
+        </Tooltip>
+      </div>
+    ),
     dataIndex: key,
     key,
-    sorter: (a: ContractData, b: ContractData) =>
-      a[key as keyof ContractData].localeCompare(b[key as keyof ContractData]),
-    sortDirections: ["ascend", "descend"],
+     // Enable sorter for the column
+    
     ...getColumnSearchProps(key),
     render: (text: any, record: ContractData) => (
       <span onClick={() => rowClickHandler(record)}>{text}</span>
@@ -257,12 +300,18 @@ const ContractListHandler = () => {
   };
 
   columns.push({ //add status row to columns
-    title: "Status",
+    title: (
+      <Tooltip title="Click to sort">
+      <div onClick={() => handleSort('contract_status')}>
+        {'Status'}
+        <ArrowUpOutlined style={{ marginLeft: '5px' ,width:'12px', height:'12px'}} title="Ascending sort" className={sortOrder === 'asc' && sortField === 'contract_status' ? tableStyles['activeSort'] : ''}/>
+        <ArrowDownOutlined style={{ marginLeft: '1px' ,width:'12px', height:'12px'}} title="Descending sort" className={sortOrder === 'desc' && sortField === 'contract_status' ? tableStyles['activeSort'] : ''}/>
+      </div>
+      </Tooltip>
+    ),
     dataIndex: "contract_status",
     key: "contract_status",
-    sorter: (a: ContractData, b: ContractData) =>
-      a.contract_status.localeCompare(b.contract_status),
-    sortDirections: ["ascend", "descend"],
+   
     ...getColumnSearchProps("contract_status"),
     render: (status: string, record: ContractData) => {
       let className = "status-active"; //default style
@@ -289,16 +338,21 @@ const ContractListHandler = () => {
   {
     ROLE_ID !== 3 &&
       columns.push({
-        title: "Action",
+        title: (
+          <div>
+            {"Action"}
+          </div>
+        ),
         key: "action",
         render: (text: any, record: ContractData) => (
           <span>
+            <Tooltip title="Edit contract">
             <EditOutlined
               style={{ fontSize: "16px", color: "#DC143C" }}
               onClick={() => {
                 oneditPage(record.id);
               }}
-            />
+            /></Tooltip>
           </span>
         ),
       });
@@ -318,14 +372,13 @@ const ContractListHandler = () => {
         locale={locale}
         showExpired={showExpired}
         contractAddToast={contractAddToast}
-        setContractAddToast={setContractAddToast}
-        setContractEditToast={setContractEditToast}
         contractEditToast={contractEditToast}
         isMyContracts={isMyContracts}
         handleSegmentChange={handleSegmentChange}
         navigate={navigate}
         ROLE_ID={ROLE_ID}
         SCROLL={SCROLL}
+        contractCloseToast={contractCloseToast}
       />
     </>
   );

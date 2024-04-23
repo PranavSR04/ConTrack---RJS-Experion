@@ -15,8 +15,6 @@ const ContractList = ({
   pageTitle,
   rowClassName,
   locale,
-  setContractEditToast,
-  setContractAddToast,
   showExpired,
   contractAddToast,
   contractEditToast,
@@ -24,8 +22,11 @@ const ContractList = ({
   handleSegmentChange,
   navigate,
   ROLE_ID,
-  SCROLL
+  SCROLL,
+  contractCloseToast
 }: ContractListPropType) => {
+  console.log("contract added toast",contractAddToast)
+  console.log("contract edited toast",contractEditToast)
   return (
     <>
       <p className={styles["contractsHeading"]}>{pageTitle}</p>
@@ -120,11 +121,14 @@ const ContractList = ({
         ></Table> 
         </div>
         {contractAddToast && (    //show toasts if corresponding values received
-          <><Toast messageType="success" message="Contract Added"></Toast> {setContractAddToast(false)}</>
+          <><Toast messageType="success" message="Contract Added"></Toast></>
         )}
         
         {contractEditToast && (
-          <><Toast messageType="success" message="Contract Edited"></Toast>{setContractEditToast(false)}</>
+          <><Toast messageType="success" message="Contract Edited"></Toast></>
+        )}
+        {contractCloseToast && (
+          <Toast messageType="error" message="Contract Closed"></Toast>
         )}
       </div>
     </>

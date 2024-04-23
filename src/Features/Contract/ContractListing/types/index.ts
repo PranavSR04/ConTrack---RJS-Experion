@@ -30,10 +30,10 @@ export interface ContractData {
 }
 
 export type TableColumn = {
-  title: string;
+  title: JSX.Element;
   dataIndex?: string;
   key: string;
-  sorter?: (a: ContractData, b: ContractData) => number;
+  sorter?: boolean;
   sortDirections?: SortOrder[];
   filterDropdown?: ({
     selectedKeys,
@@ -68,7 +68,6 @@ export interface ContractListPropType {
   handleSegmentChange:(value: string) => void;
   ROLE_ID:number;
   SCROLL?:SCROLL;
-  navigate:  NavigateFunction
-  setContractAddToast: React.Dispatch<React.SetStateAction<boolean>>
-  setContractEditToast: React.Dispatch<React.SetStateAction<boolean>>
+  navigate:  NavigateFunction;
+  contractCloseToast: boolean;
 }
