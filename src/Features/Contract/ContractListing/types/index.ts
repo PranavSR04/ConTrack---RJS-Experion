@@ -68,8 +68,6 @@ export interface ContractListPropType {
   handleSegmentChange:(value: string) => void;
   ROLE_ID:number;
   SCROLL?:SCROLL;
-  navigate:  NavigateFunction
-  setContractAddToast: React.Dispatch<React.SetStateAction<boolean>>
-  setContractEditToast: React.Dispatch<React.SetStateAction<boolean>>
+  navigate:  NavigateFunction;
   contractCloseToast: boolean;
 }

@@ -12,7 +12,7 @@ const NotificationList = ({notifications, isLoading, isError, error, viewMoreCli
   return (
     <>
     <Drawer title="Notifications" onClose={onClose} open={open} className={styles.drawer}>
-    {isError && <p></p>}
+    {isError && <p style={{ marginLeft: '8rem' }}>No Notification</p>}
     <div className={styles.listStyle}>
         {notifications.map(notification => (
             <NotificationHandler key={notification.log_id} notification={notification} />
