@@ -20,8 +20,8 @@ import NavContext from "../Components/NavContext/NavContext";
 const AppRoutes = () => {
     return (
         <BrowserRouter>
-            <AuthContext>
-             <NavContext>
+            <AuthContext> 
+             <NavContext> 
 
                 <Routes>
                     <Route path="/" element={<LoginHandler />}></Route>
@@ -46,15 +46,12 @@ const AppRoutes = () => {
                     {/* <Route path="/MSAForm" element={<><NavBarHandler /><SideBar><AddMsaHandler /></SideBar></>} />
                     <Route path="/msa/edit" element={<><NavBarHandler /><SideBar><EditMsaHandler /></SideBar></>} />
                     <Route path="/msa/renew" element={<><NavBarHandler /><SideBar><RenewMsaHandler /></SideBar></>} /> */}
-
-
-
 					<Route path="/Dashboard" element={<><NavBarHandler /><SideBar><Dashboard/></SideBar></>}></Route>
 			
                 </Routes>
-             </NavContext>
+             </NavContext> 
 
-            </AuthContext>
+             </AuthContext>
         </BrowserRouter>
     );
 };

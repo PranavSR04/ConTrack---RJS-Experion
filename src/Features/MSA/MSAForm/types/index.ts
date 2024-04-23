@@ -1,10 +1,11 @@
 import { RcFile } from "antd/es/upload";
+import { Moment } from "moment";
 
 export interface MsaDataType {
     msa_ref_id: string;
     client_name?: string;
     region?: string;
-    start_date?: string;
+    start_date?: string ;
     end_date?: string;
     file?: RcFile | null;
     comments?: string;
@@ -29,12 +30,14 @@ export interface MsaDataType {
     spinning: boolean;
     headingText: string;
     handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-    handleStartDateChange: (dateString: string) => void;
-    handleEndDateChange: (dateString: string) => void;
+    handleStartDateChange: (date: Moment | null, dateString: string | string[]) => void;
+    handleEndDateChange: (date: Moment | null, dateString: string | string[]) => void
     validateStartDate: (value: any) => Promise<void>;
     showFile: boolean;
     fileCancel: () => void;
     msaAdded?: boolean | undefined;
     hideMsarefid?: boolean;
-    msaRenewed?: boolean 
+    msaRenewed?: boolean ;
+    msaEdited?:boolean;
+    startDate: string | undefined
   }

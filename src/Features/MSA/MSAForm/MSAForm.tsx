@@ -1,10 +1,9 @@
-import React from 'react'
 import styles from './MSAForm.module.css'
 import { Button, DatePicker, Form, Input, Modal, Spin, Upload } from 'antd'
-import { useNavigate } from 'react-router'
 import { MSAFormProps } from './types'
 import { CloseOutlined, FilePdfOutlined, PlusOutlined } from '@ant-design/icons'
 import TextArea from 'antd/es/input/TextArea'
+import dayjs,{Dayjs} from "dayjs";
 import moment from 'moment'
 const MSAForm = ({
   msaData,
@@ -25,10 +24,19 @@ const MSAForm = ({
    fileCancel,
    msaAdded,
    hideMsarefid,
-   msaRenewed
+   msaRenewed,
+   msaEdited,
+   startDate
 }
   :MSAFormProps) => {
-    console.log(msaData.start_date)
+    const formFields = [
+      { name: "msa_ref_id", value: msaData.msa_ref_id },
+      { name: "client_name", value: msaData.client_name },
+      { name: "region", value: msaData.region },
+       { name: "start_date", value: msaEdited ? dayjs(msaData.start_date) :(msaData.start_date ? dayjs(msaData.start_date) : undefined) },
+       { name: "end_date", value: msaEdited ? (msaData.end_date ? dayjs(msaData.end_date) : undefined) : msaData.end_date ? dayjs(msaData.end_date) : undefined }
+
+    ];
   return (
     <div className={styles.MSAForm}>
       <h3 className={styles.MSAForm__heading}>
@@ -41,7 +49,8 @@ const MSAForm = ({
             name="complex-form"
             encType="multipart/form-data"
             style={{ maxWidth: 600 }}
-            //onFinish={handleSubmitForm}
+            fields={formFields}
+            //initialValues={formFields}
             requiredMark={false}
           >
             <div className={styles.MSAForm__Form__row1}>
@@ -51,8 +60,6 @@ const MSAForm = ({
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
                 label="MSA Reference ID"
-                valuePropName={msaData.msa_ref_id}
-                
               >
                 <Input
                   name="msa_ref_id"
@@ -64,7 +71,6 @@ const MSAForm = ({
               <Form.Item
                 className={styles.MSAForm__Form__row1__col2}
                 name="client_name"
-                valuePropName={msaData.client_name}
                 label={
                   <div>
                     Client Name
@@ -76,8 +82,8 @@ const MSAForm = ({
                 rules={msaAdded ? [
                   { required: true, message: "Please enter the Client Name" },
                   {
-                    pattern: /^.{5,}$/,
-                    message: "Client name must contain at least 5 characters",
+                    pattern: /^.{3,}$/,
+                    message: "Client name must contain at least 3 characters",
                   },
                 ] : []}
               >
@@ -87,6 +93,7 @@ const MSAForm = ({
                   className={styles.MSAForm__Form__inputs}
                   onChange={handleInputChange}
                   disabled={msaRenewed}
+                  placeholder="Enter Client Name" 
                 />
               </Form.Item>
               <Form.Item
@@ -100,7 +107,6 @@ const MSAForm = ({
                 }
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
-                valuePropName={msaData.region}
                 rules={msaAdded ? [
                   { required: true, message: "Please enter the Region" }
                 ] : []}
@@ -126,23 +132,16 @@ const MSAForm = ({
                 }
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
-                rules={[
-                    {
-                      validator: validateStartDate,
-                    }
-                ]}
-                valuePropName={msaData.start_date}
               >
                 <DatePicker
                   className={styles.MSAForm__Form__inputs}
                   onChange={handleStartDateChange}
-
                   required
                 />
               </Form.Item>
               <Form.Item
                 className={styles.MSAForm__Form__row2__col2}
-                name="end_date"
+                name={"end_date"}
                 label={
                   <div>
                     End Date
@@ -153,8 +152,10 @@ const MSAForm = ({
                 wrapperCol={{ span: 24 }}
                 rules={[
                   { required: true, message: "Please enter the End Date" },
+                  {
+                    validator: validateStartDate,
+                  }
                 ]}
-                valuePropName={msaData.end_date}
               >
                 <DatePicker
                   className={styles.MSAForm__Form__inputs}
@@ -175,7 +176,9 @@ const MSAForm = ({
                 }
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
-                rules={[{ required: true, message: "Please upload File" }]}
+                rules={msaEdited
+                  ? []
+                  : [{ required: true, message: "Please upload File" }]}
               >
                 {showFile ? (
                   <div className={styles.container_file}>
@@ -229,7 +232,7 @@ const MSAForm = ({
                 )}
               </Form.Item>
               <Form.Item
-                name="comments"
+                name={"comments"}
                 className={styles.MSAForm__Form__row3__col2}
                 label={
                   <div>
@@ -278,8 +281,8 @@ const MSAForm = ({
                 </Button>,
               ]}
             >
-              <Spin spinning={spinning} fullscreen />
             </Modal>
+            <Spin spinning={spinning} fullscreen />
           </Form>
       </div>
     </div>

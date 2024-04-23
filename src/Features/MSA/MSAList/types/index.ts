@@ -1,4 +1,5 @@
 import { TablePaginationConfig } from "antd";
+import { ReactNode } from "react";
 
 export interface MsaData {
     id:string;
@@ -14,12 +15,16 @@ export interface MsaData {
     [field:string]: string;
   }
   export type TableColumn = {
-    title: string;
+    title: JSX.Element|string;
     dataIndex?: string;
     key: string;
     render?: (text: any, record:MsaData) => React.ReactNode;
     
 };
+
+export interface locale {
+  emptyText: string | ReactNode;
+}
 export  interface paginations {
     current: number;
     pageSize: number;
@@ -29,6 +34,7 @@ export interface MsaListDataType{
     data: MsaData[];
     pagination:paginations;
     handleTableChange:(pagination:TablePaginationConfig)=> void;
+    locale: locale
     columns:TableColumn[];
     msaAdded?:boolean;
     msaEdited?:boolean;

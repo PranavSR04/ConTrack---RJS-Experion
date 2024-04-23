@@ -7,10 +7,11 @@ import { postaddmsaform} from './api/postaddmsaform';
 import { LocationStateProps } from './types';
 import { getmsaapi } from './api/getmsaapi';
 import { useLocation, useNavigate } from 'react-router';
-import dayjs from 'dayjs';
-import moment from 'moment';
+import moment, { Moment } from "moment";
 import { posteditmsaform } from './api/posteditmsaform';
 import { postrenewmsaform } from './api/postrenewmsaform';
+import dayjs from 'dayjs';
+
 const MSAFormHandler = () => {
   const location=useLocation();
   const navigate=useNavigate();
@@ -24,11 +25,12 @@ const MSAFormHandler = () => {
   const[fileUpload,setFileUpload]=useState<any>();
   const[showFile,setShowFile]=useState<boolean>(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [spinning, setSpinning] = React.useState<boolean>(false);
+  const [spinning, setSpinning] = useState<boolean>(false);
   let [headingText,setHeadingText]=useState<string>("");
   const[msaState,setMsaState]=useState<string>("");
   const[msarefid,setMsarefid]=useState<boolean>();
   const[hideMsarefid,setHideMsarefid]=useState<boolean>();
+  const[startDate,setStartDate]=useState<string>();
 
   const [msaData,setMsaData]=useState({
     msa_ref_id: '',
@@ -55,7 +57,7 @@ const MSAFormHandler = () => {
       else if (state.msaEdited) {
         setMsaEdited(true);
         setHeadingText("EDIT")
-        handleAutoFillData()
+        //handleAutoFillData()
         setMsaState("update")
         setHideMsarefid(false)
         setShowFile(true)
@@ -65,7 +67,7 @@ const MSAFormHandler = () => {
      else if (state.msaRenewed){
        setMsaRenewed(true)
        setHeadingText("RENEW")
-       handleAutoFillData()
+       //handleAutoFillData()
        setMsaState('renew')
        setHideMsarefid(false)
        setShowFile(false)
@@ -75,6 +77,9 @@ const MSAFormHandler = () => {
 
 }, [msaEdited,msaRenewed,msaAdded,msaData.client_name]);
 
+useEffect(() =>{
+  handleAutoFillData();
+},[msaEdited,msaRenewed])
 //Function to autofill msa data for edit and renew msa
 const handleAutoFillData=()=>{
   autoFillMsa(id);
@@ -83,6 +88,7 @@ const handleAutoFillData=()=>{
 
 // Function to generate a unique MSA ID
 const generateMsaId = async () => {
+  if(msaAdded){
   try {
     let uniqueIdGenerated = false;
     let generatedId = "";
@@ -106,9 +112,11 @@ const generateMsaId = async () => {
   } catch (error) {
     console.error("Error generating MSA ID:", error);
   }
+}
 };
 
 const autoFillMsa = async (id: string) => {
+  
   try {
     // Fetch MSA data from API using msa_ref_id
     const data = await getmsaapi(id);
@@ -117,6 +125,7 @@ const autoFillMsa = async (id: string) => {
     if (msa_data) {
       const {msa_ref_id,client_name, region, start_date, end_date, msa_doclink } =
         msa_data;
+        if(msaEdited){
       setMsaData((prevState) => ({
         ...prevState,
         msa_ref_id:msa_ref_id,
@@ -127,9 +136,21 @@ const autoFillMsa = async (id: string) => {
         msa_doclink: msa_doclink, 
       }))
     }
+    if(msaRenewed){
+      setMsaData((prevState) => ({
+        ...prevState,
+        msa_ref_id:msa_ref_id,
+        client_name: client_name,
+        region: region,
+        msa_doclink: msa_doclink, 
+      }))
+    }
+    }
+    console.log(msaData);
   } catch (error) {
     console.error("Error generating MSA ID:", error);
   }
+
 };
 
 const handleInputChange = (
@@ -166,24 +187,23 @@ const handleFileUpload = (info: any) => {
   }
 };
 
-const handleStartDateChange = (
-  dateString: string 
-) => {
-  let formattedDateString: string;
-  const parsedDate = dayjs(dateString);
-    formattedDateString = parsedDate.format('YYYY-MM-DD');
-  // Update the state with the formatted date string
-  setMsaData({ ...msaData,start_date: formattedDateString });
-};
-const handleEndDateChange = (
-  dateString: string
-) => {
-  let formattedDateString: string;
-  const parsedDate = dayjs(dateString);
-    formattedDateString = parsedDate.format('YYYY-MM-DD')
-  // Update the state with the formatted date string
-  setMsaData({ ...msaData,end_date: formattedDateString });
-};
+  // Function to handle start date change events
+  const handleStartDateChange = (date: Moment | null, dateString: string | string[]) => {
+    if (date) {
+      const startDateFormatted = date.format('YYYY-MM-DD');
+      setMsaData({ ...msaData, start_date: startDateFormatted });
+      setStartDate(startDateFormatted);
+      console.log(startDateFormatted)
+    }
+  };
+  
+  // Function to handle end date change events
+  const handleEndDateChange = (date: Moment | null, dateString: string | string[]) => {
+    if (date) {
+      const endDateFormatted = date.format('YYYY-MM-DD');
+      setMsaData({ ...msaData, end_date: endDateFormatted });
+    }
+  };
 
 //Function to handle visibility of modal
 const handleSubmit = () => {
@@ -202,6 +222,7 @@ const handleSubmit = () => {
     };
   //Function to handle form submission
 const handleSubmitForm=async(value:any)=>{
+  setSpinning(true);
   console.log(msaData)
   //New FormData is created to store values from form
   const msaFormData = new FormData();
@@ -213,6 +234,7 @@ msaFormData.append('region', msaData.region);
   msaFormData.append('end_date', msaData.end_date);
 msaFormData.append('comments', msaData.comments);
 msaFormData.append('file',fileUpload||'')
+console.log(msaFormData);
 //Api to post the data for add msa
 if(msaAdded){
   await postaddmsaform(msaFormData,user_id);
@@ -260,6 +282,8 @@ const validateStartDate = async (value:any) => {
       msaAdded={msaAdded}
       hideMsarefid={hideMsarefid}
       msaRenewed={msaRenewed}
+      msaEdited={msaEdited}
+      startDate={startDate}
       />
     </div>
   )
