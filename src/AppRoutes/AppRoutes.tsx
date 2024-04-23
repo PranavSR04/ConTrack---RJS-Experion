@@ -17,6 +17,7 @@ import EditMsaHandler from "../Features/MSAOld/EditMsa/EditMsaHandler";
 import RenewMsaHandler from "../Features/MSAOld/RenewMsa/RenewMsaHandler";
 import NavContext from "../Components/NavContext/NavContext";
 import EditContractHandler from "../Features/AddContract/EditContractHandler";
+import ContractFormHandler from "../Features/Contract/ContractForm/ContractFormHandler";
  
 
 
@@ -49,7 +50,7 @@ const AppRoutes = () => {
                     <Route path="/msa/edit" element={<><NavBarHandler /><SideBar><EditMsaHandler /></SideBar></>} />
                     <Route path="/msa/renew" element={<><NavBarHandler /><SideBar><RenewMsaHandler /></SideBar></>} />
                     <Route path="/contract/edit" element={<><NavBarHandler /><SideBar><EditContractHandler /></SideBar></>} />
-                    
+                    <Route path="/contractform" element={<><NavBarHandler /><SideBar><ContractFormHandler /></SideBar></>} />
 
 
 					<Route path="/Dashboard" element={<><NavBarHandler /><SideBar><Dashboard/></SideBar></>}></Route>
