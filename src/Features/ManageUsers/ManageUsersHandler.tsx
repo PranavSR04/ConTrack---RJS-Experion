@@ -20,6 +20,7 @@ import { getUsersList } from "./api/getUsersList";
 import { addUsersToIndividualGroup } from "./api/postAddUsersToIndividualGroup";
 import { deleteUserFromGroup } from "./api/postDeleteUserFromGroup";
 import { deleteGroup } from "./api/deleteGroup";
+import { addGroup } from "./api/postAddGroup";
 
 
 const ManageUsersHandler = () => {
@@ -68,6 +69,8 @@ const ManageUsersHandler = () => {
 
   const [userUpdated, setUserUpdated]=useState<boolean>(false)
   const [groupDeleted, setGroupDeleted]=useState<boolean>(false)
+  const [addGroupModalVisible, setaddGroupModalVisible] = useState(false);
+
 
   const [userDeleted, setUserDeleted]=useState<boolean>(false)
   const [showToast, setShowToast] = useState(false);
@@ -88,6 +91,10 @@ const ManageUsersHandler = () => {
     total: 0,
   });
   const [userToBeUpdated,setUserToBeUpdated]=useState<string>("")
+  const [groupAdded, setGroupAdded]=useState<boolean>(false)
+  const [failedToAddGroup, setFailedToAddGroup]=useState<boolean>(false)
+
+  const [group_name, setGroupName] = useState('');
 
 
   //To list the users in the table
@@ -159,7 +166,9 @@ const ManageUsersHandler = () => {
 
           const col: TableColumn = {
             title: <span style={{ fontWeight: "bold" }}>{customTitle}</span>,
+            ellipsis:true,
             dataIndex: key,
+            
             sorter:
               //Applying sorting logic to only required fields
               key === "role_access" || key === "id"  //don't apply the sorting to role_access and id
@@ -174,7 +183,10 @@ const ManageUsersHandler = () => {
                     return 0;
                   },
             //To prevent ID from being displayed in the table
-            width: key === "id" ? 0 : undefined,
+            // width: key === "id" ? 0 : undefined,
+            width: key === "group_names" ? 300 : (key === "id" ? 0 : undefined), // Set the width for the "Name" column
+
+
           };
           cols.push(col);
         }
@@ -513,6 +525,13 @@ const ManageUsersHandler = () => {
     }
   }, [groupDeleted]);
 
+  useEffect(() => {
+    if (groupAdded) {
+      render.current = false;
+      getGroupsList();
+    }
+  }, [groupAdded]);
+
 
 
   useEffect(() => {
@@ -700,7 +719,10 @@ const getFullUsersList = async(search:string) => {
                     return 0;
                   },
             //To prevent ID from being displayed in the table
-            width: key === "id" ? 0 : undefined,
+            width: (key === "id" ? 0 : undefined),
+            
+            // width: customTitle === "Groups In" ? 25 : (key === "id" ? 0 : undefined), // Set the width for the "Name" column
+
           };
           cols.push(col);
         }
@@ -797,9 +819,9 @@ const getFullUsersList = async(search:string) => {
     }
 }
 
-  const handleAddUsersToGroup = () =>{
+  const handleAddUsersToGroup = async() =>{
     if(selectedIndividualGroup && selectedUsers){
-    addMultipleUsersToGroups(selectedIndividualGroup,selectedUsers)
+    await addMultipleUsersToGroups(selectedIndividualGroup,selectedUsers)
     setUserAddedToGroup(true);
       setTimeout(() => {
         setUserAddedToGroup(false);
@@ -830,6 +852,45 @@ const handleDeleteGroup =async(selectedIndividualGroup:number|undefined) =>{
     setGroupDeleted(false);
   }, 5000);
 }
+
+const handleAddGroupModalCancel = () => {
+  setaddGroupModalVisible(false);
+};
+
+// const addGroupToSystem = async (group_name: string) => {
+//   await addGroup(group_name)
+//   setGroupAdded(true)
+//   setTimeout(() => {
+//     setGroupAdded(false);
+//   }, 5000);
+//   setaddGroupModalVisible(false);
+// };
+
+const addGroupToSystem = async (group_name: string) => {
+  try {
+    await addGroup(group_name);
+    setGroupAdded(true);
+    setTimeout(() => {
+      setGroupAdded(false);
+    }, 5000);
+    setaddGroupModalVisible(false);
+  } catch (error:any) {
+    if (error.response && error.response.status === 422) {
+      setFailedToAddGroup(true);
+      setTimeout(() => {
+        setFailedToAddGroup(false);
+      }, 5000);    } else {
+      // Handle other errors
+      console.error("Error:", error.message);
+    }
+  }
+};
+
+
+const handleAddGroup=()=>{
+  setaddGroupModalVisible(true);
+}
+
 
 
   return (
@@ -898,6 +959,13 @@ const handleDeleteGroup =async(selectedIndividualGroup:number|undefined) =>{
       handleDeleteGroup={handleDeleteGroup}
       handleDeleteGroupModal={handleDeleteGroupModal}
       cancelDeleteGroupModal={cancelDeleteGroupModal}
+      handleAddGroup={handleAddGroup}
+      groupAdded={groupAdded}
+      failedToAddGroup={failedToAddGroup}
+      addGroupToSystem={addGroupToSystem}
+      handleAddGroupModalCancel={handleAddGroupModalCancel}
+      addGroupModalVisible={addGroupModalVisible}
+
      />
   )
 }
