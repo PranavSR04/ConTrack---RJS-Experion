@@ -22,7 +22,7 @@ const Msa_contract_listHandler = () => {
 const totalContractCount = msaData?.total_contracts_count ?? 0;
     const collapseComponents = [];
     for (let i = 1; i <= totalContractCount; i++) {
-      console.log(contractRefId)
+      //console.log(contractRefId)
       collapseComponents.push(
         <Collapse
           style={{ width: '300px' }} 
@@ -32,7 +32,7 @@ const totalContractCount = msaData?.total_contracts_count ?? 0;
           items={[
             {
               key: '1',
-              label: contractRefId ,
+              label: "Label",
               children: <p>Content for Panel {i}</p>,
             },
           ]}

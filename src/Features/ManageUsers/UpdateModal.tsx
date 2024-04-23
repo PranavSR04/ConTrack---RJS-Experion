@@ -36,6 +36,7 @@ interface UpdateModalProps {
             className={`${userTableStyles.viewUpdateUserAccessBox}`}
             // options={roleOptions}
             // style={{ width: 200 }}
+            // value={}
             options={roleOptions}
             onSelect={(value) => setSelectedRoleId(value as number)}
             placeholder='Select a role'

@@ -1,6 +1,7 @@
 import React from "react";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import UpdateModal from "./UpdateModal";
+import AddGroupModal from "./AddGroupModal";
 import userTableStyles from "./ManageUsers.module.css";
 import {
   Table,
@@ -78,7 +79,14 @@ const ManageUsers = ({
   showDeleteGroupModal,
   handleDeleteGroup,
   handleDeleteGroupModal,
-  cancelDeleteGroupModal
+  cancelDeleteGroupModal,
+  addGroupToSystem,
+  groupAdded,
+  failedToAddGroup,
+  handleAddGroup,
+  handleAddGroupModalCancel,
+  addGroupModalVisible
+
   // selectedUsers
   // selectedIndividualGroup
 
@@ -169,6 +177,7 @@ ManageUsersPropType) => {
           </Button>
         </div>
 
+        
         {userAdded ? (
           <Toast message={"User Added Successfully"} messageType={"success"} />
         ) : (
@@ -200,6 +209,11 @@ ManageUsersPropType) => {
           <Toast message="No Employee Found" messageType="error" />
         )} 
 
+        {groupAdded && (<Toast message="Group added successfully" messageType="success" />)} 
+        {failedToAddGroup && (<Toast message="Such a group already exists" messageType="error" />)} 
+
+
+
         <div className={`${userTableStyles.mainListContainer}`}>
           <Input
             className={`${userTableStyles.searchUserBox}`}
@@ -215,6 +229,14 @@ ManageUsersPropType) => {
           >
             View Groups
           </Button>
+
+          <Button
+            className={`${userTableStyles.addGroupButton}`}
+            onClick={() => handleAddGroup()}
+          >
+                      + New Group
+          </Button>
+
 
           <Table
             className={`${userTableStyles.userListTable}`}
@@ -296,6 +318,7 @@ ManageUsersPropType) => {
             onChange={(value)=>{addUsersToGroup(value)}}
             filterOption={false}
             labelInValue={false}
+            maxTagCount={"responsive"}
             style={{ width: '50%' }}
             mode="multiple"
             showSearch
@@ -327,13 +350,17 @@ ManageUsersPropType) => {
             onClick={handleDeleteGroupModal}
           
           >
-                <div>
+                
                   
                     {
                       <DeleteOutlined style={{ fontSize: 15 }} />
                     }
-                  
-                </div>          
+
+                    {
+                    }
+                     
+                {/* <p>Delete Group</p> */}
+    
           </Button>}
 
           <Modal
@@ -350,6 +377,7 @@ ManageUsersPropType) => {
             size="small"
             dataSource={groupUsersData}
             rowClassName={rowClassName}
+
             locale={{ emptyText: "Please select a group" }}
             pagination={{
               position: ["bottomCenter"],
@@ -400,6 +428,11 @@ ManageUsersPropType) => {
         style={{marginTop:30}}
       />
 
+    <AddGroupModal
+          visible={addGroupModalVisible}
+          onCancel={handleAddGroupModalCancel}
+          addGroupToSystem={addGroupToSystem}
+          />
 
       <UpdateModal
         visible={editModalVisible}

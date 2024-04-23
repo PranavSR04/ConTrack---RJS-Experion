@@ -246,6 +246,7 @@ const MSAListHandler = () => {
           </span>
           
            <span className='listmsa-action-edit'>
+           <Tooltip title="Edit MSA"/>
             {actionClicked?<></>:
              <EditOutlined
              title='Edit MSA'
