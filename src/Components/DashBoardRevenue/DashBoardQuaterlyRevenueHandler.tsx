@@ -20,7 +20,7 @@ const DashBoardQuaterlyRevenueHandler = () => {
    
     try {
        // Fetch revenue projection data
-      const { data }: { data: { [key: string]: number } } = await fetchRevenueProjection(undefined, requestBody);
+      const { data }: { data: { [key: string]: number } } = await fetchRevenueProjection(undefined, undefined, requestBody);
       if (data instanceof AxiosError) {
         console.log(data.response?.data);
         setError(data.response?.data);

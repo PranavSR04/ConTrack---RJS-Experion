@@ -6,6 +6,7 @@ export const editContract = async (
   CON_ID: number
 ) => {
   try {
+    console.log(contractData);
     const response = await axiosInstance.post(
       `/api/contracts/edit/${CON_ID}`,
       contractData,
@@ -19,6 +20,7 @@ export const editContract = async (
     console.log(response);
     return response.data;
   } catch (error) {
+    console.log('Error occured!!!',error);
     throw new Error("Something went wrong while editing the contract.");
   }
 };
