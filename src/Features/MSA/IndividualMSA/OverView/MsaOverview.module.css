@@ -1,0 +1,79 @@
+.maincontainer__overviewpayment {
+    margin-top: 1rem;
+    display: flex;
+    position: relative;
+  }
+  .maincontainer__overviewpayment__overview_count {
+    margin-left: 1rem;
+    margin-bottom: 2%;
+    width: 31%;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    background-color: white;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  .maincontainer__overviewpayment__overview {
+    width: 32%;
+    margin-bottom: 2%;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    background-color: white;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  .maincontainer__overviewpayment__title h4 {
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  
+  .maincontainer__overviewpayment__content__list {
+    display: flex;
+    margin-top: 0.3rem;
+    justify-content: space-between;
+  }
+  
+  .maincontainer__overviewpayment__content__list h5 {
+    font-size: 0.8rem;
+  }
+  
+  .maincontainer__overviewpayment__content__list__value {
+    font-weight: 300;
+    text-transform: capitalize;
+  }
+  
+  .maincontainer__overviewpayment__content__list__value span {
+    font-weight: 300;
+    text-transform: lowercase;
+  }
+  
+  .maincontainer__overviewpayment__payment {
+    width: 32%;
+    margin-bottom: 2%;
+    margin-left: 1rem;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    background-color: white;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  .maincontainer__overviewpayment__payment__h2 {
+    margin: 20px 40px;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  
+  .maincontainer__overviewpayment__list {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .maincontainer__overviewpayment__list h5 {
+    font-weight: 500;
+    padding-top: 1rem;
+    font-size: 0.8rem;
+  }
+  
+  @media only screen and (max-width: 1200px) {
+    .maincontainer__overviewpayment {
+      width: 130vw;
+    }
+  }
+  

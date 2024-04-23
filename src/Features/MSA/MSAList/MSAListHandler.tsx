@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { MsaData, TableColumn } from "./types";
 import { getmsalist } from "./api/getmsalist";
-import { Button, Input, Pagination, TablePaginationConfig } from "antd";
+import { Button, Input, Pagination, TablePaginationConfig, Tooltip } from "antd";
 import tableStyles from './MSAList.module.css'
 import { CloudDownloadOutlined, EditOutlined, SearchOutlined, SyncOutlined } from '@ant-design/icons';
 import { FilterConfirmProps } from "antd/es/table/interface";
@@ -188,6 +188,7 @@ const MSAListHandler = () => {
           </span>
           
            <span className='listmsa-action-edit'>
+           <Tooltip title="Edit MSA"/>
             {actionClicked?<></>:
              <EditOutlined
              title='Edit MSA'
