@@ -169,13 +169,13 @@ const MSAListHandler = () => {
     };
 
     //click function for each data row
-  const rowClickHandler = (record: MsaData) => {
-    if (!actionClicked) {
-      navigate(`${record.msa_ref_id}`, {
-        state: { id: record.id as string },
-      });
-    }
-  };
+  // const rowClickHandler = (record: MsaData) => {
+  //   if (!actionClicked) {
+  //     navigate(`${record.msa_ref_id}`, {
+  //       state: { id: record.id as string },
+  //     });
+  //   }
+  // };
 
     const handleActiveMSA=()=>{
         if(selectedActiveKeys=='Inactive'){
