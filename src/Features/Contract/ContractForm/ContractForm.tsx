@@ -6,7 +6,6 @@ import { ContractFormPropType, MSAType } from "./types";
 import { UploadOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 
-
 const ContractForm = ({
 	selectedOption, 
 	handleSelectChange, 
@@ -18,20 +17,56 @@ const ContractForm = ({
 	clientRegion,
 	onSelectClientName,
 	getClientNames,
-	users
+	users,
 	}:ContractFormPropType) => {
 		const dd = dayjs("2023-09-09");
 		console.log(dd);
 		const initialfields = [
 			{name: "region", value: clientRegion },
 		];
+		const [form] = Form.useForm();
 
+		// Validation for date of signature to be before start date and end date
+		const validateDateOfSignature = (_: unknown, value: dayjs.Dayjs | null | undefined,callback: (error?: string) => void) => {
+			const startDate = form.getFieldValue('start_date');
+			const endDate = form.getFieldValue('end_date');
+			if (value && startDate && endDate) {
+				if (value.isBefore(startDate) && value.isBefore(endDate)) {
+					callback(); // Validation passed
+					return;
+				}
+			  callback('Date of Signature must be before Start Date and End Date');
+			} else {
+				callback() // Validation passed if fields are empty
+			}
+		};
+
+		// Validation for start date to be before end date
+		const validateStartDate = (_: unknown, value: dayjs.Dayjs | null | undefined) => {
+			const startDate = value;
+			const endDate = form.getFieldValue('end_date');
+			if (startDate && endDate && dayjs(startDate).isAfter(endDate)) {
+				return Promise.reject('Start Date must be before End Date');
+			}
+			return Promise.resolve();
+		};
+
+		// Validation for milestone enddate to be between start date and end date
+		const validateMilestoneEndDate = (_: unknown, value: dayjs.Dayjs | null | undefined) => {
+			const startDate = form.getFieldValue('start_date');
+			const endDate = form.getFieldValue('end_date');
+			if (startDate && endDate && value && (dayjs(value).isBefore(startDate) || dayjs(value).isAfter(endDate))) {
+				return Promise.reject('Milestone End Date must be between Contract Period');
+			}
+			return Promise.resolve();
+		};
 	return (
 		<>
 		<div className={styles.contractForm}>
 			<Form encType="multipart/form-data" onFinish={onFinish} 
 				fields={initialfields}
 				initialValues={{ milestones: [{}] }}
+				form={form}
 			>
 				<Card className={styles.contractForm__topcard}>
 					<Space>
@@ -70,11 +105,15 @@ const ContractForm = ({
 						</Form.Item>
 					</Space>
 					<Space>
-						<Form.Item name={"date_of_signature"} label="Date of Signature" rules={[{ required: true, message: 'Please select the Date of Signature' },]}>
+						<Form.Item name={"date_of_signature"} label="Date of Signature" rules={[{ required: true, message: 'Please select the Date of Signature' },
+							{ validator: validateDateOfSignature }
+						]}>
 							<DatePicker placeholder="Date of Signature" />
 						</Form.Item>
 
-						<Form.Item name={"start_date"} label="Start Date" rules={[{ required: true, message: 'Please select the Start Date' }]}>
+						<Form.Item name={"start_date"} label="Start Date" rules={[{ required: true, message: 'Please select the Start Date' }, 
+							{ validator: validateStartDate }
+						]}>
 							<DatePicker placeholder="Start Date" />
 						</Form.Item>
 
@@ -113,13 +152,14 @@ const ContractForm = ({
 								{fields.map((field,index)=>{
 									return(
 										<Space key={field.key} style={{width:"70vw", justifyContent:"space-between"}}> 
-											<Form.Item name={[field.name,"milestone_desc"]} key={`${field.key}-ff_milestone_desc`}>
+											<Form.Item name={[field.name,"milestone_desc"]} key={`${field.key}-ff_milestone_desc`} rules={[{required: true, message: "Please input Milestone Description"}]}>
 												<Input placeholder="Milestone Description" style={{ width: "25rem" }}/>
 											</Form.Item>
-											<Form.Item name={[field.name,"milestone_enddate"]} key={`${field.key}-ff_milestone_enddate`}>
+											<Form.Item name={[field.name,"milestone_enddate"]} key={`${field.key}-ff_milestone_enddate`}
+											rules={[{required: true, message: "Please input Milestone End Date"},{validator: validateMilestoneEndDate}]}>
 												<DatePicker placeholder="Milestone End Date" style={{ width: "15rem" }}/>
 											</Form.Item>
-											<Form.Item name={[field.name,"percentage"]} key={`${field.key}-ff_percentage`}>
+											<Form.Item name={[field.name,"percentage"]} key={`${field.key}-ff_percentage`} rules={[{required: true, message: "Please input Milestone Percentage"}]}>
 												<InputNumber<number>
 													placeholder="Percentage"
 													min={0}
@@ -162,13 +202,14 @@ const ContractForm = ({
 							{fields.map((field,index)=>{
 								return(
 									<Space key={field.key} style={{width:"70vw", justifyContent:"space-between"}}> 
-										<Form.Item name={[field.name,"milestone_desc"]} key={`${field.key}-tm_milestone_desc`}>
+										<Form.Item name={[field.name,"milestone_desc"]} key={`${field.key}-tm_milestone_desc`} rules={[{required: true, message: "Please input Milestone Description"}]}>
 											<Input placeholder="Milestone Description" style={{ width: "25rem" }}/>
 										</Form.Item>
-										<Form.Item name={[field.name,"milestone_enddate"]} key={`${field.key}-tm_milestone_enddate`}>
+										<Form.Item name={[field.name,"milestone_enddate"]} key={`${field.key}-tm_milestone_enddate`}
+										rules={[{required: true, message: "Please input Milestone End Date"},{validator: validateMilestoneEndDate}]}>
 											<DatePicker placeholder="Milestone End Date" style={{ width: "20rem" }} />
 										</Form.Item>
-										<Form.Item name={[field.name,"amount"]} key={`${field.key}-tm_amount`}>
+										<Form.Item name={[field.name,"amount"]} key={`${field.key}-tm_amount`} rules={[{required: true, message: "Please input Milestone Amount"}]}>
 											<InputNumber<number> placeholder="Amount" min={0} style={{ width: "10rem" }}/>
 										</Form.Item>
 										{fields.length > 1 ? (

@@ -15,7 +15,6 @@ const ContractFormHandler = () => {
 	const assocFilteredOptions = OPTIONS.filter(
 		(o) => !selectedItems.includes(o)
 	);
-
 	useEffect(()=>{
 		getClientNames();
 		getAssocUsers();
@@ -101,7 +100,6 @@ const ContractFormHandler = () => {
 			onSelectClientName={onSelectClientName}
 			getClientNames={getClientNames}
 			users={users}
-
 		/>
 	);
 };
