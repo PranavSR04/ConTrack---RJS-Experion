@@ -9,7 +9,7 @@ const IndividualMsaHandler = () => {
   const location = useLocation();
   const { state } = location;
   const msa_id = state?.msa_id;
-  const [id, setId] = useState<string>("1");
+  const [id, setId] = useState<string>();
   const [responses, setResponses] = useState<
   MsaApiType | AxiosError<unknown, any>
   >();
@@ -32,11 +32,11 @@ const IndividualMsaHandler = () => {
     }
   }, [id]);
 console.log(id);
-  return (
+  return id ? (
     <>
       <IndividualMSA msa_id={id} responses={responses} loading={loading} />
     </>
-  );
+  ):null
 };
 
 export default IndividualMsaHandler;

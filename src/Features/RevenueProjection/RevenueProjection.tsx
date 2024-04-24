@@ -27,8 +27,6 @@ const RevenueProjection = ({
   filterEndDate,
 }: RevenueProjectionPropType) => {
   const revenueid = id ? id : undefined;
-  const MsaId = msa_id ? msa_id : undefined;
-  console.log(filter);
   const [type, setType] = useState<string>();
 
   return (
@@ -122,7 +120,7 @@ const RevenueProjection = ({
 						filter={filter}
 						selectedFilters={selectedFilters}
 						id={revenueid}
-            msa_id={MsaId}
+            msa_id={msa_id ? msa_id : undefined}
             filterStartDate={filterStartDate}
             filterEndDate={filterEndDate}
 					/></div>
