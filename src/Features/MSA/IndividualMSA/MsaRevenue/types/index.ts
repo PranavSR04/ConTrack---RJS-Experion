@@ -19,14 +19,13 @@ export type RevenueProjectionPropType = {
 	regionOptions: string[];
 	duOptions: string[];
 	selectedFilters: {};
-	id?:number |undefined;
-	msa_id?:string |undefined;
+	id:number |undefined;
 	onhandledatechange:(dates: any, dateStrings: any) => void;
 	filterEndDate:string|undefined;
 	filterStartDate:string|undefined;	
 };
 export type RevenueProjectionHandlerPropType = {
-	id?:number;
+	msa_id?:string;
 };
 
 export interface RevenueProjectionData {

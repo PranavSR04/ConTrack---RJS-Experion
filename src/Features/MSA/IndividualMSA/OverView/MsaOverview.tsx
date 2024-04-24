@@ -19,7 +19,6 @@ const MsaOverview = ({
   tmTotalEstimate,
   chartData,
   options
-
 }:MsaOverViewPropType) => {
   return (
       <div className={`${styles.maincontainer__overviewpayment}`}>

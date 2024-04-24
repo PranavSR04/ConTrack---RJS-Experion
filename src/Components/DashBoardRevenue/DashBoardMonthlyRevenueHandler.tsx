@@ -21,7 +21,7 @@ const DashBoardMonthlyRevenueHandler = () => {
  
     try {
         // Fetch revenue projection data
-      const { data }: { data: { [key: string]: number } } = await fetchRevenueProjection(undefined, requestBody);
+      const { data }: { data: { [key: string]: number } } = await fetchRevenueProjection(undefined, undefined, requestBody);
       console.log(data)
       if (data instanceof AxiosError) {
         console.log(data.response?.data);
