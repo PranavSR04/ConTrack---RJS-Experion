@@ -18,12 +18,49 @@ const ContractForm = ({
 	onSelectClientName,
 	getClientNames,
 	users,
+	contractDetails
 	}:ContractFormPropType) => {
-		const dd = dayjs("2023-09-09");
-		console.log(dd);
-		const initialfields = [
-			{name: "region", value: clientRegion },
-		];
+
+		let filename = "file";
+
+		let initialfields:any = [];
+
+		console.log(selectedOption);
+
+		let initialValues:any = {milestones: [{}] };
+
+		if(contractDetails){
+			console.log(contractDetails);
+			 initialValues = {
+				...contractDetails,
+				date_of_signature: dayjs(contractDetails?.date_of_signature),
+				start_date: dayjs(contractDetails?.start_date),
+				end_date: dayjs(contractDetails?.end_date),
+			};
+			if (contractDetails?.milestones) {
+				const updatedMilestones = contractDetails.milestones.map((milestone: any) => {
+				  return {
+					...milestone,
+					milestone_enddate: dayjs(milestone.milestone_enddate),
+				  };
+				});
+			  
+				initialValues.milestones = updatedMilestones;
+			  }
+			if(contractDetails?.associated_users){
+				const associated_users_id = contractDetails.associated_users.map((user)=>user.user_id);
+				initialValues.associated_users = associated_users_id;
+				console.log(associated_users_id);
+			}
+			filename = "addendum_file";
+			console.log("Initial values",initialValues);
+		}else{
+			initialfields = [
+				{name: "region", value: clientRegion }
+			];
+			filename = "file";
+		}
+		
 		const [form] = Form.useForm();
 
 		// Validation for date of signature to be before start date and end date
@@ -65,7 +102,7 @@ const ContractForm = ({
 		<div className={styles.contractForm}>
 			<Form encType="multipart/form-data" onFinish={onFinish} 
 				fields={initialfields}
-				initialValues={{ milestones: [{}] }}
+				initialValues={initialValues}
 				form={form}
 			>
 				<Card className={styles.contractForm__topcard}>
@@ -232,13 +269,8 @@ const ContractForm = ({
 								style={{width:"80%"}}
 								mode="multiple"
 								placeholder="Select Associated Users"
-								// value={selectedItems}
 								filterOption={false}
 								onChange={setSelectedItems}
-								// options={assocFilteredOptions.map((item) => ({
-								// 	value: item,
-								// 	label: item,
-								// }))}
 							>
 								{users && users.map((user:any,index) => (
 									<Select.Option key={index} value={user.id}>
@@ -250,8 +282,8 @@ const ContractForm = ({
 					</Card>
 				<Space style={{width:"100%"}}>
 					<Card className={styles.contractForm__uploadcard}>
-						<h6><span style={{color:"red"}}>*</span> Upload Work Schedule</h6>
-						<Form.Item name={"file"} rules={[{ required: true, message: 'Please upload a file' }]}>
+						{contractDetails ? <h6>Upload Addendum</h6> :<h6><span style={{color:"red"}}>*</span> Upload Work Schedule</h6>}
+						<Form.Item name={filename} rules={[{ required: true, message: 'Please upload a file' }]}>
 							<Upload accept=".pdf" maxCount={1} >
 								<div style={{ marginTop: "1rem" }} className={styles.contractForm__uploadcard__upload}>
 									<p>Drag & drop or click to upload</p>
@@ -268,8 +300,8 @@ const ContractForm = ({
 					</Card>
 				</Space>
 				</> :<></>}
-				<Button htmlType="submit" disabled={!selectedOption} className={styles.contractForm__submit}>
-					Add Contract
+				<Button htmlType="submit"  disabled={!selectedOption} className={styles.contractForm__submit}>
+					{contractDetails ? <>Update Contract</> : <>Add Contract</>}
 				 </Button>
 			</Form>
 		</div>

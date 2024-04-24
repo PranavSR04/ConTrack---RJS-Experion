@@ -1,0 +1,7 @@
+.listContainer{
+max-width: 20vw;
+background-color: rgba(38, 155, 190, 0.233);
+max-height: 48vh;
+overflow-y: auto;
+font-family: "Montserrat", sans-serif;
+}
