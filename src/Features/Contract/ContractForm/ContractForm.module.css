@@ -1,0 +1,36 @@
+.contractForm {
+	/* margin-left: 19vw; */
+	/* padding-top: 1vh; */
+	margin-bottom: 10vh;
+	width: 77vw;
+}
+
+.contractForm__topcard,
+.contractForm__ffcard,
+.contractForm__tmcard,
+.contractForm__assoccard,
+.contractForm__uploadcard,
+.contractForm__commentscard {
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	margin-top: 2vh;
+}
+.contractForm__uploadcard,
+.contractForm__commentscard {
+	width: 38.5vw;
+	height: 35vh;
+}
+
+.contractForm__uploadcard__upload {
+	margin-top: 2%;
+	border: 1px dashed #ccc;
+	border-radius: 8px;
+	padding: 26px;
+	text-align: center;
+	width: 35vw;
+}
+.contractForm__assoccard {
+	width: 50vw;
+}
+.contractForm__submit {
+	margin-top: 2%;
+}
