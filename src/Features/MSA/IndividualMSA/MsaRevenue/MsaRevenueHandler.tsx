@@ -5,10 +5,8 @@ import { useState } from 'react';
 import RevenueProjection from '../../../RevenueProjection/RevenueProjection';
 import styles from './RevenueProjection.module.css';
 
-
 const MsaRevenueHandler = ({ msa_id }: RevenueProjectionHandlerPropType) => {
   const [filter, setFilter] = useState<string>("Monthly");
-	const access_token = localStorage.getItem("access_token");
 	const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 	const [selectedFilters, setSelectedFilters] = useState<SelectedFiltersType>(
 		{}
@@ -25,7 +23,6 @@ const MsaRevenueHandler = ({ msa_id }: RevenueProjectionHandlerPropType) => {
     setFilterEndDate(dateStrings[1]);
 
 }
-
 	const showFilterModal = () => {  //Setting the modal true
 		setIsFilterModalOpen(true);
 	};
