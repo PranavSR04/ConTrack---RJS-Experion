@@ -42,12 +42,13 @@ const AppRoutes = () => {
                     <Route path="/Revenue/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
                     <Route path="/ManageUser/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
                     <Route path="/ManageUser" element={<><NavBarHandler /><SideBar><ManageUsersHandler/></SideBar></>}></Route>
-                    <Route path="/MSAOverview" element={<><NavBarHandler /><SideBar><IndividualMsaHandler/></SideBar></>} />
+                    <Route path="/MSAOverview" element={<><NavBarHandler /><SideBar><MSAListHandler/></SideBar></>} />
                     <Route path='MSAForm' element={<><NavBarHandler/><SideBar><MSAFormHandler/></SideBar></>}/>
                     {/* <Route path="/MSAForm" element={<><NavBarHandler /><SideBar><AddMsaHandler /></SideBar></>} />
                     <Route path="/msa/edit" element={<><NavBarHandler /><SideBar><EditMsaHandler /></SideBar></>} />
                     <Route path="/msa/renew" element={<><NavBarHandler /><SideBar><RenewMsaHandler /></SideBar></>} /> */}
 					<Route path="/Dashboard" element={<><NavBarHandler /><SideBar><Dashboard/></SideBar></>}></Route>
+			        <Route path='/MSAOverview/:msa_ref_id' element={<><NavBarHandler/><SideBar><IndividualMsaHandler></IndividualMsaHandler></SideBar></>}></Route>
                 </Routes>
              </NavContext> 
 

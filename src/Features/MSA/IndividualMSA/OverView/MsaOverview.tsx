@@ -2,6 +2,7 @@ import React from 'react'
 import { MsaOverViewPropType } from './types'
 import styles from './MsaOverview.module.css'
 import { Card } from 'antd'
+import { Doughnut } from 'react-chartjs-2'
 const MsaOverview = ({
   startDate,
   endDate,
@@ -15,7 +16,9 @@ const MsaOverview = ({
   expiringContracts,
   onProgressContracts,
   ffTotalEstimate,
-  tmTotalEstimate
+  tmTotalEstimate,
+  chartData,
+  options
 
 }:MsaOverViewPropType) => {
   return (
@@ -130,60 +133,12 @@ const MsaOverview = ({
           loading={loading}
         >
           <div className={`${styles.maincontainer__overviewpayment__title}`}>
-            <h4>Contracts</h4>
+            <h4>Contract Status</h4>
           </div>
-          <div className={`${styles.maincontainer__overviewpayment__content}`}>
-            <div
-              className={`${styles.maincontainer__overviewpayment__content__list}`}
-            >
-              <h5>Total Contracts</h5>
-              <h5
-                className={`${styles.maincontainer__overviewpayment__content__list__value}`}
-              >
-                {totalContracts}
-              </h5>
-            </div>
-            <div
-              className={`${styles.maincontainer__overviewpayment__content__list}`}
-            >
-              <h5>Active Contracts</h5>
-              <h5
-                className={`${styles.maincontainer__overviewpayment__content__list__value}`}
-              >
-                {activeContracts}
-              </h5>
-            </div>
-            <div
-              className={`${styles.maincontainer__overviewpayment__content__list}`}
-            >
-              <h5>On Progress Contracts</h5>
-              <h5
-                className={`${styles.maincontainer__overviewpayment__content__list__value}`}
-              >
-                {onProgressContracts}
-              </h5>
-            </div>
-            <div
-              className={`${styles.maincontainer__overviewpayment__content__list}`}
-            >
-              <h5>Expiring Contracts</h5>
-              <h5
-                className={`${styles.maincontainer__overviewpayment__content__list__value}`}
-              >
-                {expiringContracts}
-              </h5>
-            </div>
-            <div
-              className={`${styles.maincontainer__overviewpayment__content__list}`}
-            >
-              <h5>Closed Contracts</h5>
-              <h5
-                className={`${styles.maincontainer__overviewpayment__content__list__value}`}
-              >
-                {closedContracts}
-              </h5>
-            </div>
-          </div>
+          <div style={{ width:'18vw'}}>
+          <Doughnut 
+           data={chartData} options={options}></Doughnut>
+      </div>
         </Card>
     </div>
   )
