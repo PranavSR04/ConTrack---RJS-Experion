@@ -46,8 +46,8 @@ const MSAListHandler = () => {
       const rowClickHandler = (record: MsaData) => {
         navigate(`/${record.msa_ref_id}`, {
             state: { msa_id: record.id as string },
-        });
-    };    
+          });
+      };
 
       useEffect(() => {
         
@@ -102,7 +102,7 @@ const MSAListHandler = () => {
 
 
       const handleAddMSA=()=>{
-        navigate(`/MSAForm`, { state: { msaAdded: true } })
+        navigate("/MSAForm", { state: { msaAdded: true } })
       }
 
 

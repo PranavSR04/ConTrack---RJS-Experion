@@ -149,10 +149,14 @@ const NotificationHandler = ({ notification }:NotificationHandlerProps) => {
                 });
               }
           }
-          else
+          else 
           {
               onClose();
-              navigate('/MSAOverview')
+              navigate(`/${notification.msa_ref_id}`, {
+                state: { id: notification.msa_id },
+              });
+              console.log("notification id",notification.msa_id)
+            console.log("location id",location.state)
           }
       };
     return <Notification notification={notification} difference={difference} actionStyle={actionStyle} stylenames={stylename} cardStyle={cardStyle} ItemClickHandler={ItemClickHandler}/>;

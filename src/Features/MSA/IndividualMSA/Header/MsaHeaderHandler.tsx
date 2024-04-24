@@ -83,27 +83,11 @@ const MsaHeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
     }
   };
 
-  // // Function to trigger navigation to the edit MSA page
-  // const navigateToEditMsa = (id: string) => {
-  //   navigate(`Edit MSA`, {
-  //       state: { id: id as string },
-  //   });
-  // };
-
-  // // Function to trigger navigation to the renew MSA page
-  // const navigateToRenewMsa = (id: string) => {
-  //   navigate(`/MSAOverview/Renew MSA`, {
-  //       state: { id: id as string },
-  //   });
-  // };
-  
-  const navigateToEditMsa = (id: string) => {
-    navigate(`/MSAForm/${msaRefId}`, { state: {id:id as string } });
-    console.log("hi",id, msaRefId)
-   
-  };
-  const navigateToRenewMsa=(id:string)=>{
-    navigate(`/MSAForm/${msaRefId}`, { state: {id:id as string } });
+  const navigateToEditMsa=(id: string)=>{
+    navigate('/MSAForm', { state: {id:id as string , msaEdited: true } });
+  }
+  const navigateToRenewMsa=(id: string)=>{
+    navigate('/MSAForm', { state: {id:id as string , msaRenewed: true } });
    
   }
   return (

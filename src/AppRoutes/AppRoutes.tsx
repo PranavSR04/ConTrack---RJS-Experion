@@ -19,8 +19,6 @@ import NavContext from "../Components/NavContext/NavContext";
 import EditContractHandler from "../Features/AddContract/EditContractHandler";
 import ContractFormHandler from "../Features/Contract/ContractForm/ContractFormHandler";
 import IndividualMsaHandler from "../Features/MSA/IndividualMSA/IndividualMSAHandler";
-import IndividualMSA from "../Features/MSA/IndividualMSA/IndividualMSA";
- 
 const AppRoutes = () => {
     return (
         <BrowserRouter>
@@ -32,6 +30,7 @@ const AppRoutes = () => {
                     <Route path='/AllContracts' element={<><NavBarHandler /><SideBar><ContractListHandler /></SideBar></>}></Route>
                     <Route path='/MyContracts' element={<><NavBarHandler /><SideBar><ContractListHandler /></SideBar></>}></Route>
                     <Route path="/Revenue" element={<><NavBarHandler /><SideBar><RevenueProjectionHandler /></SideBar></>}></Route>
+                    <Route path="/AllContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
                     <Route path="/AllContracts/Add Contract" element={<><NavBarHandler /><SideBar><AddContractHandler /></SideBar></>}/>
                     <Route path="/MyContracts/Add Contract" element={<><NavBarHandler /><SideBar><AddContractHandler /></SideBar></>}/>
                     <Route path="/MyContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
@@ -45,21 +44,15 @@ const AppRoutes = () => {
                     <Route path="/ManageUser" element={<><NavBarHandler /><SideBar><ManageUsersHandler/></SideBar></>}></Route>
                     <Route path="/MSAOverview" element={<><NavBarHandler /><SideBar><MSAListHandler/></SideBar></>} />
                     <Route path='MSAForm' element={<><NavBarHandler/><SideBar><MSAFormHandler/></SideBar></>}/>
-                    <Route path='/MSAForm/:msa_ref_id' element={<><NavBarHandler/><SideBar><MSAFormHandler/></SideBar></>}/>
                     <Route path="/MSAForm" element={<><NavBarHandler /><SideBar><AddMsaHandler /></SideBar></>} />
                     <Route path="/msa/edit" element={<><NavBarHandler /><SideBar><EditMsaHandler /></SideBar></>} />
                     <Route path="/msa/renew" element={<><NavBarHandler /><SideBar><RenewMsaHandler /></SideBar></>} />
                     <Route path="/contract/edit" element={<><NavBarHandler /><SideBar><EditContractHandler /></SideBar></>} />
                     <Route path="/contractform" element={<><NavBarHandler /><SideBar><ContractFormHandler /></SideBar></>} />                    
+                    <Route path="/msa/msaDetails" element={<><NavBarHandler /><SideBar><IndividualMsaHandler /></SideBar></>} />
                     <Route path="/Dashboard" element={<><NavBarHandler /><SideBar><Dashboard /></SideBar></>}></Route>
-                    <Route path="/MyContracts/:msa_ref_id" element={<><NavBarHandler /><SideBar><IndividualMsaHandler/></SideBar></>}></Route>
                     <Route path="/:msa_ref_id" element={<><NavBarHandler /><SideBar><IndividualMsaHandler/></SideBar></>}></Route>
-                    <Route path="/Revenue/:msa_ref_id" element={<><NavBarHandler /><SideBar><IndividualMsaHandler/></SideBar></>}></Route>
-                    <Route path="/Dashboard/:msa_ref_id" element={<><NavBarHandler /><SideBar><IndividualMsaHandler/></SideBar></>}></Route>
-                    <Route path="/MSAOverview/:msa_ref_id" element={<><NavBarHandler /><SideBar><IndividualMsaHandler/></SideBar></>}></Route>
-                    <Route path="/AllContracts/:msa_ref_id" element={<><NavBarHandler /><SideBar><IndividualMsaHandler/></SideBar></>}></Route>
-                    <Route path="/Revenue/:msa_ref_id" element={<><NavBarHandler /><SideBar><IndividualMsaHandler/></SideBar></>}></Route>
-                    <Route path="/ManageUser/:msa_ref_id" element={<><NavBarHandler /><SideBar><IndividualMsaHandler/></SideBar></>}></Route>
+                    
                 </Routes>
             </NavContext>
 
