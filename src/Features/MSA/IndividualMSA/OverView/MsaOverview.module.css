@@ -1,7 +1,8 @@
 .maincontainer__overviewpayment {
     margin-top: 1rem;
     display: flex;
-    position: relative;
+    /* position: relative; */
+    
   }
   .maincontainer__overviewpayment__overview_count {
     margin-left: 1rem;
@@ -75,5 +76,9 @@
     .maincontainer__overviewpayment {
       width: 130vw;
     }
+  }
+  .manincontainer__overviewpaymwent__doughnutchart{
+    height: 200px;
+  justify-self: center;
   }
   

@@ -1,6 +1,7 @@
 import axiosInstance from "../../../../Config/AxiosConfig";
 
 export const getmsaapi = async (id: string) => {
+  
   try {
     const data = await axiosInstance.get(
       `api/msa/list?id=${id}`
@@ -10,4 +11,5 @@ export const getmsaapi = async (id: string) => {
     console.error("Error checking MSA ID existence:", error);
     throw error;
   }
-};
+  }
+

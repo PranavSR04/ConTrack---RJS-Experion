@@ -33,7 +33,7 @@ const MSAForm = ({
       { name: "msa_ref_id", value: msaData.msa_ref_id },
       { name: "client_name", value: msaData.client_name },
       { name: "region", value: msaData.region },
-       { name: "start_date", value: msaEdited ? dayjs(msaData.start_date) :(msaData.start_date ? dayjs(msaData.start_date) : undefined) },
+       { name: "start_date", value: msaEdited ? (msaData.start_date ? dayjs(msaData.start_date) : undefined) : msaData.start_date ? dayjs(msaData.start_date) : undefined},
        { name: "end_date", value: msaEdited ? (msaData.end_date ? dayjs(msaData.end_date) : undefined) : msaData.end_date ? dayjs(msaData.end_date) : undefined }
 
     ];
@@ -89,7 +89,6 @@ const MSAForm = ({
               >
                 <Input
                   name="client_name"
-                  value={msaData.client_name}
                   className={styles.MSAForm__Form__inputs}
                   onChange={handleInputChange}
                   disabled={msaRenewed}
@@ -113,7 +112,6 @@ const MSAForm = ({
               >
                 <Input
                   name="region"
-                  value={msaData.region}
                   className={styles.MSAForm__Form__inputs}
                   onChange={handleInputChange}
                   disabled={msaRenewed}

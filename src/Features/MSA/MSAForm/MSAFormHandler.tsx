@@ -79,6 +79,7 @@ const MSAFormHandler = () => {
 
 useEffect(() =>{
   handleAutoFillData();
+  console.log("is this edit function");
 },[msaEdited,msaRenewed])
 //Function to autofill msa data for edit and renew msa
 const handleAutoFillData=()=>{

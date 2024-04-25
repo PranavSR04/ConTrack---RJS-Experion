@@ -23,5 +23,24 @@ export interface HandlerPropType {
     closedContracts: number;
     expiringContracts: number;
     onProgressContracts: number;
+    chartData: {
+      labels: string[];
+      datasets: {
+          data: number[];
+          backgroundColor: string[];
+      }[];
+  }
+  options: {
+    plugins: {
+        legend: {
+            labels: {
+                font: {
+                    size: number;
+                };
+                boxWidth: number;
+            };
+        };
+    };
+}
   }
   
