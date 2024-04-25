@@ -11,6 +11,7 @@ import {
   Select,
   Spin,
   Upload,
+  message,
 } from "antd";
 import {
   PlusOutlined,
@@ -103,9 +104,10 @@ const AddContract = ({
               >
                 <Form.Item
                   label="Client Name"
+                  name="client_name"
                   labelCol={{ span: 15 }}
                   wrapperCol={{ span: 11 }}
-                  required
+                  rules={[{ required: true, message: 'Please select a Client Name' }]}
                   style={{ marginLeft: "-2.4rem" }}
                 >
                   <AutoComplete
@@ -118,9 +120,11 @@ const AddContract = ({
                 </Form.Item>
                 <Form.Item
                   label="Contract ID"
+                  name="contract_id"
                   labelCol={{ span: 10 }}
                   wrapperCol={{ span: 14 }}
                   style={{ paddingLeft: "1rem", marginLeft: "4rem" }}
+                  rules={[{ required: true, message: 'Please enter a Contract ID' }]}
                   required
                 >
                   <Input
@@ -135,7 +139,7 @@ const AddContract = ({
                 </Form.Item>
                 <Form.Item
                   label="Region"
-                  required
+                  // required
                   labelCol={{ span: 9 }}
                   wrapperCol={{ span: 12 }}
                 >
@@ -146,8 +150,8 @@ const AddContract = ({
                   name="du"
                   labelCol={{ span: 8 }}
                   wrapperCol={{ span: 16 }}
+                  rules={[{ required: true, message: 'Please select a DU' }]}
                   style={{ paddingLeft: "2rem", marginLeft: "-3.5rem" }}
-                  required
                 >
                   <Select
                     placeholder="DU"
@@ -293,6 +297,7 @@ const AddContract = ({
                         name="estimated_amount"
                         labelCol={{ span: 8 }}
                         wrapperCol={{ span: 8 }}
+                        rules={[{ required: true, message: 'Please input Total Contract Value' }]}
                         required
                       >
                         <InputNumber
@@ -380,7 +385,7 @@ const AddContract = ({
                             rules={[
                               {
                                 required: true,
-                                message: "Please enter milestone description!",
+                                message: "Please enter milestone description",
                               },
                             ]}
                           >
@@ -413,7 +418,7 @@ const AddContract = ({
                               {
                                 required: true,
                                 message:
-                                  "Please enter Expected Completion Date!",
+                                  "Please select an Expected Completion Date",
                               },
                             ]}
                           >
@@ -445,7 +450,7 @@ const AddContract = ({
                             rules={[
                               {
                                 required: true,
-                                message: "Please input percentage!",
+                                message: "Please input a Percentage",
                               },
                               { validator: checkPercentage },
                               {
@@ -579,6 +584,15 @@ const AddContract = ({
                           accept=".pdf"
                           customRequest={handleFileUpload}
                           maxCount={1}
+                          beforeUpload={(file) => {
+                            // Perform validation here
+                            if (!file) {
+                              message.error("Please select a file");
+                              return false; // Prevent the file from being uploaded
+                            }
+                            // You can add more validation if needed
+                            return true; // Allow the file to be uploaded
+                          }}
                         >
                           <div style={{ marginTop: "1rem" }}>
                             <p>Drag & drop or click to upload</p>
