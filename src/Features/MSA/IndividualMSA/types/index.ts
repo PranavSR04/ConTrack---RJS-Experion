@@ -10,6 +10,11 @@ export interface contractType{
     start_date:string;
     end_date:string;
 }
+export interface MsaDocs {
+  msa_doclink: string |undefined, 
+  start_date: string |undefined,
+  end_date: string |undefined
+}
 export interface Msa {
     id: number;
     msa_ref_id: string;
@@ -44,7 +49,7 @@ export interface Msa {
     id: string;
   }
   export interface IndividualMsaPropType{
-    msa_id: string;
+    msa_id: string ;
     responses: MsaApiType|AxiosError<unknown, any>|undefined;
     loading: boolean;
   }

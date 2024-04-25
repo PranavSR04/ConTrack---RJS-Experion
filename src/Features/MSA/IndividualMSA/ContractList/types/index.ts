@@ -45,22 +45,28 @@ export interface ContractListHandlerPropType {
     getCount: (responses: any) => void;
   }
   export interface ContractData {
+    id:number;
     contract_ref_id: string;
     contract_status: string;
     contract_type: string;
 }
   export interface ContractListPropType{
     columns: ({
-      title: string;
-      dataIndex: string;
-      key: string;
-      render: (text: string) => JSX.Element;
-  } | {
-      title: string;
-      dataIndex: string;
-      key: string;
-      render?: undefined;
-  })[]
+        title: string;
+        dataIndex: string;
+        key: string;
+        render: (text: any, record: ContractData) => JSX.Element;
+    } | {
+        title: string;
+        dataIndex: string;
+        key: string;
+        render?: undefined;
+    } | {
+        title: string;
+        dataIndex: string;
+        key: string;
+        render: (text: string) => JSX.Element;
+    })[]
   contractData:ContractData[];
   chartData: {
     labels: string[];

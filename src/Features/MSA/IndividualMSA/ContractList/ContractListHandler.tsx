@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ContractList from './ContractList'
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { MsaApiType } from '../types';
 import { getMSAData } from '../api/getMSAData';
 import { AxiosError } from 'axios';
@@ -16,6 +16,8 @@ const ContractListHandler = ({ responses, id }:ContractListHandlerPropType) => {
     const [activeCount, setActiveCount] = useState(0);
     const [closedCount,setClosedCount]=useState(0);
     const [expiredCount,setExpiredCount]=useState(0);
+    const [actionClicked, setActionClicked] = useState<boolean>(false);
+    const navigate = useNavigate();
     useEffect(() => {
         getContractCount(responses);
       }, [responses]);
@@ -50,6 +52,7 @@ const ContractListHandler = ({ responses, id }:ContractListHandlerPropType) => {
                     setExpiredCount(msa.expired_contracts_count||0)
                     msa.contracts.forEach((contract) => {
                         contracts.push({
+                            id:contract.id,
                             contract_ref_id: contract.contract_ref_id,
                             contract_type: contract.contract_type,
                             contract_status: contract.contract_status,
@@ -72,7 +75,10 @@ const ContractListHandler = ({ responses, id }:ContractListHandlerPropType) => {
             title: 'Contract Ref Id',
             dataIndex: 'contract_ref_id',
             key: 'contract_ref_id',
-            render: (text: string) => <span>{text}</span>,
+            render: (text: any, record: ContractData) => (
+                <span onClick={() => rowClickHandler(record)}>{text}</span>
+              ),
+            // render: (text: string) => <span>{text}</span>,
         },
         {
             title: 'Contract Type',
@@ -90,6 +96,13 @@ const ContractListHandler = ({ responses, id }:ContractListHandlerPropType) => {
             ),
         }
     ];
+    const rowClickHandler = (record: ContractData) => {
+        if (!actionClicked) {
+          navigate(`/AllContracts/${record.contract_ref_id}`, {
+            state: { id: record.id },
+          });
+        }
+      };
     const getStatusColor = (status: string) => {
         switch (status) {
             case 'Closed':

@@ -18,6 +18,7 @@ const ContractList = ({
         </div>
         <div>
           <Table
+          className={styles.contract_list_table}
             dataSource={contractData}
             columns={columns}
             pagination={false}

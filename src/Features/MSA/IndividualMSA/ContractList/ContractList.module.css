@@ -10,3 +10,7 @@
     font-weight: 700;
     font-size: 1rem;
 }
+.contract_list_table{
+    max-height: 200px; 
+    overflow-y: auto; 
+}

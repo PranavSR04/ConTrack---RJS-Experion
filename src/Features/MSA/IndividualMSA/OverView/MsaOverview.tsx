@@ -17,8 +17,7 @@ const MsaOverview = ({
   onProgressContracts,
   ffTotalEstimate,
   tmTotalEstimate,
-  chartData,
-  options
+chartData,options
 }:MsaOverViewPropType) => {
   return (
       <div className={`${styles.maincontainer__overviewpayment}`}>
@@ -134,10 +133,10 @@ const MsaOverview = ({
           <div className={`${styles.maincontainer__overviewpayment__title}`}>
             <h4>Contract Status</h4>
           </div>
-          <div style={{ width:'18vw'}}>
-          <Doughnut 
-           data={chartData} options={options}></Doughnut>
-      </div>
+          <div className={styles.manincontainer__overviewpaymwent__doughnutchart}>
+              <Doughnut  data={chartData} options={options}></Doughnut>
+    
+    </div>
         </Card>
     </div>
   )
