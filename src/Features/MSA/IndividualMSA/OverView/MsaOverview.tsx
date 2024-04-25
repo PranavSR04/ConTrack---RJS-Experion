@@ -2,6 +2,7 @@ import React from 'react'
 import { MsaOverViewPropType } from './types'
 import styles from './MsaOverview.module.css'
 import { Card } from 'antd'
+import { Doughnut } from 'react-chartjs-2'
 const MsaOverview = ({
   startDate,
   endDate,
@@ -15,8 +16,8 @@ const MsaOverview = ({
   expiringContracts,
   onProgressContracts,
   ffTotalEstimate,
-  tmTotalEstimate
-
+  tmTotalEstimate,
+chartData,options
 }:MsaOverViewPropType) => {
   return (
     <div className={styles.maincontainer__overview__maindiv}>

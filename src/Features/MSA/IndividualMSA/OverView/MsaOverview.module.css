@@ -86,4 +86,8 @@
       width: 130vw;
     }
   }
+  .manincontainer__overviewpaymwent__doughnutchart{
+    height: 200px;
+  justify-self: center;
+  }
   
