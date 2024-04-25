@@ -14,40 +14,40 @@ const MsaHeader = ({
   id
 }:HeaderPropType) => {
   return (
-    <div className={`${styles.maincontainer__header}`}>
-      <div className={`${styles.maincontainer__header__title}`}>
-        <div className={`${styles.maincontainer__header__title__contract}`}>
+    <div className={styles.maincontainer__header}>
+      <div className={styles.maincontainer__header__title}>
+        <div className={styles.maincontainer__header__title__contract}>
           <h2>
             {clientName} <span>#{msaRefId}</span>
           </h2>
         </div>
-        <div className={`${styles.maincontainer__header__subheading}`}>
-        <div className={`${styles.maincontainer__header__subheading__box}`}>
+        <div className={styles.maincontainer__header__subheading}>
+        <div className={styles.maincontainer__header__subheading__box}>
           {msaStatus === 0 ? <p>ACTIVE</p> : <p>INACTIVE</p>}
       </div>
 
         </div>
-        <div className={`${styles.maincontainer__header__title__edit}`}>
+        <div className={styles.maincontainer__header__title__edit}>
           {ROLE_ID !== 3 && (
             <button
-              className={`${styles.maincontainer__header__title__edit__button}`}
+              className={styles.maincontainer__header__title__edit__button}
               onClick={() => navigateToEditMsa(id)}
             >
               Edit
             </button>
           )}
         </div>
-        <div className={`${styles.maincontainer__header__title__renew}`}>
+        <div className={styles.maincontainer__header__title__renew}>
           {ROLE_ID !== 3 && (
             <button
-              className={`${styles.maincontainer__header__title__renew__button}`}
+              className={styles.maincontainer__header__title__renew__button}
               onClick={() => navigateToRenewMsa(id)}
             >
               Renew
             </button>
           )}
         </div>
-        <div className={`${styles.maincontainer__header__title__export}`}>
+        <div className={styles.maincontainer__header__title__export}>
           {msaExcelData && (
             <button
               className={styles.maincontainer__header__title__export__button}

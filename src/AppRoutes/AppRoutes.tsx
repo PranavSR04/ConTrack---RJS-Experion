@@ -11,14 +11,18 @@ import ManageUsersHandler from '../Features/ManageUsers/ManageUsersHandler'
 import Dashboard from "../Features/Dashboard/Dashboard";
 import MSAListHandler from "../Features/MSA/MSAList/MSAListHandler";
 import MSAFormHandler from "../Features/MSA/MSAForm/MSAFormHandler";
-import AddContractHandler from "../Features/AddContract/AddContractHandler";
+// import AddContractHandler from "../Features/AddContract/AddContractHandler";
 import AddMsaHandler from "../Features/MSAOld/AddMsa/AddMsaHandler";
 import EditMsaHandler from "../Features/MSAOld/EditMsa/EditMsaHandler";
 import RenewMsaHandler from "../Features/MSAOld/RenewMsa/RenewMsaHandler";
 import NavContext from "../Components/NavContext/NavContext";
-import EditContractHandler from "../Features/AddContract/EditContractHandler";
+// import EditContractHandler from "../Features/AddContract/EditContractHandler";
 import ContractFormHandler from "../Features/Contract/ContractForm/ContractFormHandler";
 import IndividualMsaHandler from "../Features/MSA/IndividualMSA/IndividualMSAHandler";
+import IndividualMSA from "../Features/MSA/IndividualMSA/IndividualMSA";
+import AddContractHandler from "../Features/Contract/AddContract/AddContractHandler";
+import EditContractHandler from "../Features/Contract/EditContract/EditContractHandler";
+ 
 const AppRoutes = () => {
     return (
         <BrowserRouter>

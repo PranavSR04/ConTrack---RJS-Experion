@@ -9,9 +9,13 @@ export interface ContractFormPropType {
 	clientRegion: string | undefined;
 	onSelectClientName: (value: number) => void;
 	getClientNames: (value: any) => Promise<void>;
-    users: any[];
+	users: any[];
+	contractDetails: ContractType | undefined;
 }
-
+export interface ContractFormHandlerPropType {
+	contractDetails?: ContractType;
+	contract_id?: number;
+}
 export interface MSAType {
 	added_by: number;
 	client_name: string;
@@ -29,14 +33,14 @@ export interface MSAType {
 
 export interface RcFile extends File {
 	uid: string;
-  }
-  
-  export interface Milestone {
+}
+
+export interface Milestone {
 	milestones: string | null;
 	expectedCompletionDate: string;
 	percentage?: number | null;
 	amount: number | null;
-  }
+}
 
 export interface ContractType {
 	msa_id: string;
@@ -48,10 +52,12 @@ export interface ContractType {
 	end_date: string;
 	date_of_signature: string;
 	contract_type: "FF" | "TM";
-	milestone: Milestone[];
-	assoc_users: [{ user_id: number }] | [];
+	milestones: Milestone[];
+	associated_users: [{ user_id: number }] | [];
 	file: RcFile | null;
 	comments: string;
 	estimated_amount: number;
 	contract_added_by: number;
-  }
+	contract_status:string;
+	contract_doclink:string;
+}
