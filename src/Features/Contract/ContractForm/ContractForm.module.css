@@ -15,9 +15,9 @@
 	margin-top: 2vh;
 }
 .contractForm__uploadcard,
-.contractForm__commentscard {
-	width: 38.5vw;
-	height: 35vh;
+.contractForm__commentscard{
+    width: 38.5vw;
+    height: 37vh;
 }
 
 .contractForm__uploadcard__upload {
@@ -31,6 +31,24 @@
 .contractForm__assoccard {
 	width: 50vw;
 }
-.contractForm__submit {
-	margin-top: 2%;
+.contractForm__submit{
+    margin-top: 2%;
+    background-color: #dc143c;
+    color: white;
+}
+
+.contractForm__ffcard__contractvalue{
+    margin-left: 18rem;
+    margin-bottom: 0.3rem;
+}
+
+.contractForm__ffcard__addbutton{
+    background-color: #dc143c;
+    color: white;
+    border: none;
+    margin-left: auto;
+}
+
+.contractForm__ffcard__main{
+    text-align: right;
 }
