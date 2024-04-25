@@ -23,5 +23,6 @@ export interface HandlerPropType {
     closedContracts: number;
     expiringContracts: number;
     onProgressContracts: number;
+    
   }
   

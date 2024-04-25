@@ -20,7 +20,7 @@ const IndividualMSA = (
       <MsaOverviewHandler responses={responses} loading={loading} />
       <MsaRevenueHandler msa_id={msa_id}/>
       <MsaDocHandler response={responses?responses:undefined}  />
-      <MsaCommentsHandler responses={responses} loading={loading} />
+      
     </div>
   )
 }
