@@ -5,6 +5,7 @@ import MsaHeader from "./MsaHeader";
 
 const MsaHeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
   const [error, setError] = useState<string>("");
+  const[loading,isLoading]=useState<boolean>(false);
   const [msaRefId, setMsaRefId] = useState<string>("");
   const [clientName, setClientName] = useState<string>("");
   const [msaExcelData, setMsaExcelData] = useState<(string | number)[][]>([]);
@@ -20,6 +21,7 @@ const MsaHeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
   // Function which is used to set the data required from response
   const getMsaHeading: HeadingHandlerType["getMsaHeading"] = (responses) => {
     if (responses && responses.data && responses.data.length > 0) {
+      isLoading(true);
       setMsaRefId(responses.data[0].msa_ref_id);
       setClientName(responses.data[0].client_name);
       setMsaStatus(responses.data[0].is_active);
@@ -101,6 +103,7 @@ const MsaHeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
         navigateToEditMsa={navigateToEditMsa}
         navigateToRenewMsa={navigateToRenewMsa}
         id={id}
+        loading={loading}
       />
     </>
   );

@@ -11,6 +11,7 @@ const MsaHeader = ({
   msaStatus,
   navigateToEditMsa,
   navigateToRenewMsa,
+  loading,
   id
 }:HeaderPropType) => {
   return (
@@ -23,7 +24,9 @@ const MsaHeader = ({
         </div>
         <div className={styles.maincontainer__header__subheading}>
         <div className={styles.maincontainer__header__subheading__box}>
-          {msaStatus === 0 ? <p>ACTIVE</p> : <p>INACTIVE</p>}
+        {loading && (
+         msaStatus === 0 ? <p>INACTIVE</p> : <p>ACTIVE</p>
+  )}
       </div>
 
         </div>

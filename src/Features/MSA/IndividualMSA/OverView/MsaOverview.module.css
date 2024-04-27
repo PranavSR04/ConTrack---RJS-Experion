@@ -1,27 +1,33 @@
-.maincontainer__overview {
-    margin-top: 1rem;
-    flex:8;
-    display: flex;
-  }
+
 .maincontainer__overview__maindiv{
   display: flex;
 }
-.maincontainer__overview__div2{
-  
+.maincontainer__overview__left {
+  margin-top: 1rem;
+  height: 15rem;
   flex:1;
+  display: flex;
+  position: relative;
 }
   .maincontainer__overview__overview_count {
-    margin-left: -220%;
     margin-bottom: 2%;
-    margin-top: 12%;
-    width: 300%;
+    margin-top: 6%;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
     background-color: white;
     font-family: "Montserrat", sans-serif;
   }
-  
+  .maincontainer__overview__overview__2{
+    width: 30%;
+    margin-left: 2.5%;
+    margin-bottom: 2%;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    background-color: white;
+    font-family: "Montserrat", sans-serif;
+    height: 80%;
+
+  }
   .maincontainer__overview__overview {
-    width: 32%;
+    width: 30%;
     margin-bottom: 2%;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
     background-color: white;
@@ -57,7 +63,7 @@
   .maincontainer__overview__payment {
     width: 32%;
     margin-bottom: 2%;
-    margin-left: 1rem;
+    margin-left: 1.5rem;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
     background-color: white;
     font-family: "Montserrat", sans-serif;
@@ -86,8 +92,8 @@
       width: 130vw;
     }
   }
-  .manincontainer__overviewpaymwent__doughnutchart{
+  .manincontainer__overview__doughnutchart{
     height: 200px;
-  justify-self: center;
+    width: 210px;
   }
   

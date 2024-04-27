@@ -56,6 +56,10 @@ const ContractListHandler = ({ responses, id }:ContractListHandlerPropType) => {
                             contract_ref_id: contract.contract_ref_id,
                             contract_type: contract.contract_type,
                             contract_status: contract.contract_status,
+                            start_date: contract.start_date,
+                            end_date: contract.end_date,
+                            du:contract.du,
+
                         });
                     });
                 });
@@ -85,6 +89,21 @@ const ContractListHandler = ({ responses, id }:ContractListHandlerPropType) => {
             dataIndex: 'contract_type',
             key: 'contract_type',
         },
+        {
+          title: 'start',
+          dataIndex: 'start_date',
+          key: 'contract_type',
+      },
+      {
+        title: 'end',
+        dataIndex: 'end_date',
+        key: 'contract_type',
+    },
+      {
+        title: 'DU',
+        dataIndex: 'du',
+        key: 'du',
+    },
         {
             title: 'Status',
             dataIndex: 'contract_status',

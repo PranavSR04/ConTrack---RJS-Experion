@@ -8,12 +8,12 @@ const MsaComments = ({
   return (
     <div>
        <Card
-          className={styles.maincontainer__docusercomm__payment}
+          className={styles.maincontainer__comments}
         >
-          <div className={styles.maincontainer__docusercomm__title}>
+          <div className={styles.maincontainer__comments__title}>
             <h4>Comments</h4>
           </div>
-          <div className={styles.maincontainer__docusercomm__list}>
+          <div className={styles.maincontainer__comments__list}>
             {comments}
           </div>
         </Card>

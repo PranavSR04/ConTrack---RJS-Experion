@@ -20,10 +20,19 @@ const IndividualMSA = (
     <div className={styles.maincontainer}>
       <MsaHeaderHandler responses={responses} id={msa_id && msa_id} />
       <MsaOverviewHandler responses={responses} loading={loading} />
-      <ContractListHandler responses={responses} id={msa_id} />
+      <div className={styles.maincontainer__revenue}>
       <MsaRevenueHandler msa_id={msa_id}/>
+      </div>
+      <div className={styles.maincontainer__doclist}>
       <MsaDocHandler response={responses?responses:undefined}  />
-      
+
+       </div>
+       <div className={styles.maincontainer__comments}>
+      <MsaCommentsHandler  responses={responses} loading={loading}/>
+       </div>
+       <div className={styles.maincontainer__contractlist}>
+       <ContractListHandler responses={responses} id={msa_id} />
+       </div>
     </div>
   )
 }
