@@ -17,6 +17,7 @@ export interface HeaderHandlerPropType {
     msaStatus:number;
     navigateToEditMsa: (id: string) => void;
     navigateToRenewMsa: (id: string) => void;
+    loading:boolean
     id: string
   }
   

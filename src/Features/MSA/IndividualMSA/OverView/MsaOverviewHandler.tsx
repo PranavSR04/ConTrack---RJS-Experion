@@ -148,11 +148,14 @@ const MsaOverviewHandler = ({ responses, loading }: HandlerPropType) => {
       ],
   };
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,  // Allows the chart to fill the container
+    cutout: '40%',
     plugins: {
       legend: {
         labels: {
           font: {
-            size: 11  // Font size
+            size: 11 // Font size
           },
           boxWidth: 12  // Color block width
         }

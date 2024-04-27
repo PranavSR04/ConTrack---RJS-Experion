@@ -8,25 +8,23 @@ import IndividualMSA from "./IndividualMSA";
 const IndividualMsaHandler = () => {
   const location = useLocation();
   const { state } = location;
-  const msa_id = state?.msa_id;
-  const [id, setId] = useState<string>();
+  const id = state?.id;
   const [responses, setResponses] = useState<
   MsaApiType | AxiosError<unknown, any>
   >();
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
-    setId(msa_id);
-    const fetchData = async (id: string) => {
+    const fetchData = async (msaid: string) => {
       try {
-        const response = await getMSAData(id);
+        const response = await getMSAData(msaid);
         setResponses(response);
         setLoading(false);
-        console.log("Contracts response: ", response);
-      } catch (error) {
+        } catch (error) {
         console.log("Error: ", error);
       }
     };
-
+    console.log("location state:", state);
+    console.log("id before fetch:", id);
     if (id) {
       fetchData(id);
     }

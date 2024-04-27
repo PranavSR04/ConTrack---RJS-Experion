@@ -55,6 +55,8 @@ const AppRoutes = () => {
                     <Route path="/contractform" element={<><NavBarHandler /><SideBar><ContractFormHandler /></SideBar></>} />                    
                     <Route path="/msa/msaDetails" element={<><NavBarHandler /><SideBar><IndividualMsaHandler /></SideBar></>} />
                     <Route path="/Dashboard" element={<><NavBarHandler /><SideBar><Dashboard /></SideBar></>}></Route>
+                    <Route path="/:msa_ref_id" element={<><NavBarHandler /><SideBar><IndividualMsaHandler/></SideBar></>}></Route>
+                    
                 </Routes>
             </NavContext>
 
