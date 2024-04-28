@@ -1,6 +1,4 @@
 import axiosInstance from "../../../Config/AxiosConfig";
-
-
 export const fetchRevenueProjection = async (id?:number, msa_id?:string, requestBody?: any) =>{
     let url = 'api/revenue/list/';
     console.log(requestBody);
@@ -9,6 +7,7 @@ export const fetchRevenueProjection = async (id?:number, msa_id?:string, request
     }
     if (msa_id !== undefined) {
         url += '?msa_id='+msa_id;
+        console.log(msa_id,'msa_id', url,'url');
     }
 
     const config = { 

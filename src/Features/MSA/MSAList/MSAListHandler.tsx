@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { MsaData, TableColumn, locale } from "./types";
 import { getmsalist } from "./api/getmsalist";
-import { Button, Empty, Input, Pagination, TablePaginationConfig, Tooltip } from "antd";
+import { Button, Empty, Input, Pagination, TablePaginationConfig, Tooltip} from "antd";
 import tableStyles from './MSAList.module.css'
 import { ArrowDownOutlined, ArrowUpOutlined, CloudDownloadOutlined, EditOutlined, SearchOutlined, SyncOutlined } from '@ant-design/icons';
 import { FilterConfirmProps } from "antd/es/table/interface";
@@ -44,8 +44,8 @@ const MSAListHandler = () => {
       };
       //click function for each data row
       const rowClickHandler = (record: MsaData) => {
-          navigate(`/msa/msaDetails`, {
-            state: { msa_id: record.id as string },
+        navigate(`/${record.msa_ref_id}`, {
+            state: { id: record.id as string },
           });
       };
 

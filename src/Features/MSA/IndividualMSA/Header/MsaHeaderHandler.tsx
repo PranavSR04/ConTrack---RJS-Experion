@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { HeaderHandlerPropType, HeadingHandlerType } from "./types";
-import { useNavigate } from "react-router"; // Importing useNavigate hook
+import { useNavigate } from "react-router";
 import MsaHeader from "./MsaHeader";
 
 const MsaHeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
   const [error, setError] = useState<string>("");
+  const[loading,isLoading]=useState<boolean>(false);
   const [msaRefId, setMsaRefId] = useState<string>("");
   const [clientName, setClientName] = useState<string>("");
   const [msaExcelData, setMsaExcelData] = useState<(string | number)[][]>([]);
@@ -20,6 +21,7 @@ const MsaHeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
   // Function which is used to set the data required from response
   const getMsaHeading: HeadingHandlerType["getMsaHeading"] = (responses) => {
     if (responses && responses.data && responses.data.length > 0) {
+      isLoading(true);
       setMsaRefId(responses.data[0].msa_ref_id);
       setClientName(responses.data[0].client_name);
       setMsaStatus(responses.data[0].is_active);
@@ -83,21 +85,13 @@ const MsaHeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
     }
   };
 
-  // Function to trigger navigation to the edit MSA page
-  const navigateToEditMsa = (id: string) => {
-    navigate(`Edit MSA`, {
-        state: { id: id as string },
-    });
-  };
-
-  // Function to trigger navigation to the renew MSA page
-  const navigateToRenewMsa = (id: string) => {
-    navigate(`/MSAOverview/Renew MSA`, {
-        state: { id: id as string },
-    });
-  };
-  
-
+  const navigateToEditMsa=(id: string)=>{
+    navigate('/MSAForm', { state: {id:id as string , msaEdited: true } });
+  }
+  const navigateToRenewMsa=(id: string)=>{
+    navigate('/MSAForm', { state: {id:id as string , msaRenewed: true } });
+   
+  }
   return (
     <>
       <MsaHeader
@@ -109,6 +103,7 @@ const MsaHeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
         navigateToEditMsa={navigateToEditMsa}
         navigateToRenewMsa={navigateToRenewMsa}
         id={id}
+        loading={loading}
       />
     </>
   );
