@@ -10,57 +10,15 @@ const ContractForm = ({
 	selectedOption, 
 	handleSelectChange, 
 	onFinish, 
-	selectedItems, 
-	setSelectedItems,
-	assocFilteredOptions,
 	clients,
-	clientRegion,
 	onSelectClientName,
 	getClientNames,
 	users,
-	contractDetails
-	}:ContractFormPropType) => {
-
-		let filename = "file";
-
-		let initialfields:any = [];
-
-		console.log(selectedOption);
-
-		let initialValues:any = {milestones: [{}] };
-
-		if(contractDetails){
-			console.log(contractDetails);
-			 initialValues = {
-				...contractDetails,
-				date_of_signature: dayjs(contractDetails?.date_of_signature),
-				start_date: dayjs(contractDetails?.start_date),
-				end_date: dayjs(contractDetails?.end_date),
-			};
-			if (contractDetails?.milestones) {
-				const updatedMilestones = contractDetails.milestones.map((milestone: any) => {
-				  return {
-					...milestone,
-					milestone_enddate: dayjs(milestone.milestone_enddate),
-				  };
-				});
-			  
-				initialValues.milestones = updatedMilestones;
-			  }
-			if(contractDetails?.associated_users){
-				const associated_users_id = contractDetails.associated_users.map((user)=>user.user_id);
-				initialValues.associated_users = associated_users_id;
-				console.log(associated_users_id);
-			}
-			filename = "addendum_file";
-			console.log("Initial values",initialValues);
-		}else{
-			initialfields = [
-				{name: "region", value: clientRegion }
-			];
-			filename = "file";
-		}
-		
+	contractDetails,
+	initialValues,
+	filename,
+	initialFields
+	}:ContractFormPropType) => {		
 		const [form] = Form.useForm();
 
 		// Validation for date of signature to be before start date and end date
@@ -101,7 +59,7 @@ const ContractForm = ({
 		<>
 		<div className={styles.contractForm}>
 			<Form encType="multipart/form-data" onFinish={onFinish} 
-				fields={initialfields}
+				fields={initialFields}
 				initialValues={initialValues}
 				form={form}
 			>
@@ -270,7 +228,7 @@ const ContractForm = ({
 								mode="multiple"
 								placeholder="Select Associated Users"
 								filterOption={false}
-								onChange={setSelectedItems}
+								// onChange={setSelectedItems}
 							>
 								{users && users.map((user:any,index) => (
 									<Select.Option key={index} value={user.id}>
