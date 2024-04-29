@@ -3,7 +3,7 @@ import { contractType } from "../types";
 import MsaOverview from "./MsaOverview";
 import { HandlerPropType, OverviewHandlerType } from "./types";
 
-const MsaOverviewHandler = ({ responses, loading }: HandlerPropType) => {
+const MsaOverviewHandler = ({ responses, loading,msa_id }: HandlerPropType) => {
     const [error, setError] = useState<string>("");
     const [startDate, setStartDate] = useState<string>("");
     const [endDate, setEndDate] = useState<string>("");
@@ -22,7 +22,7 @@ const MsaOverviewHandler = ({ responses, loading }: HandlerPropType) => {
     const [activeCount, setActiveCount] = useState(0);
     const [closedCount,setClosedCount]=useState(0);
     const [expiredCount,setExpiredCount]=useState(0);
-
+   
     useEffect(() => {
       console.log("response in Header Handler", responses);
       if (responses) {
@@ -179,7 +179,8 @@ const MsaOverviewHandler = ({ responses, loading }: HandlerPropType) => {
           onProgressContracts={onProgressContracts}
           chartData={chartData}
           options={options}
-        />
+          responses={responses}
+          msa_id={msa_id}        />
       </div>
     );
   };

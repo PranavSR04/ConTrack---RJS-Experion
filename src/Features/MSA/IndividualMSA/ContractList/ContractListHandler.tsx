@@ -80,21 +80,21 @@ const ContractListHandler = ({ responses, id }:ContractListHandlerPropType) => {
               ),
             // render: (text: string) => <span>{text}</span>,
         },
-        {
-            title: 'Contract Type',
-            dataIndex: 'contract_type',
-            key: 'contract_type',
-        },
-        {
-            title: 'Status',
-            dataIndex: 'contract_status',
-            key: 'contract_status',
-            render: (text: string) => (
-                <span style={{ display: 'inline-block', minWidth:'89px',padding: '5px', borderRadius: '3px', color: 'white', fontWeight: 'bold', backgroundColor: getStatusColor(text) , textAlign: 'center'}}>
-                    {text}
-                </span>
-            ),
-        }
+        // {
+        //     title: 'Contract Type',
+        //     dataIndex: 'contract_type',
+        //     key: 'contract_type',
+        // },
+        // {
+            // title: 'Status',
+            // dataIndex: 'contract_status',
+            // key: 'contract_status',
+            // render: (text: string) => (
+            //     <span style={{ display: 'inline-block', minWidth:'89px',padding: '5px', borderRadius: '3px', color: 'white', fontWeight: 'bold', backgroundColor: getStatusColor(text) , textAlign: 'center'}}>
+            //         {text}
+            //     </span>
+            // ),
+        //}
     ];
     const rowClickHandler = (record: ContractData) => {
         if (!actionClicked) {

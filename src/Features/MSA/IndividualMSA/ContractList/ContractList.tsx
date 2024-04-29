@@ -26,11 +26,7 @@ const ContractList = ({
           />
         </div>
       </Card>
-      {/* <div style={{ width:'16vw'}}>
-   <Card className={styles.contract_list_statusChart} style={{ height: '35vh '}}> <><Doughnut data={chartData} options={options}></Doughnut>
-    <p style={{fontSize:'.7rem',textAlign:'center',fontWeight:'600'}}>Contract Status</p></>
-  </Card>
-      </div> */}
+
     </>
   );
 };

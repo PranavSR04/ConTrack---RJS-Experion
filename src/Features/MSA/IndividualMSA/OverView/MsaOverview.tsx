@@ -3,6 +3,7 @@ import { MsaOverViewPropType } from './types'
 import styles from './MsaOverview.module.css'
 import { Card } from 'antd'
 import { Doughnut } from 'react-chartjs-2'
+import ContractListHandler from '../ContractList/ContractListHandler'
 const MsaOverview = ({
   startDate,
   endDate,
@@ -17,7 +18,9 @@ const MsaOverview = ({
   onProgressContracts,
   ffTotalEstimate,
   tmTotalEstimate,
-chartData,options
+chartData,options,
+responses,
+msa_id
 }:MsaOverViewPropType) => {
   return (
       <div className={`${styles.maincontainer__overviewpayment}`}>
@@ -126,18 +129,10 @@ chartData,options
           </div>
         </Card>
 
-        <Card
-          className={`${styles.maincontainer__overviewpayment__overview_count}`}
-          loading={loading}
-        >
-          <div className={`${styles.maincontainer__overviewpayment__title}`}>
-            <h4>Contract Status</h4>
-          </div>
-          <div className={styles.manincontainer__overviewpaymwent__doughnutchart}>
-              <Doughnut  data={chartData} options={options}></Doughnut>
-    
-    </div>
-        </Card>
+         
+                <ContractListHandler responses={responses} id={msa_id} />
+              {/* <Doughnut  data={chartData} options={options}></Doughnut> */}
+              
     </div>
   )
 }

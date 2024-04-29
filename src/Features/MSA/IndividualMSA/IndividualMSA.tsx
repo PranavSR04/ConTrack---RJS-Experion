@@ -17,7 +17,7 @@ const IndividualMSA = (
   return (
     <div className={`${styles.maincontainer}`}>
       <MsaHeaderHandler responses={responses} id={msa_id && msa_id} />
-      <MsaOverviewHandler responses={responses} loading={loading} />
+      <MsaOverviewHandler responses={responses} loading={loading} msa_id={msa_id} />
        {/* <div className={`${styles.maincontainer__revenue}`}>
         <div className={styles.maincontainer__chart}>
           <RevenueProjectionHandler id={revenueid} />
@@ -28,7 +28,7 @@ const IndividualMSA = (
       </div> */}
       {/* <DocumentsUsersCommentsHandler responses={responses} loading={loading} /> */}
       {/* <CloseContractHandler responses={responses} id={id} />  */}
-      <ContractListHandler responses={responses} id={msa_id} />
+      {/* <ContractListHandler responses={responses} id={msa_id} /> */}
       <MsaRevenueHandler msa_id={msa_id}/>
       <MsaDocHandler response={responses?responses:undefined}  />
     </div>
