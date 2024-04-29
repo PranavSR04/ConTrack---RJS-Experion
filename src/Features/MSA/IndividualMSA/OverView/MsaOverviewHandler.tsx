@@ -3,7 +3,7 @@ import { contractType } from "../types";
 import MsaOverview from "./MsaOverview";
 import { HandlerPropType, OverviewHandlerType } from "./types";
 
-const MsaOverviewHandler = ({ responses, loading,msa_id }: HandlerPropType) => {
+const MsaOverviewHandler = ({ responses, loading}: HandlerPropType) => {
     const [error, setError] = useState<string>("");
     const [startDate, setStartDate] = useState<string>("");
     const [endDate, setEndDate] = useState<string>("");
@@ -22,7 +22,7 @@ const MsaOverviewHandler = ({ responses, loading,msa_id }: HandlerPropType) => {
     const [activeCount, setActiveCount] = useState(0);
     const [closedCount,setClosedCount]=useState(0);
     const [expiredCount,setExpiredCount]=useState(0);
-   
+   const [noContracts,setNoContracts]=useState<boolean>(false)
     useEffect(() => {
       console.log("response in Header Handler", responses);
       if (responses) {
@@ -67,7 +67,10 @@ const MsaOverviewHandler = ({ responses, loading,msa_id }: HandlerPropType) => {
         let closed = 0;
         let expiring = 0;
         let onProgress = 0;
-  
+  console.log(contracts.length,"is the no.of contracts")
+  if(contracts.length==0){
+    setNoContracts(true);
+  }
         contracts.forEach((contract: contractType) => {
           switch (contract.contract_status) {
             case "Active":
@@ -148,11 +151,14 @@ const MsaOverviewHandler = ({ responses, loading,msa_id }: HandlerPropType) => {
       ],
   };
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,  // Allows the chart to fill the container
+    cutout: '40%',
     plugins: {
       legend: {
         labels: {
           font: {
-            size: 11  // Font size
+            size: 11 // Font size
           },
           boxWidth: 12  // Color block width
         }
@@ -180,7 +186,8 @@ const MsaOverviewHandler = ({ responses, loading,msa_id }: HandlerPropType) => {
           chartData={chartData}
           options={options}
           responses={responses}
-          msa_id={msa_id}        />
+          noContracts={noContracts}
+          />
       </div>
     );
   };

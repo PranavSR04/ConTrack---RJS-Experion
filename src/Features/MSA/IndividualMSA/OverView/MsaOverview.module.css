@@ -1,81 +1,99 @@
-.maincontainer__overviewpayment {
-    margin-top: 1rem;
-    display: flex;
-    /* position: relative; */
-    
-  }
-  .maincontainer__overviewpayment__overview_count {
-    margin-left: 1rem;
+
+.maincontainer__overview__maindiv{
+  display: flex;
+}
+.maincontainer__overview__left {
+  margin-top: 1rem;
+  height: 15rem;
+  flex:1;
+  display: flex;
+  position: relative;
+}
+  .maincontainer__overview__overview_count {
     margin-bottom: 2%;
-    width: 31%;
+    margin-top: 6%;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
     background-color: white;
     font-family: "Montserrat", sans-serif;
   }
-  
-  .maincontainer__overviewpayment__overview {
-    width: 32%;
+  .maincontainer__overview__overview__2{
+    width: 30%;
+    margin-left: 2.5%;
     margin-bottom: 2%;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
     background-color: white;
     font-family: "Montserrat", sans-serif;
+    height: 80%;
+
+  }
+  .maincontainer__overview__overview {
+    width: 30%;
+    margin-bottom: 2%;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    background-color: white;
+    font-family: "Montserrat", sans-serif;
+    height: 80%;
   }
   
-  .maincontainer__overviewpayment__title h4 {
+  .maincontainer__overview__title h4 {
     font-weight: 700;
     font-size: 1rem;
   }
   
-  .maincontainer__overviewpayment__content__list {
+  .maincontainer__overview__content__list {
     display: flex;
     margin-top: 0.3rem;
     justify-content: space-between;
   }
   
-  .maincontainer__overviewpayment__content__list h5 {
+  .maincontainer__overview__content__list h5 {
     font-size: 0.8rem;
   }
   
-  .maincontainer__overviewpayment__content__list__value {
+  .maincontainer__overview__content__list__value {
     font-weight: 300;
     text-transform: capitalize;
   }
   
-  .maincontainer__overviewpayment__content__list__value span {
+  .maincontainer__overview__content__list__value span {
     font-weight: 300;
     text-transform: lowercase;
   }
   
-  .maincontainer__overviewpayment__payment {
+  .maincontainer__overview__payment {
     width: 32%;
     margin-bottom: 2%;
-    margin-left: 1rem;
+    margin-left: 1.5rem;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
     background-color: white;
     font-family: "Montserrat", sans-serif;
+    height: 80%;
   }
   
-  .maincontainer__overviewpayment__payment__h2 {
+  .maincontainer__overview__payment__h2 {
     margin: 20px 40px;
     font-size: 1rem;
     font-weight: 700;
   }
   
-  .maincontainer__overviewpayment__list {
+  .maincontainer__overview__list {
     display: flex;
     justify-content: space-between;
   }
   
-  .maincontainer__overviewpayment__list h5 {
+  .maincontainer__overview__list h5 {
     font-weight: 500;
     padding-top: 1rem;
     font-size: 0.8rem;
   }
   
   @media only screen and (max-width: 1200px) {
-    .maincontainer__overviewpayment {
+    .maincontainer__overview {
       width: 130vw;
     }
   }
-
+  .manincontainer__overview__doughnutchart{
+    height: 200px;
+    width: 210px;
+  }
   

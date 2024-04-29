@@ -56,6 +56,10 @@ const ContractListHandler = ({ responses, id }:ContractListHandlerPropType) => {
                             contract_ref_id: contract.contract_ref_id,
                             contract_type: contract.contract_type,
                             contract_status: contract.contract_status,
+                            start_date: contract.start_date,
+                            end_date: contract.end_date,
+                            du:contract.du,
+
                         });
                     });
                 });
@@ -72,7 +76,7 @@ const ContractListHandler = ({ responses, id }:ContractListHandlerPropType) => {
     }, [responses]);
     const columns = [
         {
-            title: 'Contract Ref Id',
+            title: 'Id',
             dataIndex: 'contract_ref_id',
             key: 'contract_ref_id',
             render: (text: any, record: ContractData) => (
@@ -80,21 +84,36 @@ const ContractListHandler = ({ responses, id }:ContractListHandlerPropType) => {
               ),
             // render: (text: string) => <span>{text}</span>,
         },
-        // {
-        //     title: 'Contract Type',
-        //     dataIndex: 'contract_type',
-        //     key: 'contract_type',
-        // },
-        // {
-            // title: 'Status',
-            // dataIndex: 'contract_status',
-            // key: 'contract_status',
-            // render: (text: string) => (
-            //     <span style={{ display: 'inline-block', minWidth:'89px',padding: '5px', borderRadius: '3px', color: 'white', fontWeight: 'bold', backgroundColor: getStatusColor(text) , textAlign: 'center'}}>
-            //         {text}
-            //     </span>
-            // ),
-        //}
+        {
+            title: 'Type',
+            dataIndex: 'contract_type',
+            key: 'contract_type',
+        },
+        {
+          title: 'Start Date',
+          dataIndex: 'start_date',
+          key: 'contract_type',
+      },
+      {
+        title: 'End Date',
+        dataIndex: 'end_date',
+        key: 'contract_type',
+    },
+      {
+        title: 'DU',
+        dataIndex: 'du',
+        key: 'du',
+    },
+        {
+            title: 'Status',
+            dataIndex: 'contract_status',
+            key: 'contract_status',
+            render: (text: string) => (
+                <span style={{ display: 'inline-block', minWidth:'89px', borderRadius: '3px', color: 'white', backgroundColor: getStatusColor(text) , textAlign: 'center',fontSize: '14px'}}>
+                    {text}
+                </span>
+            ),
+        }
     ];
     const rowClickHandler = (record: ContractData) => {
         if (!actionClicked) {

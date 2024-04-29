@@ -49,6 +49,9 @@ export interface ContractListHandlerPropType {
     contract_ref_id: string;
     contract_status: string;
     contract_type: string;
+    start_date:string;
+    end_date:string;
+    du:string;
 }
   export interface ContractListPropType{
     columns: ({

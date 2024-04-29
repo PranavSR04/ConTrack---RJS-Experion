@@ -17,13 +17,16 @@ const ContractList = ({
           <h4>Contract List</h4>
         </div>
         <div>
+        {contractData && contractData.length > 0 ? (
           <Table
           className={styles.contract_list_table}
             dataSource={contractData}
             columns={columns}
             pagination={false}
             size="small"
-          />
+          /> ) : (
+            <p>No contracts found</p>
+          )}
         </div>
       </Card>
 
