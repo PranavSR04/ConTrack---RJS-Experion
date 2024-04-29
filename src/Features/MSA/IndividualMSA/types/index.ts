@@ -29,13 +29,20 @@ export interface Msa {
     created_at: string;
     updated_at: string;
     user_name: string;
-    contracts:contractType;
+    contracts:contractType[];
     msa_olddoclink:string[];
-    combined_msa_doclink:MsaDocs;
+    total_contracts_count: number;
+    active_contracts_count:number,
+    closed_contracts_count:number,
+    expiring_contracts_count:number,
+    onprogress_contracts_count:number,
+    expired_contracts_count:number,
+    tm_contracts_count:number,
+    ff_contracts_count:number
   }
   
   export interface MsaApiType {
-    msa_data: Msa[];
+    data: Msa[];
   }
 
   export interface LocationStateProps {
