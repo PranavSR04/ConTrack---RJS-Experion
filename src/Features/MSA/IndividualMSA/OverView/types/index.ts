@@ -4,12 +4,15 @@ import { MsaApiType } from "../../types";
 export interface HandlerPropType {
     responses: MsaApiType | AxiosError<unknown, any> | undefined;
     loading: boolean;
+
   }
   export interface OverviewHandlerType {
     getOverview: (responses: any) => void;
   }
   
   export interface MsaOverViewPropType {
+    responses: MsaApiType | AxiosError<unknown, any> | undefined;
+    noContracts: boolean
     startDate: string;
     endDate: string;
     totalEstimate: number;

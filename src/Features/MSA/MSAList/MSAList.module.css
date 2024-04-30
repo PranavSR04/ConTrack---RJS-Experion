@@ -31,15 +31,16 @@
     flex:1;
 }
 .MSAList__Table__Addbutton{
-    margin-left: 65%;
+    margin-left: 70%;
     margin-top: 1%;
     border-color: transparent;
     width:30%;
     margin-bottom: 1%;
-    border-radius: 0.5rem;
+    border-radius: 0.3rem;
      background-color:#DC143C;
      color: white;
-     height: 90%;
+     height: 70%;
+     font-size: 0.9rem;
 }
 .MSAList__Table__Table{
     padding-top: 2%;
