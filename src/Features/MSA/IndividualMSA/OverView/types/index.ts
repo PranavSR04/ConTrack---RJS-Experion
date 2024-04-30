@@ -15,14 +15,12 @@ export interface HandlerPropType {
     totalEstimate: number;
     ffTotalEstimate: number;
     tmTotalEstimate: number;
+    totalContractCount: number;
+    tmContractCount: number;
+    ffContractCount: number;
     loading: boolean;
     region: string;
     msaTerm:number;
-    totalContracts: number;
-    activeContracts: number;
-    closedContracts: number;
-    expiringContracts: number;
-    onProgressContracts: number;
     chartData: {
       labels: string[];
       datasets: {

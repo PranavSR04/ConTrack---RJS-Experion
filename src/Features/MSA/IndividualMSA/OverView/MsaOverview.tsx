@@ -10,13 +10,11 @@ const MsaOverview = ({
   loading,
   region,
   msaTerm,
-  totalContracts,
-  activeContracts,
-  closedContracts,
-  expiringContracts,
-  onProgressContracts,
   ffTotalEstimate,
   tmTotalEstimate,
+  totalContractCount,
+  tmContractCount,
+  ffContractCount,
 chartData,options
 }:MsaOverViewPropType) => {
   return (
@@ -126,69 +124,42 @@ chartData,options
                 </h5>
               </div>
             </Card>
-            {/* for demo only */}
 
 
 
             <Card
-              className={styles.maincontainer__overview__overview__2}
-              loading={loading}
-            >
-              <div className={styles.maincontainer__overview__title}>
-                <h4>Msa Details</h4>
-              </div>
-              <div className={styles.maincontainer__overview__content}>
-                <div
-                  className={styles.maincontainer__overview__content__list}
-                >
-                  <h5>Region</h5>
-                  <h5
-                    className={styles.maincontainer__overview__content__list__value}
-                  >
-                    {region}
-                  </h5>
-                </div>
-                <div
-                  className={styles.maincontainer__overview__content__list}
-                >
-                  <h5>Start Date</h5>
-                  <h5
-                    className={styles.maincontainer__overview__content__list__value}
-                  >
-                    {startDate}
-                  </h5>
-                </div>
-                <div
-                  className={styles.maincontainer__overview__content__list}
-                >
-                  <h5>End Date</h5>
-                  <h5
-                    className={styles.maincontainer__overview__content__list__value}
-                  >
-                    {endDate}
-                  </h5>
-                </div>
-                <div
-                  className={styles.maincontainer__overview__content__list}
-                >
-                  <h5>Msa Term</h5>
-                  <h5
-                    className={styles.maincontainer__overview__content__list__value}
-                  >
-                    {msaTerm && msaTerm !== 0
-                      ? `${msaTerm} Years`
-                      : "1 Year"}
-                  </h5>
-                </div>
-              </div>
-            </Card>
-            {/* for demo end */}
+      className={styles.maincontainer__overview__overview__contractcount}
+      loading={loading}
+    >
+      <div className={styles.maincontainer__overview__count__title}>
+        <p><b>Contract Count</b></p>
+        <h4>{totalContractCount}</h4>
+        <div className={styles.titleSeparator}></div>
+      </div>
+      <div className={styles.mainContainer}>
+        <div className={styles.mainContainer__overview__count__content}>
+          <div className={styles.mainContainer__overview__count__content__list__ff}>
+            <p><b>Fixed Fee</b></p>
+            <p className={styles.mainContainer__overview__count__content__list__value}>
+              {ffContractCount}
+            </p>
+          </div>
+          <div className={styles.countSeparator}></div>
+          <div className={styles.mainContainer__overview__count__contentt__list__tm}>
+            <p><b>T & M</b></p>
+            <p className={styles.mainContainer__overview__count__content__list__value}>
+              {tmContractCount}
+            </p>
+          </div>
+        </div>
+      </div>
+    </Card>
 
 
       </div>
       <div className={styles.maincontainer__overview__right}>
           <Card
-          className={styles.maincontainer__overview__overview_count}
+          className={styles.maincontainer__overview__overview__count}
           loading={loading}
         >
           <div className={styles.maincontainer__overview__title}>
