@@ -100,3 +100,17 @@
   font-weight: 400;
   margin-left: 4rem;
 }
+
+
+.modal{
+	text-align: center;
+}
+.okbtn{
+	color: white;
+    background-color: #dc143c;
+	margin-right: 10px ;
+}
+.modalfooter{
+	text-align: center;
+	padding: 5%;
+}

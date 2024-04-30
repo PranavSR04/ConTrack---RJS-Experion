@@ -17,20 +17,19 @@ const ContractList = ({
           <h4>Contract List</h4>
         </div>
         <div>
+        {contractData && contractData.length > 0 ? (
           <Table
           className={styles.contract_list_table}
             dataSource={contractData}
             columns={columns}
             pagination={false}
             size="small"
-          />
+          /> ) : (
+            <p>No contracts found</p>
+          )}
         </div>
       </Card>
-      {/* <div style={{ width:'16vw'}}>
-   <Card className={styles.contract_list_statusChart} style={{ height: '35vh '}}> <><Doughnut data={chartData} options={options}></Doughnut>
-    <p style={{fontSize:'.7rem',textAlign:'center',fontWeight:'600'}}>Contract Status</p></>
-  </Card>
-      </div> */}
+
     </>
   );
 };
