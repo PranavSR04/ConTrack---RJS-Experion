@@ -67,7 +67,6 @@ const MsaOverviewHandler = ({ responses, loading}: HandlerPropType) => {
         let closed = 0;
         let expiring = 0;
         let onProgress = 0;
-  console.log(contracts.length,"is the no.of contracts")
   if(contracts.length==0){
     setNoContracts(true);
   }
@@ -137,8 +136,9 @@ const MsaOverviewHandler = ({ responses, loading}: HandlerPropType) => {
                   expiringCount,
                   onProgressContracts,
                   activeCount,
-                  expiredCount,
+                  
                   closedCount,
+                  expiredCount
               ],
               backgroundColor: [
                   '#89CFF0', // Expiring
@@ -165,7 +165,6 @@ const MsaOverviewHandler = ({ responses, loading}: HandlerPropType) => {
       }
     }
   }; 
-  
     return (
       <div>
         {error && <p>Error: {error}</p>}
