@@ -10,7 +10,6 @@ import { useLocation, useNavigate } from 'react-router';
 import moment, { Moment } from "moment";
 import { posteditmsaform } from './api/posteditmsaform';
 import { postrenewmsaform } from './api/postrenewmsaform';
-import dayjs from 'dayjs';
 
 const MSAFormHandler = () => {
   const location=useLocation();
@@ -57,7 +56,6 @@ const MSAFormHandler = () => {
       else if (state.msaEdited) {
         setMsaEdited(true);
         setHeadingText("EDIT")
-        //handleAutoFillData()
         setMsaState("update")
         setHideMsarefid(false)
         setShowFile(true)
@@ -67,7 +65,6 @@ const MSAFormHandler = () => {
      else if (state.msaRenewed){
        setMsaRenewed(true)
        setHeadingText("RENEW")
-       //handleAutoFillData()
        setMsaState('renew')
        setHideMsarefid(false)
        setShowFile(false)
@@ -93,19 +90,15 @@ const generateMsaId = async () => {
   try {
     let uniqueIdGenerated = false;
     let generatedId = "";
-    const clientName = msaData.client_name.toUpperCase().replace(/\s/g, ""); // Convert client name to uppercase and remove spaces
-    const prefix = clientName.length > 10 ? clientName.substring(0, 4) : clientName.substring(0, 3); // Determine prefix based on client name length
-
+    const clientName = msaData.client_name.toUpperCase().replace(/\s/g, ""); 
+    const prefix = clientName.length > 10 ? clientName.substring(0, 4) : clientName.substring(0, 3); 
     while (!uniqueIdGenerated) {
-      // Generate a random MSA ID
       generatedId = `${prefix}${Math.floor(Math.random() * 1000)}`;
-       // Check if the generated ID exists in the database
       const exists = await getmsainfo(generatedId);
       if (!exists) {
         uniqueIdGenerated = true;
       }
     }
-    // Set the generated ID as the MSA reference ID in the component state
     setMsaData(prevState => ({
       ...prevState,
       msa_ref_id: generatedId
@@ -117,12 +110,10 @@ const generateMsaId = async () => {
 };
 
 const autoFillMsa = async (id: string) => {
-  
   try {
     // Fetch MSA data from API using msa_ref_id
     const data = await getmsaapi(id);
     const msa_data = data.data.data[0];
-    //console.log(msa_data)
     if (msa_data) {
       const {msa_ref_id,client_name, region, start_date, end_date, msa_doclink } =
         msa_data;
@@ -147,7 +138,6 @@ const autoFillMsa = async (id: string) => {
       }))
     }
     }
-    console.log(msaData);
   } catch (error) {
     console.error("Error generating MSA ID:", error);
   }
@@ -157,7 +147,6 @@ const autoFillMsa = async (id: string) => {
 const handleInputChange = (
   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 ) => {
-  // Destructure the 'name' and 'value' from the event target
   const { name, value } = e.target;
   setMsaData((prevState) => ({
     ...prevState,
@@ -167,9 +156,7 @@ const handleInputChange = (
 
 //Function to check the size of file
 const beforeUpload = (file: RcFile) => {
-  // Check if the file size exceeds the maximum allowed size
   if (file.size > maxSize) {
-    // If the file size exceeds the maximum, show an error message
     message.error("File must be smaller than 10MB!");
     return false;
   }
@@ -179,7 +166,6 @@ const beforeUpload = (file: RcFile) => {
 // Function to handle file upload
 const handleFileUpload = (info: any) => {
   try {
-    // Update the form data with the uploaded file
     setFileUpload( info.file );
     setFileName(info.file.name);
     setShowFile(true);
@@ -224,10 +210,7 @@ const handleSubmit = () => {
   //Function to handle form submission
 const handleSubmitForm=async(value:any)=>{
   setSpinning(true);
-  console.log(msaData)
-  //New FormData is created to store values from form
   const msaFormData = new FormData();
-
 msaFormData.append('msa_ref_id', msaData.msa_ref_id); 
 msaFormData.append('client_name', msaData.client_name);
 msaFormData.append('region', msaData.region);
@@ -235,8 +218,6 @@ msaFormData.append('region', msaData.region);
   msaFormData.append('end_date', msaData.end_date);
 msaFormData.append('comments', msaData.comments);
 msaFormData.append('file',fileUpload||'')
-console.log(msaFormData);
-//Api to post the data for add msa
 if(msaAdded){
   await postaddmsaform(msaFormData,user_id);
   setSpinning(false);
