@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Select, Card, Input, Space, DatePicker, Button, InputNumber, Upload, Modal } from "antd";
 import styles from "./ContractForm.module.css";
 import { AiOutlineMinusCircle } from "react-icons/ai";
-import { ContractFormPropType, MSAType } from "./types";
+import { ContractFormPropType, MSAType, Milestone } from "./types";
 import { UploadOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 
@@ -27,6 +27,7 @@ const ContractForm = ({
 
 
 		const [form] = Form.useForm();
+		const [totalPercentage, setTotalPercentage] = useState(0);
 
 		// Validation for date of signature to be before start date and end date
 		const validateDateOfSignature = (_: unknown, value: dayjs.Dayjs | null | undefined,callback: (error?: string) => void) => {
@@ -62,6 +63,33 @@ const ContractForm = ({
 			}
 			return Promise.resolve();
 		};
+
+		// Function to calculate total percentage
+		const calculateTotalPercentage = () => {
+			const milestones: Milestone[] = form.getFieldValue('milestones');
+			let totalPercentage = 0;
+			milestones.forEach((field: Milestone) => {
+			  totalPercentage += field.percentage || 0;
+			});
+			return totalPercentage;
+		};
+		
+		  // Validator function for total percentage
+		const validateTotalPercentage = (_: unknown, value: number) => {
+			const totalPercentage = calculateTotalPercentage();
+			if (totalPercentage !== 100) {
+				return Promise.reject(new Error('Total percentage should be 100'));
+			} else {
+				// Clear validation errors for individual percentage fields
+				const milestones = form.getFieldValue('milestones');
+				milestones.forEach((_:unknown, index: number) => {
+					const fieldName = `milestones[${index}].percentage`;
+					form.setFields([{ name: fieldName, errors: [] }]);
+				});
+				return Promise.resolve();
+			}
+		};
+
 	return (
 		<>
 		<div className={styles.contractForm}>
@@ -150,27 +178,34 @@ const ContractForm = ({
 							<Space className={`${styles.contractForm__ffcard__main}`}>
 								<Form.List key={"ff"} name={"milestones"}>{(fields,{add,remove}) => 
 								<>
-								<Form.Item>
-									<Button onClick={()=>{add()}} className={`${styles.contractForm__ffcard__addbutton}`}>Add</Button>
-								</Form.Item>
+								<div className={`${styles.contractForm__ffcard__main__milestoneheading}`}>
+									<h6 className={`${styles.contractForm__ffcard__main__milestoneheading__desc}`}>Milestone Description</h6>
+									<h6 className={`${styles.contractForm__ffcard__main__milestoneheading__enddate}`}>Milestone End Date</h6>
+									<h6 className={`${styles.contractForm__ffcard__main__milestoneheading__percentage}`}>Percentage</h6>
+									<h6 className={`${styles.contractForm__ffcard__main__milestoneheading__amount}`}>Amount</h6>
+									<Form.Item>
+										<Button onClick={()=>{add()}} className={`${styles.contractForm__ffcard__addbutton}`}>Add</Button>
+									</Form.Item>
+								</div>
 								{fields.map((field,index)=>{
 									console.log("Inside Milestones Filed",field);
 									return(
-										<Space key={field.key} style={{width:"70vw", justifyContent:"space-between"}}> 
+										<Space key={field.key} style={{width:"72vw"}}>
 											<Form.Item name={[field.name,"milestone_desc"]} key={`${field.key}-ff_milestone_desc`} rules={[{required: true, message: "Please input Milestone Description"}]}>
-												<Input placeholder="Milestone Description" style={{ width: "25rem" }}/>
+												<Input placeholder="Milestone Description" style={{ width: "20rem" }}/>
 											</Form.Item>
 											<Form.Item name={[field.name,"milestone_enddate"]} key={`${field.key}-ff_milestone_enddate`}
 											rules={[{required: true, message: "Please input Milestone End Date"},{validator: validateMilestoneEndDate}]}>
 												<DatePicker placeholder="Milestone End Date" style={{ width: "15rem" }}/>
 											</Form.Item>
-											<Form.Item name={[field.name,"percentage"]} key={`${field.key}-ff_percentage`} rules={[{required: true, message: "Please input Milestone Percentage"}]}>
-												<InputNumber
+											<Form.Item name={[field.name,"percentage"]} key={`${field.key}-ff_percentage`} rules={[{required: true, message: "Please input Milestone Percentage"},
+												// { validator: validateTotalPercentage }
+											]}>
+												<InputNumber<number>
 													placeholder="Percentage"
 													min={0}
 													max={100}
-													style={{ width: "7rem" }}
-													// onChange={(value)=>onPercentageChange(value,[field.name, 'amount'], form)}
+													style={{ width: "10rem" }}
 													// formatter={(value) => `${value}%`}
 													// parser={(value) => value?.replace('%', '') as unknown as number}
 												/>
@@ -202,14 +237,19 @@ const ContractForm = ({
 						<Space className={`${styles.contractForm__ffcard__main}`}>
 							<Form.List key={"tm"} name={"milestones"}>{(fields,{add,remove}) => 
 							<>
+							<div className={`${styles.contractForm__ffcard__main__milestoneheading}`}>
+								<h6 className={`${styles.contractForm__ffcard__main__milestoneheading__tmdesc}`}>Milestone Description</h6>
+								<h6 className={`${styles.contractForm__ffcard__main__milestoneheading__tmenddate}`}>Milestone End Date</h6>
+								<h6 className={`${styles.contractForm__ffcard__main__milestoneheading__tmamount}`}>Amount</h6>
 							<Form.Item>
 								<Button onClick={()=>{add()}} className={`${styles.contractForm__ffcard__addbutton}`}>Add</Button>
 							</Form.Item>
+							</div>
 							{fields.map((field,index)=>{
 								return(
-									<Space key={field.key} style={{width:"70vw", justifyContent:"space-between"}}> 
+									<Space key={field.key} style={{width:"70vw"}}> 
 										<Form.Item name={[field.name,"milestone_desc"]} key={`${field.key}-tm_milestone_desc`} rules={[{required: true, message: "Please input Milestone Description"}]}>
-											<Input placeholder="Milestone Description" style={{ width: "25rem" }}/>
+											<Input placeholder="Milestone Description" style={{ width: "20rem" }}/>
 										</Form.Item>
 										<Form.Item name={[field.name,"milestone_enddate"]} key={`${field.key}-tm_milestone_enddate`}
 											rules={[{required: true, message: "Please input Milestone End Date"},{validator: validateMilestoneEndDate}]}>
@@ -264,7 +304,7 @@ const ContractForm = ({
 					<Card className={styles.contractForm__commentscard}>
 						<h6>Comments and Remarks</h6>
 						<Form.Item name={"comments"}>
-							<Input.TextArea rows={6} style={{marginTop:"1%"}} placeholder="Comments and Remarks"/>
+							<Input.TextArea rows={6} style={{marginTop:"1%"}} placeholder="Comments and Remarks" maxLength={200}/>
 						</Form.Item>
 					</Card>
 				</Space>

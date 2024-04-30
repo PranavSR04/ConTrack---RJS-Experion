@@ -9,11 +9,9 @@ const MsaOverviewHandler = ({ responses, loading}: HandlerPropType) => {
     const [endDate, setEndDate] = useState<string>("");
     const [region, setRegion] = useState<string>("");
     const [msaTerm, setMsaTerm] = useState<number>(0);
-    const [totalContracts, setTotalContracts] = useState<number>(0);
-    const [activeContracts, setActiveContracts] = useState<number>(0);
-    const [closedContracts, setClosedContracts] = useState<number>(0);
-    const [expiringContracts, setExpiringContracts] = useState<number>(0);
-    const [onProgressContracts, setOnProgressContracts] = useState<number>(0);
+    const [ffContractCount, setFFContractCount] = useState<number>(0);
+    const [tmContractCount, setTMContractCount] = useState<number>(0);
+    const [totalContractCount,setTotalContractCount]= useState<number>(0);
     const [totalEstimate, setTotalEstimate] = useState<number>(0);
     const [ffTotalEstimate, setFFTotalEstimate] = useState<number>(0);
     const [tmTotalEstimate, setTMTotalEstimate] = useState<number>(0);
@@ -63,61 +61,39 @@ const MsaOverviewHandler = ({ responses, loading}: HandlerPropType) => {
         const term = new Date(data.end_date).getFullYear() - new Date(data.start_date).getFullYear();
         setMsaTerm(term);
   
-        let active = 0;
-        let closed = 0;
-        let expiring = 0;
-        let onProgress = 0;
-  console.log(contracts.length,"is the no.of contracts")
-  if(contracts.length==0){
-    setNoContracts(true);
-  }
-        contracts.forEach((contract: contractType) => {
-          switch (contract.contract_status) {
-            case "Active":
-              active++;
-              break;
-            case "Closed":
-              closed++;
-              break;
-            case "Expiring":
-              expiring++;
-              break;
-            case "On Progress":
-              onProgress++;
-              break;
-            default:
-              break;
-          }
-        });
-  
-        setTotalContracts(contracts.length);
-        setActiveContracts(active);
-        setClosedContracts(closed);
-        setExpiringContracts(expiring);
-        setOnProgressContracts(onProgress);
+       
         const calculateTotalEstimatedAmount = (contracts: contractType) => {
             let totalAmount = 0;
+            let totalCount=0;
             data.contracts.forEach((contract:contractType) => {
+              totalCount++;
               totalAmount += contract.estimated_amount;
             });
+            setTotalContractCount(totalCount)
             return totalAmount;
           };
           const calculateFFEstimatedAmount = (contracts: contractType) => {
             let fftotalAmount = 0;
+            let ffCount=0;
             data.contracts.forEach((contract:contractType) => {
               if(contract.contract_type=="FF"){
+                ffCount++;
                 fftotalAmount += contract.estimated_amount;
               }
             });
+            setFFContractCount(ffCount);
             return fftotalAmount;
           };
           const calculateTMEstimatedAmount = (contracts: contractType) => {
             let tmtotalAmount = 0;
+            let tmCount=0;
             data.contracts.forEach((contract:contractType) => {
               if(contract.contract_type=="TM"){
+                tmCount++;
                 tmtotalAmount += contract.estimated_amount;
               }
             });
+            setTMContractCount(tmCount)
             return tmtotalAmount;
           };
           setTMTotalEstimate(calculateTMEstimatedAmount(contracts));
@@ -135,10 +111,10 @@ const MsaOverviewHandler = ({ responses, loading}: HandlerPropType) => {
           {
               data: [
                   expiringCount,
-                  onProgressContracts,
+                  progressCount,
                   activeCount,
-                  expiredCount,
                   closedCount,
+                  expiredCount
               ],
               backgroundColor: [
                   '#89CFF0', // Expiring
@@ -165,7 +141,6 @@ const MsaOverviewHandler = ({ responses, loading}: HandlerPropType) => {
       }
     }
   }; 
-  
     return (
       <div>
         {error && <p>Error: {error}</p>}
@@ -175,14 +150,12 @@ const MsaOverviewHandler = ({ responses, loading}: HandlerPropType) => {
           totalEstimate={totalEstimate}
           ffTotalEstimate={ffTotalEstimate}
           tmTotalEstimate={tmTotalEstimate}
+          totalContractCount={totalContractCount}
+          tmContractCount={tmContractCount}
+          ffContractCount={ffContractCount}
           loading={loading}
           region={region}
           msaTerm={msaTerm}
-          totalContracts={totalContracts}
-          activeContracts={activeContracts}
-          closedContracts={closedContracts}
-          expiringContracts={expiringContracts}
-          onProgressContracts={onProgressContracts}
           chartData={chartData}
           options={options}
           responses={responses}
