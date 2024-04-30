@@ -13,6 +13,11 @@ export interface ContractFormPropType {
 	initialValues:  EditContractValueType | AddContractValueType;
 	filename: "file" | "addendum_file";
 	initialFields: [InitialFieldsType] | undefined;
+	disabled: boolean;
+	modalTitle: string;
+	handleCancel: () => void;
+	showModal: () => void;
+	isModalOpen: boolean;
 }
 export interface ContractFormHandlerPropType {
 	contractDetails?: ContractType;
