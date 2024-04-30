@@ -4,18 +4,28 @@ import moment from "moment";
 import { getMSA, getUserList } from "./api/api";
 import { ContractFormHandlerPropType, InitialFieldsType, MSAType } from "./types";
 import { editContract } from "../EditContract/api/api";
+import { useNavigate } from "react-router";
 
 const ContractFormHandler = ({contractDetails,contract_id,addContract,initialValues}: ContractFormHandlerPropType) => {
 	const [selectedOption, setSelectedOption] = useState<string>();
+	const [modalTitle,setModalTitle] = useState<string>("Do you want to add contract?");
 	const [filename,setFilename] = useState<"file" | "addendum_file">("file");
 	const [clients, setClients] = useState<MSAType[]>([]);
 	const [users, setUsers] = useState<any[]>([]);
 	const [initialFields,setInitialFields] = useState<[InitialFieldsType]>();
+	const [disabled,setDisabled] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const navigate = useNavigate();
+	const handleCancel = () => {setIsModalOpen(false);};
+	const showModal = () => {setIsModalOpen(true);};
+
 	useEffect(() => {
 		if (contractDetails) {
 			const contractType = contractDetails.contract_type;
 			setSelectedOption(contractType);
 			setFilename("addendum_file");
+			setDisabled(true);
+			setModalTitle("Do you want to edit this contract?")
 		}
 	}, [contractDetails]);
 
@@ -62,7 +72,7 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 
 	//On submiting the form :- either add / edit 
 	const onFinish = async (values: any) => {
-
+		console.log("Values",values);
 		const { milestones, date_of_signature, start_date, end_date } = values;
 		// Format completiondate fields in milestones array
 		const formattedMilestones = milestones.map((milestone: any) => {
@@ -80,13 +90,13 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 			date_of_signature: getFormatedDate(date_of_signature),
 			start_date: getFormatedDate(start_date),
 			end_date: getFormatedDate(end_date),
-			contract_added_by: 1,
+			contract_added_by: localStorage.getItem("user_id"),
 		};
 
 		if (contractDetails) {
 			// For adding a new contract
 			console.log("Addentum", values);
-			formattedValues.addendum_file = values.addendum_file.file.originFileObj;
+			formattedValues.addendum_file = values.addendum_file?.file.originFileObj;
 			formattedValues.contract_status = contractDetails.contract_status;
 			formattedValues.contract_doclink = contractDetails.contract_doclink;
 			
@@ -95,17 +105,30 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 			formattedValues.file = values.file.file.originFileObj;
 		}
 		console.log("Formatted Form Values:", formattedValues);
+		try{
+
+		}catch(error){
+
+		}
 		if (contractDetails && contract_id) {
 			try{
 				await editContract(formattedValues,contract_id);
 			}catch(error){
 				console.log("Error in adding contract", error);
+			}finally{
+				navigate("/AllContracts", {
+					state: { edited: true},
+				  });
 			}
 		} else {
 			try {
-				addContract && addContract(formattedValues);
+				addContract && await addContract(formattedValues);
 			} catch (error) {
 				console.log("Error in adding contract", error);
+			}finally{
+				navigate("/AllContracts", {
+					state: { added: true},
+				  });
 			}
 		}
 	};
@@ -123,6 +146,11 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 			initialValues={initialValues}
 			filename={filename}
 			initialFields={initialFields}
+			disabled={disabled}
+			modalTitle={modalTitle}
+			handleCancel={handleCancel}
+			showModal={showModal}
+			isModalOpen={isModalOpen}
 		/>
 	);
 };

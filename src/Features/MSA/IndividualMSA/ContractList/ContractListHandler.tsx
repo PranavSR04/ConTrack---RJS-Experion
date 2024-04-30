@@ -76,7 +76,7 @@ const ContractListHandler = ({ responses, id }:ContractListHandlerPropType) => {
     }, [responses]);
     const columns = [
         {
-            title: 'Contract Ref Id',
+            title: 'Id',
             dataIndex: 'contract_ref_id',
             key: 'contract_ref_id',
             render: (text: any, record: ContractData) => (
@@ -85,17 +85,17 @@ const ContractListHandler = ({ responses, id }:ContractListHandlerPropType) => {
             // render: (text: string) => <span>{text}</span>,
         },
         {
-            title: 'Contract Type',
+            title: 'Type',
             dataIndex: 'contract_type',
             key: 'contract_type',
         },
         {
-          title: 'start',
+          title: 'Start Date',
           dataIndex: 'start_date',
           key: 'contract_type',
       },
       {
-        title: 'end',
+        title: 'End Date',
         dataIndex: 'end_date',
         key: 'contract_type',
     },
@@ -109,7 +109,7 @@ const ContractListHandler = ({ responses, id }:ContractListHandlerPropType) => {
             dataIndex: 'contract_status',
             key: 'contract_status',
             render: (text: string) => (
-                <span style={{ display: 'inline-block', minWidth:'89px',padding: '5px', borderRadius: '3px', color: 'white', fontWeight: 'bold', backgroundColor: getStatusColor(text) , textAlign: 'center'}}>
+                <span style={{ display: 'inline-block', minWidth:'89px', borderRadius: '3px', color: 'white', backgroundColor: getStatusColor(text) , textAlign: 'center',fontSize: '14px'}}>
                     {text}
                 </span>
             ),

@@ -3,7 +3,7 @@ import { contractType } from "../types";
 import MsaOverview from "./MsaOverview";
 import { HandlerPropType, OverviewHandlerType } from "./types";
 
-const MsaOverviewHandler = ({ responses, loading }: HandlerPropType) => {
+const MsaOverviewHandler = ({ responses, loading}: HandlerPropType) => {
     const [error, setError] = useState<string>("");
     const [startDate, setStartDate] = useState<string>("");
     const [endDate, setEndDate] = useState<string>("");
@@ -20,7 +20,7 @@ const MsaOverviewHandler = ({ responses, loading }: HandlerPropType) => {
     const [activeCount, setActiveCount] = useState(0);
     const [closedCount,setClosedCount]=useState(0);
     const [expiredCount,setExpiredCount]=useState(0);
-
+   const [noContracts,setNoContracts]=useState<boolean>(false)
     useEffect(() => {
       console.log("response in Header Handler", responses);
       if (responses) {
@@ -61,6 +61,7 @@ const MsaOverviewHandler = ({ responses, loading }: HandlerPropType) => {
         const term = new Date(data.end_date).getFullYear() - new Date(data.start_date).getFullYear();
         setMsaTerm(term);
   
+       
         const calculateTotalEstimatedAmount = (contracts: contractType) => {
             let totalAmount = 0;
             let totalCount=0;
@@ -112,7 +113,6 @@ const MsaOverviewHandler = ({ responses, loading }: HandlerPropType) => {
                   expiringCount,
                   progressCount,
                   activeCount,
-                  expiredCount,
                   closedCount,
                   expiredCount
               ],
@@ -141,7 +141,6 @@ const MsaOverviewHandler = ({ responses, loading }: HandlerPropType) => {
       }
     }
   }; 
-  
     return (
       <div>
         {error && <p>Error: {error}</p>}
@@ -159,7 +158,9 @@ const MsaOverviewHandler = ({ responses, loading }: HandlerPropType) => {
           msaTerm={msaTerm}
           chartData={chartData}
           options={options}
-        />
+          responses={responses}
+          noContracts={noContracts}
+          />
       </div>
     );
   };

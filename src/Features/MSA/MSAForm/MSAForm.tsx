@@ -3,8 +3,8 @@ import { Button, DatePicker, Form, Input, Modal, Spin, Upload } from 'antd'
 import { MSAFormProps } from './types'
 import { CloseOutlined, FilePdfOutlined, PlusOutlined } from '@ant-design/icons'
 import TextArea from 'antd/es/input/TextArea'
-import dayjs,{Dayjs} from "dayjs";
-import moment from 'moment'
+import dayjs from "dayjs";
+
 const MSAForm = ({
   msaData,
   fileName,
