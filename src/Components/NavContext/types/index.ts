@@ -16,4 +16,6 @@ export type NavPropType={
     contractEditToast:boolean;
     setContractCloseToast:React.Dispatch<React.SetStateAction<boolean>>;
     contractCloseToast:boolean;
+    revenueExcelData: (string | number)[][];
+    setRevenueExcelData: React.Dispatch<React.SetStateAction<(string | number)[][]>>;
 }
