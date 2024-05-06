@@ -22,7 +22,8 @@ const ContractForm = ({
 	modalTitle,
 	handleCancel,
 	showModal,
-	isModalOpen
+	isModalOpen,
+	groups
 	}:ContractFormPropType) => {	
 
 
@@ -270,7 +271,7 @@ const ContractForm = ({
 						</Space>
 						</Card>
 					)}
-					
+				<Space>
 					<Card className={styles.contractForm__assoccard}>
 						<h6 className={styles.contractForm__assoccard__title}>Associated Members</h6>
 						<Form.Item name={"associated_users"} label="Select Associated Users">
@@ -289,6 +290,25 @@ const ContractForm = ({
 							</Select>
 						</Form.Item>
 					</Card>
+					<Card className={styles.contractForm__assoccard}>
+						<h6 className={styles.contractForm__assoccard__title}>Associated Groups</h6>
+						<Form.Item name={"associated_groups"} label="Select Associated Groups">
+							<Select
+								style={{width:"80%"}}
+								mode="multiple"
+								placeholder="Select Associated Group"
+								filterOption={false}
+								// onChange={setSelectedItems}
+							>
+								{groups && groups.map((group:any,index) => (
+									<Select.Option key={index} value={group.id}>
+										{group.group_name}
+									</Select.Option>
+								))}
+							</Select>
+						</Form.Item>
+					</Card>
+				</Space>	
 				<Space style={{width:"100%"}}>
 					<Card className={styles.contractForm__uploadcard}>
 						{contractDetails ? <h6>Upload Addendum</h6> :<h6><span style={{color:"red"}}>*</span> Upload Work Schedule</h6>}
