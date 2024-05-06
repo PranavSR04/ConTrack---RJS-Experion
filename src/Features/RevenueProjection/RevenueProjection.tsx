@@ -31,7 +31,6 @@ const RevenueProjection = ({
   const revenueid = id ? id : undefined;
   const [type, setType] = useState<string>();
   const{revenueExcelData}=useContext(NavContexts);
-  
   return (
     <div className={styles.revueneprojection}>
       <h2 className={styles.revueneprojection__title}>REVENUE PROJECTION</h2>
