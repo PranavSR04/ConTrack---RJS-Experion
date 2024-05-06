@@ -29,7 +29,8 @@
   width: 35vw;
 }
 .contractForm__assoccard {
-  width: 50vw;
+	width: 38.5vw;
+	height: 25vh;
 }
 .contractForm__submit {
   margin-top: 2%;
