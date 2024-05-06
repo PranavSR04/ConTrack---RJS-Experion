@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { LineChartHandlerPtopType} from "./types";
 import { useEffect, useState } from "react";
 import LineChart from "./LineChart";
 import { AxiosError } from "axios";
 import { RevenueProjectionData } from "../../Features/RevenueProjection/types";
 import { fetchRevenueProjection } from "../../Features/RevenueProjection/api/getRevenueProjection";
+import { NavContexts } from "../NavContext/NavContext";
 
 const formatDate = (dateString:RevenueProjectionData[]) => {
     // Define an array to map full month names to abbreviated ones
@@ -51,6 +52,8 @@ const LineChartHandler = ({
 	const [revenueData, setRevenueData] = useState<
 		RevenueProjectionData[] | undefined
 	>([]);
+	const{setRevenueExcelData}=useContext(NavContexts);
+
 	const [error, setError] = useState();
 	const [loading, setLoading] = useState(false);
 
@@ -101,8 +104,15 @@ const LineChartHandler = ({
 		}
 	};
 
+	useEffect(() => {
+		const excelData = revenueData ? revenueData.map(item => [item.Date, item.Revenue]) : [];
+		// console.log('excelData', excelData);
+		excelData.unshift(['Date', 'Revenue']);
+		setRevenueExcelData(excelData);
+	}, [revenueData]);
+
 	return (
-		<LineChart revenueData={revenueData} loading={loading} error={error} />
+		<LineChart revenueData={revenueData} loading={loading} error={error}/>
 	);
 };
 
