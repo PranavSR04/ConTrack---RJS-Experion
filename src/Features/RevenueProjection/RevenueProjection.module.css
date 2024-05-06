@@ -53,3 +53,13 @@
   }
 
 }
+
+.export{
+  background-color: #dc143c;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: small;
+  border-radius: 10px;
+  text-decoration: none;
+}

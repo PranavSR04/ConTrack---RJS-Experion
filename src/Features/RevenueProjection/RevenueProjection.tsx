@@ -53,11 +53,6 @@ const RevenueProjection = ({
                 }}
               >
                 <div className={styles.revueneprojection__card__filtersection}>
-                  <div>
-                    <CSVLink filename={`revenue.xlsx`} data={revenueExcelData}>
-                      Export Reveue data
-                    </CSVLink>
-                  </div>
                   <Segmented<string>
                     options={["Monthly", "Quarterly", "Yearly"]}
                     defaultValue="Monthly"
@@ -102,7 +97,11 @@ const RevenueProjection = ({
 												size={20}
 												onClick={showFilterModal}
 											/>
-                     
+                     <button className={`${styles.export}`}>
+                      <CSVLink filename={`revenue.xlsx`} data={revenueExcelData} style={{ textDecoration: "none", color: "white" }}>
+                        Export
+                      </CSVLink>
+                     </button>
 										</>
 									)}
 										<Modal
