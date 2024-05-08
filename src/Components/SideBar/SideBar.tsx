@@ -72,7 +72,7 @@ const SideBar = ({ children }: SideBarPropType) => {
     icon: <FaUserCog title="ManageUser" />,
   };
   const sideBarItem =
-    role_id === 1 ? [...commonSideItems, superadminSideItem] : commonSideItems;
+    (role_id === 1)||(role_id === 2) ? [...commonSideItems, superadminSideItem] : commonSideItems;
   const onClickActive = (index: number) => {
     setIsActiveIndex(index);
   };
