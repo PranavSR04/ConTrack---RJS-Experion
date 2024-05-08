@@ -64,6 +64,7 @@ export interface ContractType {
 	contract_type: "FF" | "TM";
 	milestones: Milestone[];
 	associated_users: [{ user_id: number }] | [];
+	associated_groups: [{ id: number }] | [];
 	file: RcFile | null;
 	comments: string;
 	estimated_amount: number;
@@ -84,6 +85,8 @@ export interface EditContractValueType {
 	contract_type: "FF" | "TM";
 	milestones: Milestone[];
 	associated_users?: number[] | [];
+	associated_groups?: number[] | [];
+
 	file: RcFile | null;
 	comments: string;
 	estimated_amount: number;
