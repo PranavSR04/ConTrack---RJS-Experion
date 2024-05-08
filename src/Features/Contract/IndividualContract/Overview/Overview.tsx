@@ -77,7 +77,7 @@ const Overview = ({
               <h5
                 className={`${styles.maincontainer__overviewpayment__content__list__value}`}
               >
-                {contractAddedBy}
+                {contractAddedBy} 
               </h5>
             </div>
           </div>
