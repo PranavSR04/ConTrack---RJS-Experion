@@ -15,6 +15,7 @@ const Overview = ({
   milestoneCount,
   totalRevenue,
   revenueGenerated,
+  contractAddedBy
 }: OverviewPropType) => {
   return (
     <>
@@ -26,17 +27,19 @@ const Overview = ({
           <div className={`${styles.maincontainer__overviewpayment__title}`}>
             <h4>Contract Details</h4>
           </div>
-          <div className={`${styles.maincontainer__overviewpayment__content}`}>
-            <div
+          <div
               className={`${styles.maincontainer__overviewpayment__content__list}`}
+          >
+            <h5>Contract Term</h5>
+            <h5
+              className={`${styles.maincontainer__overviewpayment__content__list__value}`}
             >
-              <h5>Region</h5>
-              <h5
-                className={`${styles.maincontainer__overviewpayment__content__list__value}`}
-              >
-                {region}
-              </h5>
-            </div>
+              {contractTerm && contractTerm !== 0
+                ? `${contractTerm} Years`
+                : "1 Year"}
+            </h5>
+          </div>
+          <div className={`${styles.maincontainer__overviewpayment__content}`}>
             <div
               className={`${styles.maincontainer__overviewpayment__content__list}`}
             >
@@ -70,13 +73,11 @@ const Overview = ({
             <div
               className={`${styles.maincontainer__overviewpayment__content__list}`}
             >
-              <h5>Contract Term</h5>
+              <h5>Added By</h5>
               <h5
                 className={`${styles.maincontainer__overviewpayment__content__list__value}`}
               >
-                {contractTerm && contractTerm !== 0
-                  ? `${contractTerm} Years`
-                  : "1 Year"}
+                {contractAddedBy}
               </h5>
             </div>
           </div>
