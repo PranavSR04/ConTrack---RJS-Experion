@@ -21,7 +21,7 @@ import ContractFormHandler from "../Features/Contract/ContractForm/ContractFormH
 import IndividualMsaHandler from "../Features/MSA/IndividualMSA/IndividualMSAHandler";
 import IndividualMSA from "../Features/MSA/IndividualMSA/IndividualMSA";
 import AddContractHandler from "../Features/Contract/AddContract/AddContractHandler";
-import EditContractHandler from "../Features/Contract/EditContract/EditContractHandler";
+
  
 
 import EditContractHandler from "../Features/AddContract/EditContractHandler";

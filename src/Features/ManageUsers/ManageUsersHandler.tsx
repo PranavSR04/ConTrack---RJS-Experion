@@ -70,7 +70,7 @@ const ManageUsersHandler = () => {
 
   const [userUpdated, setUserUpdated]=useState<boolean>(false)
   const [groupDeleted, setGroupDeleted]=useState<boolean>(false)
-  const [addGroupModalVisible, setaddGroupModalVisible] = useState(false);
+  // const [addGroupModalVisible, setaddGroupModalVisible] = useState(false);
 
 
   const [userDeleted, setUserDeleted]=useState<boolean>(false)
@@ -428,9 +428,9 @@ const ManageUsersHandler = () => {
       setaddGroupModalVisible(false)
     }
   };
-  const handleAddGroup=()=>{
-    setaddGroupModalVisible(true);
-  }
+  // const handleAddGroup=()=>{
+  //   setaddGroupModalVisible(true);
+  // }
 
   //to show role choices to be updated
   const showUpdateChoice = (record: User) => {
@@ -533,9 +533,9 @@ const ManageUsersHandler = () => {
     setEditedUser(null);
   };
 
-  const handleAddGroupModalCancel = () => {
-    setaddGroupModalVisible(false);
-  };
+  // const handleAddGroupModalCancel = () => {
+  //   setaddGroupModalVisible(false);
+  // };
 
   useEffect(() => {
     // Fetch roles when the component mounts
@@ -897,25 +897,25 @@ const handleAddGroupModalCancel = () => {
 //   setaddGroupModalVisible(false);
 // };
 
-const addGroupToSystem = async (group_name: string) => {
-  try {
-    await addGroup(group_name);
-    setGroupAdded(true);
-    setTimeout(() => {
-      setGroupAdded(false);
-    }, 5000);
-    setaddGroupModalVisible(false);
-  } catch (error:any) {
-    if (error.response && error.response.status === 422) {
-      setFailedToAddGroup(true);
-      setTimeout(() => {
-        setFailedToAddGroup(false);
-      }, 5000);    } else {
-      // Handle other errors
-      console.error("Error:", error.message);
-    }
-  }
-};
+// const addGroupToSystem = async (group_name: string) => {
+//   try {
+//     await addGroup(group_name);
+//     setGroupAdded(true);
+//     setTimeout(() => {
+//       setGroupAdded(false);
+//     }, 5000);
+//     setaddGroupModalVisible(false);
+//   } catch (error:any) {
+//     if (error.response && error.response.status === 422) {
+//       setFailedToAddGroup(true);
+//       setTimeout(() => {
+//         setFailedToAddGroup(false);
+//       }, 5000);    } else {
+//       // Handle other errors
+//       console.error("Error:", error.message);
+//     }
+//   }
+// };
 
 
 const handleAddGroup=()=>{

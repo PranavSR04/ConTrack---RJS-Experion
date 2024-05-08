@@ -2,7 +2,7 @@ import React from "react";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import UpdateModal from "./UpdateModal";
 import AddGroupModal from "./AddGroupModal";
-import AddGroupModal from "./AddGroupModal";
+// import AddGroupModal from "./AddGroupModal";
 import userTableStyles from "./ManageUsers.module.css";
 import {
   Table,
@@ -25,13 +25,13 @@ import { DeleteOutlined, LoadingOutlined } from "@ant-design/icons";
 
 const ManageUsers = ({
   handleAddUser,
-  handleAddGroup,
+ 
   hideDeleteConfirmation,
   handleDelete,
   handleSearch,
   handlePageChange,
   handleEditModalCancel,
-  handleAddGroupModalCancel,
+  
   handleUpdateUser,
   rowClassName,
   debouncedFetchData,
@@ -48,7 +48,7 @@ const ManageUsers = ({
   roleOptions,
   dataSource,
   pagination,
-  addGroupModalVisible,
+ 
   editModalVisible,
   selectedRoleId,
   deleteConfirmationVisible,

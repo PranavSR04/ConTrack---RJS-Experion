@@ -2,7 +2,6 @@ import { DebouncedFunc } from "lodash";
 
 export interface ManageUsersPropType {
   handleAddUser: () => void;
-  handleAddGroup: () => void
   showDeleteConfirmation: (record: User) => void;
   displayGroupsModal:()=>void;
   hideGroupsModal: () => void;
@@ -69,9 +68,7 @@ export interface ManageUsersPropType {
       pageSize: number;
       total: number;
   }
-  addGroupToSystem: (groupName: string) => void
   editModalVisible: boolean
-  addGroupModalVisible:boolean
   selectedRoleId: number | undefined
   deleteConfirmationVisible: boolean
   selectedUser: User | null
