@@ -1,0 +1,99 @@
+.maincontainer__header {
+    margin: 0px 0rem;
+    font-family: "Montserrat", sans-serif;
+    background-color: white;
+  }
+  
+  .maincontainer__header__title {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.7rem;
+  }
+  
+  .maincontainer__header__title__contract h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .maincontainer__header__title__contract span {
+    color: #dc143c;
+  }
+  
+  .maincontainer__header__title__edit {
+    margin-left: auto;
+    /* margin-right: 1rem; */
+  }
+  
+  .maincontainer__header__title__edit__button {
+    background-color: #dc143c;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    margin-right: 1rem;
+    font-size: small;
+    border-radius: 10px;
+  }
+  
+  .maincontainer__header__title__renew__button {
+    background-color: #dc143c;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    margin-right: 1rem;
+    font-size: small;
+    border-radius: 10px;
+  }
+  .maincontainer__header__title__export {
+    margin-right: 1rem;
+  }
+  
+  .maincontainer__header__title__export__button {
+    background-color: #dc143c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: small;
+    border-radius: 10px;
+    text-decoration: none;
+  }
+  
+  .maincontainer__header__subheading {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  
+  .maincontainer__header__subheading__box {
+    background-color: #d9d9d9;
+    margin: 0px 0.5rem 0px 0.5rem;
+    padding: 0.5rem;
+    border-radius: 40px;
+    width: 6rem;
+    height: 2rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-small;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  
+  @media only screen and (max-width: 768px) {
+    .maincontainer__header__title{
+      flex-direction: column;
+    }
+    .maincontainer__header {
+      flex-direction: row; /* Change to column layout */
+      align-items: flex-start; /* Align items to the start */
+    }
+  
+    .maincontainer__header__subheading {
+      display: flex; /* Change to flex layout */
+      flex-wrap: wrap; /* Allow items to wrap */
+    }
+  
+    .maincontainer__header__title__edit{
+      margin: 1rem 0rem;
+    }
+  }

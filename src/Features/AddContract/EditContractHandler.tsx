@@ -232,7 +232,7 @@ const EditContractHandler = () => {
       setSpinning(true);
       await editContract(updatedContractDetails, CON_ID);
       console.log("Contract Updated Successfully!");
-      setContractEdited(true);
+      setContractEdited(false);
       //   navigate("/AllContracts");
       navigate("/AllContracts", {
         state: { edited: contractEdited as boolean },
@@ -240,6 +240,13 @@ const EditContractHandler = () => {
     } catch (error: any) {
       console.error("Error editing contract:", error.message);
       // Optionally, you can set an error state or show a notification to the user
+    }finally{
+      console.log("Contract Updated Successfully!");
+      setContractEdited(false);
+      //   navigate("/AllContracts");
+      navigate("/AllContracts", {
+        state: { edited: contractEdited as boolean },
+      });
     }
   };
 

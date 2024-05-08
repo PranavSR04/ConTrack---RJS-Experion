@@ -79,6 +79,10 @@ const DashBoardNotificationHandler= ({notification}:DashBoardNotificationHandler
           {
             setActionStyle(`${stylename}_renewed`);
           }
+          else if (notification.action === "Closed") 
+            {
+              setActionStyle(`${stylename}_closed`);
+            }
           setCardStyle(`${stylename}_cardStyle_right`)
           
       }, [notification.action, stylename]);
@@ -144,10 +148,12 @@ const DashBoardNotificationHandler= ({notification}:DashBoardNotificationHandler
                 });
               }
           }
-          else
+          else 
           {
               onClose();
-              navigate('/MSAOverview')
+              navigate(`/${notification.msa_ref_id}`, {
+                state: { id: notification.msa_id },
+              });
           }
       };
       return <Notification notification={notification} difference={difference} actionStyle={actionStyle} stylenames={stylename} cardStyle={cardStyle} ItemClickHandler={ItemClickHandler}/>;

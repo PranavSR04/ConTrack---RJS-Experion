@@ -1,0 +1,80 @@
+.maincontainer {
+    margin-left: 14rem;
+    margin-top: 1rem;
+    padding-left: 0.5rem;
+    background-color: #ffffff;
+    width: 80vw;
+    height: max-content;
+    font-family: "Montserrat", sans-serif;
+    position: relative;
+  }
+  
+  .maincontainer__revenue{
+    border: solid 1px #ffffff;
+    width: 73%;
+    height: 26rem;
+    margin-top: -4.5rem;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    border-radius: 10px;
+  }
+  
+  .maincontainer__chart {
+    margin-left: -21rem;
+    margin-top: -5rem;
+    transform: scale(0.6);
+    height: 25rem;
+  }
+  .maincontainer__doclist {
+    width: 25%;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    border-radius: 10px;     
+  }
+  
+  .maincontainer__contractlist {
+    position: absolute;
+    left: 29.7%;
+    top: 103%;
+    padding-bottom: 1%;
+  }
+  .maincontainer__comments {
+    width: 26.6%; 
+    position: absolute;
+    left: 0.9%;
+    top: 98%;
+    padding-bottom: 1%;
+  }
+  
+  
+  @media only screen and (max-width: 1200px) {
+    .maincontainer {
+      width: 100%;
+    }
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .maincontainer {
+      width: 100%;
+      margin-left: 5rem;
+      overflow-x: hidden;
+    }
+  
+    .maincontainer__milestones {
+      position: relative;
+      top: 0;
+      width: 85vw;
+      margin: 1rem 0.5rem;
+    }
+  
+    .maincontainer__revenue{
+      width: 85vw;
+    }
+  
+    .maincontainer__chart {
+      margin-left: -10rem;
+      margin-top: -2rem;
+      transform: scale(0.8);
+      height: 25rem;
+    }
+  }

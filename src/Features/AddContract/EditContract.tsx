@@ -687,7 +687,7 @@ const EditContract = ({
               </>
             )}
 
-            <div
+            {/* <div
               className={`contract_details ${styles.contract_details}`}
               style={{ width: "46.5%" }}
             >
@@ -711,7 +711,7 @@ const EditContract = ({
                   />
                 </Form.Item>
               </div>
-            </div>
+            </div> */}
 
             <div style={{ display: "flex", width: "100%" }}>
               <div

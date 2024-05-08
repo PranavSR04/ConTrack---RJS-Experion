@@ -18,6 +18,7 @@ const OverviewHandler = ({ responses, loading }: HandlerPropType) => {
   const [milestonesCount, setMilestonesCount] = useState<number>(0);
   const [revenueGenerated, setRevenueGenerated] = useState<number>(0)
   const [totalRevenue,setTotalRevenue] = useState<number>(0)
+  const [contractAddedBy, setContractAddedBy] = useState<string>("");
 
   useEffect(() => {
     console.log("response in Header Handler", responses);
@@ -27,8 +28,10 @@ const OverviewHandler = ({ responses, loading }: HandlerPropType) => {
 
   const getOverview: OverviewHandlerType["getOverview"] = (responses) => {
     if (responses && responses.data && responses.data.length > 0) {
+      console.log("res", responses.data[0])
       setDateOfSignature(responses.data[0].date_of_signature);
       setRegion(responses.data[0].region)
+      setContractAddedBy(responses.data[0].user_name)
 
       let originalDate = responses.data[0].start_date;
       let parts = originalDate.split("-");
@@ -85,6 +88,7 @@ const OverviewHandler = ({ responses, loading }: HandlerPropType) => {
         milestoneCount={milestonesCount}
         totalRevenue={totalRevenue}
         revenueGenerated={revenueGenerated}
+        contractAddedBy={contractAddedBy}
         />
     </div>
   );

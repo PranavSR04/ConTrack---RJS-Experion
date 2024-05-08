@@ -19,7 +19,7 @@ const MSAList = (
         renew,
         handleSegmentChange,
         handleAddMSA,
-
+locale
       
         
     }:MsaListDataType
@@ -94,10 +94,10 @@ const MSAList = (
       </div>
       <div className={styles.MSAList__Table__Table}>
       <Table
-      locale={{ emptyText: " " }}
       size="small"
       columns={columns}
       dataSource={data}
+      locale={locale} //empty message
       scroll={scroll}
       className={styles.ListMsa__Details__Table__table}
       pagination={{

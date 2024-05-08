@@ -18,15 +18,20 @@ export const NavContexts=createContext<NavPropType>({
     setContractAddToast:()=>{},
     contractAddToast:false,
     setContractEditToast:()=>{},
-    contractEditToast:false
+    contractEditToast:false,
+    setContractCloseToast:()=>{},
+    contractCloseToast:false,
+    revenueExcelData: [],
+    setRevenueExcelData:()=>{},
 
 })
     const NavContext = ({ children }: { children: React.ReactNode }) =>  {
-    const [added, setAdded] = useState(false);
+    const[added, setAdded] = useState(false);
     const[edited,setEdited]=useState(false);
     const[renew,setRenew]=useState(false);
-    const [contractAddToast, setContractAddToast] = useState<boolean>(false);
-    const [contractEditToast, setContractEditToast] = useState<boolean>(false);    
+    const [contractCloseToast, setContractCloseToast] = useState(false);
+    const [contractAddToast, setContractAddToast] = useState(false);
+    const [contractEditToast, setContractEditToast] = useState(false);    
     const [open, setOpen] = useState(false);
     const [activeNotificationCount, setActiveNotificationCount] = useState<number>(0);
     const SENDTO_ID = parseInt(localStorage.getItem("user_id") || '0', 10);
@@ -41,6 +46,7 @@ export const NavContexts=createContext<NavPropType>({
         setOpen(false);
         setActiveNotificationCount(0);
       };
+      const [revenueExcelData, setRevenueExcelData] = useState<(string | number)[][]>([]);
   return (
     <NavContexts.Provider
       value={{
@@ -59,6 +65,10 @@ export const NavContexts=createContext<NavPropType>({
         contractAddToast,
         setContractEditToast,
         contractEditToast,
+        setContractCloseToast,
+        contractCloseToast,
+        revenueExcelData,
+        setRevenueExcelData
       }}
     >
       {children}

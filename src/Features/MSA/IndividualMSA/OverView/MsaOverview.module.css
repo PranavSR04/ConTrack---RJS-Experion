@@ -1,0 +1,150 @@
+
+.maincontainer__overview__maindiv{
+  display: flex;
+}
+.maincontainer__overview__left {
+  margin-top: 1rem;
+  height: 15rem;
+  flex:1;
+  display: flex;
+  position: relative;
+}
+  .maincontainer__overview__overview__count {
+    margin-bottom: 2%;
+    margin-top: 6%;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    background-color: white;
+    font-family: "Montserrat", sans-serif;
+  }
+  .maincontainer__overview__overview__contractcount{
+    width: 33%;
+    margin-left: 1.6%;
+    margin-bottom: 2%;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    background-color: white;
+    font-family: "Montserrat", sans-serif;
+    height: 80%;
+
+  }
+  .maincontainer__overview__overview {
+    width: 30%;
+    margin-bottom: 2%;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    background-color: white;
+    font-family: "Montserrat", sans-serif;
+    height: 80%;
+  }
+
+  .maincontainer__overview__overview {
+    width: 30%;
+    margin-bottom: 2%;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    background-color: white;
+    font-family: "Montserrat", sans-serif;
+    height: 80%;
+  }
+  
+  .maincontainer__overview__title h4 {
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  
+  .maincontainer__overview__content__list {
+    display: flex;
+    margin-top: 0.3rem;
+    justify-content: space-between;
+  }
+  
+  .maincontainer__overview__content__list h5 {
+    font-size: 0.8rem;
+  }
+  
+  .maincontainer__overview__content__list__value {
+    font-weight: 300;
+    text-transform: capitalize;
+  }
+  
+  .maincontainer__overview__content__list__value span {
+    font-weight: 300;
+    text-transform: lowercase;
+  }
+  
+  .maincontainer__overview__payment {
+    width: 32%;
+    margin-bottom: 2%;
+    margin-left: 0.9rem;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    background-color: white;
+    font-family: "Montserrat", sans-serif;
+    height: 80%;
+  }
+  
+  .maincontainer__overview__payment__h2 {
+    margin: 20px 40px;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  
+  .maincontainer__overview__list {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .maincontainer__overview__list h5 {
+    font-weight: 500;
+    padding-top: 1rem;
+    font-size: 0.8rem;
+  }
+  .maincontainer__overview__count__title{
+    margin-top: -40px;
+    text-align: center;
+  }
+  .maincontainer__overview__count__title p{
+    margin-top: 34px;
+    font-size: 18px;
+  }
+  .maincontainer__overview__count__title h4{
+    margin-top: -20px;
+    font-size: 3rem;
+    color: rgb(49, 110, 215);
+    font-weight: 600;
+  }
+  .titleSeparator{
+    margin-top: -7px;
+   background-color: rgb(62, 172, 226);
+   height: 2px;
+   margin-left: 38px;
+   width: 7.8rem;
+  }
+  .mainContainer__overview__count__content{
+    display: flex;
+    margin-top: 8px;
+  }
+  .mainContainer__overview__count__content__list__ff{
+    margin-left: 30px;
+    font-size: 12px;
+    flex: 1;
+  }
+  .mainContainer__overview__count__contentt__list__tm{
+    font-size: 12px;
+    flex: 1;
+  }
+  .mainContainer__overview__count__content__list__value{
+    padding-left: 30px;
+  }
+  .countSeparator{
+    margin-right: 20px;
+    width: 2px;
+    height: 60px;
+    background-color: rgb(15, 88, 124);
+  }
+  @media only screen and (max-width: 1200px) {
+    .maincontainer__overview {
+      width: 130vw;
+    }
+  }
+  .manincontainer__overview__doughnutchart{
+    height: 200px;
+    width: 210px;
+  }
+  
