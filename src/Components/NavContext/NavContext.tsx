@@ -21,6 +21,8 @@ export const NavContexts=createContext<NavPropType>({
     contractEditToast:false,
     setContractCloseToast:()=>{},
     contractCloseToast:false,
+    revenueExcelData: [],
+    setRevenueExcelData:()=>{},
 
 })
     const NavContext = ({ children }: { children: React.ReactNode }) =>  {
@@ -44,6 +46,7 @@ export const NavContexts=createContext<NavPropType>({
         setOpen(false);
         setActiveNotificationCount(0);
       };
+      const [revenueExcelData, setRevenueExcelData] = useState<(string | number)[][]>([]);
   return (
     <NavContexts.Provider
       value={{
@@ -64,6 +67,8 @@ export const NavContexts=createContext<NavPropType>({
         contractEditToast,
         setContractCloseToast,
         contractCloseToast,
+        revenueExcelData,
+        setRevenueExcelData
       }}
     >
       {children}

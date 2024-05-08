@@ -1,0 +1,51 @@
+.listContainer {
+  margin-top: 10px;
+  max-width: 40vw;
+  background-color: rgba(253, 255, 255, 0.233);
+  overflow-y: auto;
+  font-family: "Montserrat", sans-serif;
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+  height: 20.8rem;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.listItem {
+  padding: 10px 0;
+}
+
+.avatar {
+  background-color: #b70808;
+}
+
+/* Customizing scrollbar */
+.listContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.listContainer::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+.listContainer::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+.listContainer::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/* Hide scrollbar when there's no overflow content */
+.listContainer {
+  scrollbar-width: 20px; /* Firefox */
+}
+
+.listContainer::-webkit-scrollbar {
+  display: none; 
+}

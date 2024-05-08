@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./RevenueProjection.module.css";
 import { Card, ConfigProvider, Modal, Segmented } from "antd";
 import { RevenueProjectionPropType } from "./types";
 import { HiOutlineFilter } from "react-icons/hi";
 import { DatePicker } from "antd";
 import LineChartHandler from "../../Components/LineChart/LineChartHandler";
+import { NavContexts } from "../../Components/NavContext/NavContext";
+import { CSVLink } from "react-csv";
 const { RangePicker } = DatePicker;
 
 const RevenueProjection = ({
@@ -27,10 +29,8 @@ const RevenueProjection = ({
   filterEndDate,
 }: RevenueProjectionPropType) => {
   const revenueid = id ? id : undefined;
-  const MsaId = msa_id ? msa_id : undefined;
-  console.log(filter);
   const [type, setType] = useState<string>();
-
+  const{revenueExcelData}=useContext(NavContexts);
   return (
     <div className={styles.revueneprojection}>
       <h2 className={styles.revueneprojection__title}>REVENUE PROJECTION</h2>
@@ -97,7 +97,11 @@ const RevenueProjection = ({
 												size={20}
 												onClick={showFilterModal}
 											/>
-                     
+                     <button className={`${styles.export}`}>
+                      <CSVLink filename={`revenue.xlsx`} data={revenueExcelData} style={{ textDecoration: "none", color: "white" }}>
+                        Export
+                      </CSVLink>
+                     </button>
 										</>
 									)}
 										<Modal
@@ -122,7 +126,7 @@ const RevenueProjection = ({
 						filter={filter}
 						selectedFilters={selectedFilters}
 						id={revenueid}
-            msa_id={MsaId}
+            msa_id={msa_id ? msa_id : undefined}
             filterStartDate={filterStartDate}
             filterEndDate={filterEndDate}
 					/></div>

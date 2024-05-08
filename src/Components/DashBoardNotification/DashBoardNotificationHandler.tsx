@@ -148,10 +148,12 @@ const DashBoardNotificationHandler= ({notification}:DashBoardNotificationHandler
                 });
               }
           }
-          else
+          else 
           {
               onClose();
-              navigate('/MSAOverview')
+              navigate(`/${notification.msa_ref_id}`, {
+                state: { id: notification.msa_id },
+              });
           }
       };
       return <Notification notification={notification} difference={difference} actionStyle={actionStyle} stylenames={stylename} cardStyle={cardStyle} ItemClickHandler={ItemClickHandler}/>;

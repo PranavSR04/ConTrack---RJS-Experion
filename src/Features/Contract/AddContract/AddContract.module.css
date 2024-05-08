@@ -1,0 +1,10 @@
+.addcontract {
+	padding-top: 1%;
+	margin-left: 16rem;
+	margin-right: 1.5rem;
+}
+.addcontract__title {
+	font-weight: 700;
+	font-size: 1.2rem;
+	margin-left: 1rem;
+}

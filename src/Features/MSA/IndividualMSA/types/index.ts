@@ -10,6 +10,11 @@ export interface contractType{
     start_date:string;
     end_date:string;
 }
+export interface MsaDocs {
+  msa_doclink: string |undefined, 
+  start_date: string |undefined,
+  end_date: string |undefined
+}
 export interface Msa {
     id: number;
     msa_ref_id: string;
@@ -24,19 +29,27 @@ export interface Msa {
     created_at: string;
     updated_at: string;
     user_name: string;
-    contracts:contractType;
+    contracts:contractType[];
     msa_olddoclink:string[];
+    total_contracts_count: number;
+    active_contracts_count:number,
+    closed_contracts_count:number,
+    expiring_contracts_count:number,
+    onprogress_contracts_count:number,
+    expired_contracts_count:number,
+    tm_contracts_count:number,
+    ff_contracts_count:number
   }
   
   export interface MsaApiType {
-    msa_data: Msa[];
+    data: Msa[];
   }
 
   export interface LocationStateProps {
     id: string;
   }
   export interface IndividualMsaPropType{
-    msa_id: string;
+    msa_id: string ;
     responses: MsaApiType|AxiosError<unknown, any>|undefined;
     loading: boolean;
   }

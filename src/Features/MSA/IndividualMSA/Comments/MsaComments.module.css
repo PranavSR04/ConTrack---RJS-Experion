@@ -1,0 +1,21 @@
+    
+  .maincontainer__comments {
+    margin-top: 2.15rem;
+    height: 49.1vh;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    background-color: white;
+    font-family: "Montserrat", sans-serif;
+    overflow-y: auto;
+    
+  }
+  .maincontainer__comments__title h4 {
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  
+  .maincontainer__comments__list {
+    display: flex;
+    margin-top: 0.3rem;
+    justify-content: space-between;
+  }
+

@@ -1,17 +1,31 @@
+import { AddContractPropType } from "../../AddContract/types";
+import dayjs from "dayjs";
+
 export interface ContractFormPropType {
 	selectedOption: string | undefined;
 	handleSelectChange: (value: string) => void;
 	onFinish: (values: any) => void;
-	selectedItems: string[];
-	setSelectedItems: React.Dispatch<React.SetStateAction<string[]>>;
-	assocFilteredOptions: string[];
 	clients: any[];
-	clientRegion: string | undefined;
 	onSelectClientName: (value: number) => void;
 	getClientNames: (value: any) => Promise<void>;
-    users: any[];
+	users: any[];
+	groups: any[];
+	contractDetails: ContractType | undefined;
+	initialValues: EditContractValueType | AddContractValueType;
+	filename: "file" | "addendum_file";
+	initialFields: [InitialFieldsType] | undefined;
+	disabled: boolean;
+	modalTitle: string;
+	handleCancel: () => void;
+	showModal: () => void;
+	isModalOpen: boolean;
 }
-
+export interface ContractFormHandlerPropType {
+	contractDetails?: ContractType;
+	contract_id?: number;
+	addContract?: AddContractPropType["addContract"];
+	initialValues: EditContractValueType | AddContractValueType;
+}
 export interface MSAType {
 	added_by: number;
 	client_name: string;
@@ -29,14 +43,14 @@ export interface MSAType {
 
 export interface RcFile extends File {
 	uid: string;
-  }
-  
-  export interface Milestone {
-	milestones: string | null;
-	expectedCompletionDate: string;
+}
+
+export interface Milestone {
+	milestone_desc: string;
+	milestone_enddate: string | dayjs.Dayjs;
 	percentage?: number | null;
-	amount: number | null;
-  }
+	amount: number;
+}
 
 export interface ContractType {
 	msa_id: string;
@@ -44,14 +58,51 @@ export interface ContractType {
 	contract_ref_id: string;
 	region: string;
 	du: string;
-	start_date: string;
-	end_date: string;
-	date_of_signature: string;
+	start_date: string | dayjs.Dayjs;
+	end_date: string | dayjs.Dayjs;
+	date_of_signature: string | dayjs.Dayjs;
 	contract_type: "FF" | "TM";
-	milestone: Milestone[];
-	assoc_users: [{ user_id: number }] | [];
+	milestones: Milestone[];
+	associated_users: [{ user_id: number }] | [];
 	file: RcFile | null;
 	comments: string;
 	estimated_amount: number;
 	contract_added_by: number;
-  }
+	contract_status: string;
+	contract_doclink: string;
+}
+
+export interface EditContractValueType {
+	msa_id: string;
+	clientName: string;
+	contract_ref_id: string;
+	region: string;
+	du: string;
+	start_date: string | dayjs.Dayjs;
+	end_date: string | dayjs.Dayjs;
+	date_of_signature: string | dayjs.Dayjs;
+	contract_type: "FF" | "TM";
+	milestones: Milestone[];
+	associated_users?: number[] | [];
+	file: RcFile | null;
+	comments: string;
+	estimated_amount: number;
+	contract_added_by: number;
+	contract_status: string;
+	contract_doclink: string;
+}
+export interface AddContractValueType {
+	milestones: {}[];
+}
+
+export type ContractEditingInitialValueType = EditContractValueType;
+
+export interface InitialFieldsType {
+	name: string;
+	value: string | undefined;
+}
+
+export interface GroupOptions {
+	id: number;
+	group_name: string;
+}

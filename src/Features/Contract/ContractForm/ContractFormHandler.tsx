@@ -1,50 +1,77 @@
 import React, { useEffect, useState } from "react";
 import ContractForm from "./ContractForm";
 import moment from "moment";
-import { getMSA, getUserList, postContract } from "./api/api";
-import { MSAType } from "./types";
-// import { RcFile } from "antd/es/upload";
+import { getMSA, getUserGroups, getUserList } from "./api/api";
+import { ContractFormHandlerPropType, InitialFieldsType, MSAType } from "./types";
+import { editContract } from "../EditContract/api/api";
+import { useNavigate } from "react-router";
 
-const ContractFormHandler = () => {
-	const [selectedOption, setSelectedOption] = useState<string | undefined>(undefined);
+const ContractFormHandler = ({contractDetails,contract_id,addContract,initialValues}: ContractFormHandlerPropType) => {
+	const [selectedOption, setSelectedOption] = useState<string>();
+	const [modalTitle,setModalTitle] = useState<string>("Do you want to add contract?");
+	const [filename,setFilename] = useState<"file" | "addendum_file">("file");
 	const [clients, setClients] = useState<MSAType[]>([]);
-	const [clientRegion, setClientRegion] = useState<string>();
 	const [users, setUsers] = useState<any[]>([]);
-	const OPTIONS = ["Apples", "Nails", "Bananas", "Helicopters"];
-	const [selectedItems, setSelectedItems] = useState<string[]>([]);
-	const assocFilteredOptions = OPTIONS.filter(
-		(o) => !selectedItems.includes(o)
-	);
+	const [groups, setGroups] = useState<any[]>([]);
 
-	useEffect(()=>{
+	const [initialFields,setInitialFields] = useState<[InitialFieldsType]>();
+	const [disabled,setDisabled] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const navigate = useNavigate();
+	const handleCancel = () => {setIsModalOpen(false);};
+	const showModal = () => {setIsModalOpen(true);};
+
+	useEffect(() => {
+		if (contractDetails) {
+			const contractType = contractDetails.contract_type;
+			setSelectedOption(contractType);
+			setFilename("addendum_file");
+			setDisabled(true);
+			setModalTitle("Do you want to edit this contract?")
+		}
+	}, [contractDetails]);
+
+	useEffect(() => {
 		getClientNames();
 		getAssocUsers();
-	},[])
+		getAssocGroups();
+	}, []);
 
 	const handleSelectChange = (value: string) => {
 		setSelectedOption(value);
 	};
 
 	//Get client names (MSA)
-	const getClientNames = async(value?:string) =>{
+	const getClientNames = async (value?: string) => {
 		const responce = await getMSA(value);
 		setClients(responce.data);
 		console.log(responce.data);
-	}
+	};
 
 	//Get Associated Users List
-	const getAssocUsers = async(value?:string) =>{
+	const getAssocUsers = async (value?: string) => {
 		const responce = await getUserList(value);
 		setUsers(responce.data.data);
-		console.log(responce.data.data)
+		console.log("Users",responce.data.data);
+	};
+
+	//Get User groups List
+	const getAssocGroups = async () =>{
+		const responce = await getUserGroups();
+		console.log("Groups",responce);
+		setGroups(responce);
 	}
 
 	//Setting the region autofill when clientname is selected
-	const onSelectClientName = (value: number) =>{
-		const selectedClient : MSAType | undefined = clients.find((msa) => msa.id === value);
-		console.log(`ID:${value} , Selected Client Name: ${selectedClient?.client_name}, region: ${selectedClient?.region}`);
-		setClientRegion(selectedClient?.region);
-	}
+	const onSelectClientName = (value: number) => {
+		const selectedClient: MSAType | undefined = clients.find(
+			(msa) => msa.id === value
+		);
+		console.log(
+			`ID:${value} , Selected Client Name: ${selectedClient?.client_name}, region: ${selectedClient?.region}`
+		);
+		setInitialFields([{name: "region", value: selectedClient?.region }])
+	};
 
 	//Formate the day.js object to yyyy-mm-dd formate
 	const getFormatedDate = (date: any) => {
@@ -53,16 +80,16 @@ const ContractFormHandler = () => {
 		return formattedDate;
 	};
 
+	//On submiting the form :- either add / edit 
 	const onFinish = async (values: any) => {
-		console.log(values);
+		console.log("Values",values);
 		const { milestones, date_of_signature, start_date, end_date } = values;
-
 		// Format completiondate fields in milestones array
 		const formattedMilestones = milestones.map((milestone: any) => {
-			const formattedDate = getFormatedDate(milestone.completiondate);
+			const formattedDate = getFormatedDate(milestone.milestone_enddate);
 			return {
 				...milestone,
-				completiondate: formattedDate,
+				milestone_enddate: formattedDate,
 			};
 		});
 
@@ -73,35 +100,68 @@ const ContractFormHandler = () => {
 			date_of_signature: getFormatedDate(date_of_signature),
 			start_date: getFormatedDate(start_date),
 			end_date: getFormatedDate(end_date),
-			file: values.file.file.originFileObj,
-			contract_added_by:1,
+			contract_added_by: localStorage.getItem("user_id"),
 		};
-		console.log(values);
-		console.log("File ", values.file.file.originFileObj);
-		console.log("Formatted Form Values:", formattedValues);
 
-		try{
-			await postContract(formattedValues);
-		}catch(error){
-			console.log("Error in adding contract" ,error)
+		if (contractDetails) {
+			// For adding a new contract
+			console.log("Addentum", values);
+			formattedValues.addendum_file = values.addendum_file?.file.originFileObj;
+			formattedValues.contract_status = contractDetails.contract_status;
+			formattedValues.contract_doclink = contractDetails.contract_doclink;
+			
+		} else {
+			// For editing an existing contract
+			formattedValues.file = values.file.file.originFileObj;
 		}
+		console.log("Formatted Form Values:", formattedValues);
+		try{
 
+		}catch(error){
 
+		}
+		if (contractDetails && contract_id) {
+			try{
+				await editContract(formattedValues,contract_id);
+			}catch(error){
+				console.log("Error in adding contract", error);
+			}finally{
+				navigate("/AllContracts", {
+					state: { edited: true},
+				  });
+			}
+		} else {
+			try {
+				addContract && await addContract(formattedValues);
+			} catch (error) {
+				console.log("Error in adding contract", error);
+			}finally{
+				navigate("/AllContracts", {
+					state: { added: true},
+				  });
+			}
+		}
 	};
+
 	return (
 		<ContractForm
 			selectedOption={selectedOption}
 			handleSelectChange={handleSelectChange}
 			onFinish={onFinish}
-			selectedItems={selectedItems}
-			setSelectedItems={setSelectedItems}
-			assocFilteredOptions={assocFilteredOptions}
 			clients={clients}
-			clientRegion={clientRegion}
 			onSelectClientName={onSelectClientName}
 			getClientNames={getClientNames}
 			users={users}
-
+			contractDetails={contractDetails}
+			initialValues={initialValues}
+			filename={filename}
+			initialFields={initialFields}
+			disabled={disabled}
+			modalTitle={modalTitle}
+			handleCancel={handleCancel}
+			showModal={showModal}
+			isModalOpen={isModalOpen}
+			groups={groups}
 		/>
 	);
 };
