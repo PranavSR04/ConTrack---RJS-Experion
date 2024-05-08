@@ -1,0 +1,77 @@
+.msaform{
+    margin-bottom: 10vh;
+    width: 75vw;
+}
+.msaform__maincard{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin-top: 2vh;
+    min-height: 65vh;
+}
+.msaform__maincard__msarefid,
+.msaform__maincard__clientname,
+.msaform__maincard__region{
+    max-width: 75%;
+}
+.msaform__maincard__datepicker__startdate,
+.msaform__maincard__datepicker__enddate{
+    min-width :100%;
+}
+.msaform__maincard__enddate{
+      margin-left: 32%;
+      min-width: 90%;
+}
+.msaform__maincard__comments{
+    max-width: 75%;
+   margin-left: 70px;
+}
+.msaform__maincard__button{
+  background-color: #dc143c;
+  color: white;
+  margin-left: 40%;
+}
+.modal{
+	text-align: center;
+}
+.okbtn{
+	color: white;
+    background-color: #dc143c;
+	margin-right: 10px ;
+}
+.modalfooter{
+	text-align: center;
+	padding: 5%;
+}
+.msaform__maincard__file__fileicon{
+    color: #dc143c;
+    font-size: 4.5rem;
+    
+}
+.msaform__maincard__file__closeicon{
+    position: absolute;
+    margin-right: 13rem;
+    font-size: 15px;
+    color: black;
+    top: 0;
+    right: 0;
+}
+
+
+@media only screen and (max-width: 800px) {
+    .msaform__maincard__spacecontainer{
+        display: flex;
+        flex-direction: column;
+    }
+    .msaform__maincard__msarefid,
+.msaform__maincard__clientname,
+.msaform__maincard__region,
+.msaform__maincard__datepicker__startdate,
+.msaform__maincard__datepicker__enddate{
+    min-width: 70%;
+}
+.msaform__maincard__clientname{
+    margin-left: -3%;
+}
+.msaform__maincard__region{
+margin-left: -8%;
+}
+}
