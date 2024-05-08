@@ -49,6 +49,7 @@ const EditContractHandler = () => {
 				end_date: dayjs(contractDetails?.end_date),
 				milestones: initialDateUpdatedMilestones,
 				associated_users: [],
+				associated_groups: [],
 			};
 
 			if (contractDetails.associated_users) {
@@ -56,6 +57,12 @@ const EditContractHandler = () => {
 					(user) => user.user_id
 				);
 				initaiValuesData.associated_users = initialAssociated_users_id;
+			}
+			if (contractDetails.associated_groups) {
+				const initialAssociated_groups_id = contractDetails.associated_groups.map(
+					(group) => group.id
+				);
+				initaiValuesData.associated_groups = initialAssociated_groups_id;
 			}
 			setInitialValues(initaiValuesData);
 		}
