@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ContractForm from "./ContractForm";
 import moment from "moment";
-import { getMSA, getUserList } from "./api/api";
+import { getMSA, getUserGroups, getUserList } from "./api/api";
 import { ContractFormHandlerPropType, InitialFieldsType, MSAType } from "./types";
 import { editContract } from "../EditContract/api/api";
 import { useNavigate } from "react-router";
@@ -12,6 +12,8 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 	const [filename,setFilename] = useState<"file" | "addendum_file">("file");
 	const [clients, setClients] = useState<MSAType[]>([]);
 	const [users, setUsers] = useState<any[]>([]);
+	const [groups, setGroups] = useState<any[]>([]);
+
 	const [initialFields,setInitialFields] = useState<[InitialFieldsType]>();
 	const [disabled,setDisabled] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,6 +34,7 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 	useEffect(() => {
 		getClientNames();
 		getAssocUsers();
+		getAssocGroups();
 	}, []);
 
 	const handleSelectChange = (value: string) => {
@@ -49,8 +52,15 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 	const getAssocUsers = async (value?: string) => {
 		const responce = await getUserList(value);
 		setUsers(responce.data.data);
-		console.log(responce.data.data);
+		console.log("Users",responce.data.data);
 	};
+
+	//Get User groups List
+	const getAssocGroups = async () =>{
+		const responce = await getUserGroups();
+		console.log("Groups",responce);
+		setGroups(responce);
+	}
 
 	//Setting the region autofill when clientname is selected
 	const onSelectClientName = (value: number) => {
@@ -151,6 +161,7 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 			handleCancel={handleCancel}
 			showModal={showModal}
 			isModalOpen={isModalOpen}
+			groups={groups}
 		/>
 	);
 };
