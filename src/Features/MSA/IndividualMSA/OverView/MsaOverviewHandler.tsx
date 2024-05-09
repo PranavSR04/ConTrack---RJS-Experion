@@ -34,7 +34,6 @@ const MsaOverviewHandler = ({ responses, loading}: HandlerPropType) => {
       console.error('An error occurred:', responses.message);
   } else if (responses && 'data' in responses && Array.isArray(responses.data)) {
       const data = responses.data;
-     
               data.forEach((msa) => {
                   setExpiringCount(msa.expiring_contracts_count || 0);
                   setProgressCount(msa.onprogress_contracts_count || 0);
@@ -42,6 +41,9 @@ const MsaOverviewHandler = ({ responses, loading}: HandlerPropType) => {
                   setClosedCount(msa.closed_contracts_count||0)
                   setExpiredCount(msa.expired_contracts_count||0)
               });
+              if(data[0].contracts.length==0){
+                setNoContracts(true)
+              }
           }
           } catch (error) {
               console.error('Error fetching contract data:', error);
@@ -104,7 +106,6 @@ const MsaOverviewHandler = ({ responses, loading}: HandlerPropType) => {
         setError("Failed to get response");
       }
     };
-  
     const chartData = {
       labels: ['Expiring', 'Progress', 'Active','Closed','Expired'],
       datasets: [
@@ -140,7 +141,9 @@ const MsaOverviewHandler = ({ responses, loading}: HandlerPropType) => {
         }
       }
     }
-  }; 
+  };
+  console.log(chartData,"for the chart")
+
     return (
       <div>
         {error && <p>Error: {error}</p>}
