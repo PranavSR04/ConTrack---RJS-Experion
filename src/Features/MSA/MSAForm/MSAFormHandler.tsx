@@ -4,21 +4,24 @@ import { getmsainfo } from './api/getmsainfo';
 import { RcFile } from 'antd/es/upload';
 import { message } from 'antd';
 import { postaddmsaform} from './api/postaddmsaform';
-import { LocationStateProps } from './types';
+import { FormField, MSAFormHandlerPropType } from './types';
 import { getmsaapi } from './api/getmsaapi';
 import { useLocation, useNavigate } from 'react-router';
 import moment, { Moment } from "moment";
 import { posteditmsaform } from './api/posteditmsaform';
 import { postrenewmsaform } from './api/postrenewmsaform';
+import dayjs from "dayjs";
 
-const MSAFormHandler = () => {
+
+const MSAFormHandler = ({
+  msaAdded,
+  msaEdited,
+  msa_id,
+  msaRenewed
+}:MSAFormHandlerPropType) => {
   const location=useLocation();
   const navigate=useNavigate();
   const user_id: number = parseInt(localStorage.getItem("user_id") || "0");
-  let { id } = location.state as LocationStateProps;
-  const[msaAdded,setMsaAdded]=useState<boolean>();
-  const[msaEdited,setMsaEdited]=useState<boolean>();
-  const[msaRenewed,setMsaRenewed]=useState<boolean>();
   const maxSize = 10 * 1024 * 1024;
   const [fileName, setFileName] = useState<string>();
   const[fileUpload,setFileUpload]=useState<any>();
@@ -30,7 +33,8 @@ const MSAFormHandler = () => {
   const[msarefid,setMsarefid]=useState<boolean>();
   const[hideMsarefid,setHideMsarefid]=useState<boolean>();
   const[startDate,setStartDate]=useState<string>();
-
+  const [modalTitle,setModalTitle] = useState<string>("");
+  const [formFields, setFormFields] = useState<FormField[]>([]);
   const [msaData,setMsaData]=useState({
     msa_ref_id: '',
     client_name: "",
@@ -40,50 +44,73 @@ const MSAFormHandler = () => {
     comments: "",
     file: null as RcFile | null,
   })
-
+  const [formData, setFormData] = useState({
+    client_name: "",
+    region: "",
+    start_date: "",
+    end_date: "",
+    comments: "",
+    file: null as RcFile | null  
+  });
   useEffect(() => {
-    //Check the location to handle function in form
-      if (location .state) {
-        const state = location.state as LocationStateProps;
-        // Check if add MSA
-        if (state.msaAdded) {
-            setMsaAdded(true);
+    setFormData({
+      client_name: msaData.client_name,
+      region: msaData.region,
+      start_date: msaData.start_date,
+      end_date: msaData.end_date,
+      comments: msaData.comments,
+      file: null as RcFile | null,
+    });
+  
+  }, [msaData]);
+  useEffect(() => {
+    // Dynamically generate formFields based on msaData and msaEdited
+    const updatedFormFields = [
+      { name: "msa_ref_id", value: msaData?.msa_ref_id },
+      { name: "client_name", value: msaData?.client_name },
+      { name: "region", value: msaData?.region },
+      { name: "start_date", value: msaEdited ? (msaData?.start_date ? dayjs(msaData?.start_date) : undefined) : msaData?.start_date ? dayjs(msaData?.start_date) : undefined},
+      { name: "end_date", value: msaEdited ? (msaData?.end_date ? dayjs(msaData?.end_date) : undefined) : msaData?.end_date ? dayjs(msaData?.end_date) : undefined }
+    ];
+    setFormFields(updatedFormFields);
+  }, [msaRenewed,msaEdited]);
+
+  useEffect(() => { 
+        if (msaAdded) {
             setHeadingText("ADD");
             setMsaState("add")
             setHideMsarefid(true);
+            generateMsaId();
         }
-         //Check if edit MSA
-      else if (state.msaEdited) {
-        setMsaEdited(true);
+      else if (msaEdited) {
+        setModalTitle("Do you want to Edit this MSA ?");
         setHeadingText("EDIT")
         setMsaState("update")
         setHideMsarefid(false)
         setShowFile(true)
-
      }
      // Check if renew MSA
-     else if (state.msaRenewed){
-       setMsaRenewed(true)
+     else if (msaRenewed){
+      setModalTitle("Do you want to Renew this MSA ?");
        setHeadingText("RENEW")
        setMsaState('renew')
        setHideMsarefid(false)
        setShowFile(false)
-
-     }
     }
-
 }, [msaEdited,msaRenewed,msaAdded,msaData.client_name]);
 
 useEffect(() =>{
-  handleAutoFillData();
+  if(msaAdded){
+    // generateMsaId()
+  }else{
+  handleAutoFillData(msa_id);
   console.log("is this edit function");
-},[msaEdited,msaRenewed])
+  }
+},[])
 //Function to autofill msa data for edit and renew msa
-const handleAutoFillData=()=>{
-  autoFillMsa(id);
+const handleAutoFillData=(msa_id:any)=>{
+  autoFillMsa(msa_id)
 }
-
-
 // Function to generate a unique MSA ID
 const generateMsaId = async () => {
   if(msaAdded){
@@ -103,16 +130,17 @@ const generateMsaId = async () => {
       ...prevState,
       msa_ref_id: generatedId
     }));
+    setModalTitle(`Do you want add msa with MSA Reference Id: ${generatedId}`)
+
   } catch (error) {
     console.error("Error generating MSA ID:", error);
   }
 }
 };
-
-const autoFillMsa = async (id: string) => {
+const autoFillMsa = async (msa_id: string) => {
   try {
     // Fetch MSA data from API using msa_ref_id
-    const data = await getmsaapi(id);
+    const data = await getmsaapi(msa_id);
     const msa_data = data.data.data[0];
     if (msa_data) {
       const {msa_ref_id,client_name, region, start_date, end_date, msa_doclink } =
@@ -143,14 +171,23 @@ const autoFillMsa = async (id: string) => {
   }
 
 };
-
 const handleInputChange = (
   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 ) => {
   const { name, value } = e.target;
-  setMsaData((prevState) => ({
-    ...prevState,
-    [name]: value,
+  if (!(name in msaData)) {
+    console.error(`Invalid property name: ${name}`);
+    return;
+  }
+  const newValue = msaData[name as keyof typeof msaData] === value ? null : value;
+  console.log("New value to set:", newValue);
+  setMsaData(prevMsaData => ({
+    ...prevMsaData,
+    [name]: newValue,
+  }));
+  setFormData(prevFormData => ({
+    ...prevFormData,
+    [name]: newValue,
   }));
 };
 
@@ -162,23 +199,23 @@ const beforeUpload = (file: RcFile) => {
   }
   return true;
 };
-
 // Function to handle file upload
 const handleFileUpload = (info: any) => {
   try {
-    setFileUpload( info.file );
+    setFileUpload( info.file);
+    setFormData({...formData,file:info.file as RcFile})
     setFileName(info.file.name);
     setShowFile(true);
   } catch (e) {
     console.log("file upload error is", e);
   }
 };
-
   // Function to handle start date change events
   const handleStartDateChange = (date: Moment | null, dateString: string | string[]) => {
     if (date) {
       const startDateFormatted = date.format('YYYY-MM-DD');
       setMsaData({ ...msaData, start_date: startDateFormatted });
+      setFormData({...formData,start_date: startDateFormatted})
       setStartDate(startDateFormatted);
       console.log(startDateFormatted)
     }
@@ -189,26 +226,26 @@ const handleFileUpload = (info: any) => {
     if (date) {
       const endDateFormatted = date.format('YYYY-MM-DD');
       setMsaData({ ...msaData, end_date: endDateFormatted });
+      setFormData({...formData,end_date: endDateFormatted})
     }
   };
-
 //Function to handle visibility of modal
 const handleSubmit = () => {
-  generateMsaId();
+  
     setIsModalVisible(true);
 };
-
   // Function to handle cancellation of modal
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
-    //Function to cancel file 
+  //Function to cancel file 
     const fileCancel = () => {
       setShowFile(false)
     };
-  //Function to handle form submission
+ //Function to handle form submission
 const handleSubmitForm=async(value:any)=>{
+  console.log(msaData,"is the msa data")
+
   setSpinning(true);
   const msaFormData = new FormData();
 msaFormData.append('msa_ref_id', msaData.msa_ref_id); 
@@ -218,6 +255,7 @@ msaFormData.append('region', msaData.region);
   msaFormData.append('end_date', msaData.end_date);
 msaFormData.append('comments', msaData.comments);
 msaFormData.append('file',fileUpload||'')
+console.log(msaFormData,"is the form DAta to sent")
 if(msaAdded){
   await postaddmsaform(msaFormData,user_id);
   setSpinning(false);
@@ -243,7 +281,7 @@ const validateStartDate = async (value:any) => {
 };
 
   return (
-    <div>
+    
       <MSAForm
       msaData={msaData}
       fileName={fileName}
@@ -266,9 +304,10 @@ const validateStartDate = async (value:any) => {
       msaRenewed={msaRenewed}
       msaEdited={msaEdited}
       startDate={startDate}
-      />
-    </div>
+      modalTitle={modalTitle}
+      formFields={formFields}
+      />  
   )
 }
 
-export default MSAFormHandler
+export default MSAFormHandler;

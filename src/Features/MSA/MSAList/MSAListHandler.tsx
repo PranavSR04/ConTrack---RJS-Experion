@@ -99,7 +99,7 @@ const MSAListHandler = () => {
       };
 
       const handleAddMSA=()=>{
-        navigate("/AddMSA")
+        navigate("/MSA/AddMSA")
       }
 
   // Function to handle pagination and page size change in the table
@@ -186,16 +186,18 @@ const MSAListHandler = () => {
         setSearchConditions({});
         setIsEmptySearch(true);    
       };
-      const oneditPage = (msa_id: string) => {
-        navigate(`/MSA/Edit`, {
+      const oneditPage = (msa_id: string,msa_ref_id: string) => {
+        navigate(`/MSA/EditMSA/${msa_ref_id}`, {
           state: { id: msa_id as string },
         });
         //navigate('/MSAForm', { state: {id:id as string , msaEdited: true } });
        
       };
-      const onRenewPage=(id:string)=>{
-        navigate("/MSAForm", { state: {id:id as string , msaRenewed: true } });
-       
+      const onRenewPage=(msa_id:string,msa_ref_id:string)=>{
+        
+        navigate(`/MSA/RenewMSA/${msa_ref_id}`, {
+          state: { id: msa_id as string },
+        });       
       }
       const columns: TableColumn[] = desiredColumnKeys.map((key) => ({
         title: (
@@ -231,7 +233,7 @@ const MSAListHandler = () => {
             className='listmsa-action-renew'
             style={{ fontSize: '16px', color: '#DC143C' ,paddingRight:"10px" }}
             onClick={()=>{
-              onRenewPage(record.id)
+              onRenewPage(record.id,record.msa_ref_id)
             }}
            />
           </span>
@@ -244,7 +246,7 @@ const MSAListHandler = () => {
              className='listmsa-action-edit-icon'
                style={{ fontSize: '18px', color: '#DC143C' ,paddingRight:"10px" }}
                onClick={() => {
-                oneditPage(record.id);
+                oneditPage(record.id,record.msa_ref_id);
               }}
              />}
            </span>

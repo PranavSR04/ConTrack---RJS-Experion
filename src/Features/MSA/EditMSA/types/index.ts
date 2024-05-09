@@ -1,8 +1,5 @@
-import { MSADataInitial, MSAType } from "../../MSA/types";
 
 export interface EditMsaPropType{
-    msa_id: number;
-    initialValues: MSADataInitial | undefined;
-    msaData: MSAType | undefined
+    msa_id: string;
     msaEdited: boolean
 }

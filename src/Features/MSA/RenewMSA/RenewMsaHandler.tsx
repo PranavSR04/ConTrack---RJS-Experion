@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useLocation } from 'react-router';
-import EditMSA from './EditMSA';
+import RenewMSA from './RenewMsa';
 
 
-const EditMSAHandler = () => {
-    const [msaEdited,setMsaEdited]=useState<boolean>(true)
+const RenewMSAHandler = () => {
+    const [msaRenewed,setMsaRenewed]=useState<boolean>(true)
     const location = useLocation();
 	let { id } = location.state;
 	const msa_id =id;
@@ -12,13 +12,13 @@ const EditMSAHandler = () => {
    
   return (
     <>
-    <EditMSA
+    <RenewMSA
     msa_id={msa_id}
-    msaEdited={msaEdited}
+    msaRenewed={msaRenewed}
     />
 
     </>
   )
 }
 
-export default EditMSAHandler
+export default RenewMSAHandler
