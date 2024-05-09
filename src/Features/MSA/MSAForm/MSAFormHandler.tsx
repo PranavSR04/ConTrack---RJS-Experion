@@ -19,7 +19,6 @@ const MSAFormHandler = ({
   msa_id,
   msaRenewed
 }:MSAFormHandlerPropType) => {
-  const location=useLocation();
   const navigate=useNavigate();
   const user_id: number = parseInt(localStorage.getItem("user_id") || "0");
   const maxSize = 10 * 1024 * 1024;
@@ -29,8 +28,6 @@ const MSAFormHandler = ({
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [spinning, setSpinning] = useState<boolean>(false);
   let [headingText,setHeadingText]=useState<string>("");
-  const[msaState,setMsaState]=useState<string>("");
-  const[msarefid,setMsarefid]=useState<boolean>();
   const[hideMsarefid,setHideMsarefid]=useState<boolean>();
   const[startDate,setStartDate]=useState<string>();
   const [modalTitle,setModalTitle] = useState<string>("");
@@ -44,48 +41,16 @@ const MSAFormHandler = ({
     comments: "",
     file: null as RcFile | null,
   })
-  const [formData, setFormData] = useState({
-    client_name: "",
-    region: "",
-    start_date: "",
-    end_date: "",
-    comments: "",
-    file: null as RcFile | null  
-  });
-  useEffect(() => {
-    setFormData({
-      client_name: msaData.client_name,
-      region: msaData.region,
-      start_date: msaData.start_date,
-      end_date: msaData.end_date,
-      comments: msaData.comments,
-      file: null as RcFile | null,
-    });
-  
-  }, [msaData]);
-  useEffect(() => {
-    // Dynamically generate formFields based on msaData and msaEdited
-    const updatedFormFields = [
-      { name: "msa_ref_id", value: msaData?.msa_ref_id },
-      { name: "client_name", value: msaData?.client_name },
-      { name: "region", value: msaData?.region },
-      { name: "start_date", value: msaEdited ? (msaData?.start_date ? dayjs(msaData?.start_date) : undefined) : msaData?.start_date ? dayjs(msaData?.start_date) : undefined},
-      { name: "end_date", value: msaEdited ? (msaData?.end_date ? dayjs(msaData?.end_date) : undefined) : msaData?.end_date ? dayjs(msaData?.end_date) : undefined }
-    ];
-    setFormFields(updatedFormFields);
-  }, [msaRenewed,msaEdited]);
 
   useEffect(() => { 
         if (msaAdded) {
             setHeadingText("ADD");
-            setMsaState("add")
             setHideMsarefid(true);
             generateMsaId();
         }
       else if (msaEdited) {
         setModalTitle("Do you want to Edit this MSA ?");
         setHeadingText("EDIT")
-        setMsaState("update")
         setHideMsarefid(false)
         setShowFile(true)
      }
@@ -93,16 +58,13 @@ const MSAFormHandler = ({
      else if (msaRenewed){
       setModalTitle("Do you want to Renew this MSA ?");
        setHeadingText("RENEW")
-       setMsaState('renew')
        setHideMsarefid(false)
        setShowFile(false)
     }
 }, [msaEdited,msaRenewed,msaAdded,msaData.client_name]);
 
 useEffect(() =>{
-  if(msaAdded){
-    // generateMsaId()
-  }else{
+  if(msaEdited||msaRenewed){
   handleAutoFillData(msa_id);
   console.log("is this edit function");
   }
@@ -185,10 +147,6 @@ const handleInputChange = (
     ...prevMsaData,
     [name]: newValue,
   }));
-  setFormData(prevFormData => ({
-    ...prevFormData,
-    [name]: newValue,
-  }));
 };
 
 //Function to check the size of file
@@ -203,7 +161,6 @@ const beforeUpload = (file: RcFile) => {
 const handleFileUpload = (info: any) => {
   try {
     setFileUpload( info.file);
-    setFormData({...formData,file:info.file as RcFile})
     setFileName(info.file.name);
     setShowFile(true);
   } catch (e) {
@@ -215,9 +172,6 @@ const handleFileUpload = (info: any) => {
     if (date) {
       const startDateFormatted = date.format('YYYY-MM-DD');
       setMsaData({ ...msaData, start_date: startDateFormatted });
-      setFormData({...formData,start_date: startDateFormatted})
-      setStartDate(startDateFormatted);
-      console.log(startDateFormatted)
     }
   };
   
@@ -226,7 +180,6 @@ const handleFileUpload = (info: any) => {
     if (date) {
       const endDateFormatted = date.format('YYYY-MM-DD');
       setMsaData({ ...msaData, end_date: endDateFormatted });
-      setFormData({...formData,end_date: endDateFormatted})
     }
   };
 //Function to handle visibility of modal

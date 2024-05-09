@@ -108,11 +108,9 @@ const MSAForm = ({
                 rules={msaAdded ? [
                   { required: true, message: "Please enter the Region" }
                 ] : []}
-                //valuePropName={msaData.region}
               >
 
                 <Input
-               // value={msaData.region}
                   name="region"
                   className={styles.MSAForm__Form__inputs}
                   onChange={handleInputChange}
