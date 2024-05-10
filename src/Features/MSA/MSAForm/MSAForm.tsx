@@ -1,4 +1,5 @@
 import styles from './MSAForm.module.css'
+import React, { useEffect, useState } from 'react'
 import { Button, DatePicker, Form, Input, Modal, Spin, Upload } from 'antd'
 import { MSAFormProps } from './types'
 import { CloseOutlined, FilePdfOutlined, PlusOutlined } from '@ant-design/icons'
@@ -26,7 +27,7 @@ const MSAForm = ({
    hideMsarefid,
    msaRenewed,
    msaEdited,
-   startDate
+   modalTitle,
 }
   :MSAFormProps) => {
     const formFields = [
@@ -35,12 +36,8 @@ const MSAForm = ({
       { name: "region", value: msaData.region },
        { name: "start_date", value: msaEdited ? (msaData.start_date ? dayjs(msaData.start_date) : undefined) : msaData.start_date ? dayjs(msaData.start_date) : undefined},
        { name: "end_date", value: msaEdited ? (msaData.end_date ? dayjs(msaData.end_date) : undefined) : msaData.end_date ? dayjs(msaData.end_date) : undefined }
-
     ];
-  return (
-    <div className={styles.MSAForm}>
-      <h3 className={styles.MSAForm__heading}>
-        {headingText} MASTER SERVICE AGREEMENT</h3>
+  return (  
       <div className={styles.MSAForm__Form}>
       <h4 className={styles.MSAForm__Form__Heading}>
             Master Service Agreement Details
@@ -50,9 +47,8 @@ const MSAForm = ({
             encType="multipart/form-data"
             style={{ maxWidth: 600 }}
             fields={formFields}
-            //initialValues={formFields}
             requiredMark={false}
-          >
+          >            
             <div className={styles.MSAForm__Form__row1}>
               <Form.Item
                 className={styles.MSAForm__Form__row1__col1}
@@ -60,9 +56,11 @@ const MSAForm = ({
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
                 label="MSA Reference ID"
+                valuePropName={msaData.msa_ref_id}
               >
                 <Input
                   name="msa_ref_id"
+                  style={msaAdded ? { color: 'transparent' } : undefined}
                   value={hideMsarefid ? '' : msaData.msa_ref_id}
                   readOnly
                   className={styles.MSAForm__Form__input__msa_ref_id}
@@ -88,10 +86,11 @@ const MSAForm = ({
                 ] : []}
               >
                 <Input
+                value={msaData.client_name}
                   name="client_name"
                   className={styles.MSAForm__Form__inputs}
-                  onChange={handleInputChange}
-                  disabled={msaRenewed}
+                 onChange= {(e) => handleInputChange(e)} 
+                 disabled={msaRenewed ? true : false}
                   placeholder="Enter Client Name" 
                 />
               </Form.Item>
@@ -110,14 +109,16 @@ const MSAForm = ({
                   { required: true, message: "Please enter the Region" }
                 ] : []}
               >
+
                 <Input
                   name="region"
                   className={styles.MSAForm__Form__inputs}
                   onChange={handleInputChange}
-                  disabled={msaRenewed}
+                  disabled={msaRenewed ? true : false}
                 />
               </Form.Item>
             </div>
+
             <div className={styles.MSAForm__Form__row2}>
               <Form.Item
                 className={styles.MSAForm__Form__row2__col1}
@@ -184,15 +185,13 @@ const MSAForm = ({
                       className={styles.file__closeicon}
                       onClick={fileCancel}
                     />
-
                       <FilePdfOutlined
                         className={styles.MSAForm__Form__row3__col1__fileicon}
                       />
-
                       <br />
                       <div>
                       <p className={styles.MSAForm__Form__row3__col1__filename}>
-                      {fileName}
+                      MSA Document
                     </p>
                       </div>
                   </div>
@@ -258,7 +257,7 @@ const MSAForm = ({
             </Button>
 
             <Modal
-              title="Are you sure you want to submit this Form?"
+              title={modalTitle}
               visible={isModalVisible}
               onCancel={handleCancel}
               footer={[
@@ -283,8 +282,8 @@ const MSAForm = ({
             <Spin spinning={spinning} fullscreen />
           </Form>
       </div>
-    </div>
+    
   )
 }
 
-export default MSAForm
+export default MSAForm;
