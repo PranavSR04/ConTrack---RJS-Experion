@@ -51,55 +51,47 @@
   height: auto;
   font-size: small;
 }
+/* .contractForm__ffcard__main__milestoneheading__desc {
+	width: 350px;
+  } */
 
-.contractForm__ffcard__main {
+
+/* .contractForm__ffcard__main {
   text-align: right;
-}
+} */
 
 .contractForm__ffcard__main__milestoneheading {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 1rem;
+  padding-top: 20px;
+  padding-bottom: 0px;
+  margin-bottom: -20px;
 }
 
 .contractForm__ffcard__main__milestoneheading__desc {
-  font-size: small;
-  font-weight: 400;
+  width: 26vw;
 }
 
 .contractForm__ffcard__main__milestoneheading__enddate {
-  margin-left: 8.5rem;
-  font-size: small;
-  font-weight: 400;
+  width: 13vw;
 }
 
 .contractForm__ffcard__main__milestoneheading__percentage {
-  margin-left: 3rem;
-  font-size: small;
-  font-weight: 400;
+  width: 9vw;
 }
 
 .contractForm__ffcard__main__milestoneheading__amount {
-  margin-left: 2rem;
-  font-size: small;
-  font-weight: 400;
+  width: 17.5vw;
 }
 
 .contractForm__ffcard__main__milestoneheading__tmdesc {
-  font-size: small;
-  font-weight: 400;
+  width: 26vw;
 }
 
 .contractForm__ffcard__main__milestoneheading__tmenddate {
-  font-size: small;
-  font-weight: 400;
-  margin-left: 4rem;
+  width: 13vw;
 }
 
 .contractForm__ffcard__main__milestoneheading__tmamount {
-  font-size: small;
-  font-weight: 400;
-  margin-left: 4rem;
+  width: 20vw;
 }
 
 
