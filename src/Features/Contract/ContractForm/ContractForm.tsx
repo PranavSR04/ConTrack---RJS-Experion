@@ -45,7 +45,7 @@ const ContractForm = ({
 				fields={initialFields}
 				initialValues={initialValues}
 				form={form}
-			>
+			>   
 				<Card className={styles.contractForm__topcard}>
 					<Space>
 						<Form.Item name={"msa_id"} label="Client Name" rules={rules.client_name}>
