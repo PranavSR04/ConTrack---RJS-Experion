@@ -44,7 +44,7 @@ const MSAListHandler = () => {
       };
       //click function for each data row
       const rowClickHandler = (record: MsaData) => {
-        navigate(`/${record.msa_ref_id}`, {
+        navigate(`/MSAOverview/${record.msa_ref_id}`, {
             state: { id: record.id as string },
           });
       };

@@ -2,6 +2,7 @@ import React from "react";
 import { HeaderPropType } from "./types";
 import styles from "./Header.module.css";
 import { CSVLink } from "react-csv";
+import BreadCrumbs from "../../../../Components/BreadCrumbs/Breadcrumbs";
 
 const Header = ({
   clientName,
@@ -16,7 +17,15 @@ const Header = ({
 }: HeaderPropType) => {
   return (
     <div className={`${styles.maincontainer__header}`}>
+      <BreadCrumbs
+            style={{
+            marginTop: "-0.3rem",
+            fontSize: 16,
+            fontStyle: "italic",
+          }}
+        />
       <div className={`${styles.maincontainer__header__title}`}>
+      
         <div className={`${styles.maincontainer__header__title__contract}`}>
           <h2>
             {clientName} <span>#{contractRefId}</span>

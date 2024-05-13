@@ -4,6 +4,7 @@ import styles from "./ContractList.module.css";
 import { ContractListPropType, ContractData } from "./types";
 import { LoadingOutlined } from "@ant-design/icons";
 import Toast from "../../../Components/Toast/Toast";
+import BreadCrumbs from "../../../Components/BreadCrumbs/Breadcrumbs";
 
 const ContractList = ({
   columns,
@@ -30,6 +31,14 @@ const ContractList = ({
   return (
     <>
       <p className={styles["contractsHeading"]}>{pageTitle}</p>
+      <BreadCrumbs
+          style={{
+            marginLeft: "15rem",
+            marginTop: "0.7rem",
+            fontSize: 16,
+            fontStyle: "italic",
+          }}
+        />
       <div className={styles["contractsTableWrap"]}>
         <div className={styles["contractsTableWrap__buttons"]}>
           <div className={styles["contractsTableWrap__buttonExpired"]}>
