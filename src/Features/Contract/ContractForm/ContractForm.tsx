@@ -5,6 +5,7 @@ import { AiOutlineMinusCircle } from "react-icons/ai";
 import { ContractFormPropType, MSAType, Milestone } from "./types";
 import { UploadOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
+import { FormInstance } from "antd/lib";
 
 const ContractForm = ({
 	selectedOption, 
@@ -75,22 +76,19 @@ const ContractForm = ({
 			return totalPercentage;
 		};
 		
-		  // Validator function for total percentage
-		const validateTotalPercentage = (_: unknown, value: number) => {
+		// Validator function for total percentage
+		const validateTotalPercentage = async (_: unknown, value: number) => {
 			const totalPercentage = calculateTotalPercentage();
+			console.log('total percentage mile', totalPercentage)
 			if (totalPercentage !== 100) {
-				return Promise.reject(new Error('Total percentage should be 100'));
+				return Promise.reject('Total percentage should be 100');
 			} else {
 				// Clear validation errors for individual percentage fields
 				const milestones = form.getFieldValue('milestones');
-				milestones.forEach((_:unknown, index: number) => {
-					const fieldName = `milestones[${index}].percentage`;
-					form.setFields([{ name: fieldName, errors: [] }]);
-				});
-				return Promise.resolve();
+				form.validateFields();
+    			return Promise.resolve();
 			}
 		};
-
 	return (
 		<>
 		<div className={styles.contractForm}>
@@ -199,7 +197,8 @@ const ContractForm = ({
 											rules={[{required: true, message: "Please input Milestone End Date"},{validator: validateMilestoneEndDate}]}>
 												<DatePicker placeholder="Milestone End Date" style={{ width: "15rem" }}/>
 											</Form.Item>
-											<Form.Item name={[field.name,"percentage"]} key={`${field.key}-ff_percentage`} rules={[{required: true, message: "Please input Milestone Percentage"},
+											<Form.Item name={[field.name,"percentage"]} key={`${field.key}-ff_percentage`} 
+												rules={[{required: true, message: "Please input Milestone Percentage"},
 												// { validator: validateTotalPercentage }
 											]}>
 												<InputNumber<number>
