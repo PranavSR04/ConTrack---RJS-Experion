@@ -60,7 +60,7 @@ const EditContractHandler = () => {
 			}
 			if (contractDetails.associated_groups) {
 				const initialAssociated_groups_id = contractDetails.associated_groups.map(
-					(group) => group.id
+					(group) => group.group_id
 				);
 				initaiValuesData.associated_groups = initialAssociated_groups_id;
 			}
