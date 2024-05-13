@@ -162,28 +162,43 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 	};
 
 	//Form Validations 
-
-	// Validation for date of signature to be before start date and end date
-	const validateDateOfSignature = (_: unknown, value: dayjs.Dayjs | null | undefined,callback: (error?: string) => void) => {
+	const validateDateOfSignature = (_: unknown, value: dayjs.Dayjs | null | undefined) => {
 		const startDate = form.getFieldValue('start_date');
 		const endDate = form.getFieldValue('end_date');
-		console.log("StartDate ",startDate);
-		if (value && startDate && endDate) {
-			if (value.isBefore(startDate) && value.isBefore(endDate)) {
-				callback(); // Validation passed
-				return;
-			}
-		callback('Date of Signature must be before Start Date and End Date');
-		} else {
-			callback() // Validation passed if fields are empty
+		const dateOfSignature = value;
+		
+		if (dayjs(startDate).isBefore(dateOfSignature) || dayjs(endDate).isBefore(dateOfSignature)) {
+			return Promise.reject('Date of Signature must be before Start Date and End Date');
 		}
+		
+		return Promise.resolve(); 
 	};
-	// Validation for start date to be before end date
+
+	// Validation for date of signature to be before start date
 	const validateStartDate = (_: unknown, value: dayjs.Dayjs | null | undefined) => {
+		const dateOfSignature = form.getFieldValue('date_of_signature');
 		const startDate = value;
 		const endDate = form.getFieldValue('end_date');
-		if (startDate && endDate && dayjs(startDate).isAfter(endDate)) {
+		
+		if (dateOfSignature && startDate && dayjs(dateOfSignature).isAfter(startDate)) {
+			return Promise.reject('Start Date must be after Date of Signature');
+		}
+		if (endDate && startDate && dayjs(endDate).isBefore(startDate)) {
 			return Promise.reject('Start Date must be before End Date');
+		}
+		return Promise.resolve();
+	};
+
+	// Validation for start date to be before end date
+	const validateEndDate = (_: unknown, value: dayjs.Dayjs | null | undefined) => {
+		const dateOfSignature = form.getFieldValue('date_of_signature');
+		const startDate = form.getFieldValue('start_date');
+		const endDate = value;
+		if (startDate && endDate && dayjs(startDate).isAfter(endDate)) {
+			return Promise.reject('End Date must be after Start Date');
+		}
+		if (dateOfSignature && endDate && dayjs(dateOfSignature).isAfter(endDate)) {
+			return Promise.reject('End Date must be after Date of Signature');
 		}
 		return Promise.resolve();
 	};
@@ -229,9 +244,9 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 		client_name : [{ required: true, message: 'Please select a Client Name' }],
 		contract_id : [{ required: true, message: 'Please input a Contract ID' }],
 		du : [{ required: true, message: 'Please select a DU' }],
-		date_of_signature : [{ required: true, message: 'Please select the Date of Signature' },{ validator: validateDateOfSignature }],
+		date_of_signature : [{ required: true, message: 'Please select the Date of Signature' }, {validator: validateDateOfSignature}],
 		start_date : [{ required: true, message: 'Please select the Start Date' }, { validator: validateStartDate }],
-		end_date : [{ required: true, message: 'Please select the End Date' },],
+		end_date : [{ required: true, message: 'Please select the End Date' }, {validator: validateEndDate}],
 		milestone_enddate : [{required: true, message: "Please input Milestone End Date"},{validator: validateMilestoneEndDate}],
 		percentage : [{required: true, message: "Please input Milestone Percentage"},
 		// { validator: validateTotalPercentage }

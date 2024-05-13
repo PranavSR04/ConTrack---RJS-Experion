@@ -83,7 +83,9 @@ const ContractForm = ({
 						</Form.Item>
 					</Space>
 					<Space>
-						<Form.Item name={"date_of_signature"} label="Date of Signature" rules={rules.date_of_signature}>
+						<Form.Item name={"date_of_signature"} label="Date of Signature" 
+						rules={rules.date_of_signature}
+						>
 							<DatePicker placeholder="Date of Signature" />
 						</Form.Item>
 
