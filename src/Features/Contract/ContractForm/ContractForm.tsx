@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { Form, Select, Card, Input, Space, DatePicker, Button, InputNumber, Upload, Modal } from "antd";
+import React from "react";
+import { Form, Select, Card, Input, Space, DatePicker, Button, InputNumber, Upload, Modal, Spin } from "antd";
 import styles from "./ContractForm.module.css";
 import { AiOutlineMinusCircle } from "react-icons/ai";
-import { ContractFormPropType, MSAType, Milestone } from "./types";
+import { ContractFormPropType, MSAType } from "./types";
 import { UploadOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
+ 
 
 const ContractForm = ({
 	selectedOption, 
@@ -23,73 +24,19 @@ const ContractForm = ({
 	handleCancel,
 	showModal,
 	isModalOpen,
-	groups
+	groups,
+	form,
+	calculateAmount,
+	setTcv,
+	spinning,
+	selectedMSA,
+	rules
 	}:ContractFormPropType) => {	
 
+		console.log("Initial values from contract form",initialValues);
+		console.log("Initial Fields",initialFields);
 
-		const [form] = Form.useForm();
-		const [totalPercentage, setTotalPercentage] = useState(0);
-
-		// Validation for date of signature to be before start date and end date
-		const validateDateOfSignature = (_: unknown, value: dayjs.Dayjs | null | undefined,callback: (error?: string) => void) => {
-			const startDate = form.getFieldValue('start_date');
-			const endDate = form.getFieldValue('end_date');
-			if (value && startDate && endDate) {
-				if (value.isBefore(startDate) && value.isBefore(endDate)) {
-					callback(); // Validation passed
-					return;
-				}
-			  callback('Date of Signature must be before Start Date and End Date');
-			} else {
-				callback() // Validation passed if fields are empty
-			}
-		};
-
-		// Validation for start date to be before end date
-		const validateStartDate = (_: unknown, value: dayjs.Dayjs | null | undefined) => {
-			const startDate = value;
-			const endDate = form.getFieldValue('end_date');
-			if (startDate && endDate && dayjs(startDate).isAfter(endDate)) {
-				return Promise.reject('Start Date must be before End Date');
-			}
-			return Promise.resolve();
-		};
-
-		// Validation for milestone enddate to be between start date and end date
-		const validateMilestoneEndDate = (_: unknown, value: dayjs.Dayjs | null | undefined) => {
-			const startDate = form.getFieldValue('start_date');
-			const endDate = form.getFieldValue('end_date');
-			if (startDate && endDate && value && (dayjs(value).isBefore(startDate) || dayjs(value).isAfter(endDate))) {
-				return Promise.reject('Milestone End Date must be between Contract Period');
-			}
-			return Promise.resolve();
-		};
-
-		// Function to calculate total percentage
-		const calculateTotalPercentage = () => {
-			const milestones: Milestone[] = form.getFieldValue('milestones');
-			let totalPercentage = 0;
-			milestones.forEach((field: Milestone) => {
-			  totalPercentage += field.percentage || 0;
-			});
-			return totalPercentage;
-		};
 		
-		  // Validator function for total percentage
-		const validateTotalPercentage = (_: unknown, value: number) => {
-			const totalPercentage = calculateTotalPercentage();
-			if (totalPercentage !== 100) {
-				return Promise.reject(new Error('Total percentage should be 100'));
-			} else {
-				// Clear validation errors for individual percentage fields
-				const milestones = form.getFieldValue('milestones');
-				milestones.forEach((_:unknown, index: number) => {
-					const fieldName = `milestones[${index}].percentage`;
-					form.setFields([{ name: fieldName, errors: [] }]);
-				});
-				return Promise.resolve();
-			}
-		};
 
 	return (
 		<>
@@ -101,7 +48,7 @@ const ContractForm = ({
 			>
 				<Card className={styles.contractForm__topcard}>
 					<Space>
-						<Form.Item name={"msa_id"} label="Client Name" rules={[{ required: true, message: 'Please select a Client Name' }]}>
+						<Form.Item name={"msa_id"} label="Client Name" rules={rules.client_name}>
 							<Select 
 								showSearch	
 								style={{ width: 200 }}
@@ -118,7 +65,7 @@ const ContractForm = ({
 							</Select>
 						</Form.Item>
 
-						<Form.Item name={"contract_ref_id"} label="Contract ID" rules={[{ required: true, message: 'Please input a Contract ID' }]}>
+						<Form.Item name={"contract_ref_id"} label="Contract ID" rules={rules.contract_id}>
 							<Input placeholder="Contract ID" />
 						</Form.Item>
 
@@ -126,7 +73,7 @@ const ContractForm = ({
 							<Input placeholder="Region" disabled/>
 						</Form.Item>
 
-						<Form.Item name={"du"} label="DU" rules={[{ required: true, message: 'Please select a DU' }]}>
+						<Form.Item name={"du"} label="DU" rules={rules.du}>
 							<Select placeholder="DU">
 								<Select.Option value="DU1">DU1</Select.Option>
 								<Select.Option value="DU2">DU2</Select.Option>
@@ -136,19 +83,15 @@ const ContractForm = ({
 						</Form.Item>
 					</Space>
 					<Space>
-						<Form.Item name={"date_of_signature"} label="Date of Signature" rules={[{ required: true, message: 'Please select the Date of Signature' },
-							{ validator: validateDateOfSignature }
-						]}>
+						<Form.Item name={"date_of_signature"} label="Date of Signature" rules={rules.date_of_signature}>
 							<DatePicker placeholder="Date of Signature" />
 						</Form.Item>
 
-						<Form.Item name={"start_date"} label="Start Date" rules={[{ required: true, message: 'Please select the Start Date' }, 
-							{ validator: validateStartDate }
-						]}>
+						<Form.Item name={"start_date"} label="Start Date" rules={rules.start_date}>
 							<DatePicker placeholder="Start Date" />
 						</Form.Item>
 
-						<Form.Item name={"end_date"} label="End Date" rules={[{ required: true, message: 'Please select the End Date' },]}>
+						<Form.Item name={"end_date"} label="End Date" rules={rules.end_date}>
 							<DatePicker placeholder="End Date" />
 						</Form.Item>
 					</Space>
@@ -173,46 +116,45 @@ const ContractForm = ({
 							<Space style={{width:"90vw"}}>
 								<h6>Milestone Details</h6>
 								<Form.Item label="Total Contract Value" name={"estimated_amount"} className={`${styles.contractForm__ffcard__contractvalue}`} rules={[{ required: true, message: 'Please input the Total Contract Value' }]}>
-									<InputNumber<number> addonBefore="USD" />
+									<InputNumber<number> addonBefore="USD" onChange={(tcv)=>{tcv && setTcv(tcv)}} style={{width:300}}/>
 								</Form.Item>
 							</Space>
 							<Space className={`${styles.contractForm__ffcard__main}`}>
 								<Form.List key={"ff"} name={"milestones"}>{(fields,{add,remove}) => 
 								<>
-								<div className={`${styles.contractForm__ffcard__main__milestoneheading}`}>
-									<h6 className={`${styles.contractForm__ffcard__main__milestoneheading__desc}`}>Milestone Description</h6>
-									<h6 className={`${styles.contractForm__ffcard__main__milestoneheading__enddate}`}>Milestone End Date</h6>
-									<h6 className={`${styles.contractForm__ffcard__main__milestoneheading__percentage}`}>Percentage</h6>
-									<h6 className={`${styles.contractForm__ffcard__main__milestoneheading__amount}`}>Amount</h6>
+								<Space className={styles.contractForm__ffcard__main__milestoneheading}>
+									<p className={`${styles.contractForm__ffcard__main__milestoneheading__desc}`} >Milestone Description</p>
+									<p className={`${styles.contractForm__ffcard__main__milestoneheading__enddate}`}>Milestone End Date</p>
+									<p className={`${styles.contractForm__ffcard__main__milestoneheading__percentage}`}>Percentage</p>
+									<p className={`${styles.contractForm__ffcard__main__milestoneheading__amount}`}>Amount</p>
 									<Form.Item>
 										<Button onClick={()=>{add()}} className={`${styles.contractForm__ffcard__addbutton}`}>Add</Button>
 									</Form.Item>
-								</div>
+								</Space>
 								{fields.map((field,index)=>{
 									console.log("Inside Milestones Filed",field);
 									return(
 										<Space key={field.key} style={{width:"72vw"}}>
 											<Form.Item name={[field.name,"milestone_desc"]} key={`${field.key}-ff_milestone_desc`} rules={[{required: true, message: "Please input Milestone Description"}]}>
-												<Input placeholder="Milestone Description" style={{ width: "20rem" }}/>
+												<Input placeholder="Milestone Description" style={{ width: "26vw"}}/>
 											</Form.Item>
 											<Form.Item name={[field.name,"milestone_enddate"]} key={`${field.key}-ff_milestone_enddate`}
-											rules={[{required: true, message: "Please input Milestone End Date"},{validator: validateMilestoneEndDate}]}>
-												<DatePicker placeholder="Milestone End Date" style={{ width: "15rem" }}/>
+											rules={rules.milestone_enddate}>
+												<DatePicker placeholder="Milestone End Date" style={{ width: "13vw" }}/>
 											</Form.Item>
-											<Form.Item name={[field.name,"percentage"]} key={`${field.key}-ff_percentage`} rules={[{required: true, message: "Please input Milestone Percentage"},
-												// { validator: validateTotalPercentage }
-											]}>
+											<Form.Item name={[field.name,"percentage"]} key={`${field.key}-ff_percentage`} rules={rules.percentage}>
 												<InputNumber<number>
 													placeholder="Percentage"
 													min={0}
 													max={100}
-													style={{ width: "10rem" }}
+													style={{ width: "9vw" }}
 													// formatter={(value) => `${value}%`}
 													// parser={(value) => value?.replace('%', '') as unknown as number}
+													onChange={(p)=>calculateAmount(p,field.name)}
 												/>
 											</Form.Item>
 											<Form.Item name={[field.name,"amount"]} key={`${field.key}-ff_amount`} >
-												<InputNumber placeholder="Amount" min={0} />
+												<InputNumber placeholder="Amount" min={0} disabled style={{width : "20vw"}} addonBefore="USD"/>
 											</Form.Item>
 											{fields.length > 1 ? (
 											<AiOutlineMinusCircle style={{marginTop:-25,color:"red"}} size={20} onClick={()=>{remove(field.name)}}/>
@@ -238,26 +180,26 @@ const ContractForm = ({
 						<Space className={`${styles.contractForm__ffcard__main}`}>
 							<Form.List key={"tm"} name={"milestones"}>{(fields,{add,remove}) => 
 							<>
-							<div className={`${styles.contractForm__ffcard__main__milestoneheading}`}>
-								<h6 className={`${styles.contractForm__ffcard__main__milestoneheading__tmdesc}`}>Milestone Description</h6>
-								<h6 className={`${styles.contractForm__ffcard__main__milestoneheading__tmenddate}`}>Milestone End Date</h6>
-								<h6 className={`${styles.contractForm__ffcard__main__milestoneheading__tmamount}`}>Amount</h6>
+							<Space className={styles.contractForm__ffcard__main__milestoneheading}>
+								<p className={`${styles.contractForm__ffcard__main__milestoneheading__tmdesc}`}>Milestone Description</p>
+								<p className={`${styles.contractForm__ffcard__main__milestoneheading__tmenddate}`}>Milestone End Date</p>
+								<p className={`${styles.contractForm__ffcard__main__milestoneheading__tmamount}`}>Amount</p>
 							<Form.Item>
 								<Button onClick={()=>{add()}} className={`${styles.contractForm__ffcard__addbutton}`}>Add</Button>
 							</Form.Item>
-							</div>
+							</Space>
 							{fields.map((field,index)=>{
 								return(
 									<Space key={field.key} style={{width:"70vw"}}> 
 										<Form.Item name={[field.name,"milestone_desc"]} key={`${field.key}-tm_milestone_desc`} rules={[{required: true, message: "Please input Milestone Description"}]}>
-											<Input placeholder="Milestone Description" style={{ width: "20rem" }}/>
+											<Input placeholder="Milestone Description" style={{ width: "26vw" }}/>
 										</Form.Item>
 										<Form.Item name={[field.name,"milestone_enddate"]} key={`${field.key}-tm_milestone_enddate`}
-											rules={[{required: true, message: "Please input Milestone End Date"},{validator: validateMilestoneEndDate}]}>
-											<DatePicker placeholder="Milestone End Date" style={{ width: "20rem" }} />
+											rules={rules.milestone_enddate}>
+											<DatePicker placeholder="Milestone End Date" style={{ width: "13vw" }} />
 										</Form.Item>
 										<Form.Item name={[field.name,"amount"]} key={`${field.key}-tm_amount`} rules={[{required: true, message: "Please input Milestone Amount"}]}>
-											<InputNumber<number> placeholder="Amount" min={0} style={{ width: "10rem" }}/>
+											<InputNumber<number> placeholder="Amount" min={0} style={{ width: "20vw" }} addonBefore="USD"/>
 										</Form.Item>
 										{fields.length > 1 ? (
 											<AiOutlineMinusCircle style={{marginTop:-25,color:"red"}} size={20} onClick={()=>{remove(field.name)}}/>
@@ -345,9 +287,8 @@ const ContractForm = ({
 				</div>
 			)}
 			>
-
-
 			</Modal>
+			<Spin spinning={spinning} fullscreen />
 		</div>
 		</>
 	);
