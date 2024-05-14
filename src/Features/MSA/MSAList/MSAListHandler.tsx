@@ -50,7 +50,7 @@ const MSAListHandler = () => {
       };
 
       useEffect(() => {
-        
+        setSearchConditions({['is_active']: '1'});
         if (location.state) {
           // Check if MSA was added
           if (location.state.added) {
@@ -92,21 +92,17 @@ const MSAListHandler = () => {
           setPagination({
             ...pagination,
             total: response.total,
-           
           });
-    
         } catch (error) {
           console.error("Error fetching data:", error);
         }
       };
 
-
       const handleAddMSA=()=>{
-        navigate("/MSAForm", { state: { msaAdded: true } })
+        navigate("/MSAOverview/AddMSA")
       }
 
-
-      // Function to handle pagination and page size change in the table
+  // Function to handle pagination and page size change in the table
   const handleTableChange = (pagination: TablePaginationConfig) => {
     if ('current' in pagination && 'pageSize' in pagination) {
       setPagination({
@@ -115,14 +111,12 @@ const MSAListHandler = () => {
         total: pagination.total || 0,
       });
     }
-  
   };
 
   const handleSort = (key:string) => {
     if (sortField === key){
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
       setSortField(key);
-      
     }
     else{
       setSortField(key);
@@ -142,7 +136,6 @@ const MSAListHandler = () => {
       filterDropdown: ({ selectedKeys,confirm, setSelectedKeys}: 
         { selectedKeys: React.Key[]; confirm: (param?: FilterConfirmProps) => void;setSelectedKeys: (selectedKeys: React.Key[]) => void;}) => { 
         // Custom filter dropdown content based on the column
-  
         return (<div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}>
           <Input
             placeholder={`Search ${(customHeadings as Record<string, string>)[dataIndex]}`}
@@ -165,15 +158,6 @@ const MSAListHandler = () => {
       },
       };
     };
-
-    //click function for each data row
-  // const rowClickHandler = (record: MsaData) => {
-  //   if (!actionClicked) {
-  //     navigate(`${record.msa_ref_id}`, {
-  //       state: { id: record.id as string },
-  //     });
-  //   }
-  // };
 
     const handleActiveMSA=()=>{
         if(selectedActiveKeys=='Inactive'){
@@ -202,13 +186,17 @@ const MSAListHandler = () => {
         setSearchConditions({});
         setIsEmptySearch(true);    
       };
-      const oneditPage = (id: string) => {
-        navigate('/MSAForm', { state: {id:id as string , msaEdited: true } });
+      const oneditPage = (msa_id: string,msa_ref_id: string) => {
+        navigate(`/MSAOverview/EditMSA`, {
+          state: { id: msa_id as string },
+        });
+        //navigate('/MSAForm', { state: {id:id as string , msaEdited: true } });
        
       };
-      const onRenewPage=(id:string)=>{
-        navigate("/MSAForm", { state: {id:id as string , msaRenewed: true } });
-       
+      const onRenewPage=(msa_id:string,msa_ref_id:string)=>{
+        navigate(`/MSAOverview/RenewMSA`, {
+          state: { id: msa_id as string },
+        });       
       }
       const columns: TableColumn[] = desiredColumnKeys.map((key) => ({
         title: (
@@ -244,7 +232,7 @@ const MSAListHandler = () => {
             className='listmsa-action-renew'
             style={{ fontSize: '16px', color: '#DC143C' ,paddingRight:"10px" }}
             onClick={()=>{
-              onRenewPage(record.id)
+              onRenewPage(record.id,record.msa_ref_id)
             }}
            />
           </span>
@@ -257,7 +245,7 @@ const MSAListHandler = () => {
              className='listmsa-action-edit-icon'
                style={{ fontSize: '18px', color: '#DC143C' ,paddingRight:"10px" }}
                onClick={() => {
-                oneditPage(record.id);
+                oneditPage(record.id,record.msa_ref_id);
               }}
              />}
            </span>

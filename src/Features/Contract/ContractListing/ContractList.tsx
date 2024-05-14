@@ -31,14 +31,6 @@ const ContractList = ({
   return (
     <>
       <p className={styles["contractsHeading"]}>{pageTitle}</p>
-      <BreadCrumbs
-          style={{
-            marginLeft: "15rem",
-            marginTop: "0.7rem",
-            fontSize: 16,
-            fontStyle: "italic",
-          }}
-        />
       <div className={styles["contractsTableWrap"]}>
         <div className={styles["contractsTableWrap__buttons"]}>
           <div className={styles["contractsTableWrap__buttonExpired"]}>

@@ -294,9 +294,16 @@ const ContractListHandler = () => {
 
   const oneditPage = (contract_id: string,contract_ref_id:string) => { //edit button click
     setActionClicked(true);
-    navigate(`/AllContracts/Edit Contract/${contract_ref_id}`, {
+    if (isMyContracts){
+    navigate(`/MyContracts/Edit Contract`, {
       state: { id: contract_id as string },
     });
+  }
+    else{
+      navigate(`/AllContracts/Edit Contract`, {
+        state: { id: contract_id as string },
+      });
+    }
   };
 
   columns.push({ //add status row to columns

@@ -55,14 +55,6 @@ locale
     <>
     <div className={styles.MSAList}>
       <h3 className={styles.MSAList__heading}>MASTER SERVICE AGREEMENT</h3>
-      <BreadCrumbs
-            style={{
-            marginLeft: "1rem",
-            marginTop: "0.4rem",
-            fontSize: 16,
-            fontStyle: "italic",
-          }}
-        />
       <div className={styles.MSAList__Table}>
         <div className={styles.MSAList__Table__row1}>
         <div className={styles.MSAList__Table__row1__col1__Toggle}>
