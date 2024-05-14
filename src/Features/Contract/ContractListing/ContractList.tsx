@@ -27,6 +27,7 @@ const ContractList = ({
   contractCloseToast
 }: ContractListPropType) => {
   console.log("contract added toast",contractAddToast)
+  console.log(data);
   console.log("contract edited toast",contractEditToast)
   return (
     <>
