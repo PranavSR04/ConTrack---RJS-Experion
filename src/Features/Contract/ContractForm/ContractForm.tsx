@@ -4,8 +4,6 @@ import styles from "./ContractForm.module.css";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { ContractFormPropType, MSAType } from "./types";
 import { UploadOutlined } from "@ant-design/icons";
-import dayjs from "dayjs";
- 
 
 const ContractForm = ({
 	selectedOption, 
@@ -29,15 +27,11 @@ const ContractForm = ({
 	calculateAmount,
 	setTcv,
 	spinning,
-	selectedMSA,
-	rules
-	}:ContractFormPropType) => {	
-
-		console.log("Initial values from contract form",initialValues);
-		console.log("Initial Fields",initialFields);
-
+	rules,
+	error,
+	beforeUpload
+	}:ContractFormPropType) => {
 		
-
 	return (
 		<>
 		<div className={styles.contractForm}>
@@ -84,15 +78,15 @@ const ContractForm = ({
 					</Space>
 					<Space>
 						<Form.Item name={"date_of_signature"} label="Date of Signature" rules={rules.date_of_signature}>
-							<DatePicker placeholder="Date of Signature" />
+							<DatePicker placeholder="Date of Signature" style={{width:"15vw"}}/>
 						</Form.Item>
 
 						<Form.Item name={"start_date"} label="Start Date" rules={rules.start_date}>
-							<DatePicker placeholder="Start Date" />
+							<DatePicker placeholder="Start Date" style={{width:"15vw"}}/>
 						</Form.Item>
 
 						<Form.Item name={"end_date"} label="End Date" rules={rules.end_date}>
-							<DatePicker placeholder="End Date" />
+							<DatePicker placeholder="End Date" style={{width:"15vw"}}/>
 						</Form.Item>
 					</Space>
 					<Space style={{width:"90vw"}}>
@@ -115,12 +109,12 @@ const ContractForm = ({
 						<Card className={styles.contractForm__ffcard}>
 							<Space style={{width:"90vw"}}>
 								<h6>Milestone Details</h6>
-								<Form.Item label="Total Contract Value" name={"estimated_amount"} className={`${styles.contractForm__ffcard__contractvalue}`} rules={[{ required: true, message: 'Please input the Total Contract Value' }]}>
+								<Form.Item label="Total Contract Value" name={"estimated_amount"} className={`${styles.contractForm__ffcard__contractvalue}`} rules={rules.estimated_amount}>
 									<InputNumber<number> addonBefore="USD" onChange={(tcv)=>{tcv && setTcv(tcv)}} style={{width:300}}/>
 								</Form.Item>
 							</Space>
 							<Space className={`${styles.contractForm__ffcard__main}`}>
-								<Form.List key={"ff"} name={"milestones"}>{(fields,{add,remove}) => 
+								<Form.List key={"ff"} name={"milestones"} >{(fields,{add,remove}) => 
 								<>
 								<Space className={styles.contractForm__ffcard__main__milestoneheading}>
 									<p className={`${styles.contractForm__ffcard__main__milestoneheading__desc}`} >Milestone Description</p>
@@ -135,11 +129,10 @@ const ContractForm = ({
 									console.log("Inside Milestones Filed",field);
 									return(
 										<Space key={field.key} style={{width:"72vw"}}>
-											<Form.Item name={[field.name,"milestone_desc"]} key={`${field.key}-ff_milestone_desc`} rules={[{required: true, message: "Please input Milestone Description"}]}>
+											<Form.Item name={[field.name,"milestone_desc"]} key={`${field.key}-ff_milestone_desc`} rules={rules.milestone_desc}>
 												<Input placeholder="Milestone Description" style={{ width: "26vw"}}/>
 											</Form.Item>
-											<Form.Item name={[field.name,"milestone_enddate"]} key={`${field.key}-ff_milestone_enddate`}
-											rules={rules.milestone_enddate}>
+											<Form.Item name={[field.name,"milestone_enddate"]} key={`${field.key}-ff_milestone_enddate`} rules={rules.milestone_enddate}>
 												<DatePicker placeholder="Milestone End Date" style={{ width: "13vw" }}/>
 											</Form.Item>
 											<Form.Item name={[field.name,"percentage"]} key={`${field.key}-ff_percentage`} rules={rules.percentage}>
@@ -153,7 +146,7 @@ const ContractForm = ({
 													onChange={(p)=>calculateAmount(p,field.name)}
 												/>
 											</Form.Item>
-											<Form.Item name={[field.name,"amount"]} key={`${field.key}-ff_amount`} >
+											<Form.Item name={[field.name,"amount"]} key={`${field.key}-ff_amount`} rules={rules.amount} >
 												<InputNumber placeholder="Amount" min={0} disabled style={{width : "20vw"}} addonBefore="USD"/>
 											</Form.Item>
 											{fields.length > 1 ? (
@@ -173,7 +166,7 @@ const ContractForm = ({
 						<Card className={styles.contractForm__tmcard}>
 						<Space style={{width:"90vw"}}>
 							<h6>Milestone Details</h6>
-							<Form.Item label="Total Contract Value" name={"estimated_amount"} className={`${styles.contractForm__ffcard__contractvalue}`} rules={[{ required: true, message: 'Please input the Total Contract Value' }]}>
+							<Form.Item label="Total Contract Value" name={"estimated_amount"} className={`${styles.contractForm__ffcard__contractvalue}`} rules={rules.estimated_amount}>
 								<Input addonBefore="USD" />
 							</Form.Item>
 						</Space>
@@ -191,14 +184,13 @@ const ContractForm = ({
 							{fields.map((field,index)=>{
 								return(
 									<Space key={field.key} style={{width:"70vw"}}> 
-										<Form.Item name={[field.name,"milestone_desc"]} key={`${field.key}-tm_milestone_desc`} rules={[{required: true, message: "Please input Milestone Description"}]}>
+										<Form.Item name={[field.name,"milestone_desc"]} key={`${field.key}-tm_milestone_desc`} rules={rules.milestone_desc}>
 											<Input placeholder="Milestone Description" style={{ width: "26vw" }}/>
 										</Form.Item>
-										<Form.Item name={[field.name,"milestone_enddate"]} key={`${field.key}-tm_milestone_enddate`}
-											rules={rules.milestone_enddate}>
+										<Form.Item name={[field.name,"milestone_enddate"]} key={`${field.key}-tm_milestone_enddate`} rules={rules.milestone_enddate}>
 											<DatePicker placeholder="Milestone End Date" style={{ width: "13vw" }} />
 										</Form.Item>
-										<Form.Item name={[field.name,"amount"]} key={`${field.key}-tm_amount`} rules={[{required: true, message: "Please input Milestone Amount"}]}>
+										<Form.Item name={[field.name,"amount"]} key={`${field.key}-tm_amount`} rules={rules.amount}>
 											<InputNumber<number> placeholder="Amount" min={0} style={{ width: "20vw" }} addonBefore="USD"/>
 										</Form.Item>
 										{fields.length > 1 ? (
@@ -254,8 +246,8 @@ const ContractForm = ({
 				<Space style={{width:"100%"}}>
 					<Card className={styles.contractForm__uploadcard}>
 						{contractDetails ? <h6>Upload Addendum</h6> :<h6><span style={{color:"red"}}>*</span> Upload Work Schedule</h6>}
-						<Form.Item name={filename} rules={contractDetails ? undefined : [{ required: true, message: 'Please upload a file' }]}>
-							<Upload accept=".pdf" maxCount={1} >
+						<Form.Item name={filename} rules={contractDetails ? rules.addendum_file : rules.file}>
+							<Upload accept=".pdf" maxCount={1} beforeUpload={beforeUpload}>
 								<div style={{ marginTop: "1rem" }} className={styles.contractForm__uploadcard__upload}>
 									<p>Drag & drop or click to upload</p>
 									<Button icon={<UploadOutlined />}>Select File</Button>
@@ -282,7 +274,7 @@ const ContractForm = ({
 			onCancel={handleCancel}
 			footer={(_, { CancelBtn }) => (
 				<div className={styles.modalfooter}>
-				  <Button form="contractForm" key="submit" htmlType="submit" className={styles.okbtn}>OK</Button>
+				  <Button form="contractForm" key="submit" htmlType="submit" className={styles.okbtn} >OK</Button>
 				  <CancelBtn/>
 				</div>
 			)}

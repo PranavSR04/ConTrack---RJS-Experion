@@ -84,6 +84,12 @@
     width: 100vw;
     height: max-content;
   }
+
+  .okbtn {
+    color: white;
+    background-color: #dc143c;
+    margin-right: 10px;
+  }
   
   @media (max-width: 768px) {
     .container_sidebar {

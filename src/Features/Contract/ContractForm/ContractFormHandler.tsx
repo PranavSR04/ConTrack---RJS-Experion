@@ -5,7 +5,7 @@ import { getMSA, getUserGroups, getUserList } from "./api/api";
 import { ContractFormHandlerPropType, InitialFieldsType, MSAType, Milestone } from "./types";
 import { editContract } from "../EditContract/api/api";
 import { useNavigate } from "react-router";
-import { Form } from "antd";
+import { Form, Modal, message } from "antd";
 import dayjs from "dayjs";
 
 const ContractFormHandler = ({contractDetails,contract_id,addContract,initialValues}: ContractFormHandlerPropType) => {
@@ -22,9 +22,20 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 	const [initialFields,setInitialFields] = useState<[InitialFieldsType]>();
 	const [disabled,setDisabled] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [error,setError] = useState<string>();
 	const navigate = useNavigate();
 	const handleCancel = () => {setIsModalOpen(false);};
-	const showModal = () => {setIsModalOpen(true);};
+	const showModal = () => {
+		if(error){
+			Modal.error({
+			title: 'Cannot add contract',
+			content: error,
+		  });
+		}else{
+			setIsModalOpen(true)
+		}
+		;
+	};
 
 	useEffect(() => {
 		if (contractDetails) {
@@ -162,12 +173,16 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 	};
 
 	//Form Validations 
-
 	// Validation for date of signature to be before start date and end date
 	const validateDateOfSignature = (_: unknown, value: dayjs.Dayjs | null | undefined,callback: (error?: string) => void) => {
 		const startDate = form.getFieldValue('start_date');
 		const endDate = form.getFieldValue('end_date');
-		console.log("StartDate ",startDate);
+		
+		if(value && selectedMSA){
+			if(value.isBefore(selectedMSA.start_date)){
+				return Promise.reject('Date must be after MSA start date');
+			}
+		}
 		if (value && startDate && endDate) {
 			if (value.isBefore(startDate) && value.isBefore(endDate)) {
 				callback(); // Validation passed
@@ -178,6 +193,7 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 			callback() // Validation passed if fields are empty
 		}
 	};
+
 	// Validation for start date to be before end date
 	const validateStartDate = (_: unknown, value: dayjs.Dayjs | null | undefined) => {
 		const startDate = value;
@@ -187,6 +203,16 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 		}
 		return Promise.resolve();
 	};
+
+	//Validation for end date - checking with MSA period
+	const validateEndDate = (_: unknown,value: dayjs.Dayjs | null | undefined) => {
+		if(value && selectedMSA){
+			if(value.isAfter(selectedMSA.end_date)){
+				return Promise.reject('Date must be before MSA end date');
+			}
+		}
+		return Promise.resolve();
+	}
 
 	// Validation for milestone enddate to be between start date and end date
 	const validateMilestoneEndDate = (_: unknown, value: dayjs.Dayjs | null | undefined) => {
@@ -198,44 +224,80 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 		return Promise.resolve();
 	};
 
-	// Function to calculate total percentage
-	const calculateTotalPercentage = () => {
+	//Validator for total amount validation
+	const validateTotalAmount = (_:unknown,value:any[]) =>{
 		const milestones: Milestone[] = form.getFieldValue('milestones');
-		let totalPercentage = 0;
+		let totalAmount = 0;
 		milestones.forEach((field: Milestone) => {
-		  totalPercentage += field.percentage || 0;
-		});
-		return totalPercentage;
-	};
+			if (field && typeof field.amount !== 'undefined') {
+				totalAmount += field.amount ? field.amount : 0 ;
+			}
+		  });
+		if(totalAmount !== parseFloat(form.getFieldValue('estimated_amount'))){
+			setError("Total amount should be equal to Total Contract Value");	
+		}else{
+			setError(undefined);
+		}
+		return Promise.resolve();
+	}
 	
 	  // Validator function for total percentage
 	const validateTotalPercentage = (_: unknown, value: number) => {
-		const totalPercentage = calculateTotalPercentage();
+		const milestones: Milestone[] = form.getFieldValue('milestones');
+		let totalPercentage = 0;
+		milestones.forEach((field: Milestone) => {
+			if(field && typeof field.percentage !== 'undefined'){
+				totalPercentage += field.percentage? field.percentage : 0;
+			}
+		  
+		});
 		if (totalPercentage !== 100) {
-			return Promise.reject(new Error('Total percentage should be 100'));
+			setError("Total percentage should be 100");
 		} else {
-			// Clear validation errors for individual percentage fields
-			const milestones = form.getFieldValue('milestones');
-			milestones.forEach((_:unknown, index: number) => {
-				const fieldName = `milestones[${index}].percentage`;
-				form.setFields([{ name: fieldName, errors: [] }]);
-			});
-			return Promise.resolve();
+			setError(undefined);
 		}
+		return Promise.resolve();
 	};
+
+	//Funtion to show message before file upload
+	const beforeUpload = (file:File) =>{
+		console.log("Fileeee",file);
+		if((file.size/1024 /1024) <= 5 ){
+			return Promise.resolve();
+		}else{
+			message.error("File size should be less than 5MB");
+			return Promise.reject('File size should be less than 5MB');
+		}
+	}
+
+	//Validator funtion for File
+	const validateFile = (_:unknown,value:any) =>{
+		// console.log("File",value.file.size);
+		if(value){
+			if((value.file.size/1024 /1024) <= 5 ){
+				return Promise.resolve();
+			}else{
+				return Promise.reject('File size should be less than 5MB');
+			}
+		}
+		return Promise.resolve();
+	}
 
 
 	const rules = {
-		client_name : [{ required: true, message: 'Please select a Client Name' }],
-		contract_id : [{ required: true, message: 'Please input a Contract ID' }],
-		du : [{ required: true, message: 'Please select a DU' }],
-		date_of_signature : [{ required: true, message: 'Please select the Date of Signature' },{ validator: validateDateOfSignature }],
-		start_date : [{ required: true, message: 'Please select the Start Date' }, { validator: validateStartDate }],
-		end_date : [{ required: true, message: 'Please select the End Date' },],
-		milestone_enddate : [{required: true, message: "Please input Milestone End Date"},{validator: validateMilestoneEndDate}],
-		percentage : [{required: true, message: "Please input Milestone Percentage"},
-		// { validator: validateTotalPercentage }
-	],
+		client_name : [{ required: true, message: 'Please select Client Name' }],
+		contract_id : [{ required: true, message: 'Please input Contract ID' }],
+		du : [{ required: true, message: 'Please select DU' }],
+		date_of_signature : [{ required: true, message: 'Please select Date of Signature' },{ validator: validateDateOfSignature }],
+		start_date : [{ required: true, message: 'Please select Start Date' }, { validator: validateStartDate }],
+		end_date : [{ required: true, message: 'Please select End Date' }, { validator: validateEndDate}],
+		estimated_amount : [{ required: true, message: 'Please input Total Contract Value' }],
+		milestone_desc : [{required: true, message: "Please input Description"}],
+		milestone_enddate : [{required: true, message: "Please select End Date"},{validator: validateMilestoneEndDate}],
+		percentage : [{required: true, message: "Please input %"},{ validator: validateTotalPercentage }],
+		amount : [{required: true, message: "Please input amount"},{ validator: validateTotalAmount }],
+		file: [{ required: true, message: 'Please upload file' },{ validator: validateFile }],
+		addendum_file : [{ validator: validateFile }]
 	}
 
 
@@ -262,8 +324,9 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 			form={form}
 			setTcv={setTcv}
 			spinning={spinning}
-			selectedMSA={selectedMSA}
 			rules={rules}
+			error={error}
+			beforeUpload={beforeUpload}
 		/>
 	);
 };

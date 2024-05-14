@@ -20,7 +20,6 @@ import AddContractHandler from "../Features/Contract/AddContract/AddContractHand
 import EditContractHandler from "../Features/Contract/EditContract/EditContractHandler";
 import AddMSAHandler from "../Features/MSA/AddMSA/AddMSAHandler";
 import EditMSAHandler from "../Features/MSA/EditMSA/EditMSAHandler";
-import RenewMsaHandler from "../Features/MSAOld/RenewMsa/RenewMsaHandler";
 import RenewMSAHandler from "../Features/MSA/RenewMSA/RenewMsaHandler";
  
 const AppRoutes = () => {
@@ -40,7 +39,7 @@ const AppRoutes = () => {
                     <Route path="/MyContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
                     <Route path="/Revenue/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
                     <Route path="/Dashboard/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
-                    {/* <Route path="/MSAOverview/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route> */}
+                    <Route path="/MSAOverview/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
                     <Route path="/MyContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
                     <Route path="/AllContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
                     <Route path="/Revenue/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
