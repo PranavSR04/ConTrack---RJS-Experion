@@ -20,7 +20,6 @@ import AddContractHandler from "../Features/Contract/AddContract/AddContractHand
 import EditContractHandler from "../Features/Contract/EditContract/EditContractHandler";
 import AddMSAHandler from "../Features/MSA/AddMSA/AddMSAHandler";
 import EditMSAHandler from "../Features/MSA/EditMSA/EditMSAHandler";
-import RenewMsaHandler from "../Features/MSAOld/RenewMsa/RenewMsaHandler";
 import RenewMSAHandler from "../Features/MSA/RenewMSA/RenewMsaHandler";
 import EditMsaHandler from "../Features/MSAOld/EditMsa/EditMsaHandler";
 import MSAFormHandler from "../Features/MSA/MSAForm/MSAFormHandler";

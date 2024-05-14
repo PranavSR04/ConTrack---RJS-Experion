@@ -75,7 +75,7 @@ const DocumentsUsersComments = ({
                 return (
                   <div
                     key={index}
-                    className={`${styles.maincontainer__membercomments__members__body__wrapper__data}`}
+                    className={`${styles.maincontainer__membercomments__members__body__wrapper__data__groups}`}
                   >
                     <p>{group.group_name}</p>
                   </div>

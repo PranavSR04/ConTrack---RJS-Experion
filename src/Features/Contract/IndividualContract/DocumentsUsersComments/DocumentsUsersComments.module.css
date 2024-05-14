@@ -132,6 +132,18 @@
   background-color: #dc143c; /* color of the thumb on hover */
 }
 
+.maincontainer__membercomments__members__body__wrapper__data__groups{
+  border-radius: 8px;
+  width: max-content;
+  height: max-content;
+  font-size: x-small;
+  align-content: center;
+  justify-content: center;
+  margin: 0.1rem;
+  padding: 0.5rem 0.2rem 0rem 0.2rem;
+  background-color: #fbe7e5; 
+}
+
 
 @media only screen and (max-width: 1200px) {
   .maincontainer__docusercomm {
