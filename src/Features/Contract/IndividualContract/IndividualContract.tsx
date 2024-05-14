@@ -18,14 +18,15 @@ const IndividualContract = ({
     <div className={`${styles.maincontainer}`}>
       <HeaderHandler responses={responses} id={id} />
       <OverviewHandler responses={responses} loading={loading} />
+      <div className={`${styles.maincontainer__milestones}`}>
+        <MilestonesHandler responses={responses} loading={loading} />
+      </div>
       <div className={`${styles.maincontainer__revenue}`}>
         <div className={styles.maincontainer__chart}>
           <RevenueProjectionHandler id={revenueid} />
         </div>
       </div>
-      <div className={`${styles.maincontainer__milestones}`}>
-        <MilestonesHandler responses={responses} loading={loading} />
-      </div>
+      
       <DocumentsUsersCommentsHandler responses={responses} loading={loading} />
       <CloseContractHandler responses={responses} id={id} />
     </div>
