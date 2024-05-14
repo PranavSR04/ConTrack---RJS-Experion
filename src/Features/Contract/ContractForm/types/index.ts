@@ -1,3 +1,4 @@
+import { FormInstance } from "antd";
 import { AddContractPropType } from "../../AddContract/types";
 import dayjs from "dayjs";
 
@@ -19,6 +20,12 @@ export interface ContractFormPropType {
 	handleCancel: () => void;
 	showModal: () => void;
 	isModalOpen: boolean;
+	calculateAmount: (percentage: number | null, key: number) => void;
+	form: FormInstance<any>;
+	setTcv: React.Dispatch<React.SetStateAction<number>>;
+	spinning: boolean;
+	selectedMSA: MSAType | undefined;
+	rules:any;
 }
 export interface ContractFormHandlerPropType {
 	contractDetails?: ContractType;
@@ -64,6 +71,7 @@ export interface ContractType {
 	contract_type: "FF" | "TM";
 	milestones: Milestone[];
 	associated_users: [{ user_id: number }] | [];
+	associated_groups: [{ id: number }] | [];
 	file: RcFile | null;
 	comments: string;
 	estimated_amount: number;
@@ -84,6 +92,8 @@ export interface EditContractValueType {
 	contract_type: "FF" | "TM";
 	milestones: Milestone[];
 	associated_users?: number[] | [];
+	associated_groups?: number[] | [];
+
 	file: RcFile | null;
 	comments: string;
 	estimated_amount: number;
