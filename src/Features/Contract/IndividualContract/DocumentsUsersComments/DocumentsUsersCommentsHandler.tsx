@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { HandlerPropType } from "../Header/types";
 import DocumentsUsersComments from "./DocumentsUsersComments";
-import { AssociatedUsersType, DocumentsUsersCommentsHandlerType } from "./types";
+import { AssociatedGroupsType, AssociatedUsersType, DocumentsUsersCommentsHandlerType } from "./types";
 import { Addendum } from "../types";
 
 const DocumentsUsersCommentsHandler = ({
@@ -14,6 +14,7 @@ const DocumentsUsersCommentsHandler = ({
   const [addendums, setAddendums] = useState<Addendum[]>([]);
   const [comments, setComments] = useState<string>("")
   const [associatedUsers, setAssociatedUsers] = useState<AssociatedUsersType[]>([]);
+  const [associatedGroups, setAssociatedGroups] = useState<AssociatedGroupsType[]>([]);
 
   useEffect(() => {
     console.log("response in Header Handler", responses);
@@ -30,6 +31,7 @@ const DocumentsUsersCommentsHandler = ({
         setAddendums(responses.data[0].addendum);
         setComments(responses.data[0].comments)
         setAssociatedUsers(responses.data[0].associated_users);
+        setAssociatedGroups(responses.data[0].associated_groups)
       }
     };
   return (
@@ -42,6 +44,7 @@ const DocumentsUsersCommentsHandler = ({
         addendums={addendums}
         comments={comments}
         associatedUsers={associatedUsers}
+        associatedGroups={associatedGroups}
       />
     </>
   );
