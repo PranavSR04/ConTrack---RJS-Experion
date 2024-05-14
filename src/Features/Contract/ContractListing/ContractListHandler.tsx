@@ -292,11 +292,18 @@ const ContractListHandler = () => {
     ),
   }));
 
-  const oneditPage = (contract_id: string) => { //edit button click
+  const oneditPage = (contract_id: string,contract_ref_id:string) => { //edit button click
     setActionClicked(true);
-    navigate(`/contract/edit`, {
+    if (isMyContracts){
+    navigate(`/MyContracts/Edit Contract`, {
       state: { id: contract_id as string },
     });
+  }
+    else{
+      navigate(`/AllContracts/Edit Contract`, {
+        state: { id: contract_id as string },
+      });
+    }
   };
 
   columns.push({ //add status row to columns
@@ -350,7 +357,7 @@ const ContractListHandler = () => {
             <EditOutlined
               style={{ fontSize: "16px", color: "#DC143C" }}
               onClick={() => {
-                oneditPage(record.id);
+                oneditPage(record.id,record.contract_ref_id);
               }}
             /></Tooltip>
           </span>

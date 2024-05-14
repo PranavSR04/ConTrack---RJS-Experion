@@ -6,7 +6,7 @@ import EditMSA from './EditMSA';
 const EditMSAHandler = () => {
     const [msaEdited,setMsaEdited]=useState<boolean>(true)
     const location = useLocation();
-	let { id } = location.state;
+	let { id } = location.state || {};
 	const msa_id =id;
      
    

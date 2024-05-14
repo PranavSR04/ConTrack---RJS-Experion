@@ -44,7 +44,7 @@ const MSAListHandler = () => {
       };
       //click function for each data row
       const rowClickHandler = (record: MsaData) => {
-        navigate(`/${record.msa_ref_id}`, {
+        navigate(`/MSAOverview/${record.msa_ref_id}`, {
             state: { id: record.id as string },
           });
       };
@@ -99,7 +99,7 @@ const MSAListHandler = () => {
       };
 
       const handleAddMSA=()=>{
-        navigate("/MSA/AddMSA")
+        navigate("/MSAOverview/AddMSA")
       }
 
   // Function to handle pagination and page size change in the table
@@ -187,15 +187,14 @@ const MSAListHandler = () => {
         setIsEmptySearch(true);    
       };
       const oneditPage = (msa_id: string,msa_ref_id: string) => {
-        navigate(`/MSA/EditMSA/${msa_ref_id}`, {
+        navigate(`/MSAOverview/EditMSA`, {
           state: { id: msa_id as string },
         });
         //navigate('/MSAForm', { state: {id:id as string , msaEdited: true } });
        
       };
       const onRenewPage=(msa_id:string,msa_ref_id:string)=>{
-        
-        navigate(`/MSA/RenewMSA/${msa_ref_id}`, {
+        navigate(`/MSAOverview/RenewMSA`, {
           state: { id: msa_id as string },
         });       
       }

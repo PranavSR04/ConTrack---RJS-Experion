@@ -32,6 +32,7 @@ const ManageUsersHandler = () => {
   const { Option } = Select;
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [editModalVisible, setEditModalVisible] = useState(false);
+  const [addGroupModalVisible, setaddGroupModalVisible] = useState(false);
   const [editedUser, setEditedUser] = useState<User | null>(null);
   const [roleOptions, setRoleOptions] = useState<RoleOption[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -69,7 +70,7 @@ const ManageUsersHandler = () => {
 
   const [userUpdated, setUserUpdated]=useState<boolean>(false)
   const [groupDeleted, setGroupDeleted]=useState<boolean>(false)
-  const [addGroupModalVisible, setaddGroupModalVisible] = useState(false);
+  // const [addGroupModalVisible, setaddGroupModalVisible] = useState(false);
 
 
   const [userDeleted, setUserDeleted]=useState<boolean>(false)
@@ -405,6 +406,32 @@ const ManageUsersHandler = () => {
     }
   };
 
+  const addGroupToSystem = async (group_name: string) => {
+    try {
+      setLoading(true);
+      await addGroup(group_name);
+      setGroupAdded(true);
+      setTimeout(() => {
+      setGroupAdded(false);
+      }, 5000);
+    } catch (error:any) {
+      console.error("Error adding group to the system:", error)
+    if (error.response && error.response.status === 422) {
+      // Display a toast 
+      setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+      }, 5000); 
+    }
+    } finally {
+      setLoading(false);
+      setaddGroupModalVisible(false)
+    }
+  };
+  // const handleAddGroup=()=>{
+  //   setaddGroupModalVisible(true);
+  // }
+
   //to show role choices to be updated
   const showUpdateChoice = (record: User) => {
   
@@ -505,6 +532,10 @@ const ManageUsersHandler = () => {
     // Optionally, you can reset the editedUser state if needed
     setEditedUser(null);
   };
+
+  // const handleAddGroupModalCancel = () => {
+  //   setaddGroupModalVisible(false);
+  // };
 
   useEffect(() => {
     // Fetch roles when the component mounts
@@ -866,25 +897,25 @@ const handleAddGroupModalCancel = () => {
 //   setaddGroupModalVisible(false);
 // };
 
-const addGroupToSystem = async (group_name: string) => {
-  try {
-    await addGroup(group_name);
-    setGroupAdded(true);
-    setTimeout(() => {
-      setGroupAdded(false);
-    }, 5000);
-    setaddGroupModalVisible(false);
-  } catch (error:any) {
-    if (error.response && error.response.status === 422) {
-      setFailedToAddGroup(true);
-      setTimeout(() => {
-        setFailedToAddGroup(false);
-      }, 5000);    } else {
-      // Handle other errors
-      console.error("Error:", error.message);
-    }
-  }
-};
+// const addGroupToSystem = async (group_name: string) => {
+//   try {
+//     await addGroup(group_name);
+//     setGroupAdded(true);
+//     setTimeout(() => {
+//       setGroupAdded(false);
+//     }, 5000);
+//     setaddGroupModalVisible(false);
+//   } catch (error:any) {
+//     if (error.response && error.response.status === 422) {
+//       setFailedToAddGroup(true);
+//       setTimeout(() => {
+//         setFailedToAddGroup(false);
+//       }, 5000);    } else {
+//       // Handle other errors
+//       console.error("Error:", error.message);
+//     }
+//   }
+// };
 
 
 const handleAddGroup=()=>{
