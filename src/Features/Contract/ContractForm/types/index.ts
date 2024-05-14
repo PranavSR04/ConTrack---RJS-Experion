@@ -24,8 +24,9 @@ export interface ContractFormPropType {
 	form: FormInstance<any>;
 	setTcv: React.Dispatch<React.SetStateAction<number>>;
 	spinning: boolean;
-	selectedMSA: MSAType | undefined;
 	rules:any;
+	error: string | undefined;
+	beforeUpload: (file: File) => Promise<void>;
 }
 export interface ContractFormHandlerPropType {
 	contractDetails?: ContractType;
