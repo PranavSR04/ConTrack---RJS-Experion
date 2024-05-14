@@ -177,42 +177,53 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 	const validateDateOfSignature = (_: unknown, value: dayjs.Dayjs | null | undefined,callback: (error?: string) => void) => {
 		const startDate = form.getFieldValue('start_date');
 		const endDate = form.getFieldValue('end_date');
+		const dateOfSignature = value;
 		
+		if (dayjs(startDate).isBefore(dateOfSignature) || dayjs(endDate).isBefore(dateOfSignature)) {
+			return Promise.reject('Date of Signature must be before Start Date and End Date');
+		}
 		if(value && selectedMSA){
 			if(value.isBefore(selectedMSA.start_date)){
 				return Promise.reject('Date must be after MSA start date');
 			}
 		}
-		if (value && startDate && endDate) {
-			if (value.isBefore(startDate) && value.isBefore(endDate)) {
-				callback(); // Validation passed
-				return;
-			}
-		callback('Date of Signature must be before Start Date and End Date');
-		} else {
-			callback() // Validation passed if fields are empty
-		}
+		
+		return Promise.resolve(); 
 	};
 
-	// Validation for start date to be before end date
+	// Validation for date of signature to be before start date
 	const validateStartDate = (_: unknown, value: dayjs.Dayjs | null | undefined) => {
+		const dateOfSignature = form.getFieldValue('date_of_signature');
 		const startDate = value;
 		const endDate = form.getFieldValue('end_date');
-		if (startDate && endDate && dayjs(startDate).isAfter(endDate)) {
+		
+		if (dateOfSignature && startDate && dayjs(dateOfSignature).isAfter(startDate)) {
+			return Promise.reject('Start Date must be after Date of Signature');
+		}
+		if (endDate && startDate && dayjs(endDate).isBefore(startDate)) {
 			return Promise.reject('Start Date must be before End Date');
 		}
 		return Promise.resolve();
 	};
 
-	//Validation for end date - checking with MSA period
-	const validateEndDate = (_: unknown,value: dayjs.Dayjs | null | undefined) => {
+	// Validation for start date to be before end date
+	const validateEndDate = (_: unknown, value: dayjs.Dayjs | null | undefined) => {
+		const dateOfSignature = form.getFieldValue('date_of_signature');
+		const startDate = form.getFieldValue('start_date');
+		const endDate = value;
+		if (startDate && endDate && dayjs(startDate).isAfter(endDate)) {
+			return Promise.reject('End Date must be after Start Date');
+		}
+		if (dateOfSignature && endDate && dayjs(dateOfSignature).isAfter(endDate)) {
+			return Promise.reject('End Date must be after Date of Signature');
+		}
 		if(value && selectedMSA){
 			if(value.isAfter(selectedMSA.end_date)){
 				return Promise.reject('Date must be before MSA end date');
 			}
 		}
 		return Promise.resolve();
-	}
+	};
 
 	// Validation for milestone enddate to be between start date and end date
 	const validateMilestoneEndDate = (_: unknown, value: dayjs.Dayjs | null | undefined) => {
