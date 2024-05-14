@@ -72,7 +72,7 @@ export interface ContractType {
 	contract_type: "FF" | "TM";
 	milestones: Milestone[];
 	associated_users: [{ user_id: number }] | [];
-	associated_groups: [{ id: number }] | [];
+	associated_groups: [{ group_id: number }] | [];
 	file: RcFile | null;
 	comments: string;
 	estimated_amount: number;
