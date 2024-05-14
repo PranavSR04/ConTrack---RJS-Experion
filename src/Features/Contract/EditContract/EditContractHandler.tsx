@@ -15,7 +15,7 @@ const EditContractHandler = () => {
 	const [initialValues, setInitialValues] = useState<ContractEditingInitialValueType>();
 
 	const location = useLocation();
-	let { id } = location.state;
+	let { id } = location.state || {};
 	const contract_id = parseInt(id);
 
 	//Funtion to get the details of the selected contract

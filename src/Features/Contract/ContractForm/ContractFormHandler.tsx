@@ -2,18 +2,23 @@ import React, { useEffect, useState } from "react";
 import ContractForm from "./ContractForm";
 import moment from "moment";
 import { getMSA, getUserGroups, getUserList } from "./api/api";
-import { ContractFormHandlerPropType, InitialFieldsType, MSAType } from "./types";
+import { ContractFormHandlerPropType, InitialFieldsType, MSAType, Milestone } from "./types";
 import { editContract } from "../EditContract/api/api";
 import { useNavigate } from "react-router";
+import { Form } from "antd";
+import dayjs from "dayjs";
 
 const ContractFormHandler = ({contractDetails,contract_id,addContract,initialValues}: ContractFormHandlerPropType) => {
 	const [selectedOption, setSelectedOption] = useState<string>();
 	const [modalTitle,setModalTitle] = useState<string>("Do you want to add contract?");
 	const [filename,setFilename] = useState<"file" | "addendum_file">("file");
 	const [clients, setClients] = useState<MSAType[]>([]);
+	const [selectedMSA, setSelectedMSA] = useState<MSAType>();
 	const [users, setUsers] = useState<any[]>([]);
 	const [groups, setGroups] = useState<any[]>([]);
-
+	const [form] = Form.useForm();
+	const [tcv,setTcv] = useState<number>(0);
+	const [spinning,setSpinning] = useState<boolean>(false);
 	const [initialFields,setInitialFields] = useState<[InitialFieldsType]>();
 	const [disabled,setDisabled] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,7 +32,8 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 			setSelectedOption(contractType);
 			setFilename("addendum_file");
 			setDisabled(true);
-			setModalTitle("Do you want to edit this contract?")
+			setModalTitle("Do you want to edit this contract?");
+			setTcv(contractDetails.estimated_amount);
 		}
 	}, [contractDetails]);
 
@@ -55,6 +61,16 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 		console.log("Users",responce.data.data);
 	};
 
+	//Auto calculating the amount for fixedfee contracts
+	const calculateAmount = (percentage: number | null, key : number) =>{
+		const amount = percentage && (percentage/100) * tcv;
+			const fields = form.getFieldsValue();
+			console.log("Fields",fields);
+			const {milestones} = fields;
+			Object.assign(milestones[key], {amount: amount});
+			form.setFieldsValue({milestones});
+	}
+
 	//Get User groups List
 	const getAssocGroups = async () =>{
 		const responce = await getUserGroups();
@@ -64,12 +80,11 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 
 	//Setting the region autofill when clientname is selected
 	const onSelectClientName = (value: number) => {
-		const selectedClient: MSAType | undefined = clients.find(
-			(msa) => msa.id === value
-		);
+		const selectedClient: MSAType | undefined = clients.find((msa) => msa.id === value);
 		console.log(
 			`ID:${value} , Selected Client Name: ${selectedClient?.client_name}, region: ${selectedClient?.region}`
 		);
+		setSelectedMSA(selectedClient);
 		setInitialFields([{name: "region", value: selectedClient?.region }])
 	};
 
@@ -82,6 +97,7 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 
 	//On submiting the form :- either add / edit 
 	const onFinish = async (values: any) => {
+		setSpinning(true);
 		console.log("Values",values);
 		const { milestones, date_of_signature, start_date, end_date } = values;
 		// Format completiondate fields in milestones array
@@ -126,6 +142,7 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 			}catch(error){
 				console.log("Error in adding contract", error);
 			}finally{
+				setSpinning(false);
 				navigate("/AllContracts", {
 					state: { edited: true},
 				  });
@@ -136,12 +153,106 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 			} catch (error) {
 				console.log("Error in adding contract", error);
 			}finally{
+				setSpinning(false);
 				navigate("/AllContracts", {
 					state: { added: true},
 				  });
 			}
 		}
 	};
+
+	//Form Validations 
+	const validateDateOfSignature = (_: unknown, value: dayjs.Dayjs | null | undefined) => {
+		const startDate = form.getFieldValue('start_date');
+		const endDate = form.getFieldValue('end_date');
+		const dateOfSignature = value;
+		
+		if (dayjs(startDate).isBefore(dateOfSignature) || dayjs(endDate).isBefore(dateOfSignature)) {
+			return Promise.reject('Date of Signature must be before Start Date and End Date');
+		}
+		
+		return Promise.resolve(); 
+	};
+
+	// Validation for date of signature to be before start date
+	const validateStartDate = (_: unknown, value: dayjs.Dayjs | null | undefined) => {
+		const dateOfSignature = form.getFieldValue('date_of_signature');
+		const startDate = value;
+		const endDate = form.getFieldValue('end_date');
+		
+		if (dateOfSignature && startDate && dayjs(dateOfSignature).isAfter(startDate)) {
+			return Promise.reject('Start Date must be after Date of Signature');
+		}
+		if (endDate && startDate && dayjs(endDate).isBefore(startDate)) {
+			return Promise.reject('Start Date must be before End Date');
+		}
+		return Promise.resolve();
+	};
+
+	// Validation for start date to be before end date
+	const validateEndDate = (_: unknown, value: dayjs.Dayjs | null | undefined) => {
+		const dateOfSignature = form.getFieldValue('date_of_signature');
+		const startDate = form.getFieldValue('start_date');
+		const endDate = value;
+		if (startDate && endDate && dayjs(startDate).isAfter(endDate)) {
+			return Promise.reject('End Date must be after Start Date');
+		}
+		if (dateOfSignature && endDate && dayjs(dateOfSignature).isAfter(endDate)) {
+			return Promise.reject('End Date must be after Date of Signature');
+		}
+		return Promise.resolve();
+	};
+
+	// Validation for milestone enddate to be between start date and end date
+	const validateMilestoneEndDate = (_: unknown, value: dayjs.Dayjs | null | undefined) => {
+		const startDate = form.getFieldValue('start_date');
+		const endDate = form.getFieldValue('end_date');
+		if (startDate && endDate && value && (dayjs(value).isBefore(startDate) || dayjs(value).isAfter(endDate))) {
+			return Promise.reject('Milestone End Date must be between Contract Period');
+		}
+		return Promise.resolve();
+	};
+
+	// Function to calculate total percentage
+	const calculateTotalPercentage = () => {
+		const milestones: Milestone[] = form.getFieldValue('milestones');
+		let totalPercentage = 0;
+		milestones.forEach((field: Milestone) => {
+		  totalPercentage += field.percentage || 0;
+		});
+		return totalPercentage;
+	};
+	
+	  // Validator function for total percentage
+	const validateTotalPercentage = (_: unknown, value: number) => {
+		const totalPercentage = calculateTotalPercentage();
+		if (totalPercentage !== 100) {
+			return Promise.reject(new Error('Total percentage should be 100'));
+		} else {
+			// Clear validation errors for individual percentage fields
+			const milestones = form.getFieldValue('milestones');
+			milestones.forEach((_:unknown, index: number) => {
+				const fieldName = `milestones[${index}].percentage`;
+				form.setFields([{ name: fieldName, errors: [] }]);
+			});
+			return Promise.resolve();
+		}
+	};
+
+
+	const rules = {
+		client_name : [{ required: true, message: 'Please select a Client Name' }],
+		contract_id : [{ required: true, message: 'Please input a Contract ID' }],
+		du : [{ required: true, message: 'Please select a DU' }],
+		date_of_signature : [{ required: true, message: 'Please select the Date of Signature' }, {validator: validateDateOfSignature}],
+		start_date : [{ required: true, message: 'Please select the Start Date' }, { validator: validateStartDate }],
+		end_date : [{ required: true, message: 'Please select the End Date' }, {validator: validateEndDate}],
+		milestone_enddate : [{required: true, message: "Please input Milestone End Date"},{validator: validateMilestoneEndDate}],
+		percentage : [{required: true, message: "Please input Milestone Percentage"},
+		// { validator: validateTotalPercentage }
+	],
+	}
+
 
 	return (
 		<ContractForm
@@ -162,6 +273,12 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 			showModal={showModal}
 			isModalOpen={isModalOpen}
 			groups={groups}
+			calculateAmount={calculateAmount}
+			form={form}
+			setTcv={setTcv}
+			spinning={spinning}
+			selectedMSA={selectedMSA}
+			rules={rules}
 		/>
 	);
 };

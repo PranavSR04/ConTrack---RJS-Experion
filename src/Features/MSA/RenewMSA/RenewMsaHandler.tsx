@@ -6,7 +6,7 @@ import RenewMSA from './RenewMsa';
 const RenewMSAHandler = () => {
     const [msaRenewed,setMsaRenewed]=useState<boolean>(true)
     const location = useLocation();
-	let { id } = location.state;
+	let { id } = location.state||{};
 	const msa_id =id;
      
    

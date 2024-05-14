@@ -1,3 +1,4 @@
+import { FormInstance } from "antd";
 import { AddContractPropType } from "../../AddContract/types";
 import dayjs from "dayjs";
 
@@ -19,6 +20,12 @@ export interface ContractFormPropType {
 	handleCancel: () => void;
 	showModal: () => void;
 	isModalOpen: boolean;
+	calculateAmount: (percentage: number | null, key: number) => void;
+	form: FormInstance<any>;
+	setTcv: React.Dispatch<React.SetStateAction<number>>;
+	spinning: boolean;
+	selectedMSA: MSAType | undefined;
+	rules:any;
 }
 export interface ContractFormHandlerPropType {
 	contractDetails?: ContractType;

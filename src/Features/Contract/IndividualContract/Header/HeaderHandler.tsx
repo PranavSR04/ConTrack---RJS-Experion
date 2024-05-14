@@ -118,10 +118,10 @@ const HeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
 
   // Function whcih triggers the navigation on click of edit button
   const navigateToEditContract = (id: string) => {
-    navigate(`Edit Contract`, {
+    navigate(`/AllContracts/Edit Contract`, {
       state: { id: id as string },
     });
-  };
+  }
 
   return (
     <>
