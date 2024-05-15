@@ -81,6 +81,14 @@ const AuthContext = ({ children }: { children: React.ReactNode }) => {
 		return contrack_response;
 	};
 
+	//Popup logout function of Azure
+    const handleLogout = () => {
+		instance.logoutPopup({
+		  postLogoutRedirectUri: "/",
+		  mainWindowRedirectUri: "/",
+		});
+	  
+	};
 
     //Simple Logout function that only logouts from our Application
     const logout = async (): Promise<void | AxiosError> => {
@@ -101,14 +109,7 @@ const AuthContext = ({ children }: { children: React.ReactNode }) => {
 		}
 	};
 
-    //Popup logout function of Azure
-    const handleLogout = () => {
-		  instance.logoutPopup({
-			postLogoutRedirectUri: "/",
-			mainWindowRedirectUri: "/",
-		  });
-		
-	  };
+    
 
 	return (
 		<Auth.Provider value={{ isModalOpen, login, handleOk, handleCancel, errorMsg ,logout,handleLogout,currentUser }}>
