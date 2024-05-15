@@ -1,0 +1,18 @@
+.container{
+    text-align: center;
+    margin-top: 20vh;
+}
+
+.title{
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.message{
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.button{
+    width: 150px;
+}
