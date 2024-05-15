@@ -8,6 +8,7 @@ export interface DocumentsUsersCommentsPropType {
   addendums: Addendum[];
   comments: string;
   associatedUsers: AssociatedUsersType[];
+  associatedGroups: AssociatedGroupsType[];
 }
 
 export interface DocumentsUsersCommentsHandlerType {
@@ -20,4 +21,10 @@ export interface AssociatedUsersType {
   user_name: string;
   user_mail: string;
   user_id: number;
+}
+
+export interface AssociatedGroupsType {
+  id: number;
+  contract_id: number;
+  group_name: string;
 }
