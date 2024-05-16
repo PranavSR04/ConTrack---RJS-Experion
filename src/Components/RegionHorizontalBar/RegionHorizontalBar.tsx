@@ -56,7 +56,7 @@ const RegionHorizontalBar = () => {
       };
 
     return (
-        <div style={{ width:'19.6rem',paddingTop:'1.4rem'}}>
+        <div style={{ width:'19.6rem',height:'10rem'}}>
             <p style={{fontSize:'.7rem',textAlign:'center'}}>  Top Contract Regions</p>
             {regionData&& <Bar data={regionData} options={options} />}
             
