@@ -31,21 +31,6 @@
     border-radius: 0.5rem;
   }
 
-  .addGroupButton {
-    width: 7rem;
-    height: 2rem;
-    /* margin-left: 1.5%; */
-    margin-bottom: 2%;
-    margin-right: 2%;
-    
-    /* margin-top: 3rem; */
-    /* margin-bottom: 3rem; */
-    color: white;
-    background-color: #dc143c;
-  }
-
-  
-
   @media only screen and (min-width: 368px) and (max-width: 892.8px){
     .wholeTable {
         overflow-x: scroll;
@@ -74,8 +59,6 @@
       background-color: #dc143c;
     }
 
-   
-
     .searchEmployeeBox{
       width:15rem;
       height: 2rem;
@@ -94,15 +77,21 @@
       margin-bottom: 1rem;
       /* border: '5px solid #808080' */
     }
-
- 
-
-    }
     .addGroupButton{
       width: 9rem;
       height: 2rem;
       margin-bottom: 2%;
       margin-left: 22%;
+      color: white;
+      background-color: #dc143c;
+    }
+    }
+
+    .addGroupButton{
+      width: 9rem;
+      height: 2rem;
+      margin-bottom: 2%;
+      /* margin-left: 22%; */
       color: white;
       background-color: #dc143c;
     }
