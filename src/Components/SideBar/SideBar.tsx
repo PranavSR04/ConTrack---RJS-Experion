@@ -7,13 +7,15 @@ import {
   FaUserCog,
   FaSignOutAlt,
 } from "react-icons/fa";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import styles from "./SideBar.module.css";
 import { SideBarPropType } from "./types";
 import { Auth } from "../../Components/AuthContext/AuthContext";
+import { Button, Modal } from "antd";
+import LoginRedirect from "../LoginRedirect/LoginRedirect";
 
 const SideBar = ({ children }: SideBarPropType) => {
-  const { logout } = useContext(Auth);
+  const { logout,currentUser } = useContext(Auth);
   const location = useLocation();
   const access_token = localStorage.getItem("access_token");
   const role_id = parseInt(localStorage.getItem("role_id") || "0", 10);
@@ -21,8 +23,9 @@ const SideBar = ({ children }: SideBarPropType) => {
     const storedIndex = localStorage.getItem("activeIndex");
     return storedIndex ? parseInt(storedIndex, 10) : 0;
   });
-
-  
+  const [isModalOpen,setIsModalOpen] = useState<boolean>(false);
+  const navigate = useNavigate(); 
+  const handleCancel = () => {setIsModalOpen(false);};
   const handleLogout = async () => {
     try {
       access_token && (await logout());
@@ -76,7 +79,16 @@ const SideBar = ({ children }: SideBarPropType) => {
   const onClickActive = (index: number) => {
     setIsActiveIndex(index);
   };
-  return (
+  const showmodal = () =>{
+    setIsModalOpen(true);
+  }
+  const handleLogoutAndCloseModal = () => {
+    handleLogout(); // Logout action
+    navigate('/');
+    setIsModalOpen(false); // Close the modal after logout
+  }
+
+  return currentUser? (
     <div className={styles.container}>
       <div className={styles.container_sidebar}>
         {sideBarItem.map((item, index) => (
@@ -95,23 +107,35 @@ const SideBar = ({ children }: SideBarPropType) => {
           </NavLink>
         ))}
         <div className={styles.container_sidebar_logout}>
-          <NavLink
-            to="/"
+          <div
+            // to="/"
             className={styles.container_sidebar_logout_link}
-            onClick={handleLogout}
+            onClick={showmodal}
           >
             <div className={styles.container_sidebar_icon}>
               <FaSignOutAlt title="LogOut" />
             </div>
-            <div className={styles.container_sidebar_logout_link_text}>
+            <div className={styles.container_sidebar_logout_link_text} onClick={showmodal}>
               Logout
             </div>
-          </NavLink>
+          </div>
         </div>
       </div>
       <div className={styles.container_outsideSideBar}>{children}</div>
+      <Modal
+      title={"Do you want to logout?"} 
+      open={isModalOpen}
+      onCancel={handleCancel}
+      footer={(_, { CancelBtn }) => (
+				<div className={styles.modalfooter}>
+				  <Button className={styles.okbtn} onClick={handleLogoutAndCloseModal}>OK</Button>
+				  <CancelBtn/>
+				</div>
+			)}
+      >
+      </Modal>
     </div>
-  );
+  ):(<LoginRedirect/>);
 };
 
 export default SideBar;

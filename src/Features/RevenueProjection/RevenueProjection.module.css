@@ -24,10 +24,7 @@
 }
 
 .revueneprojection__card__filtersection__datepicker{
-  margin-left: 25vw;
-
-
-
+  margin-left: 23vw;
 }
 
 .revueneprojection__card__filtersection__filtericon{
@@ -62,4 +59,5 @@
   font-size: small;
   border-radius: 10px;
   text-decoration: none;
+  margin-left: 1rem;
 }

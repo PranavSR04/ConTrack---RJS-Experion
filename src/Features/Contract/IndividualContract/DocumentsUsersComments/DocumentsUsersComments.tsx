@@ -1,7 +1,7 @@
 import { Card } from "antd";
 import React from "react";
 import styles from "./DocumentsUsersComments.module.css";
-import { AssociatedUsersType, DocumentsUsersCommentsPropType } from "./types";
+import { AssociatedGroupsType, AssociatedUsersType, DocumentsUsersCommentsPropType } from "./types";
 import { FilePdfFilled } from "@ant-design/icons";
 
 const DocumentsUsersComments = ({
@@ -12,6 +12,7 @@ const DocumentsUsersComments = ({
   addendums,
   comments,
   associatedUsers,
+  associatedGroups,
 }: DocumentsUsersCommentsPropType) => {
   return (
     <>
@@ -67,6 +68,16 @@ const DocumentsUsersComments = ({
                     className={`${styles.maincontainer__membercomments__members__body__wrapper__data}`}
                   >
                     <p>{user.user_name}</p>
+                  </div>
+                );
+              })}
+              {associatedGroups.map((group: AssociatedGroupsType, index) => {
+                return (
+                  <div
+                    key={index}
+                    className={`${styles.maincontainer__membercomments__members__body__wrapper__data__groups}`}
+                  >
+                    <p>{group.group_name}</p>
                   </div>
                 );
               })}

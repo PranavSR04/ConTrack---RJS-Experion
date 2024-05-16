@@ -24,8 +24,9 @@ export interface ContractFormPropType {
 	form: FormInstance<any>;
 	setTcv: React.Dispatch<React.SetStateAction<number>>;
 	spinning: boolean;
-	selectedMSA: MSAType | undefined;
 	rules:any;
+	error: string | undefined;
+	beforeUpload: (file: File) => Promise<void>;
 }
 export interface ContractFormHandlerPropType {
 	contractDetails?: ContractType;
@@ -71,7 +72,7 @@ export interface ContractType {
 	contract_type: "FF" | "TM";
 	milestones: Milestone[];
 	associated_users: [{ user_id: number }] | [];
-	associated_groups: [{ id: number }] | [];
+	associated_groups: [{ group_id: number }] | [];
 	file: RcFile | null;
 	comments: string;
 	estimated_amount: number;
