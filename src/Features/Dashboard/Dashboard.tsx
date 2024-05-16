@@ -11,14 +11,14 @@ import DashBoardContractCountHandler from "../../Components/DashBoardContractsCo
 import DashBoardMsaCountHandler from "../../Components/DashBoardContractsCount/DashBoardMsaCountHandler";
 import DoughnutChartHandler from "../../Components/DoughnutChart/DoughnutChartHandler";
 import RegionHorizontalBar from "../../Components/RegionHorizontalBar/RegionHorizontalBar";
-
+ 
 const Dashboard = () => {
   return (
     < >
     <div className={styles["dashboardContainer"]}>
       <div className={styles["dashboard-div1"]}>
         <div className={styles["dash-row1-div"]}>
-          <div >
+          <div>
             <div className={styles["dash-revenue-div"]}>
             <div className={styles["dash-revenue-div-month"]}>
               <DashBoardMonthlyRevenueHandler />
@@ -29,23 +29,23 @@ const Dashboard = () => {
             <div className={styles["dash-revenue-div-month"]}>
               <DashBoardYearlyRevenueHandler />
             </div>
-
-            <div className={styles["dash-revenue-div-month"]}>
+ 
+            <div className={styles["dash-revenue-div-count"]}>
               <DashBoardContractCountHandler />
             </div>
-            <div className={styles["dash-revenue-div-month"]}>
+            <div className={styles["dash-revenue-div-count"]}>
               <DashBoardMsaCountHandler />
             </div>
             </div>
-          
+         
            <div>
           <div className={styles['dash-row1-charts']}>
-    <div className={styles['dash-row1-barchart']}>
-      <Card className={styles['dash-row2-ducharts']}><BarChartHandler/> </Card>  
-      </div> 
-      <div className={styles['dash-row1-doughnut']}>     
+<Card style={{backgroundColor:'white',marginRight:'.1rem'}}>
+<BarChartHandler/>
+ </Card>
+      <div className={styles['dash-row1-doughnut']}>    
       <DoughnutChartHandler />
-      </div> 
+      </div>
       </div>
     </div>
     </div>
@@ -56,7 +56,7 @@ const Dashboard = () => {
 <div  className={styles['dash-row2-charts']}>
   <Card style={{backgroundColor:'white',marginRight:'.8rem'}}>      
     <ScatterPlotHandler/>
-      </Card> 
+      </Card>
  <Card style={{backgroundColor:'white',marginRight:'.8rem'}}>
  <RegionHorizontalBar/>
  </Card>
@@ -69,5 +69,5 @@ const Dashboard = () => {
     </>
   );
 };
-
+ 
 export default Dashboard;
