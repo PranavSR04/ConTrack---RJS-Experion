@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { AxiosError } from "axios";
 import { getTopRevenueRegion } from './api/getTopRevenueRegion';
 import { topRevenueRegionType } from './type';
 import TopRevenueRegion from './TopRevenueRegion';
-import { useNavigate } from 'react-router';
 
 const TopRevenueHandler = () => {
 
     const [barChartData, setBarChartData] = useState<topRevenueRegionType[]>([]);
-    const navigate = useNavigate();
+
     const fetchTopRevenueRegions = async () => {
         try {
             const res = await getTopRevenueRegion();
@@ -19,11 +17,7 @@ const TopRevenueHandler = () => {
             }));
 
             setBarChartData(data);
-        } catch (err:any) {
-            if (err.response.status === 401) {
-                // Redirect to session expired page
-                navigate("/session/expired");
-            }
+        } catch (err) {
             console.error(err);
         }
     };
