@@ -12,9 +12,10 @@ import styles from "./SideBar.module.css";
 import { SideBarPropType } from "./types";
 import { Auth } from "../../Components/AuthContext/AuthContext";
 import { Button, Modal } from "antd";
+import LoginRedirect from "../LoginRedirect/LoginRedirect";
 
 const SideBar = ({ children }: SideBarPropType) => {
-  const { logout } = useContext(Auth);
+  const { logout,currentUser } = useContext(Auth);
   const location = useLocation();
   const access_token = localStorage.getItem("access_token");
   const role_id = parseInt(localStorage.getItem("role_id") || "0", 10);
@@ -87,7 +88,7 @@ const SideBar = ({ children }: SideBarPropType) => {
     setIsModalOpen(false); // Close the modal after logout
   }
 
-  return (
+  return currentUser? (
     <div className={styles.container}>
       <div className={styles.container_sidebar}>
         {sideBarItem.map((item, index) => (
@@ -134,7 +135,7 @@ const SideBar = ({ children }: SideBarPropType) => {
       >
       </Modal>
     </div>
-  );
+  ):(<LoginRedirect/>);
 };
 
 export default SideBar;
