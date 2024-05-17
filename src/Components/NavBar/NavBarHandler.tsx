@@ -2,32 +2,25 @@ import React, { useContext, useEffect, useState } from 'react'
 import NavBar from './NavBar'
 import { Auth } from '../AuthContext/AuthContext'
 import { NavContexts } from '../NavContext/NavContext';
-import { useNavigate } from 'react-router';
 
 const NavBarHandler = () => {
-  const {currentUser} = useContext(Auth);
+  // const {currentUser} = useContext(Auth);
+  const currentUser:string | undefined = localStorage.getItem("username")?JSON.parse(localStorage.getItem("username")||"" ):null;
   const{activeNotificationCount}=useContext(NavContexts);
-  const navigate = useNavigate();
   console.log(currentUser);
-  if(!currentUser){
-		navigate("/unauthorized");
-	}
-
-  const [username,setUsername] = useState<string>();
   const [notificationCount,setNotificationCount] = useState();
   useEffect(()=>{
-    setUsername(currentUser?.user_name);
     setNotificationCount(notificationCount);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
-  return username?(
+  return currentUser ? (
     <NavBar
-    username={username}
+    username={currentUser}
     activeNotificationCounte={activeNotificationCount}
     />
-  ):null
+  ) : null;
 }
 
 export default NavBarHandler

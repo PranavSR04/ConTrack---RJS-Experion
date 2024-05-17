@@ -15,7 +15,10 @@ import { Button, Modal } from "antd";
 import LoginRedirect from "../LoginRedirect/LoginRedirect";
 
 const SideBar = ({ children }: SideBarPropType) => {
-  const { logout,currentUser } = useContext(Auth);
+  const { logout } = useContext(Auth);
+  
+  const currentUser = localStorage.getItem("username");
+  console.log("%%%%",currentUser);
   const location = useLocation();
   const access_token = localStorage.getItem("access_token");
   const role_id = parseInt(localStorage.getItem("role_id") || "0", 10);

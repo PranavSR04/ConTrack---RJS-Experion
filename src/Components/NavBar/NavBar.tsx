@@ -9,9 +9,8 @@ import { NavContexts } from "../NavContext/NavContext";
 import NotificationListHandler from "../NotificationList/NotificationListHandler";
 
 const NavBar = ({username,activeNotificationCounte}:NavBarPropType) => {
+
 	
-	// const {currentUser} = useContext(Auth);
-	// const currentUser = localStorage.getItem("username")?JSON.parse(localStorage.getItem("username")||"" ):null;
 	
 	const{showDrawer}=useContext(NavContexts);
     const{activeNotificationCount}=useContext(NavContexts);

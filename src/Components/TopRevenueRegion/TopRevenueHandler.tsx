@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Bar } from 'react-chartjs-2';
 import { getTopRevenueRegion } from './api/getTopRevenueRegion';
 import { topRevenueRegionType } from './type';
 import TopRevenueRegion from './TopRevenueRegion';
