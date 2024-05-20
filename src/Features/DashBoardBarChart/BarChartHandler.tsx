@@ -65,9 +65,9 @@ const BarChartHandler = () => {
       };
      
     return (
-        <div style={{transform: 'scale(0.9)', marginTop:'-0.3rem', marginLeft:'1rem'}}>
+        // <div style={{transform: 'scale(0.9)', marginTop:'-0.3rem', marginLeft:'1rem'}}>
             <BarComponent data={dataset} maxDataValue={maxDataValue}/>
-        </div>
+        // </div>
     );
 }
 
