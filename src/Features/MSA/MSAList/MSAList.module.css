@@ -1,55 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
-.MSAList{
-    margin-top: 0.9%;
-    margin-left: 18.3%;
-    margin-right: 5%;
-    font-family: 'Montserrat', sans-serif;
+.MSAList {
+	margin-top: 0.9%;
+	margin-left: 18.3%;
+	margin-right: 5%;
+	font-family: "Montserrat", sans-serif;
 }
 
-.MSAList__heading{
-    font-weight: 700; 
-    font-size: 1.2rem;
-  margin-top: 1.3rem;
-
+.MSAList__heading {
+	font-weight: 700;
+	font-size: 1.2rem;
+	margin-top: 1.3rem;
+    /* margin-bottom: 2%; */
 }
-.MSAList__Table{
-    background-color: white;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
-   padding: 1.8rem;
-   border-radius: 0.5rem;
-   min-width: 62rem;
+.MSAList__Table {
+    /* height: 81vh; */
+	background-color: white;
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+	padding: 1.8rem;
+	padding-bottom: 0;
+    /* padding-top: 5vh; */
+	border-radius: 0.5rem;
+	min-width: 62rem;
+	/* margin-bottom: 10vh; */
 }
-.MSAList__Table__row1{
-    display: flex;
-    margin-top: -2%;
+.MSAList__Table__row1 {
+	display: flex;
+	margin-top: -2%;
 }
-.MSAList__Table__row1__col1__Toggle{
-    flex:1;
+.MSAList__Table__row1__col1__Toggle {
+	flex: 1;
 }
-.MSAList__Table__row1__col2__Addbutton{
-    flex:1;
+.MSAList__Table__row1__col2__Addbutton {
+	flex: 1;
 }
-.MSAList__Table__Addbutton{
-    margin-left: 70%;
-    margin-top: 1%;
-    border-color: transparent;
-    width:30%;
-    margin-bottom: 1%;
-    border-radius: 0.3rem;
-     background-color:#DC143C;
-     color: white;
-     height: 70%;
-     font-size: 0.9rem;
+.MSAList__Table__Addbutton {
+	margin-left: 75%;
+	margin-top: 1%;
+	border-color: transparent;
+	width: 25%;
+    padding: 2px;
+	margin-bottom: 1%;
+	border-radius: 0.3rem;
+	background-color: #dc143c;
+	color: white;
+	/* height: 70%; */
+	font-size: 0.9rem;
 }
-.MSAList__Table__Table{
-    padding-top: 2%;
+.MSAList__Table__Table {
+	padding-top: 2%;
 }
 .oddRow {
-    background-color: #f5f8fc; /* Set the background color for even rows */
-  }
-  
-  /* Optionally, you can add styles for odd rows as well */
-  .evenRow {
-    background-color: #ffffff; /* Set the background color for odd rows */
-  }
+	background-color: #f5f8fc; /* Set the background color for even rows */
+}
+
+/* Optionally, you can add styles for odd rows as well */
+.evenRow {
+	background-color: #ffffff; /* Set the background color for odd rows */
+}

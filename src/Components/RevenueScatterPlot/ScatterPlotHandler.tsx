@@ -8,7 +8,7 @@ import { Scatter } from 'react-chartjs-2';
 
 const ScatterPlotHandler = () => {
 
-    const [scatterData, setScatterData] = useState<Object>({});
+    const [scatterData, setScatterData] = useState<Object>([]);
 
     const fetchContractRevenue = async () => {
         try {
@@ -49,7 +49,7 @@ const ScatterPlotHandler = () => {
         ]
     };
 
-  return (
+  return  (
     <ScatterPlot
         fetchContractRevenue={fetchContractRevenue}
         scatterData={scatterData}

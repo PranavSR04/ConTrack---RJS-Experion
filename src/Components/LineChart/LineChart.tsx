@@ -61,6 +61,7 @@ const LineChart= ({ revenueData, loading, error }: LineChartPropType) => {
 		scales: {
 			x: {
 				ticks: {
+					
 					stepSize: 9, // Increase the step size to create more space between points
                		 count: 200,
 						
@@ -96,13 +97,13 @@ const LineChart= ({ revenueData, loading, error }: LineChartPropType) => {
 			<div className={styles.linechart}>
 				<div className={styles.linechart__container} >
 					{loading ? (
-						// <div data-testid="line-chart-spinner">
+						<div data-testid="line-chart-spinner" className={styles.loading}>						
 						<Spin 
 							data-testid="line-chart-spinner"
 							className={styles.linechart__container__spinner}
 							indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
 						/>
-						// </div>
+						</div>
 					) : revenueData ? (
 					
 						<Line data={data} options={options}  data-testid="line-chart" >
