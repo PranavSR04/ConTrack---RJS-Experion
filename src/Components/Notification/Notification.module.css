@@ -94,10 +94,11 @@ border-radius: 10px;
 box-shadow:0 0 4px rgba(0, 0, 0, 0.1);
 margin: 2px 0 20px 4px;
 height:45px;
-width:271px;
+width:290px;
 font-size: small;
 transition: transform 0.3s ease;
-
+padding-left: 13px;
+padding-right: 13px;
 }
 .DashBoard_Notification_Style:hover{
 display: flex;
@@ -105,7 +106,6 @@ background-color: #f0eded;
 border-radius: 10px;
 margin: 2px 0 20px 4px;
 height:45px;
-width:271px;
 transform: translateY(-5px);
 }
 

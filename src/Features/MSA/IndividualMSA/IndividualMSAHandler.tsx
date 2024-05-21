@@ -4,6 +4,7 @@ import { MsaApiType } from "./types";
 import { AxiosError } from "axios";
 import { getMSAData } from "./api/getMSAData";
 import IndividualMSA from "./IndividualMSA";
+import NewIndividualMSA from "./NewIndividualMSA";
 
 const IndividualMsaHandler = () => {
   const location = useLocation();
@@ -32,7 +33,8 @@ const IndividualMsaHandler = () => {
 console.log(id);
   return id ? (
     <>
-      <IndividualMSA msa_id={id} responses={responses} loading={loading} />
+      {/* <IndividualMSA msa_id={id} responses={responses} loading={loading} /> */}
+      <NewIndividualMSA msa_id={id} responses={responses} loading={loading} />
     </>
   ):null
 };

@@ -17,7 +17,8 @@ const ScatterPlot = ({fetchContractRevenue,scatterData,data}:ScatterPlotHandlerP
 
     
     return(
-        <div style={{transform: 'scale(1=)'}}>
+        <div style={{transform: 'scale(1)'}}>
+            <p style={{fontSize:'.7rem',textAlign:'center'}}>Contract Revenue</p>
             <Scatter
                 data={data}
                 options={{
@@ -46,6 +47,9 @@ const ScatterPlot = ({fetchContractRevenue,scatterData,data}:ScatterPlotHandlerP
                         },
                     },
                     plugins: {
+                        legend: {
+                            display: true // Hide the legend
+                        },
                         tooltip: {
                             enabled: false // Disable tooltip hover
                         }

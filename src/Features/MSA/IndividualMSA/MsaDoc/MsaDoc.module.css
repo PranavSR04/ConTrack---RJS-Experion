@@ -1,6 +1,6 @@
 .listContainer {
   margin-top: 10px;
-  max-width: 40vw;
+  /* max-width: 40vw; */
   background-color: rgba(253, 255, 255, 0.233);
   overflow-y: auto;
   font-family: "Montserrat", sans-serif;
