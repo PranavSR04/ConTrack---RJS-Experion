@@ -10,7 +10,7 @@ const NavBarHandler = () => {
   const navigate = useNavigate();
   console.log(currentUser);
   if(!currentUser){
-		navigate("/unauthorized");
+		// navigate("/unauthorized");
 	}
 
   const [username,setUsername] = useState<string>();
