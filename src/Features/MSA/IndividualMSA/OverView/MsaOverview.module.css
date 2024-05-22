@@ -106,37 +106,41 @@
   .maincontainer__overview__count__title h4{
     margin-top: -20px;
     font-size: 3rem;
-    color: rgb(49, 110, 215);
+    color: rgb(0, 0, 0);
     font-weight: 600;
+    text-align: center;
   }
   .titleSeparator{
     margin-top: -7px;
-   background-color: rgb(62, 172, 226);
+   background-color: rgb(224, 224, 224);
    height: 2px;
-   margin-left: 38px;
-   width: 7.8rem;
+   width: 12.5rem;
   }
   .mainContainer__overview__count__content{
     display: flex;
     margin-top: 8px;
   }
   .mainContainer__overview__count__content__list__ff{
-    margin-left: 30px;
+    /* margin-left: 30px; */
+    text-align: center;
     font-size: 12px;
     flex: 1;
   }
   .mainContainer__overview__count__contentt__list__tm{
     font-size: 12px;
     flex: 1;
+    text-align: center;
   }
   .mainContainer__overview__count__content__list__value{
     padding-left: 30px;
+    text-align: left;
   }
   .countSeparator{
-    margin-right: 20px;
+    /* margin-right: 20px; */
+    margin: 0rem 1rem;
     width: 2px;
     height: 60px;
-    background-color: rgb(15, 88, 124);
+    background-color: rgb(224, 224, 224);
   }
   @media only screen and (max-width: 1200px) {
     .maincontainer__overview {

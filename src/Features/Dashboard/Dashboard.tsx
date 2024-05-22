@@ -1,73 +1,44 @@
-import { Card } from "antd";
-import styles from "./dashboard.module.css";
-import DashBoardNotificationListHandler from "../../Components/DashBoardNotificationList/DashBoardNotificationListHandler";
-import ScatterPlotHandler from "../../Components/RevenueScatterPlot/ScatterPlotHandler";
-import BarChartHandler from "../DashBoardBarChart/BarChartHandler";
+import React from "react";
+import styles from "./Dashboard.module.css";
+import { Card, Col, Row } from "antd";
 import DashBoardMonthlyRevenueHandler from "../../Components/DashBoardRevenue/DashBoardMonthlyRevenueHandler";
-import DashBoardQuaterlyRevenueHandler from "./../../Components/DashBoardRevenue/DashBoardQuaterlyRevenueHandler";
+import DashBoardQuaterlyRevenueHandler from "../../Components/DashBoardRevenue/DashBoardQuaterlyRevenueHandler";
 import DashBoardYearlyRevenueHandler from "../../Components/DashBoardRevenue/DashBoardYearlyRevenueHandler";
-import TopRevenueHandler from "../../Components/TopRevenueRegion/TopRevenueHandler";
 import DashBoardContractCountHandler from "../../Components/DashBoardContractsCount/DashBoardContractCountHandler";
 import DashBoardMsaCountHandler from "../../Components/DashBoardContractsCount/DashBoardMsaCountHandler";
+import DashBoardNotificationListHandler from "../../Components/DashBoardNotificationList/DashBoardNotificationListHandler";
+import BarChartHandler from "../DashBoardBarChart/BarChartHandler";
 import DoughnutChartHandler from "../../Components/DoughnutChart/DoughnutChartHandler";
+import ScatterPlotHandler from "../../Components/RevenueScatterPlot/ScatterPlotHandler";
 import RegionHorizontalBar from "../../Components/RegionHorizontalBar/RegionHorizontalBar";
+import TopRevenueHandler from "../../Components/TopRevenueRegion/TopRevenueHandler";
 
 const Dashboard = () => {
-  return (
-    < >
-    <div className={styles["dashboardContainer"]}>
-      <div className={styles["dashboard-div1"]}>
-        <div className={styles["dash-row1-div"]}>
-          <div >
-            <div className={styles["dash-revenue-div"]}>
-            <div className={styles["dash-revenue-div-month"]}>
-              <DashBoardMonthlyRevenueHandler />
-            </div>
-            <div className={styles["dash-revenue-div-month"]}>
-              <DashBoardQuaterlyRevenueHandler />
-            </div>
-            <div className={styles["dash-revenue-div-month"]}>
-              <DashBoardYearlyRevenueHandler />
-            </div>
-
-            <div className={styles["dash-revenue-div-month"]}>
-              <DashBoardContractCountHandler />
-            </div>
-            <div className={styles["dash-revenue-div-month"]}>
-              <DashBoardMsaCountHandler />
-            </div>
-            </div>
-          
-           <div>
-          <div className={styles['dash-row1-charts']}>
-    <div className={styles['dash-row1-barchart']}>
-      <Card className={styles['dash-row2-ducharts']}><BarChartHandler/> </Card>  
-      </div> 
-      <div className={styles['dash-row1-doughnut']}>     
-      <DoughnutChartHandler />
-      </div> 
-      </div>
-    </div>
-    </div>
-          <div className={styles["dash-revenue-div-notifi"]}>
-            <DashBoardNotificationListHandler />
-          </div>
-        </div>
-<div  className={styles['dash-row2-charts']}>
-  <Card style={{backgroundColor:'white',marginRight:'.8rem'}}>      
-    <ScatterPlotHandler/>
-      </Card> 
- <Card style={{backgroundColor:'white',marginRight:'.8rem'}}>
- <RegionHorizontalBar/>
- </Card>
- <Card style={{backgroundColor:'white', }}>
- <TopRevenueHandler/>
- </Card>
-</div>
-      </div>
-      </div>
-    </>
-  );
+	return (
+		<div className={styles.dashboard}>
+			<Row style={{paddingBottom:8}}>
+				<Col className={styles.col} span={17}>
+					<Row gutter={140} style={{paddingBottom:8}}>
+						<Col span={4}><DashBoardMonthlyRevenueHandler /></Col>
+						<Col span={4}><DashBoardQuaterlyRevenueHandler /></Col>
+						<Col span={4}><DashBoardYearlyRevenueHandler /></Col>
+						<Col span={4}><DashBoardContractCountHandler /></Col>
+						<Col span={4}><DashBoardMsaCountHandler /></Col>
+					</Row>
+					<Row gutter={15}>
+						<Col span={14}><Card className={styles.barchart_card} bodyStyle={{paddingTop:"5vh"}}><BarChartHandler /></Card></Col>
+						<Col span={8}><DoughnutChartHandler /></Col>
+					</Row>
+        		</Col>
+				<Col className={styles.col} span={5} ><DashBoardNotificationListHandler /></Col>
+			</Row>
+			<Row gutter={15}>
+				<Col span={8}><Card className={styles.lastrow_card}><ScatterPlotHandler /></Card></Col>
+				<Col span={8}><Card className={styles.lastrow_card}><RegionHorizontalBar /></Card></Col>
+				<Col span={8}><Card className={styles.lastrow_card}><TopRevenueHandler /></Card></Col>
+			</Row>
+		</div>
+	);
 };
 
 export default Dashboard;

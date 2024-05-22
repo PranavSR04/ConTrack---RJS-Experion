@@ -1,5 +1,5 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
-import { Navigate, useNavigate } from "react-router";
+
 
 // Create a custom Axios instance with a base URL
 const axiosInstance = axios.create({
@@ -41,6 +41,7 @@ axiosInstance.interceptors.response.use(
 		if (response.status === 401) {
       localStorage.clear();
 			console.log("Session expired or unauthorized");
+      window.location.href = '/session/expired';
 		}
 		return response;
 	},
@@ -49,6 +50,7 @@ axiosInstance.interceptors.response.use(
 		if (error.response && error.response.status === 401) {
       localStorage.clear();
 			console.log("Session expired or unauthorized");
+      window.location.href = '/session/expired';
 		}
 		return Promise.reject(error);
 	}

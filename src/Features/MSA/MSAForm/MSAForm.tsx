@@ -244,6 +244,7 @@ const MSAForm = ({
                   rows={4}
                   name="comments"
                   onChange={handleInputChange}
+                  maxLength={200}
                 />
               </Form.Item>
             </div>
