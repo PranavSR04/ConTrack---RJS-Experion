@@ -418,9 +418,9 @@ const ManageUsersHandler = () => {
       console.error("Error adding group to the system:", error)
     if (error.response && error.response.status === 422) {
       // Display a toast 
-      setShowToast(true);
+      setFailedToAddGroup(true);
       setTimeout(() => {
-        setShowToast(false);
+        setFailedToAddGroup(false);
       }, 5000); 
     }
     } finally {

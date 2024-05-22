@@ -313,7 +313,7 @@ ManageUsersPropType) => {
                 // style={{ width: '100%' }}
                 options={groupOptions}
                 value={selectedIndividualGroup}
-                placeholder="Please select"
+                placeholder="Please select group"
                 onChange={handleIndividualGroup}
               />
 
