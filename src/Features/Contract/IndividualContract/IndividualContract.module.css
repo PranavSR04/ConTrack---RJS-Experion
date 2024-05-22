@@ -14,8 +14,8 @@
 .maincontainer__revenue{
   border: solid 1px #ffffff;
   width: 66%;
-  height: 24rem;
-  margin-top: 1rem;
+  height: 57vh;
+  margin-top: 1%;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
   border-radius: 10px;
 }
@@ -23,15 +23,16 @@
 .maincontainer__chart {
   margin-left: -16rem;
   margin-top: -4.8rem;
-  transform: scale(0.6);
+  transform: scale(0.61);
   height: 25rem;
 }
 
 .maincontainer__milestones {
   width: 30%;
   /* height: 58%; */
-  min-height: 38.4rem;
-  max-height: 38.4rem;
+  height: 87.8vh;
+  /* min-height: 87.8vh; */
+  /* max-height: 38.4rem; */
   position: absolute;
   right: 1%;
   /* top: 8.5%; */

@@ -2,6 +2,7 @@
   margin-left: 14rem;
   margin-top: 1rem;
   padding-left: 0.5rem;
+  padding-bottom: 3%;
   background-color: #ffffff;
   width: 80vw;
   height: max-content;
@@ -10,6 +11,7 @@
 }
 
 .maincontainer__revenue {
+  height: 68vh;
   border: solid 1px #ffffff;
   width: 59.5vw;
   min-height: 27.7rem;
@@ -19,9 +21,9 @@
 }
 
 @media screen and (min-width: 1px) and (min-height: 600px) {
-  .maincontainer__revenue {
+  /* .maincontainer__revenue {
     height: 31.5rem;
-  }
+  } */
 }
 
 .maincontainer__chart {
