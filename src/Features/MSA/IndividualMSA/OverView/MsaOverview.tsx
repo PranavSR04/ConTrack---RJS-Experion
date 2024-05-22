@@ -160,7 +160,7 @@ responses
 
 
       </div>
-      <div className={styles.maincontainer__overview__right}>
+      {/* <div className={styles.maincontainer__overview__right}>
           <Card
           className={styles.maincontainer__overview__overview__count}
           loading={loading}
@@ -175,7 +175,7 @@ responses
           
         </div>
         </Card>
-      </div>
+      </div> */}
   </div>
   )
 }
