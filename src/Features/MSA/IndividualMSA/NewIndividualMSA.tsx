@@ -55,10 +55,10 @@ const NewIndividualMSA = ({
           </Col>
         </Row>
         <Row gutter={10}>
-          <Col span={7}>
+          <Col span={8}>
               <MsaCommentsHandler responses={responses} loading={loading} />
           </Col>
-          <Col span={12}>
+          <Col span={16}>
               <ContractListHandler responses={responses} id={msa_id} />
           </Col>
         </Row>

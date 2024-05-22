@@ -12,9 +12,11 @@
 .barchart_card{
     padding: 0px !important;
     height: 37.3vh;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .lastrow_card{
     height: 215px;
     padding: 0px ;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
