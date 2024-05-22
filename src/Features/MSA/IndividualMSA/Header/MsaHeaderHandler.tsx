@@ -26,31 +26,48 @@ const MsaHeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
       setClientName(responses.data[0].client_name);
       setMsaStatus(responses.data[0].is_active);
       if ("data" in responses) {
-        console.log(responses.data[0]);
+        console.log("this is the data",responses.data[0]);
 
         const responseDataArray = [responses.data[0]];
         let dataWithHeaders = [];
 
         // dataArray contains data items from the response
         const dataArray = responseDataArray.map((item) => {
+          console.log("the id is ",item.id)
           const row = [
             item.id,
             item.msa_ref_id,
             item.added_by,
             item.client_name,
             item.region,
+            item.msa_doclink,
             item.start_date,
             item.end_date,
             item.comments,
             item.is_active,
-            item.msa_doclink,
             item.created_at,
             item.updated_at,
-            item.user_name,
-            item.contracts,
-            item.msa_olddoclink,
           ];
-
+          if (item.contracts) {
+            item.contracts.forEach((contracts: any) => {
+              const contractRow = [...row]; // Create a copy of the original row
+              contractRow.push(
+                contracts.id,
+                contracts.contract_ref_id,
+                contracts.contract_status,
+                contracts.contract_type,
+                contracts.du,
+                contracts.estimated_amount,
+                contracts.start_date,
+                contracts.end_date,
+              );
+              dataWithHeaders.push(contractRow); // Push the new row for the milestone
+            });
+          } else {
+            // Push empty values for milestones if they don't exist
+            row.push("", "", "", "", "", "", "", "");
+            dataWithHeaders.push(row); // Push the original row with empty milestone values
+          }
           return row;
         });
 
@@ -65,18 +82,19 @@ const MsaHeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
           "End Date",
           "Comments",
           "Is Active",
-          "Msa Document Link",
           "Created At",
           "Updated At",
-          "User Name",
-          "Contracts",
-          "Msa Old Document Links",
+          "Contracts ID",
+          "Contract Ref ID",
+          "Contract_status",
+          "Contract_type",
+          "DU",
+          "Estimated Amount",
+          "Contract Start Date",
+          "Contract End Date"
         ]);
-
-        console.log(dataWithHeaders);
-
-        // Setting the data to be passed to Header component for exporting into excel
         setMsaExcelData(dataWithHeaders);
+        console.log("excel data",msaExcelData)
       } else {
         console.error("Error fetching contract data:", responses);
       }

@@ -18,7 +18,7 @@ const Dashboard = () => {
     <div className={styles["dashboardContainer"]}>
       <div className={styles["dashboard-div1"]}>
         <div className={styles["dash-row1-div"]}>
-          <div >
+          <div>
             <div className={styles["dash-revenue-div"]}>
             <div className={styles["dash-revenue-div-month"]}>
               <DashBoardMonthlyRevenueHandler />
@@ -30,19 +30,19 @@ const Dashboard = () => {
               <DashBoardYearlyRevenueHandler />
             </div>
 
-            <div className={styles["dash-revenue-div-month"]}>
+            <div className={styles["dash-revenue-div-count"]}>
               <DashBoardContractCountHandler />
             </div>
-            <div className={styles["dash-revenue-div-month"]}>
+            <div className={styles["dash-revenue-div-count"]}>
               <DashBoardMsaCountHandler />
             </div>
             </div>
           
            <div>
           <div className={styles['dash-row1-charts']}>
-    <div className={styles['dash-row1-barchart']}>
-      <Card className={styles['dash-row2-ducharts']}><BarChartHandler/> </Card>  
-      </div> 
+<Card style={{backgroundColor:'white',marginRight:'.1rem'}}>
+<BarChartHandler/>
+ </Card>
       <div className={styles['dash-row1-doughnut']}>     
       <DoughnutChartHandler />
       </div> 

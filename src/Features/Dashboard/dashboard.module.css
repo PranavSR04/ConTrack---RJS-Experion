@@ -1,71 +1,75 @@
-.dashboardContainer{
-max-width: 80vw;
-height: 50vh;
+.dashboardContainer { 
+  max-width: 80vw;
+  overflow-y: auto !important;
 }
 
-.dashboard-div1{
-    margin-top: 1%;
-    border-width: 10cm;
-    margin-left: 17.5%;
-    padding-left: 1.1%;
+.dashboard-div1 {
+  margin-top: 1vh;
+  border-width: 1vw;
+  margin-left: 17.5vw;
+  padding-left: 1.1vw;
   font-family: "Montserrat", sans-serif;
   width: 80vw;
   height: 100vh;
-  position:fixed;
-  border-radius: .5rem;
+  position: fixed;
+  border-radius: 0.5rem;
   background-color: white;
 }
-.dashboard-name{
-    font-weight: 700;
-    font-size: 1.8rem;
-    padding-top: .5rem;
-}
-.dash-row1-div{ 
-  display:flex;
-  }
 
-.dash-revenue-div{ 
-display:flex;
-max-height:20vh;
-}
-.dash-revenue-div-month{
-  padding-right: 1rem;
-}
-.dash-revenue-div-notifi{
-  padding-left: 0%;
+.dashboard-name {
+  font-weight: 700;
+  font-size: 1.8rem;
+  padding-top: 0.5rem;
 }
 
-.dash-row1-charts{
-display: flex;
-margin-top: 2vh;
-width: 46.3vw;
-height: 35.8vh;
-border-radius: 10px;
-background-color:'white';
-}
-
-.dash-row1-doughnut{
-  margin-top:.2vh ;
-  /* margin-left:.5rem ;  */
-  padding-left: 1rem;
-  background-color:'white';
-}
-.dash-row1-barchart{
-  margin-top:1rvh ;
-  padding-left: .1rem;
-
-}
-.dash-row2-ducharts{
-  width: 33.59vw;
-  height:35vh ;
-}
-.dash-row2-charts{
+.dash-row1-div { 
   display: flex;
-  /* margin-top: -13rem; */
-  width: 46.3rvw;
+}
+
+.dash-revenue-div { 
+  display: flex;
+  max-height: 20vh;
+}
+
+.dash-revenue-div-month,
+.dash-revenue-div-count,
+.dash-revenue-div-notifi {
+  padding-right: 1vw;
+}
+
+.dash-row1-charts {
+  display: flex;
+  margin-top: 2vh;
+  width: 46.3vw;
+  height: 35.8vh;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.dash-row1-doughnut {
+  margin-top: 0.9vh;
+  padding-left: 1.65vw;
+  background-color: white;
+}
+
+.dash-row1-barchart {
+  margin-top: 1vh;
+  padding-left: 0.1vw;
+  width: 38.59vw;
+  height: 35vh;
+}
+
+.dash-row2-ducharts {
+  width: 38.59vw;
+  height: 35vh;
+}
+
+.dash-row2-charts {
+  display: flex;
+  margin-top: 1.9vh;
+  padding-left: 0.1vw;
+  width: 46.3vw;
   height: 31.3vh;
   border-radius: 10px;
-  margin-top: 1.9%;
-  padding-left: .1%;
-  background-color:white;
-  }
+  background-color: white;
+}

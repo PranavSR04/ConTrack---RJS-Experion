@@ -111,10 +111,10 @@
   }
   .titleSeparator{
     margin-top: -7px;
-   background-color: rgb(62, 172, 226);
+   background-color: rgb(99, 99, 99);
    height: 2px;
-   margin-left: 38px;
-   width: 7.8rem;
+   margin-left: 14px;
+   width: 10.8rem;
   }
   .mainContainer__overview__count__content{
     display: flex;
@@ -130,13 +130,13 @@
     flex: 1;
   }
   .mainContainer__overview__count__content__list__value{
-    padding-left: 30px;
+    padding-left: 15px;
   }
   .countSeparator{
-    margin-right: 20px;
+    margin-right: 32px;
     width: 2px;
     height: 60px;
-    background-color: rgb(15, 88, 124);
+    background-color: rgb(99, 99, 99);
   }
   @media only screen and (max-width: 1200px) {
     .maincontainer__overview {

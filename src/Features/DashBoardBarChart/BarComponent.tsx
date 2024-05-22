@@ -5,6 +5,7 @@ import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 const BarComponent = ({data,maxDataValue}:BarChartPropType) => {  
   return (
+    <div style={{ width: '26rem',paddingLeft:'0%', transform:'scale(1)'}}>
   <Bar data={data}  options = {{
         scales: {
           x:{
@@ -28,6 +29,7 @@ const BarComponent = ({data,maxDataValue}:BarChartPropType) => {
         }
         
       }}/>
+      </div>
   );
 }
 
