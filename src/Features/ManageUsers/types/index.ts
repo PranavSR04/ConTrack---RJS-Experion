@@ -123,7 +123,7 @@ export interface TableColumn {
   title: JSX.Element;
   dataIndex: string;
   sorter?: false | ((a: any, b: any) => number);
-  width?: number | undefined;
+  width?: number | undefined | string;
   ellipsis?:boolean | undefined
 }
 
@@ -160,3 +160,4 @@ export interface AddGroupModalProps{
   visible: boolean;
   onCancel: () => void;
 }
+

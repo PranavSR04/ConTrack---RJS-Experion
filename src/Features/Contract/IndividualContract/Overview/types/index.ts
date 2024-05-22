@@ -14,5 +14,6 @@ export interface OverviewHandlerType {
     milestoneCount: number;
     totalRevenue: number;
     revenueGenerated: number;
+    contractAddedBy: string;
   }
   

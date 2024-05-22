@@ -4,6 +4,7 @@ import styles from "./ContractList.module.css";
 import { ContractListPropType, ContractData } from "./types";
 import { LoadingOutlined } from "@ant-design/icons";
 import Toast from "../../../Components/Toast/Toast";
+import BreadCrumbs from "../../../Components/BreadCrumbs/Breadcrumbs";
 
 const ContractList = ({
   columns,
@@ -26,6 +27,7 @@ const ContractList = ({
   contractCloseToast
 }: ContractListPropType) => {
   console.log("contract added toast",contractAddToast)
+  console.log(data);
   console.log("contract edited toast",contractEditToast)
   return (
     <>

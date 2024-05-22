@@ -2,6 +2,7 @@ import React from "react";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import UpdateModal from "./UpdateModal";
 import AddGroupModal from "./AddGroupModal";
+// import AddGroupModal from "./AddGroupModal";
 import userTableStyles from "./ManageUsers.module.css";
 import {
   Table,
@@ -24,11 +25,13 @@ import { DeleteOutlined, LoadingOutlined } from "@ant-design/icons";
 
 const ManageUsers = ({
   handleAddUser,
+ 
   hideDeleteConfirmation,
   handleDelete,
   handleSearch,
   handlePageChange,
   handleEditModalCancel,
+  
   handleUpdateUser,
   rowClassName,
   debouncedFetchData,
@@ -45,6 +48,7 @@ const ManageUsers = ({
   roleOptions,
   dataSource,
   pagination,
+ 
   editModalVisible,
   selectedRoleId,
   deleteConfirmationVisible,
@@ -94,7 +98,9 @@ const ManageUsers = ({
 
 ManageUsersPropType) => {
 
-  console.log("OPTIONS LIST FROM HANDLE AFTER KEYPRESS",completeUserList)
+  const ROLE_ID = parseInt(localStorage.getItem("role_id") || "0", 10);
+
+
 
   return (
     <>
@@ -108,7 +114,8 @@ ManageUsersPropType) => {
       /> */}
       <h2 className={`${userTableStyles.pageTitle}`}>MANAGE USER</h2>
       <div className={` ${userTableStyles.wholeTable} `}>
-        <div className={`${userTableStyles.searchEmployeeCluster}`}>
+        {ROLE_ID ==1 &&
+          <div className={`${userTableStyles.searchEmployeeCluster}`}>
 
 
           <Select
@@ -175,7 +182,7 @@ ManageUsersPropType) => {
           >
             ADD USER
           </Button>
-        </div>
+        </div>}
 
         
         {userAdded ? (
@@ -306,7 +313,7 @@ ManageUsersPropType) => {
                 // style={{ width: '100%' }}
                 options={groupOptions}
                 value={selectedIndividualGroup}
-                placeholder="Please select"
+                placeholder="Please select group"
                 onChange={handleIndividualGroup}
               />
 
@@ -364,12 +371,14 @@ ManageUsersPropType) => {
           </Button>}
 
           <Modal
+              className={userTableStyles.updateModal}
               open={showDeleteGroupModal}
               onCancel={cancelDeleteGroupModal}
               title="Do you really wish to delete this group?"            
               onOk={()=>handleDeleteGroup(selectedIndividualGroup)}
               style={{marginTop:30}}
-            />
+              okButtonProps={{ className: userTableStyles.customButtonYes }}
+              />
 
          <Table
             className={`${userTableStyles.userListTable}`}
@@ -378,7 +387,10 @@ ManageUsersPropType) => {
             dataSource={groupUsersData}
             rowClassName={rowClassName}
 
-            locale={{ emptyText: "Please select a group" }}
+            // locale={{ emptyText: "Please select a group" }}
+            locale={{
+             emptyText:  "No users available" 
+             }}
             pagination={{
               position: ["bottomCenter"],
               ...pagination,
@@ -421,11 +433,14 @@ ManageUsersPropType) => {
     </Modal>
 
     <Modal
+        className={userTableStyles.updateModal}
         open={showDeleteFromGroupModal}
         onCancel={cancelDeleteFromGroupModal}
         title="Do you really wish to remove the user from this group"
         onOk={handleDeleteFromGroup}
         style={{marginTop:30}}
+        okButtonProps={{ className: userTableStyles.customButtonYes }}
+
       />
 
     <AddGroupModal

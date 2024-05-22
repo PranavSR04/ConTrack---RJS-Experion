@@ -1,5 +1,4 @@
 import axiosInstance from "../../../../Config/AxiosConfig";
-import { ContractType } from "../types";
 
 export const getMSA = async (searchvalue?: string) => {
 	return await axiosInstance
@@ -9,9 +8,15 @@ export const getMSA = async (searchvalue?: string) => {
 };
 
 export const getUserList = async (searchvalue?: string) => {
-  return await axiosInstance
-    .get(`/api/users/get${searchvalue ? `?user_id=${searchvalue}` : ""}`)
-    .then((res: { data: any }) => res.data)
-    .catch((err: any) => err);
+	return await axiosInstance
+		.get(`/api/users/get${searchvalue ? `?user_id=${searchvalue}` : ""}`)
+		.then((res: { data: any }) => res.data)
+		.catch((err: any) => err);
 };
 
+export const getUserGroups = async () => {
+	return await axiosInstance
+		.get("api/groups/list")
+		.then((res: { data: any }) => res.data)
+    .catch((err: any) => err);
+};

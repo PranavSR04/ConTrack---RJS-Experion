@@ -1,8 +1,8 @@
 .contractForm {
-  /* margin-left: 19vw; */
-  /* padding-top: 1vh; */
-  margin-bottom: 10vh;
-  width: 77vw;
+	/* margin-left: 19vw; */
+	/* padding-top: 1vh; */
+	margin-bottom: 10vh;
+	width: 77vw;
 }
 
 .contractForm__topcard,
@@ -11,106 +11,104 @@
 .contractForm__assoccard,
 .contractForm__uploadcard,
 .contractForm__commentscard {
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  margin-top: 2vh;
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	margin-top: 2vh;
 }
 .contractForm__uploadcard,
 .contractForm__commentscard {
-  width: 38.5vw;
-  height: 37vh;
+	width: 38.5vw;
+	height: 37vh;
 }
 
 .contractForm__uploadcard__upload {
-  margin-top: 2%;
-  border: 1px dashed #ccc;
-  border-radius: 8px;
-  padding: 26px;
-  text-align: center;
-  width: 35vw;
+	margin-top: 2%;
+	border: 1px dashed #ccc;
+	border-radius: 8px;
+	padding: 26px;
+	text-align: center;
+	width: 35vw;
 }
 .contractForm__assoccard {
-  width: 50vw;
+	width: 38.5vw;
+	height: 25vh;
 }
 .contractForm__submit {
-  margin-top: 2%;
-  background-color: #dc143c;
-  color: white;
+	margin-top: 2%;
+	background-color: #dc143c;
+	color: white;
 }
 
 .contractForm__ffcard__contractvalue {
-  margin-left: 18rem;
-  margin-bottom: 0.3rem;
+	margin-left: 18rem;
+	margin-bottom: 0.3rem;
 }
 
 .contractForm__ffcard__addbutton {
-  background-color: #dc143c;
-  color: white;
-  border: none;
-  margin-left: auto;
-  height: auto;
-  font-size: small;
+	background-color: #dc143c;
+	color: white;
+	border: none;
+	margin-left: auto;
+	height: auto;
+	font-size: small;
 }
+/* .contractForm__ffcard__main__milestoneheading__desc {
+	width: 350px;
+  } */
 
-.contractForm__ffcard__main {
+/* .contractForm__ffcard__main {
   text-align: right;
-}
+} */
 
 .contractForm__ffcard__main__milestoneheading {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 1rem;
+	padding-top: 20px;
+	padding-bottom: 0px;
+	margin-bottom: -20px;
 }
 
 .contractForm__ffcard__main__milestoneheading__desc {
-  font-size: small;
-  font-weight: 400;
+	color: grey;
+	width: 26vw;
 }
 
 .contractForm__ffcard__main__milestoneheading__enddate {
-  margin-left: 8.5rem;
-  font-size: small;
-  font-weight: 400;
+	color: grey;
+	width: 13vw;
 }
 
 .contractForm__ffcard__main__milestoneheading__percentage {
-  margin-left: 3rem;
-  font-size: small;
-  font-weight: 400;
+	color: grey;
+	width: 9vw;
 }
 
 .contractForm__ffcard__main__milestoneheading__amount {
-  margin-left: 2rem;
-  font-size: small;
-  font-weight: 400;
+	color: grey;
+	width: 17.5vw;
 }
 
 .contractForm__ffcard__main__milestoneheading__tmdesc {
-  font-size: small;
-  font-weight: 400;
+	color: grey;
+	width: 26vw;
 }
 
 .contractForm__ffcard__main__milestoneheading__tmenddate {
-  font-size: small;
-  font-weight: 400;
-  margin-left: 4rem;
+	color: grey;
+	width: 13vw;
 }
 
 .contractForm__ffcard__main__milestoneheading__tmamount {
-  font-size: small;
-  font-weight: 400;
-  margin-left: 4rem;
+	color: grey;
+	width: 20vw;
 }
 
-
-.modal{
+.modal {
 	text-align: center;
 }
-.okbtn{
+.okbtn {
 	color: white;
-    background-color: #dc143c;
-	margin-right: 10px ;
+	background-color: #dc143c;
+	margin-right: 10px;
 }
-.modalfooter{
+.modalfooter {
 	text-align: center;
 	padding: 5%;
 }

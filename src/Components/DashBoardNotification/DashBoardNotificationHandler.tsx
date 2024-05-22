@@ -156,7 +156,7 @@ const DashBoardNotificationHandler= ({notification}:DashBoardNotificationHandler
               });
           }
       };
-      return <Notification notification={notification} difference={difference} actionStyle={actionStyle} stylenames={stylename} cardStyle={cardStyle} ItemClickHandler={ItemClickHandler}/>;
+      return (<Notification notification={notification} difference={difference} actionStyle={actionStyle} stylenames={stylename} cardStyle={cardStyle} ItemClickHandler={ItemClickHandler}/>);
 }
 
 export default DashBoardNotificationHandler

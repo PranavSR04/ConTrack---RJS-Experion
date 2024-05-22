@@ -104,10 +104,10 @@ const MsaHeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
   };
 
   const navigateToEditMsa=(id: string)=>{
-    navigate('/MSAForm', { state: {id:id as string , msaEdited: true } });
+    navigate('/MSAOverview/EditMSA', { state: {id:id as string , msaEdited: true } });
   }
   const navigateToRenewMsa=(id: string)=>{
-    navigate('/MSAForm', { state: {id:id as string , msaRenewed: true } });
+    navigate('/MSAOverview/RenewMSA', { state: {id:id as string , msaRenewed: true } });
    
   }
   return (

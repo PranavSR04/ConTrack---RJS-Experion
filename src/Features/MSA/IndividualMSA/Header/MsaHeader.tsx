@@ -2,6 +2,7 @@ import React from 'react'
 import { HeaderPropType } from './types'
 import styles from "./MsaHeader.module.css";
 import { CSVLink } from 'react-csv';
+import BreadCrumbs from '../../../../Components/BreadCrumbs/Breadcrumbs';
 
 const MsaHeader = ({
   msaRefId,
@@ -16,6 +17,14 @@ const MsaHeader = ({
 }:HeaderPropType) => {
   return (
     <div className={styles.maincontainer__header}>
+      <BreadCrumbs
+            style={{
+            marginLeft: "1rem",
+            marginTop: "0.7rem",
+            fontSize: 16,
+            fontStyle: "italic",
+          }}
+        />
       <div className={styles.maincontainer__header__title}>
         <div className={styles.maincontainer__header__title__contract}>
           <h2>

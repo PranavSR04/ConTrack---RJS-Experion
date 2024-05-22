@@ -22,15 +22,28 @@ console.log(previousMonthRevenue)
   const difference=((currentMonthRevenue-previousMonthRevenue)/previousMonthRevenue)*100;
   const arrowIcon = difference >= 0 ? <ArrowUpOutlined style={{ color: '#3f8600' }} data-testid="up-arrow" /> : <ArrowDownOutlined style={{ color: 'red' }} data-testid="down-arrow" />;
 //return contains Countup to show count styling and statistic to show growth
+
+  const formatNumber = (value: number) => {
+    if (value >= 1e9) {
+        return { value: value / 1e9, suffix: 'B USD' };
+    } else if (value >= 1e6) {
+        return { value: value / 1e6, suffix: 'M USD' };
+    } else if (value >= 1e3) {
+        return { value: value / 1e3, suffix: 'K USD' };
+    } else {
+        return { value: value, suffix: 'USD' };
+    }
+  };
+  const { value, suffix } = formatNumber(currentMonthRevenue);
+
   return (
     <Row gutter={16}>
     <Col span={12}>
       <Card style={{width:'135px',height:'120px',padding:'0px',transform:'scale', backgroundColor:'#f4f4f4', border:'solid 2px #f9f9f9',}}>
       <p style={{fontSize:'15px', paddingLeft:'2%', marginBottom:'0.1rem'}}>{responsetype}</p> 
       <div style={{fontSize:'15px', fontWeight:'600', marginLeft:'1.8px'}}>
-      <span>USD&nbsp;</span>
-      <CountUp end={currentMonthRevenue/1000.00}/>
-      <span>k&nbsp;</span>
+      <CountUp end={value}/>
+      <span> {suffix}</span>
     </div>
       <Statistic className={styles.statistic}  
           value={Math.abs(difference)}

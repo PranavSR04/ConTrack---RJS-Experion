@@ -35,9 +35,29 @@ export interface MsaDataType {
     validateStartDate: (value: any) => Promise<void>;
     showFile: boolean;
     fileCancel: () => void;
-    msaAdded?: boolean | undefined;
+    msaAdded?: Boolean
     hideMsarefid?: boolean;
-    msaRenewed?: boolean ;
-    msaEdited?:boolean;
-    startDate: string | undefined
+    msaRenewed: Boolean | undefined
+    msaEdited: Boolean | undefined
+    startDate: string | undefined;
+    modalTitle: string;
+    formFields?: FormField[]
+  }
+
+  export interface FormField {
+    name: string;
+    value: any;
+  }
+  export interface MSAFormHandlerPropType{
+    msaAdded?:Boolean;
+    msa_id?:string;
+    msaEdited?:Boolean;
+    msaRenewed?:Boolean
+  }
+  export interface MsaData {
+    msa_ref_id: string;
+    client_name: string;
+    region: string;
+    start_date: string;
+    end_date: string;
   }

@@ -15,7 +15,7 @@ const EditContractHandler = () => {
 	const [initialValues, setInitialValues] = useState<ContractEditingInitialValueType>();
 
 	const location = useLocation();
-	let { id } = location.state;
+	let { id } = location.state || {};
 	const contract_id = parseInt(id);
 
 	//Funtion to get the details of the selected contract
@@ -49,6 +49,7 @@ const EditContractHandler = () => {
 				end_date: dayjs(contractDetails?.end_date),
 				milestones: initialDateUpdatedMilestones,
 				associated_users: [],
+				associated_groups: [],
 			};
 
 			if (contractDetails.associated_users) {
@@ -56,6 +57,12 @@ const EditContractHandler = () => {
 					(user) => user.user_id
 				);
 				initaiValuesData.associated_users = initialAssociated_users_id;
+			}
+			if (contractDetails.associated_groups) {
+				const initialAssociated_groups_id = contractDetails.associated_groups.map(
+					(group) => group.group_id
+				);
+				initaiValuesData.associated_groups = initialAssociated_groups_id;
 			}
 			setInitialValues(initaiValuesData);
 		}

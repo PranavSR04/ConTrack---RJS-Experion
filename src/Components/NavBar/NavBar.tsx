@@ -9,8 +9,9 @@ import { NavContexts } from "../NavContext/NavContext";
 import NotificationListHandler from "../NotificationList/NotificationListHandler";
 
 const NavBar = ({username,activeNotificationCounte}:NavBarPropType) => {
+
 	
-	const currentUser = JSON.parse(localStorage.getItem("username")||"" );
+	
 	const{showDrawer}=useContext(NavContexts);
     const{activeNotificationCount}=useContext(NavContexts);
 	console.log(username,activeNotificationCount);
@@ -30,7 +31,7 @@ const NavBar = ({username,activeNotificationCounte}:NavBarPropType) => {
 					</Badge>
 				</Space>
 				<NotificationListHandler/>
-				<NavbarText>{currentUser}</NavbarText>
+				<NavbarText>{username}</NavbarText>
 			</NavItem>
 		</Nav>
 	);

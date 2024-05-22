@@ -1,75 +1,20 @@
-.dashboardContainer { 
-  max-width: 80vw;
-  overflow-y: auto !important;
+.dashboard{
+    padding-top: 1%;
+	margin-left: 18%;
+	margin-right: 1.5rem;
+    overflow: hidden;
 }
 
-.dashboard-div1 {
-  margin-top: 1vh;
-  border-width: 1vw;
-  margin-left: 17.5vw;
-  padding-left: 1.1vw;
-  font-family: "Montserrat", sans-serif;
-  width: 80vw;
-  height: 100vh;
-  position: fixed;
-  border-radius: 0.5rem;
-  background-color: white;
+.col{
+    background-color: rgba(252, 0, 0, 0);
 }
 
-.dashboard-name {
-  font-weight: 700;
-  font-size: 1.8rem;
-  padding-top: 0.5rem;
+.barchart_card{
+    padding: 0px !important;
+    height: 37.3vh;
 }
 
-.dash-row1-div { 
-  display: flex;
-}
-
-.dash-revenue-div { 
-  display: flex;
-  max-height: 20vh;
-}
-
-.dash-revenue-div-month,
-.dash-revenue-div-count,
-.dash-revenue-div-notifi {
-  padding-right: 1vw;
-}
-
-.dash-row1-charts {
-  display: flex;
-  margin-top: 2vh;
-  width: 46.3vw;
-  height: 35.8vh;
-  border-radius: 10px;
-  background-color: white;
-}
-
-.dash-row1-doughnut {
-  margin-top: 0.9vh;
-  padding-left: 1.65vw;
-  background-color: white;
-}
-
-.dash-row1-barchart {
-  margin-top: 1vh;
-  padding-left: 0.1vw;
-  width: 38.59vw;
-  height: 35vh;
-}
-
-.dash-row2-ducharts {
-  width: 38.59vw;
-  height: 35vh;
-}
-
-.dash-row2-charts {
-  display: flex;
-  margin-top: 1.9vh;
-  padding-left: 0.1vw;
-  width: 46.3vw;
-  height: 31.3vh;
-  border-radius: 10px;
-  background-color: white;
+.lastrow_card{
+    height: 215px;
+    padding: 0px ;
 }

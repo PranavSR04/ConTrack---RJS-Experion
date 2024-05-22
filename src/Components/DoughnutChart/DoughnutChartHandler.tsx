@@ -38,6 +38,7 @@ const DoughnutChartHandler = () => {
         ],
     };
     const options = {
+      aspectRatio: 1.4,
       plugins: {
         legend: {
           labels: {
