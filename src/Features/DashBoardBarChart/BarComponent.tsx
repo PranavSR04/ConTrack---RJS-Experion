@@ -6,9 +6,12 @@ Chart.register(...registerables);
 const BarComponent = ({ data, maxDataValue }: BarChartPropType) => {
 	return (
 		// <div style={{ width: "26rem", paddingLeft: "0%", transform: "scale(1)" }}>
-			<Bar
+			<Bar 
 				data={data}
+				
 				options={{
+					responsive: true,
+					// maintainAspectRatio: false,
 					plugins: {
 						legend: {
 						  labels: {
@@ -27,6 +30,7 @@ const BarComponent = ({ data, maxDataValue }: BarChartPropType) => {
 							},
 						},
 						y: {
+							
 							grid: {
 								display: false,
 							},
@@ -34,8 +38,8 @@ const BarComponent = ({ data, maxDataValue }: BarChartPropType) => {
 								display: false,
 								text: "Contract Count",
 							},
-							min: 0,
-							max: Math.ceil(maxDataValue * 1.1),
+							// min: 0,
+							// max: Math.ceil(maxDataValue * 1.1),
 						},
 					},
 				}}
