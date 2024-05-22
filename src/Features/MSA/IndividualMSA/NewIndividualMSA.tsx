@@ -55,7 +55,7 @@ const NewIndividualMSA = ({
           </Col>
         </Row>
         <Row gutter={10}>
-          <Col span={6}>
+          <Col span={7}>
               <MsaCommentsHandler responses={responses} loading={loading} />
           </Col>
           <Col span={12}>
