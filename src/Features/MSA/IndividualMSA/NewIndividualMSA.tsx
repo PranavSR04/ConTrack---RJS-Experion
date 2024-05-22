@@ -9,6 +9,7 @@ import MsaCommentsHandler from "./Comments/MsaCommentsHandler";
 import MsaOverviewHandler from "./OverView/MsaOverviewHandler";
 import MsaRevenueHandler from "./MsaRevenue/MsaRevenueHandler";
 import { Col, Row, Spin } from "antd";
+import ContractStatusGraphHandler from "./ContractStatusGraph/ContractStatusGraphHandler";
 
 const NewIndividualMSA = ({
   responses,
@@ -17,7 +18,6 @@ const NewIndividualMSA = ({
 }: IndividualMsaPropType) => {
   return (
     <>
-    <Spin tip="Loading" size="large" spinning={loading}>
       <div className={styles.maincontainer}>
         <Row>
           <Col span={24}>
@@ -25,23 +25,34 @@ const NewIndividualMSA = ({
           </Col>
         </Row>
         <Row>
-          <Row>
-            <Col span={24}>
+          <Col span={18}>
+            <Row>
+              <Col>
               <MsaOverviewHandler responses={responses} loading={loading} />
-            </Col>
-          </Row>
-          <Row gutter={50}>
-            <Col span={20}>
+              </Col>
+            </Row>
+            <Row>
             <div className={styles.maincontainer__revenue}>
+            <Col>
               <MsaRevenueHandler msa_id={msa_id}/>
-            </div>
             </Col>
-            <Col span={4}>
+            </div>
+            </Row>
+          </Col>
+          <Col span={6}>
+            <Row>
+              <Col span={24}>
+              <ContractStatusGraphHandler responses={responses} loading={loading}/>
+              </Col>
+            </Row>
+            <Row>
             <div className={styles.maincontainer__doclist}>
+              <Col span={24}>
               <MsaDocHandler response={responses?responses:undefined}  />
+              </Col>
             </div>
-            </Col>
-          </Row>
+            </Row>
+          </Col>
         </Row>
         <Row gutter={10}>
           <Col span={6}>
@@ -52,7 +63,6 @@ const NewIndividualMSA = ({
           </Col>
         </Row>
       </div>
-    </Spin>
     </>
   );
 };

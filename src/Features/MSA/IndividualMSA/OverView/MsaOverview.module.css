@@ -18,10 +18,12 @@
     font-family: "Montserrat", sans-serif;
     width: 15rem;
     min-width: 15rem;
+    height: 46vh;
+    min-height: 46vh;
   }
   .maincontainer__overview__overview__contractcount{
-    width: 33%;
-    min-width: 33%;
+    width: 15.5rem;
+    min-width: 15.5rem;
     margin-left: 1rem;
     margin-bottom: 2%;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
@@ -151,7 +153,3 @@
     width: 210px;
   }
   
-  .maincontainer__overview__right{
-    min-width: 20rem;
-    margin-left: auto;
-  }
