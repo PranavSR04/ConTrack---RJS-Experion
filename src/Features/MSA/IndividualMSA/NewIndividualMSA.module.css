@@ -12,10 +12,16 @@
 .maincontainer__revenue {
   border: solid 1px #ffffff;
   width: 59.5vw;
-  min-height: 28rem;
+  min-height: 27.7rem;
   margin-top: -2rem;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
   border-radius: 10px;
+}
+
+@media screen and (min-width: 1px) and (min-height: 600px) {
+  .maincontainer__revenue {
+    height: 31.5rem;
+  }
 }
 
 .maincontainer__chart {
