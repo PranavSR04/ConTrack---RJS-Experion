@@ -58,3 +58,6 @@
 .evenRow {
 	background-color: #ffffff; /* Set the background color for odd rows */
 }
+.activeSort {
+    color: blue;
+  }
