@@ -217,7 +217,7 @@ ManageUsersPropType) => {
         )} 
 
         {groupAdded && (<Toast message="Group added successfully" messageType="success" />)} 
-        {failedToAddGroup && (<Toast message="Such a group already exists" messageType="error" />)} 
+        {failedToAddGroup && (<Toast message="Group already exists" messageType="error" />)} 
 
 
 
