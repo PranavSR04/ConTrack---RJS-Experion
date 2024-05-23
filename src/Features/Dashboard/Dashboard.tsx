@@ -32,7 +32,7 @@ const Dashboard = () => {
         		</Col>
 				<Col className={styles.col} span={5} ><DashBoardNotificationListHandler /></Col>
 			</Row>
-			<Row gutter={15}>
+			<Row gutter={15} style={{paddingTop:".5vh"}}>
 				<Col span={8}><Card className={styles.lastrow_card}><ScatterPlotHandler /></Card></Col>
 				<Col span={8}><Card className={styles.lastrow_card}><RegionHorizontalBar /></Card></Col>
 				<Col span={8}><Card className={styles.lastrow_card}><TopRevenueHandler /></Card></Col>

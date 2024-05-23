@@ -14,29 +14,31 @@
 .maincontainer__revenue{
   border: solid 1px #ffffff;
   width: 66%;
-  height: 24rem;
-  margin-top: 1rem;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+  height: 57vh;
+  margin-top: 1%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
 }
 
 .maincontainer__chart {
   margin-left: -16rem;
   margin-top: -4.8rem;
-  transform: scale(0.6);
+  transform: scale(0.61);
   height: 25rem;
 }
 
 .maincontainer__milestones {
   width: 30%;
   /* height: 58%; */
-  min-height: 38.4rem;
-  max-height: 38.4rem;
+  height: 86.1vh;
+  /* min-height: 87.8vh; */
+  /* max-height: 38.4rem; */
   position: absolute;
   right: 1%;
   /* top: 8.5%; */
   top: 5.3rem;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+  /* box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253); */
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   background-color: white;
   overflow-y: auto;
   border-radius: 10px;

@@ -10,7 +10,7 @@ const DoughnutChart = ({
 	return (
 		<>
 			{/* <div style={{ width:'16vw'}}> */}
-			<Card style={{height:"37.3vh",width:"285px"}} bodyStyle={{padding:0,paddingTop:"3vh"}}>
+			<Card style={{height:"37.3vh",width:"285px",boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px"}} bodyStyle={{padding:0,paddingTop:"3vh"}}>
 				{" "}
 				{loading ? (
 					<div>Loading...</div>
