@@ -20,7 +20,7 @@ const MsaHeader = ({
       <BreadCrumbs
             style={{
             marginLeft: "1rem",
-            fontSize: 16,
+            fontSize: 13,
             fontStyle: "italic",
           }}
         />

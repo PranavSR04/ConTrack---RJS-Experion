@@ -35,22 +35,43 @@ axiosInstance.interceptors.request.use(
 );
 
 // Response interceptor to handle session expiration
+// axiosInstance.interceptors.response.use(
+// 	(response) => {
+// 		// Check if the response status is 401 (Unauthorized)
+// 		if (response.status === 401) {
+//       localStorage.clear();
+// 			console.log("Session expired or unauthorized");
+//       window.location.href = '/session/expired';
+// 		}
+// 		return response;
+// 	},
+// 	(error) => {
+// 		// Check if the error response status is 401 (Unauthorized)
+// 		if (error.response && error.response.status === 401) {
+//       localStorage.clear();
+// 			console.log("Session expired or unauthorized");
+//       window.location.href = '/session/expired';
+// 		}
+// 		return Promise.reject(error);
+// 	}
+// );
+
+// Response interceptor to handle session expiration
 axiosInstance.interceptors.response.use(
 	(response) => {
-		// Check if the response status is 401 (Unauthorized)
-		if (response.status === 401) {
-      localStorage.clear();
-			console.log("Session expired or unauthorized");
-      window.location.href = '/session/expired';
-		}
 		return response;
 	},
 	(error) => {
-		// Check if the error response status is 401 (Unauthorized)
-		if (error.response && error.response.status === 401) {
-      localStorage.clear();
+		const config = error.config;
+		// Check if the error response status is 401 (Unauthorized) and not an excluded path
+		const isExcludedPath = excludePaths.some((path) =>
+			config.url?.includes(path)
+		);
+
+		if (error.response && error.response.status === 401 && !isExcludedPath) {
+			localStorage.clear();
 			console.log("Session expired or unauthorized");
-      window.location.href = '/session/expired';
+			window.location.href = '/session/expired';
 		}
 		return Promise.reject(error);
 	}
