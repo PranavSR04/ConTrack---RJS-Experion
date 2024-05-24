@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Dashboard.module.css";
+import styles from "./dashboard.module.css";
 import { Card, Col, Row } from "antd";
 import DashBoardMonthlyRevenueHandler from "../../Components/DashBoardRevenue/DashBoardMonthlyRevenueHandler";
 import DashBoardQuaterlyRevenueHandler from "../../Components/DashBoardRevenue/DashBoardQuaterlyRevenueHandler";
@@ -32,7 +32,7 @@ const Dashboard = () => {
         		</Col>
 				<Col className={styles.col} span={5} ><DashBoardNotificationListHandler /></Col>
 			</Row>
-			<Row gutter={15}>
+			<Row gutter={15} style={{paddingTop:".5vh"}}>
 				<Col span={8}><Card className={styles.lastrow_card}><ScatterPlotHandler /></Card></Col>
 				<Col span={8}><Card className={styles.lastrow_card}><RegionHorizontalBar /></Card></Col>
 				<Col span={8}><Card className={styles.lastrow_card}><TopRevenueHandler /></Card></Col>

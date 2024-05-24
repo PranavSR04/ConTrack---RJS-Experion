@@ -13,7 +13,8 @@
     margin-bottom: 2%;
     margin-top: 6%;
     margin-left: 1rem;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    /* box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253); */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
     font-family: "Montserrat", sans-serif;
     /* width: 15rem;
@@ -24,9 +25,13 @@
   }
   .maincontainer__overview__overview__contractcount{
     width: 18vw;
-    /* min-width: 16rem; */
+    min-width: 18vw;
+    /* width: 15rem;
+    min-width: 15rem; */
+    /* margin-left: 1rem; */
     margin-bottom: 2%;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    /* box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253); */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
     font-family: "Montserrat", sans-serif;
     height: 80%;
@@ -34,11 +39,13 @@
   }
 
   .maincontainer__overview__overview {
-    /* width: 16rem;
-    min-width: 16rem; */
     width: 20vw;
+    min-width: 20vw;
+    /* width: 15rem; */
+    /* min-width: 15rem; */
     margin-bottom: 2%;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    /* box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253); */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
     font-family: "Montserrat", sans-serif;
     height: 80%;
@@ -70,14 +77,14 @@
   }
   
   .maincontainer__overview__payment {
-    /* width: 16rem;
-    min-width: 16rem; */
     width: 20vw;
+    min-width: 20vw;
     min-height: 80%;
     /* min-width: 15rem; */
     margin-bottom: 2%;
     /* margin-left: 1rem; */
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    /* box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253); */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
     font-family: "Montserrat", sans-serif;
     height: 80%;

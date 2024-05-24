@@ -37,6 +37,8 @@ const ManageUsersHandler = () => {
   const [roleOptions, setRoleOptions] = useState<RoleOption[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [search, setSearch] = useState('');
+  const ROLE_ID = parseInt(localStorage.getItem("role_id") || "0", 10);
+
 
   const [searchEmployee, setSearchEmployee] = useState("")
   const [dropdownOptions, setDropdownOptions] = useState<EmployeeOption[]>([]);
@@ -192,7 +194,7 @@ const ManageUsersHandler = () => {
           cols.push(col);
         }
       }
-
+      
       // Add "Action" column with "Edit" and "Delete" icons
       const actionColumn: ActionColumn = {
         title: <span style={{ fontWeight: "bold" }}>Action</span>,
@@ -218,10 +220,12 @@ const ManageUsersHandler = () => {
           </>
         ),
       };
-    {     
+    { if(ROLE_ID ==1 )
+      {    
       //if the data fetched is not empty
       result.data.data.length!== 0 &&
       cols.push(actionColumn);
+      }
     }      
 
    setColumns(cols);
