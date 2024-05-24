@@ -24,7 +24,7 @@ const MsaOverview = ({
 	return (
 		<div className={styles.maincontainer__overview__maindiv}>
 			<div className={styles.maincontainer__overview__left}>
-				<Row gutter={20}>
+				<Row gutter={30}>
 					<Col span={8} >
 						<Card
 							className={styles.maincontainer__overview__overview}
