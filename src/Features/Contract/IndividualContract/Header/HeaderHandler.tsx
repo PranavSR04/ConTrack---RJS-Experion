@@ -41,8 +41,9 @@ const HeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
         const dataArray = responseDataArray.map((item) => {
           const row = [
             item.id,
-            item.msa_id,
-            item.contract_added_by,
+            item.msa_ref_id,
+            item.client_name,
+            item.user_name,
             item.contract_ref_id,
             item.contract_type,
             item.date_of_signature,
@@ -53,8 +54,8 @@ const HeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
             item.contract_doclink,
             item.estimated_amount,
             item.contract_status,
-            item.client_name,
-            item.user_name,
+            
+            
           ];
 
           // Check if milestones exist
@@ -62,8 +63,6 @@ const HeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
             item.milestones.forEach((milestone: any) => {
               const milestoneRow = [...row]; // Create a copy of the original row
               milestoneRow.push(
-                milestone.id,
-                milestone.contract_id,
                 milestone.milestone_desc,
                 milestone.milestone_enddate,
                 milestone.percentage,
@@ -83,9 +82,10 @@ const HeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
         // Prepend the column headers to the dataArray
         dataWithHeaders.unshift([
           "ID",
-          "MSA ID",
+          "MSA REF ID",
+          "Client Name",
           "Added By",
-          "Reference ID",
+          "Contract REF ID",
           "Contract Type",
           "Signature Date",
           "Comments",
@@ -95,12 +95,9 @@ const HeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
           "Document Link",
           "Estimated Amount",
           "Status",
-          "Created At",
-          "Updated At",
-          "Client Name",
-          "User Name",
           "Milestone Description",
           "Milestone End Date",
+          "Milestone Percentage",
           "Milestone Amount",
         ]);
 
