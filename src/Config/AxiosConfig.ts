@@ -3,7 +3,7 @@ import axios, { InternalAxiosRequestConfig } from "axios";
 
 // Create a custom Axios instance with a base URL
 const axiosInstance = axios.create({
-	baseURL: "https://cormophytic-rifles.000webhostapp.com/", // Replace with your API base URL
+	baseURL: "https://contrack-production.up.railway.app/", // Replace with your API base URL
 });
 
 // Define the exclude paths (paths where token should not be added)
