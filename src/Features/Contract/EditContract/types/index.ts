@@ -1,4 +1,5 @@
-import { AddContractValueType, ContractType, EditContractValueType } from "../../ContractForm/types";
+import { AddContractValueType, ContractType, EditContractValueType } from "../../../../Components/ContractForm/types";
+
 
 export interface EditContractPropType{
     contract_id: number;

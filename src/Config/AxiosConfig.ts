@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
 });
 
 // Define the exclude paths (paths where token should not be added)
-const excludePaths = ["api/loginAzure"];
+const excludePaths = ["api/loginAzure","/ConTrack---RJS-Experion"];
 
 // Add a request interceptor to the axios instance
 axiosInstance.interceptors.request.use(

@@ -1,8 +1,8 @@
 import React from "react";
-import ContractFormHandler from "../ContractForm/ContractFormHandler";
 import styles from "./AddContract.module.css";
 import { AddContractPropType } from "./types";
 import BreadCrumbs from "../../../Components/BreadCrumbs/Breadcrumbs";
+import ContractFormHandler from "../../../Components/ContractForm/ContractFormHandler";
 
 const AddContract = ({ addContract, initialValues }: AddContractPropType) => {
 	return (

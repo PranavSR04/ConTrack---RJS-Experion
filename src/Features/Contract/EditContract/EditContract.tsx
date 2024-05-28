@@ -1,8 +1,8 @@
 import React from "react";
-import ContractFormHandler from "../ContractForm/ContractFormHandler";
 import styles from "./EditContract.module.css";
 import { EditContractPropType } from "./types";
 import BreadCrumbs from "../../../Components/BreadCrumbs/Breadcrumbs";
+import ContractFormHandler from "../../../Components/ContractForm/ContractFormHandler";
 
 const EditContract = ({
 	contract_id,
