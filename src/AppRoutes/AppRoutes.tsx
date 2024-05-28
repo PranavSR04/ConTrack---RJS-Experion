@@ -27,6 +27,7 @@ const AppRoutes = () => {
                 <NavContext> 
                     <Routes>
                         <Route path="/" element={<LoginHandler />}></Route>
+                        <Route path="/ConTrack---RJS-Experion" element={<LoginHandler />}></Route>
                         <Route path="/navbar" element={<><NavBarHandler /><SideBar /></>}></Route>
                         <Route path='/AllContracts' element={<><NavBarHandler /><SideBar><ContractListHandler /></SideBar></>}></Route>
                         <Route path='/MyContracts' element={<><NavBarHandler /><SideBar><ContractListHandler /></SideBar></>}></Route>
