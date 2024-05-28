@@ -1,7 +1,7 @@
 import React from "react";
 import AddContract from "./AddContract";
 import { postContract } from "./api/postContract";
-import { ContractType } from "../ContractForm/types";
+import { ContractType } from "../../../Components/ContractForm/types";
 
 const AddContractHandler = () => {
 	const initialValues = { milestones: [{}] } ;

@@ -3,10 +3,10 @@ import ContractForm from "./ContractForm";
 import moment from "moment";
 import { getMSA, getUserGroups, getUserList } from "./api/api";
 import { ContractFormHandlerPropType, InitialFieldsType, MSAType, Milestone } from "./types";
-import { editContract } from "../EditContract/api/api";
 import { useNavigate } from "react-router";
 import { Form, Modal, message } from "antd";
 import dayjs from "dayjs";
+import { editContract } from "../../Features/Contract/EditContract/api/api";
 
 const ContractFormHandler = ({contractDetails,contract_id,addContract,initialValues}: ContractFormHandlerPropType) => {
 	const [selectedOption, setSelectedOption] = useState<string>();

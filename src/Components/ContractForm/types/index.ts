@@ -1,6 +1,6 @@
 import { FormInstance } from "antd";
-import { AddContractPropType } from "../../AddContract/types";
 import dayjs from "dayjs";
+import { AddContractPropType } from "../../../Features/Contract/AddContract/types";
 
 export interface ContractFormPropType {
 	selectedOption: string | undefined;

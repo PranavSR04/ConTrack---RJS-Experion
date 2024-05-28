@@ -1,4 +1,4 @@
-import axiosInstance from "../../../../Config/AxiosConfig";
+import axiosInstance from "../../../Config/AxiosConfig";
 
 export const getMSA = async (searchvalue?: string) => {
 	return await axiosInstance
