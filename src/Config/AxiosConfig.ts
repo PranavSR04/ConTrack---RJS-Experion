@@ -3,11 +3,11 @@ import axios, { InternalAxiosRequestConfig } from "axios";
 
 // Create a custom Axios instance with a base URL
 const axiosInstance = axios.create({
-	baseURL: "http://localhost:8000", // Replace with your API base URL
+	baseURL: "https://contrack-production.up.railway.app/", // Replace with your API base URL
 });
 
 // Define the exclude paths (paths where token should not be added)
-const excludePaths = ["api/loginAzure","/ConTrack---RJS-Experion"];
+const excludePaths = ["api/loginAzure","/ConTrack---RJS-Experion","https://pranavsr04.github.io/ConTrack---RJS-Experion/"];
 
 // Add a request interceptor to the axios instance
 axiosInstance.interceptors.request.use(
