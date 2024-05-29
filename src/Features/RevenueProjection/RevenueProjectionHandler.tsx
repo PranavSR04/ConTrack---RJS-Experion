@@ -91,9 +91,9 @@ const RevenueProjectionHandler = ({ id }: RevenueProjectionHandlerPropType) => {
 				duOptions={duOptions}
 				selectedFilters={selectedFilters}
 				id={id}
-        onhandledatechange={onhandledatechange}
-        filterEndDate={filterEndDate}
-        filterStartDate={filterStartDate}
+				onhandledatechange={onhandledatechange}
+				filterEndDate={filterEndDate}
+				filterStartDate={filterStartDate}
 			/>
 		</>
 	);

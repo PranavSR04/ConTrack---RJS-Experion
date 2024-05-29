@@ -21,6 +21,7 @@ import SessionExpired from "../Components/SessionExpired/SessionExpired";
 import LoginRedirect from "../Components/LoginRedirect/LoginRedirect";
  
 const AppRoutes = () => {
+    const baseurl = "/ConTrack---RJS-Experion/"
     return (
         <BrowserRouter>
             <AuthContext> 
@@ -28,31 +29,31 @@ const AppRoutes = () => {
                     <Routes>
                         <Route path="/" element={<LoginHandler />}></Route>
                         <Route path="/ConTrack---RJS-Experion" element={<LoginHandler />}></Route>
-                        <Route path="/navbar" element={<><NavBarHandler /><SideBar /></>}></Route>
-                        <Route path='/AllContracts' element={<><NavBarHandler /><SideBar><ContractListHandler /></SideBar></>}></Route>
-                        <Route path='/MyContracts' element={<><NavBarHandler /><SideBar><ContractListHandler /></SideBar></>}></Route>
-                        <Route path="/Revenue" element={<><NavBarHandler /><SideBar><RevenueProjectionHandler /></SideBar></>}></Route>
-                        <Route path="/AllContracts/Edit Contract" element={<><NavBarHandler /><SideBar><EditContractHandler /></SideBar></>}></Route>
-                        <Route path="/AllContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
-                        <Route path="/AllContracts/Add Contract" element={<><NavBarHandler /><SideBar><AddContractHandler /></SideBar></>}/>
-                        <Route path="/MyContracts/Add Contract" element={<><NavBarHandler /><SideBar><AddContractHandler /></SideBar></>}/>
-                        <Route path="/MyContracts/Edit Contract" element={<><NavBarHandler /><SideBar><EditContractHandler /></SideBar></>}/>
-                        <Route path="/MyContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
-                        <Route path="/Revenue/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
-                        <Route path='/MSAOverview/:msa_ref_id' element={<><NavBarHandler/><SideBar><IndividualMsaHandler/></SideBar></>}/>
-                        <Route path="/Dashboard/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
-                        <Route path="/MSAOverview/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
-                        <Route path="/ManageUser/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
-                        <Route path="/ManageUser" element={<><NavBarHandler /><SideBar><ManageUsersHandler/></SideBar></>}></Route>
-                        <Route path="/MSAOverview" element={<><NavBarHandler /><SideBar><MSAListHandler/></SideBar></>} />
-                        <Route path='/MSAOverview/AddMSA' element={<><NavBarHandler/><SideBar><AddMSAHandler/></SideBar></>}/>
-                        <Route path="/Dashboard" element={<><NavBarHandler /><SideBar><Dashboard /></SideBar></>}></Route>
-                        <Route path="/:msa_ref_id" element={<><NavBarHandler /><SideBar><IndividualMsaHandler/></SideBar></>}></Route>
-                        <Route path='/MSAOverview/EditMSA' element={<><NavBarHandler/><SideBar><EditMSAHandler/></SideBar></>}/>
-                        <Route path="/MSAOverview/RenewMSA" element={<><NavBarHandler /><SideBar><RenewMSAHandler/></SideBar></>} />
-                        <Route path='/MSAOverview/:msa_ref_id/EditMSA' element={<><NavBarHandler/><SideBar><EditMSAHandler/></SideBar></>}/>
-                        <Route path="/session/expired" element={<SessionExpired/>} />
-                        <Route path="/unauthorized" element={<LoginRedirect/>} />
+                        <Route path="/ConTrack---RJS-Experion/navbar" element={<><NavBarHandler /><SideBar /></>}></Route>
+                        <Route path='/ConTrack---RJS-Experion/AllContracts' element={<><NavBarHandler /><SideBar><ContractListHandler /></SideBar></>}></Route>
+                        <Route path='/ConTrack---RJS-Experion/MyContracts' element={<><NavBarHandler /><SideBar><ContractListHandler /></SideBar></>}></Route>
+                        <Route path="/ConTrack---RJS-Experion/Revenue" element={<><NavBarHandler /><SideBar><RevenueProjectionHandler /></SideBar></>}></Route>
+                        <Route path="/ConTrack---RJS-Experion/AllContracts/Edit Contract" element={<><NavBarHandler /><SideBar><EditContractHandler /></SideBar></>}></Route>
+                        <Route path="/ConTrack---RJS-Experion/AllContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
+                        <Route path="/ConTrack---RJS-Experion/AllContracts/Add Contract" element={<><NavBarHandler /><SideBar><AddContractHandler /></SideBar></>}/>
+                        <Route path="/ConTrack---RJS-Experion/MyContracts/Add Contract" element={<><NavBarHandler /><SideBar><AddContractHandler /></SideBar></>}/>
+                        <Route path="/ConTrack---RJS-Experion/MyContracts/Edit Contract" element={<><NavBarHandler /><SideBar><EditContractHandler /></SideBar></>}/>
+                        <Route path="/ConTrack---RJS-Experion/MyContracts/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
+                        <Route path="/ConTrack---RJS-Experion/Revenue/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
+                        <Route path='/ConTrack---RJS-Experion/MSAOverview/:msa_ref_id' element={<><NavBarHandler/><SideBar><IndividualMsaHandler/></SideBar></>}/>
+                        <Route path="/ConTrack---RJS-Experion/Dashboard/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
+                        <Route path="/ConTrack---RJS-Experion/MSAOverview/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
+                        <Route path="/ConTrack---RJS-Experion/ManageUser/:contract_ref_id" element={<><NavBarHandler /><SideBar><IndividualContractHandler/></SideBar></>}></Route>
+                        <Route path="/ConTrack---RJS-Experion/ManageUser" element={<><NavBarHandler /><SideBar><ManageUsersHandler/></SideBar></>}></Route>
+                        <Route path="/ConTrack---RJS-Experion/MSAOverview" element={<><NavBarHandler /><SideBar><MSAListHandler/></SideBar></>} />
+                        <Route path='/ConTrack---RJS-Experion/MSAOverview/AddMSA' element={<><NavBarHandler/><SideBar><AddMSAHandler/></SideBar></>}/>
+                        <Route path="/ConTrack---RJS-Experion/Dashboard" element={<><NavBarHandler /><SideBar><Dashboard /></SideBar></>}></Route>
+                        <Route path="/ConTrack---RJS-Experion/:msa_ref_id" element={<><NavBarHandler /><SideBar><IndividualMsaHandler/></SideBar></>}></Route>
+                        <Route path='/ConTrack---RJS-Experion/MSAOverview/EditMSA' element={<><NavBarHandler/><SideBar><EditMSAHandler/></SideBar></>}/>
+                        <Route path="/ConTrack---RJS-Experion/MSAOverview/RenewMSA" element={<><NavBarHandler /><SideBar><RenewMSAHandler/></SideBar></>} />
+                        <Route path='/ConTrack---RJS-Experion/MSAOverview/:msa_ref_id/EditMSA' element={<><NavBarHandler/><SideBar><EditMSAHandler/></SideBar></>}/>
+                        <Route path="/ConTrack---RJS-Experion/session/expired" element={<SessionExpired/>} />
+                        <Route path="/ConTrack---RJS-Experion/unauthorized" element={<LoginRedirect/>} />
                     </Routes>
                 </NavContext>
             </AuthContext>
