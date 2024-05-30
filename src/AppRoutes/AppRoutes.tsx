@@ -52,8 +52,8 @@ const AppRoutes = () => {
                         <Route path='/MSAOverview/EditMSA' element={<><NavBarHandler/><SideBar><EditMSAHandler/></SideBar></>}/>
                         <Route path="/MSAOverview/RenewMSA" element={<><NavBarHandler /><SideBar><RenewMSAHandler/></SideBar></>} />
                         <Route path='/MSAOverview/:msa_ref_id/EditMSA' element={<><NavBarHandler/><SideBar><EditMSAHandler/></SideBar></>}/>
-                        <Route path="/ConTrack---RJS-Experion/session/expired" element={<SessionExpired/>} />
-                        <Route path="/ConTrack---RJS-Experion/unauthorized" element={<LoginRedirect/>} />
+                        <Route path="/session/expired" element={<SessionExpired/>} />
+                        <Route path="/unauthorized" element={<LoginRedirect/>} />
                     </Routes>
                 </NavContext>
             </AuthContext>
