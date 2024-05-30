@@ -128,7 +128,7 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 			start_date: getFormatedDate(start_date),
 			end_date: getFormatedDate(end_date),
 			contract_added_by: localStorage.getItem("user_id"),
-			comments: comments?comments:""
+			comments: comments?comments:" "
 		};
 		
 
