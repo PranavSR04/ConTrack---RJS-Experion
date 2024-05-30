@@ -110,7 +110,7 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 	const onFinish = async (values: any) => {
 		setSpinning(true);
 		console.log("Values",values);
-		const { milestones, date_of_signature, start_date, end_date, comments } = values;
+		const { milestones, date_of_signature, start_date, end_date} = values;
 		// Format completiondate fields in milestones array
 		const formattedMilestones = milestones.map((milestone: any) => {
 			const formattedDate = getFormatedDate(milestone.milestone_enddate);
@@ -128,7 +128,6 @@ const ContractFormHandler = ({contractDetails,contract_id,addContract,initialVal
 			start_date: getFormatedDate(start_date),
 			end_date: getFormatedDate(end_date),
 			contract_added_by: localStorage.getItem("user_id"),
-			comments: comments?comments:"s"
 		};
 		
 
