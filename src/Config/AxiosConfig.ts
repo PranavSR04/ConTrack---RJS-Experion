@@ -72,7 +72,7 @@ axiosInstance.interceptors.response.use(
 		if (error.response && error.response.status === 401 && !isExcludedPath) {
 			localStorage.clear();
 			console.log("Session expired or unauthorized");
-			window.location.href = '/session/expired';
+			window.location.href = '/ConTrack---RJS-Experion/#/session/expired';
 		}
 		return Promise.reject(error);
 	}
