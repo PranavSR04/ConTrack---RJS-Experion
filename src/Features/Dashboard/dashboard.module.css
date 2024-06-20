@@ -18,3 +18,39 @@
     height: 215px;
     padding: 0px ;
 }
+@media screen and (max-width: 435px){
+    .headercol1{
+
+        margin-top: 30px;
+        scale: 1.07;
+        max-width: 10%;
+
+    }
+    .headercol2{
+        margin-top: 30px;
+        margin-left: 30px;
+        scale: 1.07;
+        max-width: 10%;
+    }
+    .headercol3{
+        margin-top: 30px;
+        scale: 1.07;
+    }
+    .headercol4{
+        margin-top: 30px;
+        margin-left: 30px;
+        scale: 1.07;
+    }
+    .headercol5{
+        margin-top: 30px;
+        scale: 1.07;
+    }
+    .barchart_card{
+       
+    }
+    .col1{
+        display: none;
+    }
+
+};
+    
