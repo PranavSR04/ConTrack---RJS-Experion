@@ -28,28 +28,27 @@ const OverviewHandler = ({ responses, loading }: HandlerPropType) => {
 
   const getOverview: OverviewHandlerType["getOverview"] = (responses) => {
     if (responses && responses.data && responses.data.length > 0) {
-      console.log("res", responses.data[0])
-      setDateOfSignature(responses.data[0].date_of_signature);
-      setRegion(responses.data[0].region)
-      setContractAddedBy(responses.data[0].user_name)
+        console.log("res", responses.data[0]);
+        setDateOfSignature(responses.data[0].date_of_signature);
+        setRegion(responses.data[0].region);
+        setContractAddedBy(responses.data[0].user_name);
 
-      let originalDate = responses.data[0].start_date;
-      let parts = originalDate.split("-");
-      let start_year = parseInt(parts[0])
-      setStartDate(responses.data[0].start_date);
+        const startDate = new Date(responses.data[0].start_date);
+        const endDate = new Date(responses.data[0].end_date);
 
-      originalDate = responses.data[0].end_date;
-      parts = originalDate.split("-");
-      let end_year = parseInt(parts[0])
-      setEndDate(responses.data[0].end_date);
-      let term = end_year - start_year
-      
-      setContractTerm(term);
-      setEstimatedAmount(responses.data[0].estimated_amount);
+        setStartDate(responses.data[0].start_date);
+        setEndDate(responses.data[0].end_date);
+
+        const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
+        const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30)); // Convert difference to months
+
+        setContractTerm(diffMonths);
+        setEstimatedAmount(responses.data[0].estimated_amount);
     } else {
-      setError("Failed to get response");
+        setError("Failed to get response");
     }
-  };
+};
+
 
   const getMilestones: MilestonesHandlerType["getMilestones"] = (responses) => {
     if (responses && responses.data && responses.data.length > 0) {

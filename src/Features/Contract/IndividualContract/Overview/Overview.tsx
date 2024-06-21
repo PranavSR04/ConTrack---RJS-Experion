@@ -34,9 +34,15 @@ const Overview = ({
             <h5
               className={`${styles.maincontainer__overviewpayment__content__list__value}`}
             >
-              {contractTerm && contractTerm !== 0
-                ? `${contractTerm} Years`
-                : "1 Year"}
+              {contractTerm 
+                  ? contractTerm < 12
+                      ? `${contractTerm} Month${contractTerm > 1 ? 's' : ''}`
+                      : `${Math.floor(contractTerm / 12)} Year${Math.floor(contractTerm / 12) > 1 ? 's' : ''}`
+                  : contractTerm === 0
+                      ? "Less than 1 Month"
+                      : "N/A"
+              }
+
             </h5>
           </div>
           <div className={`${styles.maincontainer__overviewpayment__content}`}>
