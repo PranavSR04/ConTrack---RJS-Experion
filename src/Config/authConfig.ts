@@ -15,8 +15,8 @@ export const msalConfig = {
     auth: {
         clientId: "fb0ac951-ec15-4d9c-ac24-5a7b354a83f8",
         authority: "https://login.microsoftonline.com/5b751804-232f-410d-bb2f-714e3bb466eb",
-        redirectUri: "https://pranavsr04.github.io/ConTrack---RJS-Experion/dashboard",
-        // redirectUri: "http://localhost:3000/dashboard",
+        // redirectUri: "https://pranavsr04.github.io/ConTrack---RJS-Experion/dashboard",
+        redirectUri: "http://localhost:3000/dashboard",
     },
     cache: {
         cacheLocation: "sessionStorage", // This configures where your cache will be stored
