@@ -97,3 +97,13 @@
       margin: 1rem 0rem;
     }
   }
+  @media screen and (max-width: 435px){
+    .maincontainer__header__title__renew{
+      margin-left: 20vw;
+      margin-top: -13.6%;
+    }
+    .maincontainer__header__title__export{
+      margin-left: 45vw;
+      margin-top: -8.7%;
+    }
+  }

@@ -2,7 +2,8 @@
   .maincontainer__comments {
     margin-top: 1rem;
     height: 49.1vh;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    /* box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253); */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
     font-family: "Montserrat", sans-serif;
     overflow-y: auto;
@@ -17,5 +18,11 @@
     display: flex;
     margin-top: 0.3rem;
     justify-content: space-between;
+  }
+  @media screen and (max-width: 435px){
+    .maincontainer__comments{
+      height: 15vh;
+      width: 75vw;
+    }
   }
 

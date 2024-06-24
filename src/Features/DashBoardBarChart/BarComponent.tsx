@@ -3,15 +3,15 @@ import { BarChartPropType } from "./types";
 import { Bar } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 Chart.register(...registerables);
+
 const BarComponent = ({ data, maxDataValue }: BarChartPropType) => {
 	return (
-		// <div style={{ width: "26rem", paddingLeft: "0%", transform: "scale(1)" }}>
+		<div style={{paddingTop:"-10px", width: "100%", scale: "102%", height:"230px"}}>
 			<Bar 
 				data={data}
-				
 				options={{
 					responsive: true,
-					// maintainAspectRatio: false,
+					maintainAspectRatio: false, // Set to false to manage aspect ratio dynamically
 					plugins: {
 						legend: {
 						  labels: {
@@ -30,7 +30,6 @@ const BarComponent = ({ data, maxDataValue }: BarChartPropType) => {
 							},
 						},
 						y: {
-							
 							grid: {
 								display: false,
 							},
@@ -44,8 +43,9 @@ const BarComponent = ({ data, maxDataValue }: BarChartPropType) => {
 					},
 				}}
 			/>
-		// </div>
+		</div>
 	);
 };
 
 export default BarComponent;
+

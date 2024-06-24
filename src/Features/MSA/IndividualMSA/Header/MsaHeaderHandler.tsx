@@ -40,13 +40,13 @@ const MsaHeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
             item.added_by,
             item.client_name,
             item.region,
-            item.msa_doclink,
             item.start_date,
             item.end_date,
             item.comments,
             item.is_active,
             item.created_at,
             item.updated_at,
+            item.msa_doclink
           ];
           if (item.contracts) {
             item.contracts.forEach((contracts: any) => {
@@ -84,6 +84,7 @@ const MsaHeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
           "Is Active",
           "Created At",
           "Updated At",
+          "Document Link",
           "Contracts ID",
           "Contract Ref ID",
           "Contract_status",
@@ -91,7 +92,7 @@ const MsaHeaderHandler = ({ responses, id }: HeaderHandlerPropType) => {
           "DU",
           "Estimated Amount",
           "Contract Start Date",
-          "Contract End Date"
+          "Contract End Date",
         ]);
         setMsaExcelData(dataWithHeaders);
         console.log("excel data",msaExcelData)

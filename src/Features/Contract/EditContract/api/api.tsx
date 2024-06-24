@@ -1,5 +1,5 @@
+import { ContractType } from "../../../../Components/ContractForm/types";
 import axiosInstance from "../../../../Config/AxiosConfig";
-import { ContractType } from "../../ContractForm/types";
 
 export const editContract = async (
 	contractData: ContractType,

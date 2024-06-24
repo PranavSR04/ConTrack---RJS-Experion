@@ -12,45 +12,83 @@
 .barchart_card{
     padding: 0px !important;
     height: 37.3vh;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
-.lastrow_card{
+.lastrow_card1{
     height: 215px;
     padding: 0px ;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
+.lastrow_card2{
+    height: 215px;
+    padding: 0px ;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.lastrow_card3{
+    height: 215px;
+    padding: 0px ;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
 @media screen and (max-width: 435px){
-    .headercol1{
-
-        margin-top: 30px;
-        scale: 1.07;
-        max-width: 10%;
-
-    }
-    .headercol2{
-        margin-top: 30px;
-        margin-left: 30px;
-        scale: 1.07;
-        max-width: 10%;
-    }
-    .headercol3{
-        margin-top: 30px;
-        scale: 1.07;
+    .header{
+        margin-top: -50px;
+        scale: 0.68;
+        display: flex;
+        flex-wrap: nowrap;
+        margin-left:-108px  !important  
     }
     .headercol4{
-        margin-top: 30px;
-        margin-left: 30px;
-        scale: 1.07;
+        margin-top: 150px;
+        margin-left: -150px;
     }
     .headercol5{
-        margin-top: 30px;
-        scale: 1.07;
+        margin-top: 290px;
+        margin-left: -150px;
+    }
+    .headernotification{
+        margin-top: 95%;
+        scale: 0.92;
+        margin-left: -68%;
+        height: 42vh
+    } 
+    .doughnutchart{
+        position: relative;
+        scale: 0.67 0.52;
+        margin-top: -212%;
+        margin-left: -59%;
     }
     .barchart_card{
-       
-    }
-    .col1{
-        display: none;
-    }
+        scale: 1 0.8;
+        margin-top: 216%;
+        margin-left: 10%;
+        height:55%;
+        width: 233%;
 
+    }
+    .lastrow_card2{
+        scale: 0.8 0.8;
+        margin-top: -44%;
+        margin-left: -138%;
+        height:37%;
+        width: 380%;
+  
+    }
+    .lastrow_card3{
+        scale: 0.9;
+        margin-top: 170%;
+        margin-left: -232%;
+        height:35%;
+        width: 333%;
+  
+    }
+    .lastrow_card1{
+        scale: 1;
+        margin-top: 400%;
+        margin-left: 18%;
+        height:30%;
+        width: 303%;
+        }
 };
     

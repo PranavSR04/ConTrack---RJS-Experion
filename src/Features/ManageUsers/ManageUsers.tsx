@@ -162,7 +162,7 @@ ManageUsersPropType) => {
                 value={selectedUserGroups}
                 // style={{ width: '100%' }}
                 options={groupOptions}
-                placeholder="Please select"
+                placeholder="Please select group(s)"
                 // defaultValue={['a10', 'c12']}
                 onChange={handleSelectedGroups}
                 showSearch={false}
@@ -217,7 +217,7 @@ ManageUsersPropType) => {
         )} 
 
         {groupAdded && (<Toast message="Group added successfully" messageType="success" />)} 
-        {failedToAddGroup && (<Toast message="Such a group already exists" messageType="error" />)} 
+        {failedToAddGroup && (<Toast message="Group already exists" messageType="error" />)} 
 
 
 

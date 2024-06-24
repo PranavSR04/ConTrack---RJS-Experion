@@ -13,20 +13,25 @@
     margin-bottom: 2%;
     margin-top: 6%;
     margin-left: 1rem;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    /* box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253); */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
     font-family: "Montserrat", sans-serif;
-    width: 15rem;
-    min-width: 15rem;
-    height: 46vh;
-    min-height: 46vh;
+    /* width: 15rem;
+    min-width: 15rem; */
+    width: 18vw;
+    height: 315px;
+    min-height: 315px;
   }
   .maincontainer__overview__overview__contractcount{
-    width: 15.5rem;
-    min-width: 15.5rem;
-    margin-left: 1rem;
+    width: 18vw;
+    min-width: 18vw;
+    /* width: 15rem;
+    min-width: 15rem; */
+    /* margin-left: 1rem; */
     margin-bottom: 2%;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    /* box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253); */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
     font-family: "Montserrat", sans-serif;
     height: 80%;
@@ -34,10 +39,13 @@
   }
 
   .maincontainer__overview__overview {
-    width: 15rem;
-    min-width: 15rem;
+    width: 20vw;
+    min-width: 20vw;
+    /* width: 15rem; */
+    /* min-width: 15rem; */
     margin-bottom: 2%;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    /* box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253); */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
     font-family: "Montserrat", sans-serif;
     height: 80%;
@@ -69,19 +77,21 @@
   }
   
   .maincontainer__overview__payment {
-    width: 15rem;
+    width: 20vw;
+    min-width: 20vw;
     min-height: 80%;
-    min-width: 15rem;
+    /* min-width: 15rem; */
     margin-bottom: 2%;
-    margin-left: 1rem;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253);
+    /* margin-left: 1rem; */
+    /* box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.253); */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
     font-family: "Montserrat", sans-serif;
     height: 80%;
   }
   
   .maincontainer__overview__payment__h2 {
-    margin: 20px 40px;
+    /* margin: 20px 40px; */
     font-size: 1rem;
     font-weight: 700;
   }
@@ -152,4 +162,33 @@
     height: 200px;
     width: 210px;
   }
-  
+  @media screen and (max-width: 435px){
+    .maincontainer__overview__overview{
+      scale: 0.8;
+      margin-left: -6.5vw;
+      width: 48vw;
+      height: 20vh;
+    }
+
+    .maincontainer__overview__payment{
+      margin-top: 17.8vh;
+      scale: 0.64 0.8;
+      margin-left: -34vw;
+      width: 59vw;
+      height: 5vh;
+    }
+    .maincontainer__overview__overview__contractcount{
+      margin-top: -2.89vh;
+      scale: 0.65;
+      margin-left: -13vw;
+      width: 57vw;
+      height: 25.6vh;
+
+    }
+    .maincontainer__overview__overview__count {
+      width: 54vw;
+      min-height: 245px;
+      margin-left: 27vw;
+    }
+
+  }

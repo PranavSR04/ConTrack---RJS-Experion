@@ -6,7 +6,7 @@ import {
 	ContractType,
 	EditContractValueType,
 	Milestone,
-} from "../ContractForm/types";
+} from "../../../Components/ContractForm/types";
 import EditContract from "./EditContract";
 import dayjs from "dayjs";
 
