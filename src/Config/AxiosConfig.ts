@@ -4,8 +4,9 @@ import axios, { InternalAxiosRequestConfig } from "axios";
 // Create a custom Axios instance with a base URL
 const axiosInstance = axios.create({
 	// baseURL: "https://contrack-production.up.railway.app/", // Replace with your API base URL
-	 baseURL:"http://127.0.0.1:8000",
+	baseURL: "http://127.0.0.1:8000", // Replace with your API base URL
 
+	
 });
 
 // Define the exclude paths (paths where token should not be added)
@@ -73,7 +74,7 @@ axiosInstance.interceptors.response.use(
 		if (error.response && error.response.status === 401 && !isExcludedPath) {
 			localStorage.clear();
 			console.log("Session expired or unauthorized");
-			window.location.href = '/session/expired';
+			window.location.href = '/ConTrack---RJS-Experion/#/session/expired';
 		}
 		return Promise.reject(error);
 	}
