@@ -8,3 +8,9 @@
 	font-size: 1.2rem;
 	margin-left: 1rem;
 }
+@media screen and (max-width: 435px){
+	.addcontract {
+		margin-top: 1rem;
+		margin-left: 4.7rem;
+	}
+}

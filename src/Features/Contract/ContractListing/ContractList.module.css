@@ -76,3 +76,9 @@
 .activeSort {
   color: blue;
 }
+@media screen and (max-width: 435px){
+  .contractsTableWrap__buttons__addContract {
+    margin-top: 3rem;
+    margin-left: -9rem;
+  }
+}
