@@ -34,7 +34,7 @@
   height: 25rem;
 }
 .maincontainer__doclist {
-  width: 15rem;
+  width: 17.4rem;
   margin-left: 1rem;
   border-radius: 10px;
 }
@@ -52,14 +52,10 @@
 }
 
 @media only screen and (max-width: 1200px) {
-  .maincontainer {
-    width: 100%;
-  }
 }
 
 @media only screen and (max-width: 768px) {
   .maincontainer {
-    width: 100%;
     margin-left: 5rem;
     overflow-x: hidden;
   }
@@ -81,4 +77,38 @@
     transform: scale(0.8);
     height: 25rem;
   }
+}
+@media screen and (max-width: 435px){
+  .maincontainer__revenue {
+    min-width: 110vw;
+    width: 85vw;
+    height: 56vh;
+    margin-bottom: 1.5vh;
+  }
+  .maincontainer__revenue{
+    margin-top:27vh;
+    scale:0.7;
+    margin-left: -29%;
+ 
+  }
+  .contractgraph{
+    margin-left: -81vw;
+    scale: 0.67;
+    margin-top:34vh;
+
+  }
+  .maincontainer__doclist{
+    margin-left: -44vw;
+    scale: 0.68;
+    margin-top: -57.5vh;
+  }
+  .msacontractlist{
+    margin-left: -27vw;
+    margin-top: -10vh;
+  }
+  .msacomment{
+    margin-top: 26vh;
+    margin-bottom: 1vh;
+  }
+  
 }

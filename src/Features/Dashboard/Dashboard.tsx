@@ -12,30 +12,32 @@ import DoughnutChartHandler from "../../Components/DoughnutChart/DoughnutChartHa
 import ScatterPlotHandler from "../../Components/RevenueScatterPlot/ScatterPlotHandler";
 import RegionHorizontalBar from "../../Components/RegionHorizontalBar/RegionHorizontalBar";
 import TopRevenueHandler from "../../Components/TopRevenueRegion/TopRevenueHandler";
+import Header from './../Contract/IndividualContract/Header/Header';
+import DoughnutChart from './../../Components/DoughnutChart/DoughnutChart';
 
 const Dashboard = () => {
 	return (
 		<div className={styles.dashboard}>
 			<Row style={{paddingBottom:8}}>
 				<Col className={styles.col} span={17}>
-					<Row gutter={140} style={{paddingBottom:8}}>
-						<Col span={4}><DashBoardMonthlyRevenueHandler /></Col>
-						<Col span={4}><DashBoardQuaterlyRevenueHandler /></Col>
-						<Col span={4}><DashBoardYearlyRevenueHandler /></Col>
-						<Col span={4}><DashBoardContractCountHandler /></Col>
-						<Col span={4}><DashBoardMsaCountHandler /></Col>
+					<Row className={styles.header} gutter={150} style={{paddingBottom:8}}>
+						<Col span={4} className={styles.headercol1}><DashBoardMonthlyRevenueHandler /></Col>
+						<Col span={4} className={styles.headercol2}><DashBoardQuaterlyRevenueHandler /></Col>
+						<Col span={4} className={styles.headercol3}><DashBoardYearlyRevenueHandler /></Col>
+						<Col span={4} className={styles.headercol4}><DashBoardContractCountHandler /></Col>
+						<Col span={4} className={styles.headercol5}><DashBoardMsaCountHandler /></Col>
 					</Row>
 					<Row gutter={15}>
 						<Col span={14}><Card className={styles.barchart_card} bodyStyle={{paddingTop:"5vh"}}><BarChartHandler /></Card></Col>
-						<Col span={8}><DoughnutChartHandler /></Col>
+						<Col span={8} className={styles.doughnutchart}><DoughnutChartHandler /></Col>
 					</Row>
         		</Col>
-				<Col className={styles.col} span={5} ><DashBoardNotificationListHandler /></Col>
+				<Col className={styles.headernotification} span={5} ><DashBoardNotificationListHandler /></Col>
 			</Row>
-			<Row gutter={15} style={{paddingTop:".5vh"}}>
-				<Col span={8}><Card className={styles.lastrow_card}><ScatterPlotHandler /></Card></Col>
-				<Col span={8}><Card className={styles.lastrow_card}><RegionHorizontalBar /></Card></Col>
-				<Col span={8}><Card className={styles.lastrow_card}><TopRevenueHandler /></Card></Col>
+			<Row gutter={15} style={{paddingTop:".5vh"}} className={styles.lastrow_card}>
+				<Col span={8}><Card className={styles.lastrow_card1}><ScatterPlotHandler /></Card></Col>
+				<Col span={8}><Card className={styles.lastrow_card2}><RegionHorizontalBar /></Card></Col>
+				<Col span={8}><Card className={styles.lastrow_card3}><TopRevenueHandler /></Card></Col>
 			</Row>
 		</div>
 	);

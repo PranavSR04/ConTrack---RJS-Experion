@@ -35,3 +35,9 @@
 .contract_list_table::-webkit-scrollbar-thumb:hover {
     background-color: #555; 
 }
+@media screen and (max-width: 435px){
+    .contract_list{
+        height: 34.4vh;
+        width: 75vw;
+    }
+}

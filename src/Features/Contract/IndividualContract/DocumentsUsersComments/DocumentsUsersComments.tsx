@@ -61,7 +61,7 @@ const DocumentsUsersComments = ({
             <div
               className={`${styles.maincontainer__membercomments__members__body__wrapper}`}
             >
-              {associatedUsers.map((user: AssociatedUsersType, index) => {
+              {associatedUsers?.map((user: AssociatedUsersType, index) => {
                 return (
                   <div
                     key={index}

@@ -162,4 +162,33 @@
     height: 200px;
     width: 210px;
   }
-  
+  @media screen and (max-width: 435px){
+    .maincontainer__overview__overview{
+      scale: 0.8;
+      margin-left: -6.5vw;
+      width: 48vw;
+      height: 20vh;
+    }
+
+    .maincontainer__overview__payment{
+      margin-top: 17.8vh;
+      scale: 0.64 0.8;
+      margin-left: -34vw;
+      width: 59vw;
+      height: 5vh;
+    }
+    .maincontainer__overview__overview__contractcount{
+      margin-top: -2.89vh;
+      scale: 0.65;
+      margin-left: -13vw;
+      width: 57vw;
+      height: 25.6vh;
+
+    }
+    .maincontainer__overview__overview__count {
+      width: 54vw;
+      min-height: 245px;
+      margin-left: 27vw;
+    }
+
+  }

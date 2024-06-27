@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchDuCount } from './api/getDuCount';
 import BarComponent from './BarComponent';
 import { duCountType } from './types';
+
 interface ApiResponseDuCountType {
     du: string;
     TM: string; 
@@ -42,18 +43,27 @@ const BarChartHandler = () => {
 
         fetchCount();
     }, []);
+
+    useEffect(() => {
+        const handleResize = () => {
+            window.dispatchEvent(new Event('resize'));
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
     
     const dataset = {
         labels: labels,
-        
         datasets: [
           {
             label: 'TM Counts',
             data: tmcounts,
             backgroundColor: '#1C4E80',
             barPercentage: 0.6,
-
-            
           },
           {
             label: 'FF Counts',
@@ -65,9 +75,9 @@ const BarChartHandler = () => {
       };
      
     return (
-        // <div style={{transform: 'scale(0.9)', marginTop:'-0.3rem', marginLeft:'1rem'}}>
+        <div style={{ width: '100%', height: '100%' }}>
             <BarComponent data={dataset} maxDataValue={maxDataValue}/>
-        // </div>
+        </div>
     );
 }
 

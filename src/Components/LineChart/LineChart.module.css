@@ -17,6 +17,12 @@
 @media only screen and (max-width: 1150px) {
 	.linechart__container {
         width: 55vw;
-
 	}
 }
+@media screen and (max-width: 435px){
+	.linechart__container {
+		margin-left:5vw ;
+	  	width: 135vw;
+		height: 50vh;
+  }
+  }

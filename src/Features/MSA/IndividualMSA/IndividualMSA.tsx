@@ -39,7 +39,7 @@ const IndividualMSA = ({
           </Col>
           <Col span={6}>
             <Row>
-              <Col span={24}>
+              <Col span={24} className={styles.contractgraph}>
               <ContractStatusGraphHandler responses={responses} loading={loading}/>
               </Col>
             </Row>
@@ -52,11 +52,11 @@ const IndividualMSA = ({
             </Row>
           </Col>
         </Row>
-        <Row gutter={10}>
-          <Col span={8}>
+        <Row gutter={10} className={styles.lastrow}>
+          <Col span={8} className={styles.msacomment}>
               <MsaCommentsHandler responses={responses} loading={loading} />
           </Col>
-          <Col span={16}>
+          <Col span={16} className={styles.msacontractlist}>
               <ContractListHandler responses={responses} id={msa_id} />
           </Col>
         </Row>

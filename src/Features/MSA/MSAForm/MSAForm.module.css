@@ -76,3 +76,24 @@
     font-size: 15px;
     color: black;
 }
+@media screen and (max-width: 435px){
+    .MSAForm__Form__Button{
+        margin-left: 10rem;
+    }
+    .MSAForm__Form__inputs,
+.MSAForm__Form__input__msa_ref_id{
+    width:16rem;
+}
+#complex-form_region{
+    margin-top: 20px;
+}
+.MSAForm__Form__row1__col2,
+.MSAForm__Form__row1__col3{
+    margin-left: 0rem;
+}
+.MSAForm__Form__row1,
+.MSAForm__Form__row2,
+.MSAForm__Form__row3{
+    flex-direction: column;
+}
+}
